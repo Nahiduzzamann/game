@@ -70,7 +70,7 @@ const Footer = () => {
                   </div>
             </div>
 
-            <div className='grid md:grid-cols-3 gap-24 pt-5'>
+            <div className='grid md:grid-cols-3 gap-24 pt-10'>
                 <div className=''>
                 <p className='font-bold h2 pb-4'>Responsible Games</p>
                 <div className="flex">
@@ -78,10 +78,11 @@ const Footer = () => {
                 </div>
                 </div>
                 <div>
-                <p className='font-bold h2 pb-4'>Certified By</p>
+                <p className='font-bold h2 pb'>Certified By</p>
                 <div className="">
-                    <h1 className='text-red-400 text-[45px] italic font-bold'>BABU<span className='text-yellow-500'>88</span><br></br></h1>
-                           <span className='ml-20 text-red-400 italic text-[45px] font-bold'>official</span>
+                    <a href=""><img src="https://babu88official.com/wp-content/uploads/2023/10/Add-a-heading-1.png" alt="" srcset="" /></a>
+                    {/* <h1 className='text-red-400 text-[45px] italic font-bold'>BABU<span className='text-yellow-500'>88</span></h1>
+                           <span className='ml-20 text-white-400 italic text-[45px] font-bold leading-3'>official</span> */}
                 </div>
                 </div>
                 <div>
