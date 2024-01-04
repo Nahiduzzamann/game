@@ -80,8 +80,8 @@ const Footer = () => {
                 <div>
                 <p className='font-bold h2 pb-4'>Certified By</p>
                 <div className="">
-                    <h1 className='text-red-400 text-[45px] italic'>BABU<span className='text-yellow-500'>88</span><br></br></h1>
-                           <span className='ml-20 text-red-400 italic text-[45px]'>official</span>
+                    <h1 className='text-red-400 text-[45px] italic font-bold'>BABU<span className='text-yellow-500'>88</span><br></br></h1>
+                           <span className='ml-20 text-red-400 italic text-[45px] font-bold'>official</span>
                 </div>
                 </div>
                 <div>
