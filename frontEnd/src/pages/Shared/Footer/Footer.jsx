@@ -11,7 +11,7 @@ const Footer = () => {
                 <a href="#" className="font-bold py-2 rounded">Contact Us</a>
             </div>
 
-            <div className='grid grid-cols-3 gap-24 font-sans'>
+            <div className='grid lg:grid-cols-3 gap-24 font-sans'>
                 <div className='pt-5'>
                     <p className='font-bold h2 pb-4'>Bangladesh's Best Cricket Exchange</p>
                        <p>Play with the premium cricket exchange in Bangladesh.
@@ -65,7 +65,7 @@ const Footer = () => {
                   </div>
             </div>
 
-            <div className='grid grid-cols-3 gap-24 pt-5'>
+            <div className='grid md:grid-cols-3 gap-24 pt-5'>
                 <div className=''>
                 <p className='font-bold h2 pb-4'>Responsible Games</p>
                 </div>
