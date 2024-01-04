@@ -1,10 +1,15 @@
 import React from 'react';
-
+import { IoGameControllerOutline } from "react-icons/io5";
+import { FaFacebookF } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+import { FaTwitter } from "react-icons/fa";
+import { FaYoutube } from "react-icons/fa";
+import { TiSocialLinkedin } from "react-icons/ti";
 const Footer = () => {
     return (
-        <div className='bg-slate-200'>
+        <div className='bg-[#EBEBEB]'>
             <div className='container mx-auto mt-5  p-5'>
-            <div className='flex gap-24 underline underline-offset-8'>
+            <div className='flex gap-10 underline underline-offset-8  flex-wrap'>
                 <a href="#" className="font-bold py-2 rounded">Terms And Conditions</a>
                 <a href="#" className="font-bold py-2 rounded">About Us</a>
                 <a href="#" className="font-bold py-2 rounded">FAQ</a>
@@ -14,7 +19,7 @@ const Footer = () => {
             <div className='grid lg:grid-cols-3 gap-24 font-sans'>
                 <div className='pt-5'>
                     <p className='font-bold h2 pb-4'>Bangladesh's Best Cricket Exchange</p>
-                       <p>Play with the premium cricket exchange in Bangladesh.
+                       <p className=''>Play with the premium cricket exchange in Bangladesh.
                         Best odds and all games available. We provide FREE livestreaming 
                         for ALL cricket matches. Check out our promotions for Cricket Exchange here.</p><br></br>
 
@@ -45,7 +50,7 @@ const Footer = () => {
                         <p className='font-bold h2 pb-4'>Table Games - Spribe & Kingmaker</p>
                         <p>Look no further as BABU88 comes with the most popular table game providers such as Spribe 
                             & Kingmaker. Play with the most popular online casino in Bangladesh.</p>
-                            <p className='font-bold h2 pb-4'>Payments Options</p>
+                            <p className='font-bold h2 pb-4 pt-5'>Payments Options</p>
                         <p>The best online casino sites offer a variety of ways to deposit 
                             and withdraw money. This makes the games accessible to every individuals based on 
                             their own preferences. We provide different kinds of payments choices for our customers, 
@@ -65,15 +70,30 @@ const Footer = () => {
                   </div>
             </div>
 
-            <div className='grid md:grid-cols-3 gap-24 pt-5'>
+            <div className='grid md:grid-cols-3 gap-24 pt-10'>
                 <div className=''>
                 <p className='font-bold h2 pb-4'>Responsible Games</p>
+                <div className="flex">
+                <IoGameControllerOutline className='text-yellow-400 text-[45px] bg-black rounded-lg p-1'/>
+                </div>
                 </div>
                 <div>
-                <p className='font-bold h2 pb-4'>Certified By</p>
+                <p className='font-bold h2 pb'>Certified By</p>
+                <div className="">
+                    <a href=""><img src="https://babu88official.com/wp-content/uploads/2023/10/Add-a-heading-1.png" alt="" srcset="" /></a>
+                    {/* <h1 className='text-red-400 text-[45px] italic font-bold'>BABU<span className='text-yellow-500'>88</span></h1>
+                           <span className='ml-20 text-white-400 italic text-[45px] font-bold leading-3'>official</span> */}
+                </div>
                 </div>
                 <div>
                 <p className='font-bold h2 pb-4'>Find Us</p>
+                <div className="flex">
+                <FaFacebookF className='text-yellow-400 text-[45px] bg-black rounded-lg p-1 m-2'/>
+                <FaInstagram className='text-yellow-400 text-[45px] bg-black rounded-lg p-1 m-2'/>
+                <FaTwitter className='text-yellow-400 text-[45px] bg-black rounded-lg p-1 m-2'/>
+                <FaYoutube className='text-yellow-400 text-[45px] bg-black rounded-lg p-1 m-2'/>
+                <TiSocialLinkedin className='text-yellow-400 text-[45px] bg-black rounded-lg p-1 m-2'/>
+                </div>
                 </div>
                 
             </div>
