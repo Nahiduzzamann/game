@@ -4,7 +4,11 @@ const Footer = () => {
     return (
         <div className='bg-slate-200'>
             <div className='container mx-auto mt-5  p-5'>
+<<<<<<< HEAD
             <div className='flex gap-24 underline underline-offset-8 w-[]'>
+=======
+            <div className='flex gap-10 underline underline-offset-8 flex-wrap'>
+>>>>>>> 97dc2323a8dbe9d12dc2a509487874cc50780f06
                 <a href="#" className="font-bold py-2 rounded">Terms And Conditions</a>
                 <a href="#" className="font-bold py-2 rounded">About Us</a>
                 <a href="#" className="font-bold py-2 rounded">FAQ</a>
