@@ -9,6 +9,7 @@ import Faq from "./pages/Faq/Faq.jsx";
 import AboutUs from "./pages/AboutUs/AboutUs.jsx";
 import ContactUs from "./pages/ContactUs/ContactUs.jsx";
 import TermsConditions from "./pages/Terms&Conditions/Terms&Conditions.jsx";
+import ResponsibleGaming from "./pages/ResponsibleGaming/ResponsibleGaming.jsx";
 
 const router = createBrowserRouter([
   {
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
       },
       {
         path: "ResponsibleGaming",
-        element: <ContactUs></ContactUs>
+        element: <ResponsibleGaming></ResponsibleGaming>
       },
       {
         path: "Terms&Conditions",
