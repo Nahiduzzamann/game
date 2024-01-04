@@ -2,12 +2,13 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <div className='container mx-auto mt-5 bg-slate-200 p-5'>
+        <div className='bg-slate-200'>
+            <div className='container mx-auto mt-5  p-5'>
             <div className='flex gap-24 underline underline-offset-8'>
-                <a href="#" class="font-bold py-2 rounded">Terms And Conditions</a>
-                <a href="#" class="font-bold py-2 rounded">About Us</a>
-                <a href="#" class="font-bold py-2 rounded">FAQ</a>
-                <a href="#" class="font-bold py-2 rounded">Contact Us</a>
+                <a href="#" className="font-bold py-2 rounded">Terms And Conditions</a>
+                <a href="#" className="font-bold py-2 rounded">About Us</a>
+                <a href="#" className="font-bold py-2 rounded">FAQ</a>
+                <a href="#" className="font-bold py-2 rounded">Contact Us</a>
             </div>
 
             <div className='grid grid-cols-3 gap-24 font-sans'>
@@ -84,6 +85,7 @@ const Footer = () => {
                 
             </div>
 
+        </div>
         </div>
 
 
