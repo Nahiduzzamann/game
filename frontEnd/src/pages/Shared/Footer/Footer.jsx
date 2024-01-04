@@ -1,5 +1,10 @@
 import React from 'react';
-
+import { MdNoAdultContent } from "react-icons/md";
+import { FaFacebookF } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+import { FaTwitter } from "react-icons/fa";
+import { FaYoutube } from "react-icons/fa";
+import { TiSocialLinkedin } from "react-icons/ti";
 const Footer = () => {
     return (
         <div className='bg-slate-200'>
@@ -68,12 +73,26 @@ const Footer = () => {
             <div className='grid md:grid-cols-3 gap-24 pt-5'>
                 <div className=''>
                 <p className='font-bold h2 pb-4'>Responsible Games</p>
+                <div className="flex">
+                <MdNoAdultContent className='text-yellow-400 text-[45px] bg-black rounded-lg p-1'/>
+                </div>
                 </div>
                 <div>
                 <p className='font-bold h2 pb-4'>Certified By</p>
+                <div className="">
+                    <h1 className='text-red-400 text-[45px] italic'>BABU<span className='text-yellow-500'>88</span><br></br></h1>
+                           <span className='ml-20 text-red-400 italic text-[45px]'>official</span>
+                </div>
                 </div>
                 <div>
                 <p className='font-bold h2 pb-4'>Find Us</p>
+                <div className="flex">
+                <FaFacebookF className='text-yellow-400 text-[45px] bg-black rounded-lg p-1 m-2'/>
+                <FaInstagram className='text-yellow-400 text-[45px] bg-black rounded-lg p-1 m-2'/>
+                <FaTwitter className='text-yellow-400 text-[45px] bg-black rounded-lg p-1 m-2'/>
+                <FaYoutube className='text-yellow-400 text-[45px] bg-black rounded-lg p-1 m-2'/>
+                <TiSocialLinkedin className='text-yellow-400 text-[45px] bg-black rounded-lg p-1 m-2'/>
+                </div>
                 </div>
                 
             </div>
