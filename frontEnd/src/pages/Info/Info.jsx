@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../Shared/Header/Header";
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import Footer from "../Shared/Footer/Footer";
 import ScrollToTop from "../../components/ScrollToTop";
 
@@ -13,15 +13,15 @@ const Info = () => {
         <div className="bg-white">
           <h1 className="text-center font-bold text-xl pt-4">Other Topics</h1>
           <div className=" mt-4 flex flex-col">
-            <Link className="ml-5 py-3 font-bold uppercase " to="/info/faq">FAQ</Link>
+            <NavLink activeClassName="active" className="ml-5 py-3 font-bold uppercase " to="/info/faq">FAQ</NavLink>
             <div className="h-[1px] bg-[#EBEBEB]"></div>
-            <Link className="ml-5 py-3 font-bold uppercase " to="/info/aboutUs">About Us</Link>
+            <NavLink activeClassName="active" className="ml-5 py-3 font-bold uppercase " to="/info/aboutUs">About Us</NavLink>
             <div className="h-[1px] bg-[#EBEBEB]"></div>
-            <Link className="ml-5 py-3 font-bold uppercase " to="/info/contactUs">Contact Us</Link>
+            <NavLink activeClassName="active" className="ml-5 py-3 font-bold uppercase " to="/info/contactUs">Contact Us</NavLink>
             <div className="h-[1px] bg-[#EBEBEB]"></div>
-            <Link className="ml-5 py-3 font-bold uppercase " to="/info/ResponsibleGaming">Responsible Gaming</Link>
+            <NavLink activeClassName="active" className="ml-5 py-3 font-bold uppercase " to="/info/ResponsibleGaming">Responsible Gaming</NavLink>
             <div className="h-[1px] bg-[#EBEBEB]"></div>
-            <Link className="ml-5 py-3 font-bold uppercase " to="/info/Terms&Conditions">Terms & Conditions</Link>
+            <NavLink activeClassName="active" className="ml-5 py-3 font-bold uppercase " to="/info/Terms&Conditions">Terms & Conditions</NavLink>
           </div>
         </div>
         <div className="col-span-2 bg-white h-min">
