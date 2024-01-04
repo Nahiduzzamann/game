@@ -5,15 +5,16 @@ import { FaInstagram } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import { TiSocialLinkedin } from "react-icons/ti";
+import { Link } from "react-router-dom";
 const Footer = () => {
     return (
         <div className='bg-[#EBEBEB]'>
             <div className='container mx-auto mt-5  p-5'>
             <div className='flex gap-10 underline underline-offset-8  flex-wrap'>
-                <a href="#" className="font-bold py-2 rounded">Terms And Conditions</a>
-                <a href="#" className="font-bold py-2 rounded">About Us</a>
-                <a href="#" className="font-bold py-2 rounded">FAQ</a>
-                <a href="#" className="font-bold py-2 rounded">Contact Us</a>
+                <Link to="/info" className="font-bold py-2 rounded">Terms And Conditions</Link>
+                <Link to="/info" className="font-bold py-2 rounded">About Us</Link>
+                <Link to="/info" className="font-bold py-2 rounded">FAQ</Link>
+                <Link to="/info" className="font-bold py-2 rounded">Contact Us</Link>
             </div>
 
             <div className='grid lg:grid-cols-3 gap-24 font-sans'>
