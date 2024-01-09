@@ -14,6 +14,8 @@ import { ChakraProvider } from "@chakra-ui/react";
 import LoginButton from "./pages/Shared/navBar/LoginButton.jsx";
 import Deposit from "./pages/Deposit/index.jsx";
 import Profile from "./layout/Profile.jsx";
+import Withdrawal from "./pages/Withdrawal/index.jsx";
+import History from "./pages/History/index.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -60,6 +62,14 @@ const router = createBrowserRouter([
       {
         path: "deposit",
         element: <Deposit></Deposit>,
+      },
+      {
+        path: "withdrawal",
+        element: <Withdrawal/>,
+      },
+      {
+        path: "history",
+        element: <History/>,
       },
     ],
   },
