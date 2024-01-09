@@ -1,6 +1,7 @@
 import React from 'react'
 import { Select } from '@chakra-ui/react'
 import { BsQuestionOctagonFill } from "react-icons/bs";
+
 export default function Deposit() {
   return (
     <div className='p-5 bg-white'>
@@ -59,6 +60,15 @@ export default function Deposit() {
                     <option value='option2'>Live Casino Weekly 20% Deposit Bonus -20.00%</option>
                     <option value='option3'>Slots 20% Weekly Deposit Bonus -20.00%</option>
                  </Select>
+                
+                <div className='pt-5 text-center'>
+                 <form action="/action_page.php" className='bg-yellow-400 p-2 rounded-lg font-bold hover:bg-yellow-500'>
+            
+                  <button className=''>Submit</button>
+                  
+              </form>
+              </div>
+                 
 
         </div>
   )
