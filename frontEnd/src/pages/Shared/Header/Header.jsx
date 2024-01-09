@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { getGamesCategory } from "../../../module";
+import getCategory from "../../../module/getCategory";
+import url from "../../../module";
 
 const Header = () => {
   const [data, setData] = useState();
   useEffect(() => {
     const cats = async () => {
       try {
-        const cat = await getGamesCategory();
-        console.log(cat);
+        const cat = await getCategory(url);
+        setData(cat.data);
       } catch (error) {
         console.error(error.message);
       }
@@ -21,6 +22,7 @@ const Header = () => {
       {data?.map((data, i) => (
         <div key={i}>{data.title}</div>
       ))}
+      stsgdfh
     </div>
   );
 };
