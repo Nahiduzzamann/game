@@ -8,13 +8,13 @@ const ContactUs = () => {
             <p className='font-bold pt-5 pb-2'>CONTACT US</p>
 
             <p className='font-bold pt-5 pb-2 underline underline-offset-5'>Customer Service</p>
-            <p className='font-medium'>CS@B0XBET.com</p>
+            <p className='font-medium'>CS@40XBET.com</p>
 
             <p className='font-bold pt-5 pb-2 underline underline-offset-5'>Marketing</p>
-            <p className='font-medium'>Marketing@B0XBET.com</p>
+            <p className='font-medium'>Marketing@40XBET.com</p>
 
             <p className='font-bold pt-5 pb-2 underline underline-offset-5'>Affiliate</p>
-            <p className='font-medium border-b-4 border-indigo-200 pb-6'>Affiliate@B0XBET.com</p>
+            <p className='font-medium border-b-4 border-indigo-200 pb-6'>Affiliate@40XBET.com</p>
             
             <p className='font-bold pt-5 pb-2 underline underline-offset-5'></p>
             <p className='font-medium'></p>
