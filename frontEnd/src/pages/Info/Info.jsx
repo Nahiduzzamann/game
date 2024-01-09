@@ -9,8 +9,13 @@ const Info = () => {
     <div className="bg-[#EBEBEB]">
       <Header></Header>
       <div className="container mx-auto">
+<<<<<<< Updated upstream
       <div className="md:grid md:grid-cols-3 gap-4">
         <div className="bg-white p-5 my-4 h-min ">
+=======
+      <div className="grid grid-cols-3 gap-4">
+        <div className="bg-white p-5 h-min">
+>>>>>>> Stashed changes
           <h1 className="text-center p-5 font-bold border-b-4 border-indigo-500 text-3xl">Other Topics</h1>
           <div className=" mt-4 flex flex-col">
             <NavLink activeClassName="active" className="ml-5 py-3 font-bold uppercase " to="/info/faq">FAQ</NavLink>
