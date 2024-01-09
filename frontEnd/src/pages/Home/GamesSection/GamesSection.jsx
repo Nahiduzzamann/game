@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import url from "../../../module";
 import getCategory from "../../../module/getCategory";
 const GamesSection = () => {
-  const [dataCategory, setDataCategory] = useState();
-  const [dataSubCategory, setDataSubCategory] = useState();
+  const [dataCategory, setDataCategory] = useState(null);
+  const [dataSubCategory, setDataSubCategory] = useState(null);
   // console.log(dataSubCategory);
 
   useEffect(() => {
@@ -26,6 +26,7 @@ const GamesSection = () => {
     const subCategory = category.subCategory;
     setDataSubCategory(subCategory);
   };
+
   return (
     <div className="px-6 py-3">
       <Tabs isFitted variant="soft-rounded" colorScheme="blue">
