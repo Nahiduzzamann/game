@@ -3,10 +3,10 @@ import React from "react";
 
 const GamesSection = () => {
   return (
-    <div>
-      <Tabs isFitted variant="enclosed">
+    <div className="px-6 py-3">
+      <Tabs isFitted variant='soft-rounded'  colorScheme='blue'>
         <TabList mb="1em">
-          <Tab>Cricket</Tab>
+          <Tab className="">Cricket</Tab>
           <Tab>Casino</Tab>
           <Tab>Slot</Tab>
           <Tab>Table</Tab>
