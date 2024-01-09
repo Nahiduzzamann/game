@@ -89,7 +89,7 @@ const Footer = () => {
                 </div>
                 <div>
                 <p className='font-bold h2 pb-4'>Find Us</p>
-                <div className="flex ">
+                <div className="flex flex-wrap ">
                 <FaFacebookF className='text-white text-[45px] bg-blue-500 rounded-lg p-1 m-2'/>
                 <FaInstagram className='text-white text-[45px] bg-blue-500 rounded-lg p-1 m-2'/>
                 <FaTwitter className='text-white text-[45px] bg-blue-500 rounded-lg p-1 m-2'/>
