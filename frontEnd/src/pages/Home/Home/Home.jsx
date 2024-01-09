@@ -1,11 +1,11 @@
 
 import React from 'react';
+import GamesSection from '../GamesSection/GamesSection';
 
 const Home = () => {
     return (
         <div>
-           Homeeeeeeeeeeeeee
-            
+        <GamesSection></GamesSection>
         </div>
     );
 };
