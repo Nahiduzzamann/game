@@ -10,7 +10,7 @@ import AboutUs from "./pages/AboutUs/AboutUs.jsx";
 import ContactUs from "./pages/ContactUs/ContactUs.jsx";
 import TermsConditions from "./pages/Terms&Conditions/Terms&Conditions.jsx";
 import ResponsibleGaming from "./pages/ResponsibleGaming/ResponsibleGaming.jsx";
-
+import { ChakraProvider } from "@chakra-ui/react";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,35 +26,35 @@ const router = createBrowserRouter([
   {
     path: "/info",
     element: <Info></Info>,
-    children:[
+    children: [
       {
         path: "faq",
-        element: <Faq></Faq>
+        element: <Faq></Faq>,
       },
       {
         path: "aboutUs",
-        element: <AboutUs></AboutUs>
+        element: <AboutUs></AboutUs>,
       },
       {
         path: "contactUs",
-        element: <ContactUs></ContactUs>
+        element: <ContactUs></ContactUs>,
       },
       {
         path: "ResponsibleGaming",
-        element: <ResponsibleGaming></ResponsibleGaming>
+        element: <ResponsibleGaming></ResponsibleGaming>,
       },
       {
         path: "Terms&Conditions",
-        element: <TermsConditions></TermsConditions>
+        element: <TermsConditions></TermsConditions>,
       },
-    ]
+    ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <div className="">
+    <ChakraProvider>
       <RouterProvider router={router} />
-    </div>
+    </ChakraProvider>
   </React.StrictMode>
 );
