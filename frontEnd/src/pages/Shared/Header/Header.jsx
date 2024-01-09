@@ -30,8 +30,9 @@ const Header = () => {
       try {
         const cat = await getCategory(url);
         setData(cat.data);
-        localStorage.setItem("category",JSON.parse(cat.data))
         console.log(cat.data);
+        localStorage.setItem("category",JSON.stringify(cat?.data))
+        
       } catch (error) {
         console.error(error.message);
       }
@@ -117,7 +118,10 @@ const Header = () => {
               <GrLanguage />
               Languages
             </div>
-            <div
+            <div onClick={()=>{
+              onClose()
+              navigate("/info/faq")
+            }}
               className=" hover:bg-gray-50 flex gap-2 items-center py-2 px-2 cursor-pointer text-gray-400  text-md"
              
             >
