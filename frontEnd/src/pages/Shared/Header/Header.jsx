@@ -6,14 +6,13 @@ const Header = () => {
   useEffect(() => {
     const cats = async () => {
       try {
-        const cat=await getGamesCategory()
+        const cat = await getGamesCategory();
         console.log(cat);
       } catch (error) {
         console.error(error.message);
-      
       }
     };
-    cats()
+    cats();
     //setData(cat);
     //console.log(cat);
   }, []);
@@ -22,9 +21,7 @@ const Header = () => {
       {data?.map((data, i) => (
         <div key={i}>{data.title}</div>
       ))}
-rt
     </div>
   );
 };
-
 export default Header;

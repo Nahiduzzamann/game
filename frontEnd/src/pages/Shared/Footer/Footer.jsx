@@ -11,10 +11,10 @@ const Footer = () => {
         <div className='bg-[#EBEBEB]'>
             <div className='container mx-auto mt-5  p-5'>
             <div className='flex gap-10 underline underline-offset-8  flex-wrap'>
-                <Link to="/info" className="font-bold py-2 rounded hover:text-slate-400">Terms And Conditions</Link>
-                <Link to="/info" className="font-bold py-2 rounded hover:text-slate-400">About Us</Link>
-                <Link to="/info" className="font-bold py-2 rounded hover:text-slate-400">FAQ</Link>
-                <Link to="/info" className="font-bold py-2 rounded hover:text-slate-400">Contact Us</Link>
+                <Link to="/info/Terms&Conditions" className="font-bold py-2 rounded hover:text-slate-400">Terms And Conditions</Link>
+                <Link to="/info/aboutUs" className="font-bold py-2 rounded hover:text-slate-400">About Us</Link>
+                <Link to="/info/faq" className="font-bold py-2 rounded hover:text-slate-400">FAQ</Link>
+                <Link to="/info/contactUs" className="font-bold py-2 rounded hover:text-slate-400">Contact Us</Link>
             </div>
 
             <div className='grid lg:grid-cols-3 gap-24 font-sans'>
