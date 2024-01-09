@@ -47,11 +47,23 @@ export const getGameCategories = (req: Request, res: Response) => {
             })
             cats.push({
                 title: d.title,
-                subCategory: subs.filter(s=>s)
+                subCategory: subs.filter(s => s)
             })
         })
 
         res.status(StatusCodes.OK).json(cats)
+    } catch (error) {
+        res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error });
+    }
+}
+export const getGameByCategory = (req: Request, res: Response) => {
+    const gameIndex: number = Number(req.params.gameIndex);
+
+    const system: string = String(req.params.system)
+    try {
+
+
+        res.status(StatusCodes.OK).json(games.response.filter(d => (d.type == categories.data[gameIndex].slag.split(",")[0] || d.type == categories.data[gameIndex].slag.split(",")[1] || d.type == categories.data[gameIndex].slag.split(",")[2])&&d.system===system))
     } catch (error) {
         res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error });
     }

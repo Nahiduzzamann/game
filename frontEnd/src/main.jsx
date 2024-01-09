@@ -16,6 +16,7 @@ import Deposit from "./pages/Deposit/index.jsx";
 import Profile from "./layout/Profile.jsx";
 import Withdrawal from "./pages/Withdrawal/index.jsx";
 import History from "./pages/History/index.jsx";
+import Games from "./pages/games/Games.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home></Home>,
       },
+      {
+        path:"games/:system/:index",
+        element:<Games/>
+      }
     ],
   },
   {
@@ -73,6 +78,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+  
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
