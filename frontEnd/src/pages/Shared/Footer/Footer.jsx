@@ -6,6 +6,7 @@ import { FaTwitter } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import { TiSocialLinkedin } from "react-icons/ti";
 import { Link } from "react-router-dom";
+import logo from "../../../assets/logo.png";
 const Footer = () => {
     return (
         <div className='bg-[#EBEBEB]'>
@@ -75,13 +76,13 @@ const Footer = () => {
                 <div className=''>
                 <p className='font-bold h2 pb-4'>Responsible Games</p>
                 <div className="flex">
-                <IoGameControllerOutline className='text-yellow-400 text-[45px] bg-black rounded-lg p-1'/>
+                <IoGameControllerOutline className='text-white text-[45px] bg-blue-500 rounded-lg p-1 m-2'/>
                 </div>
                 </div>
                 <div>
                 <p className='font-bold h2 pb'>Certified By</p>
                 <div className="">
-                    <a href=""><img src="https://babu88official.com/wp-content/uploads/2023/10/Add-a-heading-1.png" alt="" srcset="" /></a>
+                    <a href=""><img className="size-32" src={logo} /></a>
                     {/* <h1 className='text-red-400 text-[45px] italic font-bold'>BABU<span className='text-yellow-500'>88</span></h1>
                            <span className='ml-20 text-white-400 italic text-[45px] font-bold leading-3'>official</span> */}
                 </div>
@@ -89,11 +90,11 @@ const Footer = () => {
                 <div>
                 <p className='font-bold h2 pb-4'>Find Us</p>
                 <div className="flex">
-                <FaFacebookF className='text-yellow-400 text-[45px] bg-black rounded-lg p-1 m-2'/>
-                <FaInstagram className='text-yellow-400 text-[45px] bg-black rounded-lg p-1 m-2'/>
-                <FaTwitter className='text-yellow-400 text-[45px] bg-black rounded-lg p-1 m-2'/>
-                <FaYoutube className='text-yellow-400 text-[45px] bg-black rounded-lg p-1 m-2'/>
-                <TiSocialLinkedin className='text-yellow-400 text-[45px] bg-black rounded-lg p-1 m-2'/>
+                <FaFacebookF className='text-white text-[45px] bg-blue-500 rounded-lg p-1 m-2'/>
+                <FaInstagram className='text-white text-[45px] bg-blue-500 rounded-lg p-1 m-2'/>
+                <FaTwitter className='text-white text-[45px] bg-blue-500 rounded-lg p-1 m-2'/>
+                <FaYoutube className='text-white text-[45px] bg-blue-500 rounded-lg p-1 m-2'/>
+                <TiSocialLinkedin className='text-white text-[45px] bg-blue-500 rounded-lg p-1 m-2'/>
                 </div>
                 </div>
                 
