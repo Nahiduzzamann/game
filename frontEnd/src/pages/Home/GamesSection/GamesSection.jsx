@@ -43,17 +43,14 @@ const GamesSection = () => {
               );
             })}
         </TabList>
-        <TabPanels>
+        <TabPanels className="bg-white rounded-md">
           {dataCategory &&
             dataCategory?.map((data, i) => (
               <TabPanel key={i}>
                 <div className="flex flex-wrap">
                   {dataSubCategory?.map((data, i) => (
-                    <div key={i} className="p-2 bg-blue-500 text-white m-2 shadow shadow-blue-500 rounded-md">
-                      <p className=" text-white">
-                        {data?.name}
-                      </p>
-                      <img src={data?.image_white}></img>
+                    <div key={i} className="p-2 bg-gray-100 text-white m-2 shadow shadow-gray-200 rounded-md">
+                      <img src={data?.image_colored}></img>
                     </div>
                   ))}
                 </div>
