@@ -17,6 +17,8 @@ import { CiMenuFries } from "react-icons/ci";
 import { SiEpicgames } from "react-icons/si";
 import { MdOutlineVerified } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { FaQuora } from "react-icons/fa6";
+
 
 const Header = () => {
   const [data, setData] = useState();
@@ -28,6 +30,8 @@ const Header = () => {
       try {
         const cat = await getCategory(url);
         setData(cat.data);
+        localStorage.setItem("category",JSON.parse(cat.data))
+        console.log(cat.data);
       } catch (error) {
         console.error(error.message);
       }
@@ -99,21 +103,27 @@ const Header = () => {
                 className=" hover:bg-gray-50 flex gap-2 items-center py-2 px-2 cursor-pointer text-gray-400  text-md"
                 key={i}
               >
-                <SiEpicgames />
+                <img className="w-5 h-5" src={data.subCategory[1]?.image_small_color}/>
                 {data.title}
               </div>
             ))}
             <hr className="my-2" />
             <p className="font-medium text-md">Others</p>
-            {data?.map((data, i) => (
-              <div
-                className=" hover:bg-gray-50 flex gap-2 items-center py-2 px-2 cursor-pointer text-gray-400  text-md"
-                key={i}
-              >
-                <SiEpicgames />
-                {data.title}
-              </div>
-            ))}
+            
+            <div
+              className=" hover:bg-gray-50 flex gap-2 items-center py-2 px-2 cursor-pointer text-gray-400  text-md"
+             
+            >
+              <GrLanguage />
+              Languages
+            </div>
+            <div
+              className=" hover:bg-gray-50 flex gap-2 items-center py-2 px-2 cursor-pointer text-gray-400  text-md"
+             
+            >
+              <FaQuora />
+              FAQ
+            </div>
           </DrawerBody>
 
           <DrawerFooter placeContent={"start"}>

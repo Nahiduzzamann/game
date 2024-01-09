@@ -47,7 +47,7 @@ export const getGameCategories = (req: Request, res: Response) => {
             })
             cats.push({
                 title: d.title,
-                subCategory: subs
+                subCategory: subs.filter(s=>s)
             })
         })
 
