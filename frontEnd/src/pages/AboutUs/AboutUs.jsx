@@ -3,39 +3,28 @@ import React from 'react';
 const AboutUs = () => {
     return (
         <div className='p-5'>
-            <h1 className='text-center p-5 font-bold border-b-4 border-indigo-500 text-3xl'>FAQ</h1>
+            <h1 className='text-center p-5 font-bold border-b-4 border-indigo-500 text-3xl'>ABOUT US</h1>
 
-            <p className='font-bold pt-5 pb-2'>FAQ</p>
+            <p className='font-bold pt-5 pb-2'>ABOUT US</p>
 
-            <p className='font-bold pt-5 pb-2 underline underline-offset-5'>Age Requirement</p>
-            <p className='font-medium'>BABU88's customers must be 18 years of age or older and agree to abide by the terms and conditions set by the company.</p>
+            <p className='font-bold pt-5 pb-2 underline underline-offset-5'>About Us</p>
+            <p className='font-medium'>B0XBET is an online gambling company, offering a wide range of betting and casino options. Founded in 2021, B0XBET began as a cricket exchange platform serving the South Asian market.
+Our goal is very simple: to provide high-quality entertainment and gaming to our customer base.</p>
 
-            <p className='font-bold pt-5 pb-2 underline underline-offset-5'>Forgot Your Username Or Password?</p>
-            <p className='font-medium'>Customers can automatically link to online customer service by clicking 'Forgot Password'.
-             The 24-hour online customer service will provide you with a solution after passing a professional verification plan.</p>
+            <p className='font-bold pt-5 pb-2 underline underline-offset-5'>Sports Betting</p>
+            <p className='font-medium'>B0XBET provides extensive sports betting opportunities. Users can place bets on various sports events including IPL,
+             World Cup, Big Bash League, CPL, T20, Test Cricket, and ICC matches.</p>
 
-          <p className='font-bold pt-5 pb-2 underline underline-offset-5'>How To Deposit</p>
-            <p className='font-medium'>There are several ways to deposit the platform: bank transfer, DhaPay (h5, secured), DhaPay (h5, secured).</p>
+            <p className='font-bold pt-5 pb-2 underline underline-offset-5'>Casino Games</p>
+            <p className='font-medium'>B0XBET offers a range of casino games. Users can enjoy games like roulette, poker, baccarat, as well as all the latest 
+            live casino trends from industry leading providers like Pragmatic Play or Evolution Gaming.</p>
 
-          <p className='font-bold pt-5 pb-2 underline underline-offset-5'>Steps To Deposit</p>
-            <p className='font-medium'>1. Please click on 'deposit' at the top right of the homepage to enter the platform deposit page.<br></br>
-            2. After entering the amount you want to deposit, click 'Select Channel' on the right.<br></br>
-            3. You can click below deposit channels.<br></br>
-            (The upper and lower limits of recharge are subject to the payment channel)</p>
+            <p className='font-bold pt-5 pb-2 underline underline-offset-5'>Mobile Application</p>
+            <p className='font-medium'>B0XBET offers a mobile application that replicates all the gambling features 
+            found on the official site. The app provides a more streamlined and expeditious interface for users.</p>
 
-            <p className='font-bold pt-5 pb-2 underline underline-offset-5'>How To Withdraw Money</p>
-            <p className='font-medium'>By clicking 'Withdraw' at the top right of the homepage, enter your withdrawal password and
-             the amount you want to withdraw, and then click the withdrawal after completion.<br></br>
-             For the first withdrawal, please bind the withdrawal bank card to the bank card message.<br></br>
-             Withdrawal limit is ৳800, withdrawal limit is ৳30,000 per day.
-             </p>
-
-           <p className='font-bold pt-5 pb-2 underline underline-offset-5'>Personal Data Security</p>
-            <p className='font-medium'>The company will ensure that your personal information is not disclosed to any third party.<br></br>
-            The company will also ensure the security of your personal information and ensure that your information is restricted to our company.</p>
-
-          <p className='font-bold pt-5 pb-2 underline underline-offset-5'>Central Wallet</p>
-            <p className='font-medium pb-5'>All deposited amount and bonus will be deposited into a single central wallet and bets can be placed.</p>
+          <p className='font-bold pt-5 pb-2 underline underline-offset-5'>Security And Customer Service</p>
+            <p className='font-medium pb-5'>B0XBET prioritizes security and safety. It uses advanced encryption technology to keep user information secure¹. The platform also offers 24/7 customer service.</p>
         </div>
     );
 };

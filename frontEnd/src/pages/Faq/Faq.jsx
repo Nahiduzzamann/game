@@ -8,7 +8,7 @@ const Faq = () => {
             <p className='font-bold pt-5 pb-2'>FAQ</p>
 
             <p className='font-bold pt-5 pb-2 underline underline-offset-5'>Age Requirement</p>
-            <p className='font-medium'>BABU88's customers must be 18 years of age or older and agree to abide by the terms and conditions set by the company.</p>
+            <p className='font-medium'>B0XBET's customers must be 18 years of age or older and agree to abide by the terms and conditions set by the company.</p>
 
             <p className='font-bold pt-5 pb-2 underline underline-offset-5'>Forgot Your Username Or Password?</p>
             <p className='font-medium'>Customers can automatically link to online customer service by clicking 'Forgot Password'.
