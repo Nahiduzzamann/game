@@ -49,7 +49,12 @@ const GamesSection = () => {
               <TabPanel key={i}>
                 <div className="flex flex-wrap">
                   {dataSubCategory?.map((data, i) => (
-                    <p className="p-2 bg-black text-white m-2" key={i}>{data?.name}</p>
+                    <div key={i} className="p-2 bg-blue-500 text-white m-2 shadow shadow-blue-500 rounded-md">
+                      <p className=" text-white">
+                        {data?.name}
+                      </p>
+                      <img src={data?.image_white}></img>
+                    </div>
                   ))}
                 </div>
               </TabPanel>
