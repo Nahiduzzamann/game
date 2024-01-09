@@ -8,7 +8,7 @@ const Info = () => {
   return (
     <div className="bg-[#EBEBEB]">
       <Header></Header>
-      <div className="container mx-auto">
+      <div className="container mx-auto pb-8">
 
       <div className="md:grid md:grid-cols-3 gap-4">
         <div className="bg-white p-5 my-4 h-min ">

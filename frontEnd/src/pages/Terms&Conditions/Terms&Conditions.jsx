@@ -8,7 +8,7 @@ const TermsConditions = () => {
             <p className='font-bold pt-5 pb-2'>Terms & Conditions</p>
 
             <p className='font-bold pt-5 pb-2 underline underline-offset-5'>Terms & Conditions</p>
-            <p className='font-medium'>Welcome to BABU88, Bangladesh #1 Cricket Exchange & Betting Platform! Register with us and start betting.
+            <p className='font-medium'>Welcome to B0XBET, Bangladesh #1 Cricket Exchange & Betting Platform! Register with us and start betting.
              By opening an account with us, you agree to the following Terms and Conditions.</p>
 
             <p className='font-bold pt-5 pb-2 underline underline-offset-5'>Account Terms And Conditions</p>
@@ -45,7 +45,7 @@ const TermsConditions = () => {
              All payments made into your account are authorized and you will not attempt to reverse any payment made into your account or take any
               action to such extent made by as third party in order to avoid any liability. c) You accept that all transactions may be checked to prevent
                money laundering and any suspicious transactions will be reported to appropriate authorities. d) 
-            You agree that you are not entitled to any interest in your deposits and acknowledge that you shall not treat BABU88 as a financial institution.</p>
+            You agree that you are not entitled to any interest in your deposits and acknowledge that you shall not treat B0XBET as a financial institution.</p>
 
             <p className='font-bold pt-5 pb-2 underline underline-offset-5'>Privacy</p>
             <p className='font-medium'>All information sent to and received by us are processed under our Privacy
@@ -66,16 +66,16 @@ const TermsConditions = () => {
               with respect to the odds, price or stake on offer, or incorrect bet requests communicated by you
                to our operators. If our operators repeat back your bet request incorrectly, it is your responsibility
                 to correct the bet request and inform us of the error. Once you have confirmed the bet request and your 
-                bet is matched, you will be liable for that bet if it loses. Babu88 may, in its sole and absolute discretion, decide to suspend betting on 
-            a market at any time. In the interests of maintaining integrity and fairness in the Markets, Babu88
+                bet is matched, you will be liable for that bet if it loses. B0XBET may, in its sole and absolute discretion, decide to suspend betting on 
+            a market at any time. In the interests of maintaining integrity and fairness in the Markets, B0XBET
              may also void certain bets in a market or void a whole Market in its entirety.</p>
 
             <p className='font-bold pt-5 pb-2 underline underline-offset-5'>Cancellation, Termination, Suspension, And Breach</p>
-            <p className='font-medium'>We may restrict your access to Babu88, suspend or terminate your account, withdraw your offers
+            <p className='font-medium'>We may restrict your access to B0XBET, suspend or terminate your account, withdraw your offers
              for bets, void any bets outstanding to your account, cancel any unmatched bets or cancel and void any outstanding or matched
               bets in our absolute discretion without cause at any time if: there is a technological failure; a) we suspect that you are engaging
                in illegal or fraudulent activity; b) we suspect that you have (or may have) breached any part of this Agreement; c) we suspect that you
-                have breached the terms of a Babu88 promotion; d) we suspect that you are acting in collusion with other players to take unfair advantage of
+                have breached the terms of a B0XBET promotion; d) we suspect that you are acting in collusion with other players to take unfair advantage of
                  a bet/promotion and/or in the course of participating in a bet/promotion, you have become able to guarantee wins and/or profits with no or only
                   minimal risk; e) we suspect that your account's "public market data" usage ('public market data' includes market prices, traded volumes and market depth) 
                   could represent business usage (˜'business usage' includes any use by a betting operator or any use by an individual or organization supplying data or services
@@ -84,7 +84,7 @@ const TermsConditions = () => {
             in which you take part (or in which a team of which you are a member, or in respect of which you are employed, takes part).</p>
 
             <p className='font-bold pt-5 pb-2 underline underline-offset-5'>Underage Gambling</p>
-            <p className='font-medium'>It is illegal for anyone under the age of 18 to register or gamble on Babu88.
+            <p className='font-medium'>It is illegal for anyone under the age of 18 to register or gamble on B0XBET.
              If we identify that you are under 18 or were under 18 when you entered into any transactions on our site: a)
               We will immediately block you from entering into any betting transactions or withdrawing funds, or using your account; b)
              We will investigate the claim that you were under age, including whether you have been betting as an agent for or on behalf of another person;</p>
@@ -105,12 +105,12 @@ const TermsConditions = () => {
 
             <p className='font-bold pt-5 pb-2 underline underline-offset-5'>Bet Settlement</p>
             <p className='font-medium'>Subject to these General Conditions and any applicable Specific Conditions, we will settle
-             markets according to our Babu88 Rules and Regulations, Sportsbook Rules and Regulations. We reserve the right to reverse 
+             markets according to our B0XBET Rules and Regulations, Sportsbook Rules and Regulations. We reserve the right to reverse 
              or amend settlement in the event of a market being settled incorrectly. This may lead to amendments being made to your account 
              to reflect changes in market settlement and if there are insufficient funds in your account we may demand that you put funds into
               your account to address the outstanding balance. We will notify you if your account goes into a negative balance and, if following 
               the notification, you either: a) do not put funds in your account within the reasonable time specified in our notice to you, or b) you
-               fail to make the relevant payments into your account in accordance with any repayment plan as agreed between you and Babu88; or c) you 
+               fail to make the relevant payments into your account in accordance with any repayment plan as agreed between you and B0XBET; or c) you 
                indicate that you have no intention of putting funds in your account to address the outstanding balance, then we reserve the right to 
                suspend your account and/or take appropriate legal action to seek to recover the debt, in full, from you.
              Any amount of winnings or losses relating to your bets on a Market will be rounded to the nearest two decimal places.</p>
@@ -128,7 +128,7 @@ const TermsConditions = () => {
             <p className='font-bold pt-5 pb-2 underline underline-offset-5'>Indemnity</p>
             <p className='font-medium'>You agree to indemnify and hold us and our associated companies, affiliates, officers, directors, agents and employees harmless 
             from any liabilities, claims, losses or demands made by any third party arising out of your breach of this Agreement (including documents incorporated by reference)
-             or out of your violation of any law or the rights of any third party. You acknowledge that Babu88 and its affiliates will hold information with respect to your identity,
+             or out of your violation of any law or the rights of any third party. You acknowledge that B0XBET and its affiliates will hold information with respect to your identity,
               including but not limited to your name, address and payment details. 
             You agree that we rely on this information in entering into this Agreement and you agree to hold us harmless against any
              falsehood or inaccuracy contained in the information you provide us.</p>
@@ -147,38 +147,38 @@ const TermsConditions = () => {
              Nothing in this Agreement excludes our liability with respect to death and personal injury resulting from our negligence, or that of our employees, agents or subcontractors.</p>
 
             <p className='font-bold pt-5 pb-2 underline underline-offset-5'>Intellectual Property</p>
-            <p className='font-medium'>Babu88 owns all copyright and related rights in and to our site, including, without limitation,
+            <p className='font-medium'>B0XBET owns all copyright and related rights in and to our site, including, without limitation,
              rights in databases and all rights in any price data and related content on our site except for certain third-party rights (referred to below); a)
-              all trade mark rights, whether registered or unregistered, in and to Babu88 and the Babu88 logo; and b) the domain name www.crickex.com which is
-               our uniform resource locator ("URL"). The following use of price data or any other data or content from our site or via the API or any other Babu88 
+              all trade mark rights, whether registered or unregistered, in and to B0XBET and the B0XBET logo; and b) the domain name www.crickex.com which is
+               our uniform resource locator ("URL"). The following use of price data or any other data or content from our site or via the API or any other B0XBET 
                data from any other source is strictly prohibited without our prior consent: a) commercial use by any person; and/or b) any use for any purpose by
-                a competitor of the Babu88 group of companies, or an employee, contractor or agent of any such competitor ("Restricted Person"), provided always 
-                that Restricted Persons may place bets. Screen scraping, web scraping or any other automated or manual collection of Babu88 Data, for commercial
+                a competitor of the B0XBET group of companies, or an employee, contractor or agent of any such competitor ("Restricted Person"), provided always 
+                that Restricted Persons may place bets. Screen scraping, web scraping or any other automated or manual collection of B0XBET Data, for commercial
                  or personal use, by any person is expressly prohibited. Any unauthorized use of any of the above rights may result in prosecution or other action
-                  being taken against you. You hereby assign to Babu88 absolutely, any and all copyright and other intellectual property rights throughout the world
+                  being taken against you. You hereby assign to B0XBET absolutely, any and all copyright and other intellectual property rights throughout the world
                    in all media whether now known or hereafter developed, for the full period of copyright, including by way of present assignment of future copyright 
                    and all other rights whatsoever, in any offers for bets or bets placed by you on our site.
-             Any data licensed to Babu88 from third parties is provided for use on our site only and may not be used for any commercial purposes without the consent of such third parties.</p>
+             Any data licensed to B0XBET from third parties is provided for use on our site only and may not be used for any commercial purposes without the consent of such third parties.</p>
 
             <p className='font-bold pt-5 pb-2 underline underline-offset-5'>Information Services</p>
-            <p className='font-medium'>Babu88 from time to time may provide you with access to various information and content. 
+            <p className='font-medium'>B0XBET from time to time may provide you with access to various information and content. 
             This may include form data, results, video streaming, upcoming events, the times and dates of events, current scores, 
             time elapsed, and other information relating to a sporting event. Such information may be supplied: a) via our site (including micro-sites and as
              part of any runner data and/or results service), emails or any other means of communication; and/or b) via links to third party websites. Such
-              information is described in these Terms and Conditions collectively as the "Information". The Information is provided by Babu88 or is sourced 
+              information is described in these Terms and Conditions collectively as the "Information". The Information is provided by B0XBET or is sourced 
               from a third party. Although some Information may be described as "live", or it may be implied that such Information is "live", you should be aware
-               that this data may be subject to a time delay. The Information may also be inaccurate. You should also be aware that other Babu88 users may have access
+               that this data may be subject to a time delay. The Information may also be inaccurate. You should also be aware that other B0XBET users may have access
                 to pictures and/or data that is faster and/or more accurate than the Information. The Information is supplied "as is" and is provided for guidance only
-                . To the fullest extent permitted by law, Babu88 makes no representations or warranties of any kind, including but not limited to, the accuracy, quality,
-                 completeness or timeliness of the Information. If you rely on the Information to place bets, you do so entirely at your own risk. Babu88 shall not be liable
+                . To the fullest extent permitted by law, B0XBET makes no representations or warranties of any kind, including but not limited to, the accuracy, quality,
+                 completeness or timeliness of the Information. If you rely on the Information to place bets, you do so entirely at your own risk. B0XBET shall not be liable
                   for any action taken or not taken by you as a result of your reliance on the Information or for any loss or damage (direct or indirect) suffered by you as 
-                  a result of your use of the Information. Any links to third party websites does not constitute an endorsement by Babu88 of any products or services available on such websites.
-             You use such websites at your own risk and Babu88 takes no responsibility for the content on, or use of, such websites.</p>
+                  a result of your use of the Information. Any links to third party websites does not constitute an endorsement by B0XBET of any products or services available on such websites.
+             You use such websites at your own risk and B0XBET takes no responsibility for the content on, or use of, such websites.</p>
 
             <p className='font-bold pt-5 pb-2 underline underline-offset-5'>Assignment</p>
-            <p className='font-medium'>You may not assign any part of this Agreement without Babu88' written consent
-             but Babu88 may assign any or all of this Agreement to any third party at any time. In the event of an assignment
-              by Babu88, we will notify of this change and, if you do not agree to this,
+            <p className='font-medium'>You may not assign any part of this Agreement without B0XBET' written consent
+             but B0XBET may assign any or all of this Agreement to any third party at any time. In the event of an assignment
+              by B0XBET, we will notify of this change and, if you do not agree to this,
              then you will not be able to continue to use our services, but you shall always be able to withdraw your funds subject to these Terms and Conditions.</p>
 
             <p className='font-bold pt-5 pb-2 underline underline-offset-5'>Severability</p>
