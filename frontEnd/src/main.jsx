@@ -11,6 +11,9 @@ import ContactUs from "./pages/ContactUs/ContactUs.jsx";
 import TermsConditions from "./pages/Terms&Conditions/Terms&Conditions.jsx";
 import ResponsibleGaming from "./pages/ResponsibleGaming/ResponsibleGaming.jsx";
 import { ChakraProvider } from "@chakra-ui/react";
+import LoginButton from "./pages/Shared/navBar/LoginButton.jsx";
+import Deposit from "./pages/Deposit/index.jsx";
+import Profile from "./layout/Profile.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -49,12 +52,24 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/user",
+    element: <Profile></Profile>,
+    // errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "deposit",
+        element: <Deposit></Deposit>,
+      },
+    ],
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ChakraProvider>
       <RouterProvider router={router} />
+      
     </ChakraProvider>
   </React.StrictMode>
 );

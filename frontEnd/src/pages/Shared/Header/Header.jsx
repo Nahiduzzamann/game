@@ -16,11 +16,13 @@ import {
 import { CiMenuFries } from "react-icons/ci";
 import { SiEpicgames } from "react-icons/si";
 import { MdOutlineVerified } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [data, setData] = useState();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
+  const navigate = useNavigate();
   useEffect(() => {
     const cats = async () => {
       try {
@@ -35,16 +37,22 @@ const Header = () => {
     //console.log(cat);
   }, []);
   return (
-    <div className="">
+    <div className="bg-white">
       <div className="md:flex items-center justify-between hidden px-6 py-3">
         <a href="/">
           <img className="w-[150px]" src={logo} />
         </a>
         <div className="flex gap-4  items-center">
-          <button className="bg-black hover:bg-gray-800 text-white rounded-md w-[150px] py-2">
+          <button
+            onClick={() => navigate("/user/deposit")}
+            className="bg-black hover:bg-gray-800 text-white rounded-md w-[150px] py-2"
+          >
             Login
           </button>
-          <button className="bg-blue-500 hover:bg-blue-400 text-white rounded-md w-[150px] py-2">
+          <button
+            onClick={() => navigate("/user/deposit")}
+            className="bg-blue-500 hover:bg-blue-400 text-white rounded-md w-[150px] py-2"
+          >
             Sign Up
           </button>
           <div className=" flex gap-2 items-center">

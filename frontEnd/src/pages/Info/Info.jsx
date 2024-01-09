@@ -3,6 +3,7 @@ import Header from "../Shared/Header/Header";
 import { NavLink, Outlet } from "react-router-dom";
 import Footer from "../Shared/Footer/Footer";
 import ScrollToTop from "../../components/ScrollToTop";
+import LoginButton from "../Shared/navBar/LoginButton";
 
 const Info = () => {
   return (
@@ -32,6 +33,7 @@ const Info = () => {
       </div>
       </div>
       <Footer></Footer>
+      <LoginButton/>
       <ScrollToTop />
     </div>
   );
