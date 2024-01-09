@@ -6,7 +6,7 @@ const GamesSection = () => {
     <div className="px-6 py-3">
       <Tabs isFitted variant='soft-rounded'  colorScheme='blue'>
         <TabList mb="1em">
-          <Tab className="">Cricket</Tab>
+          <Tab className=""><h2 className="text-xl">Cricket</h2></Tab>
           <Tab>Casino</Tab>
           <Tab>Slot</Tab>
           <Tab>Table</Tab>
