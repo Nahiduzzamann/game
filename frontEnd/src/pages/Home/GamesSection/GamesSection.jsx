@@ -2,6 +2,8 @@ import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import React from "react";
 
 const GamesSection = () => {
+    const gameCategory =localStorage.getItem("category")
+    console.log(gameCategory);
   return (
     <div className="px-6 py-3">
       <Tabs isFitted variant='soft-rounded'  colorScheme='blue'>
