@@ -8,7 +8,7 @@ const ResponsibleGaming = () => {
             <p className='font-bold pt-5 pb-2'>RESPONSIBLE GAMING</p>
 
             <p className='font-bold pt-5 pb-2 underline underline-offset-5'>Play Responsibly</p>
-            <p className='font-medium'>Playing at B0XBET should be something positive and entertaining, whilst also thrilling and fun. Sometimes 
+            <p className='font-medium'>Playing at 40XBET should be something positive and entertaining, whilst also thrilling and fun. Sometimes 
             it is hard to control how much we want to play in relation to how much we can afford to lose.
              In this section you’ll find ways to help make sure your gambling is within controllable limits,
               as well as show you places to turn to if you feel you might require help.</p>
@@ -16,7 +16,7 @@ const ResponsibleGaming = () => {
             <p className='font-bold pt-5 pb-2 underline underline-offset-5'>I Think I Might Be Playing Too Much</p>
             <p className='font-medium'>Below we have listed statements taken from a renowned psychological research paper.
              If you find that one or more of these statements are true for you, you might have a gambling problem and we 
-             recommend that you seek professional help and see how B0XBET can help you deal with this problem in sections 
+             recommend that you seek professional help and see how 40XBET can help you deal with this problem in sections 
              3 and 4 below. You’ve repeated unsuccessful efforts to control, cut back, or stop gambling. You’re restless or 
              irritable when attempting to cut down or stop gambling. You gamble as a way of escaping from problems or of relieving 
              a dysphoric mood. You often return another day after losing money gambling, to get even (“chasing” one’s losses).
@@ -84,7 +84,7 @@ const ResponsibleGaming = () => {
             an indefinite exclusion from online gambling is the right choice for you. You can suspend your account via your Play Ok settings here.</p>
 
             <p className='font-bold pt-5 pb-2 underline underline-offset-5'>Take A Break</p>
-            <p className='font-medium'>You can take a break from B0XBET for up to 6 months. Once your break is over, your account will be automatically reopened.
+            <p className='font-medium'>You can take a break from 40XBET for up to 6 months. Once your break is over, your account will be automatically reopened.
              You will be able to make changes to the end date at a later time if you so choose. If you end it early,
              a 24 hour cool off period will apply before you can log in again. Speak with us in our chat if you need any advice. You will not receive any emails 
              or texts from us during this time.</p>
