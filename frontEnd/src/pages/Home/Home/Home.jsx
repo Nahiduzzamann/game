@@ -1,13 +1,14 @@
-
-import React from 'react';
+import React from "react";
+import GamesSection from "../GamesSection/GamesSection";
+import Banner from "../Banner/Banner";
 
 const Home = () => {
-    return (
-        <div>
-           Homeeeeeeeeeeeeee
-            
-        </div>
-    );
+  return (
+    <div>
+      <Banner></Banner>
+      <GamesSection></GamesSection>
+    </div>
+  );
 };
 
 export default Home;
