@@ -12,10 +12,10 @@ const Footer = () => {
         <div className='bg-[#EBEBEB] border-t-4 border-indigo-200'>
             <div className='container mx-auto mt-5  p-5'>
             <div className='flex gap-10 underline underline-offset-8  flex-wrap'>
-                <Link to="/info/Terms&Conditions" className="font-bold py-2 rounded hover:text-slate-400">Terms And Conditions</Link>
-                <Link to="/info/aboutUs" className="font-bold py-2 rounded hover:text-slate-400">About Us</Link>
-                <Link to="/info/faq" className="font-bold py-2 rounded hover:text-slate-400">FAQ</Link>
-                <Link to="/info/contactUs" className="font-bold py-2 rounded hover:text-slate-400">Contact Us</Link>
+                <Link to="/info/Terms&Conditions" className="font-bold py-2 rounded hover:text-red-400">Terms And Conditions</Link>
+                <Link to="/info/aboutUs" className="font-bold py-2 rounded hover:text-red-400">About Us</Link>
+                <Link to="/info/faq" className="font-bold py-2 rounded hover:text-red-400">FAQ</Link>
+                <Link to="/info/contactUs" className="font-bold py-2 rounded hover:text-red-400">Contact Us</Link>
             </div>
 
             <div className='grid lg:grid-cols-3 gap-24 font-sans'>
@@ -82,14 +82,14 @@ const Footer = () => {
                 <div>
                 <p className='font-bold h2 pb'>Certified By</p>
                 <div className="">
-                    <a href=""><img className="size-32" src={logo} /></a>
+                    <a href=""><img className="w-full max-w-64" src={logo} /></a>
                     {/* <h1 className='text-red-400 text-[45px] italic font-bold'>BABU<span className='text-yellow-500'>88</span></h1>
                            <span className='ml-20 text-white-400 italic text-[45px] font-bold leading-3'>official</span> */}
                 </div>
                 </div>
                 <div>
                 <p className='font-bold h2 pb-4'>Find Us</p>
-                <div className="flex">
+                <div className="flex ">
                 <FaFacebookF className='text-white text-[45px] bg-blue-500 rounded-lg p-1 m-2'/>
                 <FaInstagram className='text-white text-[45px] bg-blue-500 rounded-lg p-1 m-2'/>
                 <FaTwitter className='text-white text-[45px] bg-blue-500 rounded-lg p-1 m-2'/>
