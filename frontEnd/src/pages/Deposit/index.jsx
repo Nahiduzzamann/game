@@ -4,7 +4,8 @@ import { BsQuestionOctagonFill } from "react-icons/bs";
 
 export default function Deposit() {
   return (
-    <div className='p-5 bg-white'>
+    <div className='bg-gray-500 rounded-lg p-4'>
+      <div className='p-5 bg-white rounded-md'>
             <h1 className='text-center p-5 font-bold border-b-4 border-indigo-300 text-3xl'>Deposit</h1>
 
             <p className='font-bold pt-5 pb-2'>Payment Methods <span className='text-red-500 ps-5'>*</span></p>
@@ -71,5 +72,6 @@ export default function Deposit() {
                  
 
         </div>
+    </div>
   )
 }
