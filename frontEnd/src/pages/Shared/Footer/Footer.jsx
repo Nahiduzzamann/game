@@ -10,7 +10,7 @@ import logo from "../../../assets/logo.png";
 const Footer = () => {
     return (
         <div className='bg-[#EBEBEB] border-t-4 border-indigo-200'>
-            <div className='container mx-auto mt-5  p-5'>
+            <div className='px-6 mx-auto mt-5  p-5'>
             <div className='flex gap-10 underline underline-offset-8  flex-wrap'>
                 <Link to="/info/Terms&Conditions" className="font-bold py-2 rounded hover:text-red-400">Terms And Conditions</Link>
                 <Link to="/info/aboutUs" className="font-bold py-2 rounded hover:text-red-400">About Us</Link>
