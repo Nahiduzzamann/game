@@ -31,15 +31,13 @@ export default function Slider() {
     },
   ];
   return (
-    <div className="slide-container  my-4">
-      <Slide>
+    <div className="slide-container  mt-4">
+      <Slide indicators arrows={false}>
         {slideImages.map((slideImage, index) => (
           <div key={index}>
             <div
               style={{ ...divStyle, backgroundImage: `url(${slideImage.url})` }}
-            >
-             
-            </div>
+            ></div>
           </div>
         ))}
       </Slide>
