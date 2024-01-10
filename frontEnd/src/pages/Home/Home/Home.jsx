@@ -5,7 +5,7 @@ import ReferralsSection from "../ReferralsSection/ReferralsSection";
 
 const Home = () => {
   return (
-    <div>
+    <div className="container mx-auto">
       <Banner></Banner>
       <GamesSection></GamesSection>
       <ReferralsSection></ReferralsSection>
