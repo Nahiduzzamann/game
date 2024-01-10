@@ -177,8 +177,8 @@ const Options = ({ data, i }) => {
       </div>
       {hover && (
         <div className=" flex gap-2 absolute z-30 bg-blue-500 flex-wrap w-full px-6 py-4 overflow-hidden rounded-md left-0 top-[120px]">
-          {data.subCategory?.map((doc, i) => (
-            <div  onClick={()=>{
+          {data.subCategory?.map((doc, j) => (
+            <div key={j} onClick={()=>{
               navigate(`/games/${doc.system}/${i}`)
               setHover(false)
               //console.log(doc.system);

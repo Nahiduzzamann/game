@@ -1,4 +1,4 @@
 
-const  url="http://62.72.31.204:3100/api"
+const  url="https://api.banglamartecommerce.com.bd/api"
 
 export default url
