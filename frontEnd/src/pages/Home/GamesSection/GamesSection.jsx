@@ -21,6 +21,12 @@ const GamesSection = () => {
     //console.log(cat);
   }, []);
 
+  useEffect(() => {
+   if(dataCategory){
+    handleSubCategory(0)
+   }
+  }, [dataCategory]);
+
   const handleSubCategory = (index = 0) => {
     const category = dataCategory[index];
     const subCategory = category.subCategory;
