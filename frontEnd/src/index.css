@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import "react-slideshow-image/dist/styles.css";
 .active {
     color: red; /* Set your desired active link styles */
     font-weight: bold;
