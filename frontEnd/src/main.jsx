@@ -19,6 +19,7 @@ import Games from "./pages/games/Games.jsx";
 import 'react-responsive-pagination/themes/classic.css';
 import ClaimVoucher from "./pages/ClaimVoucher/ClaimVoucher.jsx";
 import MyProfile from "./pages/MyProfile/MyProfile.jsx";
+import ChangePasswordPage from "./pages/ChangePassword/ChangePassword.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -85,6 +86,10 @@ const router = createBrowserRouter([
       {
         path: "myprofile",
         element: <MyProfile></MyProfile>
+      },
+      {
+        path: "changePassword",
+        element: <ChangePasswordPage></ChangePasswordPage>
       },
     ],
   },
