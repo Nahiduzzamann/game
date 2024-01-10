@@ -12,7 +12,7 @@ const Profile = () => {
       <Header></Header>
       <div className="md:flex  md:gap-4 px-4 py-4">
         <ProfileMenuBar />
-        <div className="md:col-span-3">
+        <div className="md:col-span-3 w-full">
           <Outlet></Outlet>
         </div>
       </div>
