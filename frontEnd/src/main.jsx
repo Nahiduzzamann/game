@@ -11,13 +11,13 @@ import ContactUs from "./pages/ContactUs/ContactUs.jsx";
 import TermsConditions from "./pages/Terms&Conditions/Terms&Conditions.jsx";
 import ResponsibleGaming from "./pages/ResponsibleGaming/ResponsibleGaming.jsx";
 import { ChakraProvider } from "@chakra-ui/react";
-import LoginButton from "./pages/Shared/navBar/LoginButton.jsx";
 import Deposit from "./pages/Deposit/index.jsx";
 import Profile from "./layout/Profile.jsx";
 import Withdrawal from "./pages/Withdrawal/index.jsx";
 import History from "./pages/History/index.jsx";
 import Games from "./pages/games/Games.jsx";
 import 'react-responsive-pagination/themes/classic.css';
+import ClaimVoucher from "./pages/ClaimVoucher/ClaimVoucher.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -76,6 +76,10 @@ const router = createBrowserRouter([
       {
         path: "history",
         element: <History/>,
+      },
+      {
+        path: "claimVoucher",
+        element: <ClaimVoucher></ClaimVoucher>,
       },
     ],
   },
