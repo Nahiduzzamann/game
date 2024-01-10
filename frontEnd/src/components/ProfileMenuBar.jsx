@@ -19,7 +19,7 @@ export default function ProfileMenuBar() {
         <div onClick={()=>navigate("/user/deposit")}
           className={`${
             pathname === "/user/deposit" && "bg-gray-600 text-white"
-          } flex items-center gap-2 hover:bg-gray-500 px-2 py-[6px] rounded-md hover:text-white cursor-pointer`}
+          } flex items-center gap-2 hover:bg-gray-500 px-2 w-[220px] py-[6px] rounded-md hover:text-white cursor-pointer`}
         >
           <FaDollarSign />
           <div className="text-xs font-medium">Deposit</div>
