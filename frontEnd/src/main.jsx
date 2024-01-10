@@ -18,6 +18,7 @@ import History from "./pages/History/index.jsx";
 import Games from "./pages/games/Games.jsx";
 import 'react-responsive-pagination/themes/classic.css';
 import ClaimVoucher from "./pages/ClaimVoucher/ClaimVoucher.jsx";
+import MyProfile from "./pages/MyProfile/MyProfile.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -80,6 +81,10 @@ const router = createBrowserRouter([
       {
         path: "claimVoucher",
         element: <ClaimVoucher></ClaimVoucher>,
+      },
+      {
+        path: "myprofile",
+        element: <MyProfile></MyProfile>
       },
     ],
   },

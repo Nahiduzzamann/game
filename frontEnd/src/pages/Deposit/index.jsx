@@ -3,8 +3,8 @@ import { Select } from "@chakra-ui/react";
 import { BsQuestionOctagonFill } from "react-icons/bs";
 
 export default function Deposit() {
-  const [selectedImage, setSelectedImage] = useState('');
-const [selectedAmount, setSelectedAmount] = useState(200);
+  const [selectedImage, setSelectedImage] = useState("");
+  const [selectedAmount, setSelectedAmount] = useState(200);
   const [inputAmount, setInputAmount] = useState(200);
 
   const handleAmountClick = (amount) => {
@@ -30,22 +30,22 @@ const [selectedAmount, setSelectedAmount] = useState(200);
           Payment Methods <span className="text-red-500 ">*</span>
         </p>
         <div className="flex">
-      {['nagad', 'rocket', 'bkash', 'upay'].map((name,index) => (
-        <div
-          key={index}
-          onClick={() => handleImageClick(name)}
-          className={`border-2 border-gray-500 rounded-lg p-2 m-2 hover:bg-gray-200 cursor-pointer ${
-            selectedImage === name ? 'bg-gray-200 border-[#0082D6]' : ''
-          }`}
-        >
-          <img
-            className="h-12 w-20"
-            src={`https://www.babu88.co/static/svg/deposit-ewallet-${name}.svg`}
-            alt={`Image ${name}`}
-          />
+          {["nagad", "rocket", "bkash", "upay"].map((name, index) => (
+            <div
+              key={index}
+              onClick={() => handleImageClick(name)}
+              className={`border-2 border-gray-500 rounded-lg p-2 m-2 hover:bg-gray-200 cursor-pointer ${
+                selectedImage === name ? "bg-gray-200 border-[#0082D6]" : ""
+              }`}
+            >
+              <img
+                className="h-12 w-20"
+                src={`https://www.babu88.co/static/svg/deposit-ewallet-${name}.svg`}
+                alt={`Image ${name}`}
+              />
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
 
         <p className="font-bold pt-5 pb-2">
           Deposit Channel <span className="text-red-500">*</span>
@@ -57,43 +57,43 @@ const [selectedAmount, setSelectedAmount] = useState(200);
           </p>
         </div>
         <div>
-      <div className="text-center pt-4 flex">
-        {[200, 500, 1000].map((amount) => (
-          <p
-            key={amount}
-            onClick={() => handleAmountClick(amount)}
-            className={`h-10 w-36 bg-black text-white font-bold text-center rounded-lg p-1 m-2 cursor-pointer ${
-              selectedAmount === amount ? 'bg-[#0082D6]' : ''
-            }`}
-          >
-            {amount}
-          </p>
-        ))}
-      </div>
-      <div className="text-center flex">
-        {[5000, 10000, 20000].map((amount) => (
-          <p
-            key={amount}
-            onClick={() => handleAmountClick(amount)}
-            className={`h-10 w-36 bg-black text-white font-bold text-center rounded-lg p-1 m-2 cursor-pointer ${
-              selectedAmount === amount ? 'bg-[#0082D6]' : ''
-            }`}
-          >
-            {amount}
-          </p>
-        ))}
-      </div>
+          <div className="text-center pt-4 flex">
+            {[200, 500, 1000].map((amount) => (
+              <p
+                key={amount}
+                onClick={() => handleAmountClick(amount)}
+                className={`h-10 w-36 bg-black text-white font-bold text-center rounded-lg p-1 m-2 cursor-pointer ${
+                  selectedAmount == amount ? "bg-blue-500" : ""
+                }`}
+              >
+                {amount}
+              </p>
+            ))}
+          </div>
+          <div className="text-center flex">
+            {[5000, 10000, 20000].map((amount) => (
+              <p
+                key={amount}
+                onClick={() => handleAmountClick(amount)}
+                className={`h-10 w-36 bg-black text-white font-bold text-center rounded-lg p-1 m-2 cursor-pointer ${
+                  selectedAmount == amount ? "bg-blue-500" : ""
+                }`}
+              >
+                {amount}
+              </p>
+            ))}
+          </div>
 
-      <p className="font-bold pt-5 pb-2 flex justify-between">
-          Deposit Amount * <BsQuestionOctagonFill />
-        </p>
-      <input
-        type="number"
-        value={inputAmount}
-        onChange={handleInputChange}
-        className="h-10 w-36 bg-gray-200 text-black border border-[#0082D6] font-bold text-center rounded-lg p-1 m-2"
-      />
-    </div>
+          <p className="font-bold pt-5 pb-2 flex justify-between">
+            Deposit Amount * <BsQuestionOctagonFill />
+          </p>
+          <input
+            type="number"
+            value={inputAmount}
+            onChange={handleInputChange}
+            className="h-10 w-36 bg-gray-200 text-black border border-[#0082D6] font-bold text-center rounded-lg p-1 m-2"
+          />
+        </div>
 
         <p className="font-bold pt-5 pb-2">
           Deposit Bonus <span className="text-red-500 ">*</span>
