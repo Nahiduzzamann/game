@@ -2,10 +2,12 @@ import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import url from "../../../module";
 import getCategory from "../../../module/getCategory";
+import {useNavigate} from "react-router-dom"
 const GamesSection = () => {
   const [dataCategory, setDataCategory] = useState(null);
   const [dataSubCategory, setDataSubCategory] = useState(null);
   // console.log(dataSubCategory);
+  const navigate=useNavigate()
 
   useEffect(() => {
     const cats = async () => {
@@ -55,8 +57,10 @@ const GamesSection = () => {
             dataCategory?.map((data, i) => (
               <TabPanel key={i}>
                 <div className="grid md:grid-cols-4 xl:grid-cols-8 grid-cols-2">
-                  {dataSubCategory?.map((data, i) => (
-                    <div key={i} className="p-2 bg-gray-100 text-white m-2 shadow shadow-gray-200 rounded-md">
+                  {dataSubCategory?.map((data, j) => (
+                    <div onClick={()=>{
+                      navigate(`/games/${data.system}/${i}`)
+                    }} key={j} className="p-2 bg-blue-300 hover:bg-blue-200 text-white m-2 shadow shadow-gray-200 rounded-md">
                       <img src={data?.image_colored}></img>
                     </div>
                   ))}
