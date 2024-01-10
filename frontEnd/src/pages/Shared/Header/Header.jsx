@@ -47,7 +47,7 @@ const Header = () => {
   return (
     <div className="bg-white">
       <div className="md:flex items-center justify-between hidden px-6 py-3">
-        <a href="/">
+        <a onClick={() => navigate("/")}>
           <img className="w-[150px]" src={logo} />
         </a>
         <div className="flex gap-4  items-center">
@@ -75,9 +75,9 @@ const Header = () => {
       </div>
       <div className="md:hidden flex items-center px-4 py-2 justify-between">
         <CiMenuFries onClick={onOpen} size={28} />
-        <a href="/">
+        <div onClick={() => navigate("/")}>
           <img className="w-[130px]" src={logo} />
-        </a>
+        </div>
         <div className=" flex gap-2 items-center">
           <GrLanguage color="#0082D6" size={28} /> ENG
         </div>
@@ -118,7 +118,10 @@ const Header = () => {
                   <AccordionPanel className="bg-gray-50" pb={4}>
                     <div className="grid gap-2  ">
                       {data.subCategory?.map((doc, i) => (
-                        <div key={i} className="   hover:bg-gray-400 text-black text-center px-2 py-1 overflow-hidden rounded-sm ">
+                        <div
+                          key={i}
+                          className="   hover:bg-gray-400 text-black text-center px-2 py-1 overflow-hidden rounded-sm "
+                        >
                           <div>
                             <img className=" h-5" src={doc.image_colored} />
                           </div>
@@ -159,7 +162,7 @@ const Header = () => {
 export default Header;
 const Options = ({ data, i }) => {
   const [hover, setHover] = useState(false);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   return (
     <div
       key={i}
@@ -176,11 +179,15 @@ const Options = ({ data, i }) => {
       {hover && (
         <div className=" md:grid md:grid-cols-4 xl:grid-cols-8 gap-2 absolute z-30 bg-blue-500 flex-wrap w-full px-6 py-4 overflow-hidden rounded-md left-0 top-[120px]">
           {data.subCategory?.map((doc, j) => (
-            <div key={j} onClick={()=>{
-              navigate(`/games/${doc.system}/${i}`)
-              setHover(false)
-              //console.log(doc.system);
-            }} className=" bg-white  hover:bg-gray-200 text-black text-center px-2 py-1 overflow-hidden rounded-md ">
+            <div
+              key={j}
+              onClick={() => {
+                navigate(`/games/${doc.system}/${i}`);
+                setHover(false);
+                //console.log(doc.system);
+              }}
+              className=" cursor-pointer bg-blue-200  hover:bg-gray-200 text-black text-center px-2 py-1 overflow-hidden rounded-md "
+            >
               <div>
                 <img className=" h-[50px]" src={doc.image_colored} />
               </div>
