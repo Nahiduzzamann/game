@@ -14,8 +14,6 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { CiMenuFries } from "react-icons/ci";
-import { SiEpicgames } from "react-icons/si";
-import { MdOutlineVerified } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { FaQuora } from "react-icons/fa6";
 import {
@@ -72,7 +70,7 @@ const Header = () => {
       </div>
       <div className="md:flex  bg-blue-500 text-white px-6 py-4 hidden">
         {data?.map((data, i) => (
-          <Options data={data} i={i} />
+          <Options key={i} data={data} i={i} />
         ))}
       </div>
       <div className="md:hidden flex items-center px-4 py-2 justify-between">
@@ -100,7 +98,7 @@ const Header = () => {
           <DrawerBody>
             <p className="font-medium text-md">Games</p>
             {data?.map((data, i) => (
-              <Accordion allowToggle>
+              <Accordion key={i} allowToggle>
                 <AccordionItem>
                   <h2>
                     <AccordionButton className="flex justify-between w-full">
@@ -120,7 +118,7 @@ const Header = () => {
                   <AccordionPanel className="bg-gray-50" pb={4}>
                     <div className="grid gap-2  ">
                       {data.subCategory?.map((doc, i) => (
-                        <div className="   hover:bg-gray-400 text-black text-center px-2 py-1 overflow-hidden rounded-sm ">
+                        <div key={i} className="   hover:bg-gray-400 text-black text-center px-2 py-1 overflow-hidden rounded-sm ">
                           <div>
                             <img className=" h-5" src={doc.image_colored} />
                           </div>
