@@ -4,7 +4,18 @@ import { BsQuestionOctagonFill } from "react-icons/bs";
 
 export default function Deposit() {
   const [selectedImage, setSelectedImage] = useState('');
+const [selectedAmount, setSelectedAmount] = useState(200);
+  const [inputAmount, setInputAmount] = useState(200);
 
+  const handleAmountClick = (amount) => {
+    setSelectedAmount(amount);
+    setInputAmount(amount);
+  };
+
+  const handleInputChange = (e) => {
+    setInputAmount(e.target.value);
+    // You can add validation or other logic as needed
+  };
   const handleImageClick = (name) => {
     setSelectedImage(name);
   };
@@ -23,8 +34,8 @@ export default function Deposit() {
         <div
           key={index}
           onClick={() => handleImageClick(name)}
-          className={`border-2 border-gray-500 rounded-lg p-2 m-2 hover:bg-gray-400 cursor-pointer ${
-            selectedImage === name ? 'bg-gray-400' : ''
+          className={`border-2 border-gray-500 rounded-lg p-2 m-2 hover:bg-gray-200 cursor-pointer ${
+            selectedImage === name ? 'bg-gray-200 border-[#0082D6]' : ''
           }`}
         >
           <img
@@ -45,44 +56,44 @@ export default function Deposit() {
             DPAY
           </p>
         </div>
-        <div className="text-center pt-4 flex">
-          <p className="h-10 w-36 bg-black text-white font-bold text-center rounded-lg p-1 m-2 hover:bg-yellow-400">
-            {" "}
-            200
+        <div>
+      <div className="text-center pt-4 flex">
+        {[200, 500, 1000].map((amount) => (
+          <p
+            key={amount}
+            onClick={() => handleAmountClick(amount)}
+            className={`h-10 w-36 bg-black text-white font-bold text-center rounded-lg p-1 m-2 cursor-pointer ${
+              selectedAmount === amount ? 'bg-[#0082D6]' : ''
+            }`}
+          >
+            {amount}
           </p>
-          <p className="h-10 w-36 bg-black text-white font-bold text-center rounded-lg p-1 m-2 hover:bg-yellow-400">
-            {" "}
-            500
+        ))}
+      </div>
+      <div className="text-center flex">
+        {[5000, 10000, 20000].map((amount) => (
+          <p
+            key={amount}
+            onClick={() => handleAmountClick(amount)}
+            className={`h-10 w-36 bg-black text-white font-bold text-center rounded-lg p-1 m-2 cursor-pointer ${
+              selectedAmount === amount ? 'bg-[#0082D6]' : ''
+            }`}
+          >
+            {amount}
           </p>
-          <p className="h-10 w-36 bg-black text-white font-bold text-center rounded-lg p-1 m-2 hover:bg-yellow-400">
-            {" "}
-            2000
-          </p>
-        </div>
-        <div className="text-center flex">
-          <p className="h-10 w-36 bg-black text-white font-bold text-center rounded-lg p-1 m-2 hover:bg-yellow-400">
-            {" "}
-            5000
-          </p>
-          <p className="h-10 w-36 bg-black text-white font-bold text-center rounded-lg p-1 m-2 hover:bg-yellow-400">
-            {" "}
-            10000
-          </p>
-          <p className="h-10 w-36 bg-black text-white font-bold text-center rounded-lg p-1 m-2 hover:bg-yellow-400">
-            {" "}
-            20000
-          </p>
-        </div>
+        ))}
+      </div>
 
-        <p className="font-bold pt-5 pb-2 flex justify-between">
+      <p className="font-bold pt-5 pb-2 flex justify-between">
           Deposit Amount * <BsQuestionOctagonFill />
         </p>
-
-        <Select placeholder="2000">
-          <option value="option1">200</option>
-          <option value="option2">500</option>
-          <option value="option3">2000</option>
-        </Select>
+      <input
+        type="number"
+        value={inputAmount}
+        onChange={handleInputChange}
+        className="h-10 w-36 bg-gray-200 text-black border border-[#0082D6] font-bold text-center rounded-lg p-1 m-2"
+      />
+    </div>
 
         <p className="font-bold pt-5 pb-2">
           Deposit Bonus <span className="text-red-500 ">*</span>
@@ -106,9 +117,9 @@ export default function Deposit() {
         <div className="pt-5 text-center">
           <form
             action="/action_page.php"
-            className="bg-yellow-400 p-2 rounded-lg font-bold hover:bg-yellow-500"
+            className="bg-[#0082D6] p-2 rounded-lg font-bold hover:bg-[#58b4f1]"
           >
-            <button className="">Submit</button>
+            <button className="text-white">Submit</button>
           </form>
         </div>
       </div>
