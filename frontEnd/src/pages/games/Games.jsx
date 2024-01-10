@@ -3,10 +3,15 @@ import { useParams } from "react-router-dom";
 import gateGame from "../../module/getGames";
 import url from "../../module";
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
+import ResponsivePagination from "react-responsive-pagination";
 
 export default function Games() {
+  const itemsPerPage = 30;
   const { system, index } = useParams();
   const [data, setData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.ceil(data?.length / itemsPerPage);
+
   useEffect(() => {
     const games = async () => {
       try {
@@ -15,22 +20,47 @@ export default function Games() {
         setData(res.data);
       } catch (error) {}
     };
+    setCurrentPage(1)
     games();
-  }, [system,index]);
+  }, [system, index]);
   return (
-    <div className=" container mx-auto">
+    <div className=" container mx-auto py-5 ">
       {/* <InputGroup>
         <InputLeftElement pointerEvents="none"></InputLeftElement>
         <Input type="tel" placeholder="Phone number" />
       </InputGroup> */}
-      <div className="flex gap-4 flex-wrap">
-        {data.map((doc, i) => (
-          <div className="w-[100px]">
-            <img className="w-[100px] h-[100px]" src={doc.image_square} />
-            {doc.name}
-          </div>
-        ))}
-      </div>
+      <Items
+        data={data.slice(
+          (currentPage - 1) * itemsPerPage,
+          currentPage * itemsPerPage
+        )}
+      />
+      <ResponsivePagination
+        current={currentPage}
+        total={totalPages}
+        onPageChange={setCurrentPage}
+      />
+    </div>
+  );
+}
+function Items({ data }) {
+  return (
+    <div className="grid 2xl:grid-cols-6 xl:grid-cols-5 md:grid-cols-4 grid-cols-3 gap-4 ">
+      {data.map((doc, i) => (
+        <div className="w-full line-clamp-1 text-center font-semibold hover:text-blue-500 hover:opacity-50 cursor-pointer">
+          <img
+            className=" rounded-md "
+            src={
+              doc.image_square ||
+              doc.image_preview ||
+              doc.image_background ||
+              doc.image_portrait ||
+              doc.image
+            }
+          />
+          {doc.name}
+        </div>
+      ))}
     </div>
   );
 }

@@ -17,6 +17,7 @@ import Profile from "./layout/Profile.jsx";
 import Withdrawal from "./pages/Withdrawal/index.jsx";
 import History from "./pages/History/index.jsx";
 import Games from "./pages/games/Games.jsx";
+import 'react-responsive-pagination/themes/classic.css';
 const router = createBrowserRouter([
   {
     path: "/",
