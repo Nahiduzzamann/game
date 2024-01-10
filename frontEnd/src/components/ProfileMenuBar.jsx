@@ -40,17 +40,17 @@ export default function ProfileMenuBar() {
           <FaHistory />
           <div className="text-xs font-medium">History</div>
         </div>
-        <div
+        <div onClick={()=>navigate("/user/turn-over")}
           className={`${
-            pathname === "/user/withdrawkal" && "bg-gray-600 text-white"
+            pathname === "/user/turn-over" && "bg-gray-600 text-white"
           } flex items-center gap-2 hover:bg-gray-500 px-2 py-[6px] rounded-md hover:text-white cursor-pointer`}
         >
           <FaHistory />
           <div className="text-xs font-medium">Turnover History</div>
         </div>
-        <div
+        <div onClick={()=>navigate("/user/bet-history")}
           className={`${
-            pathname === "/user/withdrawakgl" && "bg-gray-600 text-white"
+            pathname === "/user/bet-history" && "bg-gray-600 text-white"
           } flex items-center gap-2 hover:bg-gray-500 px-2 py-[6px] rounded-md hover:text-white cursor-pointer`}
         >
           <FaHistory />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import DepositHistory from "./DepositHistory";
 import WithdrawalHistory from "./WithdrawalHistory";
@@ -10,9 +10,13 @@ import { GiReceiveMoney } from "react-icons/gi";
 import { BiTransferAlt } from "react-icons/bi";
 import { MdOutlineAutorenew } from "react-icons/md";
 import { IoGiftOutline } from "react-icons/io5";
-export default function History() {
+export default function BetHistory() {
   const [selectedImage, setSelectedImage] = useState("");
-
+  const [category, setCategory] = useState([]);
+  useEffect(() => {
+    const data = localStorage.getItem("category");
+    setCategory(JSON.parse(data));
+  }, []);
   const handleImageClick = (name) => {
     setSelectedImage(name);
   };
@@ -23,37 +27,16 @@ export default function History() {
           History
         </h1>
         <Tabs className="w-full overflow-x-scroll">
-          <TabList className="text-gray-700">
-            <Tab>
-              <div className="flex gap-2 items-center font-medium text-md">
-                <RiMoneyDollarCircleFill size={24} />
-                Deposit
-              </div>
-            </Tab>
-            <Tab>
-              <div className="flex gap-2 items-center font-medium text-md">
-                <GiReceiveMoney size={24} />
-                Withdraw
-              </div>
-            </Tab>
-            <Tab>
-              <div className="flex gap-2 items-center font-medium text-md">
-                <BiTransferAlt size={24} />
-                Transfer
-              </div>
-            </Tab>
-            <Tab>
-              <div className="flex gap-2 items-center font-medium text-md">
-                <MdOutlineAutorenew size={24} />
-                Rebate
-              </div>
-            </Tab>
-            <Tab>
-              <div className="flex gap-2 items-center font-medium text-md">
-                <IoGiftOutline size={24} />
-                Bonus
-              </div>
-            </Tab>
+          <TabList className="text-gray-700 w-full overflow-x-scroll">
+            {category.map((doc, i) => (
+              <Tab>
+                <div className=" h-full  font-medium text-md">
+                  <img className="h-5" src={doc?.subCategory[0].image_colored}/>
+                  {doc.title}
+                </div>
+              </Tab>
+            ))}
+
           </TabList>
 
           <TabPanels className="w-full">

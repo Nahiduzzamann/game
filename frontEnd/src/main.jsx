@@ -19,6 +19,8 @@ import Games from "./pages/games/Games.jsx";
 import 'react-responsive-pagination/themes/classic.css';
 import ClaimVoucher from "./pages/ClaimVoucher/ClaimVoucher.jsx";
 import MyProfile from "./pages/MyProfile/MyProfile.jsx";
+import TurnOverHistory from "./pages/TurnOverHistory/index.jsx";
+import BetHistory from "./pages/BetHistory/index.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -77,6 +79,14 @@ const router = createBrowserRouter([
       {
         path: "history",
         element: <History/>,
+      },
+      {
+        path: "turn-over",
+        element: <TurnOverHistory/>,
+      },
+      {
+        path: "bet-history",
+        element: <BetHistory/>,
       },
       {
         path: "claimVoucher",

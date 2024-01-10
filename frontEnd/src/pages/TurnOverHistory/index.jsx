@@ -10,7 +10,7 @@ import { GiReceiveMoney } from "react-icons/gi";
 import { BiTransferAlt } from "react-icons/bi";
 import { MdOutlineAutorenew } from "react-icons/md";
 import { IoGiftOutline } from "react-icons/io5";
-export default function History() {
+export default function TurnOverHistory() {
   const [selectedImage, setSelectedImage] = useState("");
 
   const handleImageClick = (name) => {
