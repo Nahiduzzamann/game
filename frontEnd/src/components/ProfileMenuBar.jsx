@@ -69,8 +69,9 @@ export default function ProfileMenuBar() {
       <div className="font-semibold text-gray-500 ml-2 my-2">User Profile</div>
       <div className="grid gap-2">
         <div
+        onClick={()=>navigate("/user/myprofile")}
           className={`${
-            pathname === "/user/profile" && "bg-gray-600 text-white"
+            pathname === "/user/myprofile" && "bg-gray-600 text-white"
           } flex items-center gap-2 hover:bg-gray-500 px-2 py-[6px] rounded-md hover:text-white cursor-pointer`}
         >
           <FaUser />
