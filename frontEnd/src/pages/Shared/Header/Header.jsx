@@ -117,13 +117,17 @@ const Header = () => {
                   </h2>
                   <AccordionPanel className="bg-gray-50" pb={4}>
                     <div className="grid gap-2  ">
-                      {data.subCategory?.map((doc, i) => (
-                        <div
-                          key={i}
+                      {data.subCategory?.map((doc, j) => (
+                        <div onClick={() => {
+                          navigate(`/games/${doc.system}/${i}`);
+                         onClose()
+                          //console.log(doc.system);
+                        }}
+                          key={j}
                           className="   hover:bg-gray-400 text-black text-center px-2 py-1 overflow-hidden rounded-sm "
                         >
                           <div>
-                            <img className=" h-5" src={doc.image_colored} />
+                            <img className=" h-5" src={doc.image_black} />
                           </div>
                         </div>
                       ))}
