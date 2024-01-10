@@ -36,25 +36,25 @@ const GamesSection = () => {
   return (
     <div className="px-6 py-3">
       <Tabs isFitted variant="soft-rounded" colorScheme="blue">
-        <TabList mb="1em" className="flex gap-3 w-full overflow-x-scroll bg-white rounded-md p-2">
+        <TabList mb="1em" className="flex gap-3 w-full  md:flex-wrap overflow-x-scroll bg-white rounded-md p-2">
           {dataCategory &&
             dataCategory?.map((data, i) => {
               return (
                 <Tab
                   onClick={() => handleSubCategory(i)}
                   key={i}
-                  className="bg-gray-100 w-[150px] md:min-h-12 md:min-w-[220px] min-w-32 min-h-32 p-2 mb-2 md:mb-0"
+                  className="bg-gray-100 w-[150px] md:max-w-[150px] md:min-h-12 md:min-w-[220px] min-w-32 min-h-32 p-2 mb-2 md:mb-0"
                 >
                   <h2 className="text-md text-black">{data?.title}</h2>
                 </Tab>
               );
             })}
         </TabList>
-        <TabPanels className="bg-white rounded-md  overflow-scroll">
+        <TabPanels className="bg-white rounded-md  ">
           {dataCategory &&
             dataCategory?.map((data, i) => (
               <TabPanel key={i}>
-                <div className="grid grid-cols-3 ">
+                <div className="grid md:grid-cols-4 xl:grid-cols-8 grid-cols-2">
                   {dataSubCategory?.map((data, i) => (
                     <div key={i} className="p-2 bg-gray-100 text-white m-2 shadow shadow-gray-200 rounded-md">
                       <img src={data?.image_colored}></img>

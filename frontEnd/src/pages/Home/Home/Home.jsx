@@ -3,6 +3,7 @@ import GamesSection from "../GamesSection/GamesSection";
 import ReferralsSection from "../ReferralsSection/ReferralsSection";
 import Slider from "../Slider";
 
+
 const Home = () => {
   return (
 

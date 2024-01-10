@@ -174,13 +174,13 @@ const Options = ({ data, i }) => {
         {data.title}
       </div>
       {hover && (
-        <div className=" flex gap-2 absolute z-30 bg-blue-500 flex-wrap w-full px-6 py-4 overflow-hidden rounded-md left-0 top-[120px]">
+        <div className=" md:grid md:grid-cols-4 xl:grid-cols-8 gap-2 absolute z-30 bg-blue-500 flex-wrap w-full px-6 py-4 overflow-hidden rounded-md left-0 top-[120px]">
           {data.subCategory?.map((doc, j) => (
             <div key={j} onClick={()=>{
               navigate(`/games/${doc.system}/${i}`)
               setHover(false)
               //console.log(doc.system);
-            }} className=" bg-white hover:bg-gray-200 text-black text-center px-2 py-1 overflow-hidden rounded-md ">
+            }} className=" bg-white  hover:bg-gray-200 text-black text-center px-2 py-1 overflow-hidden rounded-md ">
               <div>
                 <img className=" h-[50px]" src={doc.image_colored} />
               </div>
