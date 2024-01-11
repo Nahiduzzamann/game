@@ -1,5 +1,6 @@
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import React, { useState } from "react";
+import PromotionsCard from "../../components/PromotionsCard";
 
 const Promotions = () => {
   // Dummy data for each category
@@ -7,16 +8,32 @@ const Promotions = () => {
     {
       title: "All",
       data: [
-        { banner: "all1.jpg", title: "All Card 1", description: "Description 1" },
-        { banner: "all2.jpg", title: "All Card 2", description: "Description 2" },
+        {
+          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320399b0d638.jpg",
+          title: "All Card 1",
+          description: "Description 1",
+        },
+        {
+          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320370a22ee7.jpg",
+          title: "All Card 2",
+          description: "Description 2",
+        },
         // Add more data as needed
       ],
     },
     {
       title: "Sports",
       data: [
-        { banner: "sports1.jpg", title: "Sports Card 1", description: "Sports Description 1" },
-        { banner: "sports2.jpg", title: "Sports Card 2", description: "Sports Description 2" },
+        {
+          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320370a22ee7.jpg",
+          title: "Sports Card 1",
+          description: "Sports Description 1",
+        },
+        {
+          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320399b0d638.jpg",
+          title: "Sports Card 2",
+          description: "Sports Description 2",
+        },
         // Add more data as needed
       ],
     },
@@ -44,13 +61,13 @@ const Promotions = () => {
           ))}
         </TabList>
         <TabPanels className="bg-white rounded-md">
-          {selectedCategory.data.map((card) => (
+          {categories.map((card) => (
             <TabPanel key={card.title}>
               {/* Render card content using card.banner, card.title, card.description */}
-              <div>
-                <img src={card.banner} alt={card.title} className="w-full" />
-                <h3 className="text-lg font-bold">{card.title}</h3>
-                <p>{card.description}</p>
+              <div className="flex gap-4">
+              {selectedCategory.data.map((card, i) => (
+                <PromotionsCard key={i} banner={card.banner} title={card.title} description={card.description}></PromotionsCard>
+              ))}
               </div>
             </TabPanel>
           ))}
