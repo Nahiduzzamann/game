@@ -11,7 +11,9 @@ import CategoryTypes from '../data/categoryTypes';
 import axios, { AxiosResponse } from "axios"
 const games: RootObject = require("../data/games.json")
 const categories: CategoryTypes = require("../data/category.json")
-
+interface Async {
+    (source: string): Promise<string>;
+}
 interface Category {
     title: string,
     subCategory: Subs[]
@@ -69,10 +71,31 @@ export const getGameByCategory = (req: Request, res: Response) => {
         res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error });
     }
 }
-export const getGameById = async (req: Request, res: Response) => {
+// export const getGameById =  (req: Request, res: Response) => {
+//     return res.status(StatusCodes.OK).json({})
+//     //const id: number = Number(req.params.id);
+//     try {
+//         // const response = await axios.post(`https://stage.game-program.com/api/seamless/provider`, {
+//         //     "api_password": "3XKBmgmYXAKpcuVyQv",
+//         //     "api_login": "40xbet_mc_s",
+//         //     "method": "getGame",
+//         //     "lang": "EN",
+//         //     "user_username": "sazzad",
+//         //     "user_password": "sazzad#991",
+//         //     "gameid": id,
+//         //     "play_for_fun": 0,
+//         //     "currency": "USD"
+//         // })
+
+//         res.status(StatusCodes.OK).json({})
+//     } catch (error) {
+//         res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error });
+//     }
+// }
+export const getGameById = async(req: Request, res: Response) => {
     const id: number = Number(req.params.id);
     try {
-        const response = await axios.post(`https://stage.game-program.com/api/seamless/provider`, {
+        const response:AxiosResponse = await axios.post(`https://stage.game-program.com/api/seamless/provider`, {
             "api_password": "3XKBmgmYXAKpcuVyQv",
             "api_login": "40xbet_mc_s",
             "method": "getGame",
