@@ -76,7 +76,7 @@ const Header = () => {
         <div onClick={() => navigate("/")}>
           <div
             className={`${
-              pathname === "/" && "text-green-400"
+              pathname === "/" && "text-green-300"
             } cursor-pointer hover:text-gray-300 font-semibold text-md `}
           >
             Home
@@ -88,7 +88,7 @@ const Header = () => {
         <div onClick={() => navigate("/promotions")}>
           <div
             className={`${
-              pathname === "/promotions" && "text-green-400"
+              pathname === "/promotions" && "text-green-300"
             } cursor-pointer hover:text-gray-300 font-semibold text-md `}
           >
             Promotions
@@ -97,7 +97,7 @@ const Header = () => {
         <div onClick={() => navigate("/referral")}>
           <div
             className={`${
-              pathname === "/referral" && "text-green-400"
+              pathname === "/referral" && "text-green-300"
             } cursor-pointer hover:text-gray-300 font-semibold text-md `}
           >
             Referral
@@ -216,7 +216,7 @@ const Options = ({ data, i, active }) => {
     >
       <div
         className={` ${
-          active && "text-green-400"
+          active && "text-green-300"
         } cursor-pointer hover:text-gray-300 font-semibold text-md `}
         key={i}
       >
