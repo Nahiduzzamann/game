@@ -4,6 +4,7 @@ import gateGameById from "../../module/getGameById";
 
 const PlayGame = () => {
   const { id } = useParams();
+//   console.log(id);
   useEffect(() => {
     const games = async () => {
       try {
