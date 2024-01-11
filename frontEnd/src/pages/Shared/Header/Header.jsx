@@ -25,6 +25,7 @@ import {
 } from "@chakra-ui/react";
 import { GoCrossReference } from "react-icons/go";
 import { AiFillNotification } from "react-icons/ai";
+import LanguageCard from "./LanguageCard";
 
 const Header = () => {
   const [data, setData] = useState();
@@ -32,7 +33,7 @@ const Header = () => {
   const btnRef = React.useRef();
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  console.log(pathname);
+
   useEffect(() => {
     const cats = async () => {
       try {
@@ -67,16 +68,14 @@ const Header = () => {
           >
             Sign Up
           </button>
-          <div className=" flex gap-2 items-center">
-            <GrLanguage color="#0082D6" size={28} /> ENG
-          </div>
+          <LanguageCard />
         </div>
       </div>
       <div className="md:flex md:flex-wrap md:gap-6 bg-blue-500 text-white px-6 py-4 hidden">
         <div onClick={() => navigate("/")}>
           <div
             className={`${
-              pathname === "/" && "text-green-400"
+              pathname === "/" && "text-green-300"
             } cursor-pointer hover:text-gray-300 font-semibold text-md `}
           >
             Home
@@ -88,7 +87,7 @@ const Header = () => {
         <div onClick={() => navigate("/promotions")}>
           <div
             className={`${
-              pathname === "/promotions" && "text-green-400"
+              pathname === "/promotions" && "text-green-300"
             } cursor-pointer hover:text-gray-300 font-semibold text-md `}
           >
             Promotions
@@ -97,7 +96,7 @@ const Header = () => {
         <div onClick={() => navigate("/referral")}>
           <div
             className={`${
-              pathname === "/referral" && "text-green-400"
+              pathname === "/referral" && "text-green-300"
             } cursor-pointer hover:text-gray-300 font-semibold text-md `}
           >
             Referral
@@ -109,9 +108,7 @@ const Header = () => {
         <div onClick={() => navigate("/")}>
           <img className="w-[130px]" src={logo} />
         </div>
-        <div className=" flex gap-2 items-center">
-          <GrLanguage color="#0082D6" size={28} /> ENG
-        </div>
+        <LanguageCard />
       </div>
       <Drawer
         isOpen={isOpen}
@@ -216,7 +213,7 @@ const Options = ({ data, i, active }) => {
     >
       <div
         className={` ${
-          active && "text-green-400"
+          active && "text-green-300"
         } cursor-pointer hover:text-gray-300 font-semibold text-md `}
         key={i}
       >
