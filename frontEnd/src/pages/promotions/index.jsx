@@ -175,7 +175,7 @@ const Promotions = () => {
               <div>
               <img src='https://akm-media.9terawolf.com/images/babu/game_banner/rng.jpg'  className="w-full rounded-t-xl" />
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
+              <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-4 ">
               {selectedCategory.data.map((card, i) => (
                 <PromotionsCard key={i} banner={card.banner} title={card.title} description={card.description}></PromotionsCard>
               ))}
