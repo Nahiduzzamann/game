@@ -25,6 +25,7 @@ import {
 } from "@chakra-ui/react";
 import { GoCrossReference } from "react-icons/go";
 import { AiFillNotification } from "react-icons/ai";
+import LanguageCard from "./LanguageCard";
 
 const Header = () => {
   const [data, setData] = useState();
@@ -32,7 +33,7 @@ const Header = () => {
   const btnRef = React.useRef();
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  console.log(pathname);
+
   useEffect(() => {
     const cats = async () => {
       try {
@@ -67,9 +68,7 @@ const Header = () => {
           >
             Sign Up
           </button>
-          <div className=" flex gap-2 items-center">
-            <GrLanguage color="#0082D6" size={28} /> ENG
-          </div>
+          <LanguageCard />
         </div>
       </div>
       <div className="md:flex md:flex-wrap md:gap-6 bg-blue-500 text-white px-6 py-4 hidden">
@@ -109,9 +108,7 @@ const Header = () => {
         <div onClick={() => navigate("/")}>
           <img className="w-[130px]" src={logo} />
         </div>
-        <div className=" flex gap-2 items-center">
-          <GrLanguage color="#0082D6" size={28} /> ENG
-        </div>
+        <LanguageCard />
       </div>
       <Drawer
         isOpen={isOpen}
