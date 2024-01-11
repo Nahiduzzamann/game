@@ -15,7 +15,7 @@ import React from "react";
 const PromotionsCard = ({banner,title,description}) => {
   return (
     <div className=" flex justify-center">
-      <Card maxW="sm" className="shadow-lg">
+      <Card maxW="md" className="shadow-lg">
         <CardBody>
           <Image
             src={banner}
