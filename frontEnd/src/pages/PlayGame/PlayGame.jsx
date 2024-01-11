@@ -10,7 +10,7 @@ const PlayGame = () => {
         const res = await gateGameById(id);
         console.log(res.data);
       } catch (error) {
-        // console.log(error);
+        console.log(error.response?.data?.error);
       }
     };
     games();
