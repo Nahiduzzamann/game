@@ -27,6 +27,7 @@ import ChangePasswordPage from "./pages/ChangePassword/ChangePassword.jsx";
 import Providers from "./pages/providers/index.jsx";
 import Referral from "./pages/Referral/index.jsx";
 import Promotions from "./pages/promotions/index.jsx";
+import PlayGame from "./pages/PlayGame/PlayGame.jsx";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path:"games/:system/:index",
         element:<Games/>
+      },
+      {
+        path:"games/:id",
+        element:<PlayGame></PlayGame>
       },
       {
         path:"promotions",
