@@ -18,6 +18,26 @@ const Promotions = () => {
           title: "All Card 2",
           description: "Description 2",
         },
+        {
+          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320399b0d638.jpg",
+          title: "All Card 1",
+          description: "Description 1",
+        },
+        {
+          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320370a22ee7.jpg",
+          title: "All Card 2",
+          description: "Description 2",
+        },
+        {
+          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320399b0d638.jpg",
+          title: "All Card 1",
+          description: "Description 1",
+        },
+        {
+          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320370a22ee7.jpg",
+          title: "All Card 2",
+          description: "Description 2",
+        },
         // Add more data as needed
       ],
     },
@@ -28,6 +48,94 @@ const Promotions = () => {
           banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320370a22ee7.jpg",
           title: "Sports Card 1",
           description: "Sports Description 1",
+        },
+        {
+          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320399b0d638.jpg",
+          title: "Sports Card 2",
+          description: "Sports Description 2",
+        },
+        // Add more data as needed
+      ],
+    },
+    {
+      title: "Casino",
+      data: [
+        {
+          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320370a22ee7.jpg",
+          title: "Sports Card 1",
+          description: "Sports Description 1",
+        },
+        {
+          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320399b0d638.jpg",
+          title: "Sports Card 2",
+          description: "Sports Description 2",
+        },
+        {
+          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320399b0d638.jpg",
+          title: "Sports Card 2",
+          description: "Sports Description 2",
+        },
+        // Add more data as needed
+      ],
+    },
+    {
+      title: "Slots",
+      data: [
+        {
+          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320370a22ee7.jpg",
+          title: "Sports Card 1",
+          description: "Sports Description 1",
+        },
+        {
+          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320399b0d638.jpg",
+          title: "Sports Card 2",
+          description: "Sports Description 2",
+        },
+        {
+          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320399b0d638.jpg",
+          title: "Sports Card 2",
+          description: "Sports Description 2",
+        },
+        {
+          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320399b0d638.jpg",
+          title: "Sports Card 2",
+          description: "Sports Description 2",
+        },
+        {
+          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320399b0d638.jpg",
+          title: "Sports Card 2",
+          description: "Sports Description 2",
+        },
+        {
+          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320399b0d638.jpg",
+          title: "Sports Card 2",
+          description: "Sports Description 2",
+        },
+        {
+          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320399b0d638.jpg",
+          title: "Sports Card 2",
+          description: "Sports Description 2",
+        },
+        // Add more data as needed
+      ],
+    },
+    {
+      title: "Table Games",
+      data: [
+        {
+          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320370a22ee7.jpg",
+          title: "Sports Card 1",
+          description: "Sports Description 1",
+        },
+        {
+          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320399b0d638.jpg",
+          title: "Sports Card 2",
+          description: "Sports Description 2",
+        },
+        {
+          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320399b0d638.jpg",
+          title: "Sports Card 2",
+          description: "Sports Description 2",
         },
         {
           banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320399b0d638.jpg",
@@ -64,7 +172,10 @@ const Promotions = () => {
           {categories.map((card) => (
             <TabPanel key={card.title}>
               {/* Render card content using card.banner, card.title, card.description */}
-              <div className="flex gap-4">
+              <div>
+              <img src='https://akm-media.9terawolf.com/images/babu/game_banner/rng.jpg'  className="w-full rounded-t-xl" />
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 ">
               {selectedCategory.data.map((card, i) => (
                 <PromotionsCard key={i} banner={card.banner} title={card.title} description={card.description}></PromotionsCard>
               ))}
