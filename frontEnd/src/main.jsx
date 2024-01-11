@@ -24,6 +24,9 @@ import TurnOverHistory from "./pages/TurnOverHistory/index.jsx";
 import BetHistory from "./pages/BetHistory/index.jsx";
 
 import ChangePasswordPage from "./pages/ChangePassword/ChangePassword.jsx";
+import Providers from "./pages/providers/index.jsx";
+import Referral from "./pages/Referral/index.jsx";
+import Promotions from "./pages/promotions/index.jsx";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +41,18 @@ const router = createBrowserRouter([
       {
         path:"games/:system/:index",
         element:<Games/>
+      },
+      {
+        path:"promotions",
+        element:<Promotions/>
+      },
+      {
+        path:"referral",
+        element:<Referral/>
+      },
+      {
+        path:"/:category",
+        element:<Providers/>
       }
     ],
   },

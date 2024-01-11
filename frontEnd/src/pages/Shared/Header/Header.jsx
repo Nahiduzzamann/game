@@ -14,7 +14,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { CiMenuFries } from "react-icons/ci";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import { FaQuora } from "react-icons/fa6";
 import {
   Accordion,
@@ -23,12 +23,16 @@ import {
   AccordionPanel,
   AccordionIcon,
 } from "@chakra-ui/react";
+import { GoCrossReference } from "react-icons/go";
+import { AiFillNotification } from "react-icons/ai";
 
 const Header = () => {
   const [data, setData] = useState();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  console.log(pathname);
   useEffect(() => {
     const cats = async () => {
       try {
@@ -68,10 +72,37 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <div className="md:flex  bg-blue-500 text-white px-6 py-4 hidden">
+      <div className="md:flex md:flex-wrap md:gap-6 bg-blue-500 text-white px-6 py-4 hidden">
+        <div onClick={() => navigate("/")}>
+          <div
+            className={`${
+              pathname === "/" && "text-green-400"
+            } cursor-pointer hover:text-gray-300 font-semibold text-md `}
+          >
+            Home
+          </div>
+        </div>
         {data?.map((data, i) => (
-          <Options key={i} data={data} i={i} />
+          <Options active={pathname === `/${i}`} key={i} data={data} i={i} />
         ))}
+        <div onClick={() => navigate("/promotions")}>
+          <div
+            className={`${
+              pathname === "/promotions" && "text-green-400"
+            } cursor-pointer hover:text-gray-300 font-semibold text-md `}
+          >
+            Promotions
+          </div>
+        </div>
+        <div onClick={() => navigate("/referral")}>
+          <div
+            className={`${
+              pathname === "/referral" && "text-green-400"
+            } cursor-pointer hover:text-gray-300 font-semibold text-md `}
+          >
+            Referral
+          </div>
+        </div>
       </div>
       <div className="md:hidden flex items-center px-4 py-2 justify-between">
         <CiMenuFries onClick={onOpen} size={28} />
@@ -118,11 +149,12 @@ const Header = () => {
                   <AccordionPanel className="bg-gray-50" pb={4}>
                     <div className="grid gap-2  ">
                       {data.subCategory?.map((doc, j) => (
-                        <div onClick={() => {
-                          navigate(`/games/${doc.system}/${i}`);
-                         onClose()
-                          //console.log(doc.system);
-                        }}
+                        <div
+                          onClick={() => {
+                            navigate(`/games/${doc.system}/${i}`);
+                            onClose();
+                            //console.log(doc.system);
+                          }}
                           key={j}
                           className="   hover:bg-gray-400 text-black text-center px-2 py-1 overflow-hidden rounded-sm "
                         >
@@ -138,7 +170,14 @@ const Header = () => {
             ))}
             <hr className="my-2" />
             <p className="font-medium text-md">Others</p>
-
+            <div className=" hover:bg-gray-50 flex gap-2 items-center py-2 px-2 cursor-pointer text-gray-400  text-md">
+              <GoCrossReference />
+              Referral
+            </div>
+            <div className=" hover:bg-gray-50 flex gap-2 items-center py-2 px-2 cursor-pointer text-gray-400  text-md">
+              <AiFillNotification />
+              Promotions
+            </div>
             <div className=" hover:bg-gray-50 flex gap-2 items-center py-2 px-2 cursor-pointer text-gray-400  text-md">
               <GrLanguage />
               Languages
@@ -164,18 +203,21 @@ const Header = () => {
   );
 };
 export default Header;
-const Options = ({ data, i }) => {
+const Options = ({ data, i, active }) => {
   const [hover, setHover] = useState(false);
   const navigate = useNavigate();
+
   return (
     <div
+      onClick={() => navigate(`/${i}`)}
       key={i}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      className="px-6"
     >
       <div
-        className={`cursor-pointer hover:text-gray-300 font-semibold text-md `}
+        className={` ${
+          active && "text-green-400"
+        } cursor-pointer hover:text-gray-300 font-semibold text-md `}
         key={i}
       >
         {data.title}
