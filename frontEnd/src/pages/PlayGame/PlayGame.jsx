@@ -1,23 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import gateGameById from "../../module/getGameById";
 import { Spinner } from "@chakra-ui/react";
 
 const PlayGame = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [iframeUrl, setIframeUrl] = useState("");
+  const [ok, setOk] = useState(false);
   //   console.log(id);
   useEffect(() => {
     const games = async () => {
       try {
         const res = await gateGameById(id);
         setIframeUrl(res.data.response);
+        // console.log(res.data.response);
+        if (!res.data.response) {
+          setOk(true);
+        }
       } catch (error) {
         console.log(error.response?.data?.error);
       }
     };
     games();
   }, [id]);
+  useEffect(() => {
+    if (ok) {
+      navigate(-1);
+    }
+  }, [ok]);
 
   return (
     <div className="w-full h-screen">
