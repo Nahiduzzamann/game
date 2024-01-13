@@ -65,11 +65,7 @@ function Items({ data }) {
           <img
             className=" rounded-md "
             src={
-              doc.image_square ||
-              doc.image_preview ||
-              doc.image_background ||
-              doc.image_portrait ||
-              doc.image
+              doc.img 
             }
           />
           {doc.name}

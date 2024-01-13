@@ -1,6 +1,4 @@
-interface CategoryTypes {
-  data: Datum[];
-}
+type CategoryTypes = Datum[]
 interface Datum {
   title: string;
   slag: string;

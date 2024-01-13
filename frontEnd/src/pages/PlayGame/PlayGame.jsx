@@ -13,9 +13,9 @@ const PlayGame = () => {
     const games = async () => {
       try {
         const res = await gateGameById(id);
-        setIframeUrl(res.data.response);
-        // console.log(res.data.response);
-        if (!res.data.response) {
+        setIframeUrl(res.data?.content?.game?.url);
+        //console.log(res.data);
+        if (!res.data.content) {
           setOk(true);
         }
       } catch (error) {

@@ -136,7 +136,7 @@ const Header = () => {
                       >
                         <img
                           className="w-5 h-5"
-                          src={data.subCategory[1]?.image_small_color}
+                          src={data.subCategory[1]?.icon}
                         />
                         {data.title}
                       </div>
@@ -148,15 +148,16 @@ const Header = () => {
                       {data.subCategory?.map((doc, j) => (
                         <div
                           onClick={() => {
-                            navigate(`/games/${doc.system}/${i}`);
+                            navigate(`/games/${doc.slag}/${i}`)
                             onClose();
-                            //console.log(doc.system);
+                            
                           }}
                           key={j}
-                          className="   hover:bg-gray-400 text-black text-center px-2 py-1 overflow-hidden rounded-sm "
+                          className="   hover:bg-gray-400 text-black flex px-2 py-1 overflow-hidden rounded-sm "
                         >
-                          <div>
-                            <img className=" h-5" src={doc.image_black} />
+                          <div className="flex gap-2 items-center">
+                            <img className=" h-5" src={`${url}${doc.icon}`} />
+                            <div className="w-full">{doc.title}</div>
                           </div>
                         </div>
                       ))}
@@ -205,8 +206,8 @@ const Options = ({ data, i, active }) => {
   const navigate = useNavigate();
 
   return (
-    <div
-      onClick={() => navigate(`/${i}`)}
+    <div className="h-full"
+      //onClick={() => navigate(`/games/${data.slag}/${i}`)}
       key={i}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
@@ -220,19 +221,20 @@ const Options = ({ data, i, active }) => {
         {data.title}
       </div>
       {hover && (
-        <div className=" md:grid md:grid-cols-4 xl:grid-cols-8 gap-2 absolute z-30 bg-blue-500 flex-wrap w-full px-6 py-4 overflow-hidden rounded-md left-0 top-[120px]">
+        <div className=" flex gap-6 absolute z-30 bg-blue-500 flex-wrap w-full px-6 py-4 overflow-hidden rounded-md left-0 top-[120px]">
           {data.subCategory?.map((doc, j) => (
             <div
               key={j}
               onClick={() => {
-                navigate(`/games/${doc.system}/${i}`);
+                navigate(`/games/${doc.slag}/${i}`)
                 setHover(false);
                 //console.log(doc.system);
               }}
-              className=" cursor-pointer bg-blue-200  hover:bg-gray-200 text-black text-center px-2 py-1 overflow-hidden rounded-md "
+              className=" cursor-pointer bg-gray-700 flex justify-center items-center  hover:bg-gray-600 text-black text-center p-2 rounded-full w-[120px] h-[120px] overflow-hidden "
             >
-              <div>
-                <img className=" h-[50px]" src={doc.image_colored} />
+              <div className="flex  text-white flex-wrap justify-center items-center  ">
+                <img className="" src={`${url}${doc.icon}`} />
+                <div className="w-full line-clamp-1 ">{doc.title}</div>
               </div>
               {doc.name}
             </div>

@@ -1,36 +1,30 @@
-{
-  "data": [
-    {
-      "title": "Live Casino",
-      "slag": "live-casino-table"
-    },
-    {
-      "title": "Casino",
-      "slag": "livecasino,poker,video-poker,video-bingo,livegames,scratch-cards"
-    },
-    {
-      "title": "Slot",
-      "slag": "video-slots,Video Slots"
-    },
-    {
-      "title": "Table Games",
-      "slag": "table-games"
-    },
-    {
-      "title": "Virtual Sports",
-      "slag": "virtual-sports,tournaments,virtual-games"
-    },
-    {
-      "title": "Live Games",
-      "slag": "table-games"
-    },
-    {
-      "title": "Crash & Fast",
-      "slag": "fast-games,crash-games"
-    },
-    {
-      "title": "Sportsbook",
-      "slag": "sportsbook"
-    }
-  ]
-}
+[
+  {
+    "title": "Live Casino",
+    "slag": "live_dealers"
+  },
+  {
+    "title": "Arcade",
+    "slag": "arcade"
+  },
+  {
+    "title": "Slots",
+    "slag": "slots"
+  },
+  {
+    "title": "Card Games",
+    "slag": "card"
+  },
+  {
+    "title": "Roulette",
+    "slag": "roulette"
+  },
+  {
+    "title": "Video Poker",
+    "slag": "video_poker"
+  },
+  {
+    "title": "Lottery",
+    "slag": "lottery"
+  }
+]

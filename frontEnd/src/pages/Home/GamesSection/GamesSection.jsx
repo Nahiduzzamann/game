@@ -10,10 +10,10 @@ const GamesSection = () => {
   const navigate=useNavigate()
 
   useEffect(() => {
-    const cats = async () => {
+    const cats =  () => {
       try {
-        const cat = await getCategory(url);
-        setDataCategory(cat.data);
+        const cat =  localStorage.getItem("category");
+        setDataCategory(JSON.parse(cat));
       } catch (error) {
         console.error(error.message);
       }
@@ -56,12 +56,13 @@ const GamesSection = () => {
           {dataCategory &&
             dataCategory?.map((data, i) => (
               <TabPanel key={i}>
-                <div className="grid md:grid-cols-4 xl:grid-cols-8 grid-cols-2">
+                <div className="grid cursor-pointer md:grid-cols-4 xl:grid-cols-8 grid-cols-2">
                   {dataSubCategory?.map((data, j) => (
                     <div onClick={()=>{
-                      navigate(`/games/${data.system}/${i}`)
-                    }} key={j} className="p-2 bg-blue-300 hover:bg-blue-200 text-white m-2 shadow shadow-gray-200 rounded-md">
-                      <img src={data?.image_colored}></img>
+                      navigate(`/games/${data.slag}/${i}`)
+                    }} key={j} className="p-2 flex gap-2 items-center bg-gray-700 hover:bg-blue-200 text-white m-2 shadow shadow-gray-200 rounded-md">
+                      <img src={`${url}${data?.icon}`}></img>
+                      <div className="text-lg">{data.title}</div>
                     </div>
                   ))}
                 </div>
