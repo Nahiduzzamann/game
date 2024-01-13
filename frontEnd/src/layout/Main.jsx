@@ -13,7 +13,7 @@ const Main = () => {
 
   return (
     <div className="bg-[#EBEBEB]">
-      {<Header></Header>}
+      {noHeaderFooter || <Header></Header>}
       <Outlet></Outlet>
       {noHeaderFooter || <Footer></Footer>}
 
