@@ -53,7 +53,7 @@ const Header = () => {
     <div className="bg-white">
       <div className="md:flex items-center justify-between hidden px-6 py-3">
         <a onClick={() => navigate("/")}>
-          <img className="w-[150px]" src={logo} />
+          <img className="w-[150px] cursor-pointer" src={logo} />
         </a>
         <div className="flex gap-4  items-center">
           <button
