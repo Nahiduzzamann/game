@@ -1,18 +1,23 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Header from "../pages/Shared/Header/Header";
 import Footer from "../pages/Shared/Footer/Footer";
 import ScrollToTop from "../components/ScrollToTop";
 import LoginButton from "../pages/Shared/navBar/LoginButton";
 
-
 const Main = () => {
+  const location = useLocation();
+
+  const noHeaderFooter =
+    location.pathname.includes("/games")
+
   return (
     <div className="bg-[#EBEBEB]">
-      <Header></Header>
+      {<Header></Header>}
       <Outlet></Outlet>
-      <Footer></Footer>
-      <LoginButton/>
+      {noHeaderFooter || <Footer></Footer>}
+
+      <LoginButton />
       <ScrollToTop />
     </div>
   );
