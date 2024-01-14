@@ -5,13 +5,13 @@ const ReferralsSection = () => {
         <div className="px-6 py-3">
             <p className='font-bold pt-5 pb-2 text-2xl font-mono'>Download App</p>
             <div className=''>
-            <img className='w-full h-44 rounded-lg' src="https://sf.my.games/sites/sf.my.com/files/styles/sf_news_prime/public/1240x310-en.jpeg?itok=diiiFYph" alt="" />
+            <img className='w-full h-44 md:h-60 rounded-lg' src="https://sf.my.games/sites/sf.my.com/files/styles/sf_news_prime/public/1240x310-en.jpeg?itok=diiiFYph" alt="" />
             </div>
             
 
              <p className='font-bold pt-5 pb-2 text-2xl font-mono'>Referrals</p>
              <div className=''>
-                <img className='w-full h-80 rounded-lg' src="https://img.freepik.com/premium-vector/futuristic-yellow-black-gaming-header-social-media-banner-template_136469-1827.jpg" alt="" />
+                <img className='w-full h-80 md:h-[450px] rounded-lg' src="https://media.licdn.com/dms/image/D4D12AQHPrCB9Q37zTQ/article-cover_image-shrink_720_1280/0/1691944099416?e=2147483647&v=beta&t=0Q-E_Z0NprvnH_DjZnWZO6xqqgZoYfl2MCm1Tm-kSt8" alt="" />
                 <div className='hidden md:block'>
                 <p className='text-4xl font-bold pt-10 font-serif'>Bangladesh’s Trusted Online Casino and Cricket Exchange</p>
                 <p className='text-2xl font-bold leading-8 pt-3 pb-20 font-serif'>40XBET is the premier online casino in India and Bangladesh, offering a variety of games for mobile and desktop users. 
