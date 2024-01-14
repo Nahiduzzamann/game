@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import gateGame from "../../module/getGames";
 import url from "../../module";
 import ResponsivePagination from "react-responsive-pagination";
+import { Box, SkeletonText } from "@chakra-ui/react";
 
 export default function Games() {
   const itemsPerPage = 30;
@@ -45,32 +46,43 @@ export default function Games() {
 }
 
 function Items({ data }) {
-  console.log(data);
+  const array = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
   const navigate = useNavigate();
 
   const handlePlayGame = (id) => {
     navigate(`/games/${id}`);
-  }
+  };
   return (
-    <div
-      className="grid 2xl:grid-cols-6 xl:grid-cols-5 md:grid-cols-4 grid-cols-3 gap-4 "
-    >
-      {data.map((doc, i) => (
-        <div
-      onClick={() => handlePlayGame(doc?.id)}
-
-          key={i}
-          className="w-full line-clamp-1 text-center font-semibold hover:text-blue-500 hover:opacity-50 cursor-pointer"
-        >
-          <img
-            className=" rounded-md "
-            src={
-              doc.img 
-            }
-          />
-          {doc.name}
-        </div>
-      ))}
+    <div className="grid 2xl:grid-cols-6 xl:grid-cols-5 md:grid-cols-4 grid-cols-3 gap-4 ">
+      {data.length > 0
+        ? data.map((doc, i) => (
+            <div
+              onClick={() => handlePlayGame(doc?.id)}
+              key={i}
+              className="w-full line-clamp-1 text-center font-semibold hover:text-blue-500 hover:opacity-50 cursor-pointer"
+            >
+              <img className=" rounded-md " src={doc.img} />
+              {doc.name}
+            </div>
+          ))
+        : array.map((doc, i) => (
+            <Box key={i} padding="6" boxShadow="lg" bg="white">
+              
+              <SkeletonText
+                mt="2"
+                noOfLines={1}
+                spacing="2"
+                startColor='blue.500' endColor='blue.200' skeletonHeight="20"
+              />
+              <SkeletonText
+                mt="2"
+                noOfLines={1}
+                spacing="2"
+                skeletonHeight="2"
+              />
+            </Box>
+          ))}
     </div>
   );
 }

@@ -21,7 +21,7 @@ const PromotionsCard = ({ banner, title, description }) => {
             src={banner}
             alt="banner"
             borderRadius="lg"
-            className="w-full"
+            className="w-full h-60"
           />
           <Stack mt="6" spacing="3">
             <Heading size="md">{title}</Heading>

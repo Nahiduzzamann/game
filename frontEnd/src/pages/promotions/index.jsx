@@ -14,7 +14,7 @@ const Promotions = () => {
           description: "Description 1",
         },
         {
-          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320370a22ee7.jpg",
+          banner: "https://www.cvent.com/sites/default/files/image/2021-06/croupier%20rolling%20roulette%20ball%20for%20casino%20marketing%20materials_0.jpg",
           title: "All Card 2",
           description: "Description 2",
         },
@@ -24,17 +24,17 @@ const Promotions = () => {
           description: "Description 1",
         },
         {
-          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320370a22ee7.jpg",
+          banner: "https://www.cvent.com/sites/default/files/image/2021-06/croupier%20rolling%20roulette%20ball%20for%20casino%20marketing%20materials_0.jpg",
           title: "All Card 2",
           description: "Description 2",
         },
         {
-          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320399b0d638.jpg",
+          banner: "https://ventsmagazine.com/wp-content/uploads/2023/07/online-casino-malaysia.jpg",
           title: "All Card 1",
           description: "Description 1",
         },
         {
-          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320370a22ee7.jpg",
+          banner: "https://www.cvent.com/sites/default/files/image/2021-06/croupier%20rolling%20roulette%20ball%20for%20casino%20marketing%20materials_0.jpg",
           title: "All Card 2",
           description: "Description 2",
         },
@@ -45,7 +45,7 @@ const Promotions = () => {
       title: "Sports",
       data: [
         {
-          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320370a22ee7.jpg",
+          banner: "https://www.cvent.com/sites/default/files/image/2021-06/croupier%20rolling%20roulette%20ball%20for%20casino%20marketing%20materials_0.jpg",
           title: "Sports Card 1",
           description: "Sports Description 1",
         },
@@ -61,12 +61,12 @@ const Promotions = () => {
       title: "Casino",
       data: [
         {
-          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320370a22ee7.jpg",
+          banner: "https://www.cvent.com/sites/default/files/image/2021-06/croupier%20rolling%20roulette%20ball%20for%20casino%20marketing%20materials_0.jpg",
           title: "Sports Card 1",
           description: "Sports Description 1",
         },
         {
-          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320399b0d638.jpg",
+          banner: "https://ventsmagazine.com/wp-content/uploads/2023/07/online-casino-malaysia.jpg",
           title: "Sports Card 2",
           description: "Sports Description 2",
         },
@@ -82,12 +82,12 @@ const Promotions = () => {
       title: "Slots",
       data: [
         {
-          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320370a22ee7.jpg",
+          banner: "https://www.cvent.com/sites/default/files/image/2021-06/croupier%20rolling%20roulette%20ball%20for%20casino%20marketing%20materials_0.jpg",
           title: "Sports Card 1",
           description: "Sports Description 1",
         },
         {
-          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320399b0d638.jpg",
+          banner: "https://ventsmagazine.com/wp-content/uploads/2023/07/online-casino-malaysia.jpg",
           title: "Sports Card 2",
           description: "Sports Description 2",
         },
@@ -102,7 +102,7 @@ const Promotions = () => {
           description: "Sports Description 2",
         },
         {
-          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320399b0d638.jpg",
+          banner: "https://ventsmagazine.com/wp-content/uploads/2023/07/online-casino-malaysia.jpg",
           title: "Sports Card 2",
           description: "Sports Description 2",
         },
@@ -112,7 +112,7 @@ const Promotions = () => {
           description: "Sports Description 2",
         },
         {
-          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320399b0d638.jpg",
+          banner: "https://ventsmagazine.com/wp-content/uploads/2023/07/online-casino-malaysia.jpg",
           title: "Sports Card 2",
           description: "Sports Description 2",
         },
@@ -123,7 +123,7 @@ const Promotions = () => {
       title: "Table Games",
       data: [
         {
-          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320370a22ee7.jpg",
+          banner: "https://www.cvent.com/sites/default/files/image/2021-06/croupier%20rolling%20roulette%20ball%20for%20casino%20marketing%20materials_0.jpg",
           title: "Sports Card 1",
           description: "Sports Description 1",
         },
@@ -133,7 +133,7 @@ const Promotions = () => {
           description: "Sports Description 2",
         },
         {
-          banner: "https://dpf3hni0r872w.cloudfront.net/cms/undefined/image/en-mobile-6320399b0d638.jpg",
+          banner: "https://ventsmagazine.com/wp-content/uploads/2023/07/online-casino-malaysia.jpg",
           title: "Sports Card 2",
           description: "Sports Description 2",
         },
