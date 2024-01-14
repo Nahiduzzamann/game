@@ -12,9 +12,10 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
+  Button,
 } from "@chakra-ui/react";
 import { CiMenuFries } from "react-icons/ci";
-import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { FaQuora } from "react-icons/fa6";
 import {
   Accordion,
@@ -81,9 +82,19 @@ const Header = () => {
             Home
           </div>
         </div>
-        {data?.map((data, i) => (
-          <Options active={pathname === `/${i}`} key={i} data={data} i={i} />
-        ))}
+        {data ? (
+          data?.map((data, i) => (
+            <Options active={pathname === `/${i}`} key={i} data={data} i={i} />
+          ))
+        ) : (
+          <Button
+            isLoading
+            colorScheme="blue"
+            // spinner={<BeatLoader size={8} color="white" />}
+          >
+            Click me
+          </Button>
+        )}
         <div onClick={() => navigate("/promotions")}>
           <div
             className={`${
@@ -148,9 +159,8 @@ const Header = () => {
                       {data.subCategory?.map((doc, j) => (
                         <div
                           onClick={() => {
-                            navigate(`/games/${doc.slag}/${i}`)
+                            navigate(`/games/${doc.slag}/${i}`);
                             onClose();
-                            
                           }}
                           key={j}
                           className="   hover:bg-gray-400 text-black flex px-2 py-1 overflow-hidden rounded-sm "
@@ -206,7 +216,8 @@ const Options = ({ data, i, active }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="h-full"
+    <div
+      className="h-full"
       //onClick={() => navigate(`/games/${data.slag}/${i}`)}
       key={i}
       onMouseEnter={() => setHover(true)}
@@ -226,7 +237,7 @@ const Options = ({ data, i, active }) => {
             <div
               key={j}
               onClick={() => {
-                navigate(`/games/${doc.slag}/${i}`)
+                navigate(`/games/${doc.slag}/${i}`);
                 setHover(false);
                 //console.log(doc.system);
               }}
