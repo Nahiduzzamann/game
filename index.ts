@@ -4,13 +4,14 @@ import cors from "cors";
 import path from "path"
 import games from "./routes/games";
 import { mongoConnection } from "./connections/databaseConnection";
-
+import user from "./routes/user";
+import bodyParser from 'body-parser';
 dotenv.config();
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
 console.log();
-
+app.use(bodyParser.json());
 app.use(cors())
 app.use(express.static(path.join(__dirname, "frontEnd/dist")));
 app.use("/api", games)
@@ -28,3 +29,7 @@ mongoConnection().then(() => {
   console.error(err.message);
 
 })
+
+
+//user 
+app.use("/user", user)
