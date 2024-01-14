@@ -12,7 +12,7 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
-  Button,
+  Spinner,
 } from "@chakra-ui/react";
 import { CiMenuFries } from "react-icons/ci";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -87,13 +87,7 @@ const Header = () => {
             <Options active={pathname === `/${i}`} key={i} data={data} i={i} />
           ))
         ) : (
-          <Button
-            isLoading
-            colorScheme="blue"
-            // spinner={<BeatLoader size={8} color="white" />}
-          >
-            Click me
-          </Button>
+          <Spinner></Spinner>
         )}
         <div onClick={() => navigate("/promotions")}>
           <div
