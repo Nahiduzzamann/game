@@ -15,10 +15,11 @@ export default function Slider() {
     justifyContent: "center",
     backgroundSize: "cover",
     height: "400px",
+    
   };
   const slideImages = [
     {
-      url: "https://store-images.s-microsoft.com/image/apps.18743.14062288212527999.210ebe00-23b0-413f-a095-f62d9a87156f.c2be24ab-1765-4938-b58a-03d9cedc732b?mode=scale&q=90&h=1080&w=1920",
+      url: "https://i.ibb.co/YjMKb2K/Untitled-design.png",
       caption: "Slide 1",
     },
     {
@@ -26,7 +27,7 @@ export default function Slider() {
       caption: "Slide 2",
     },
     {
-      url: "https://www.analyticsinsight.net/wp-content/uploads/2023/06/online-casino4.png",
+      url: "https://www.abestfashion.com/wp-content/uploads/2021/02/pexels-aidan-howe-4677402-scaled.jpg",
       caption: "Slide 3",
     },
   ];

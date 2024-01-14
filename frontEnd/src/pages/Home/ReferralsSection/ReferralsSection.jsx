@@ -5,7 +5,7 @@ const ReferralsSection = () => {
         <div className="px-6 py-3">
             <p className='font-bold pt-5 pb-2 text-2xl font-mono'>Download App</p>
             <div className=''>
-            <img className='w-full h-44 md:h-60 rounded-lg' src="https://sf.my.games/sites/sf.my.com/files/styles/sf_news_prime/public/1240x310-en.jpeg?itok=diiiFYph" alt="" />
+            <img className='w-full h-44 md:h-80 rounded-lg' src="https://lh4.googleusercontent.com/yzcVcK9_gf1_JVPYS-J933NzFjx2fRMDCgvh0MDJrzRZZx31msjxSjTNx8Wb49rEgZw6JKBd6LenCA2p7ukgUc9Hsrwf--H0MFMOJQwgi82x3KG9aBLiMXWakEQLkDZoTg=w2000" alt="" />
             </div>
             
 
