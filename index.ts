@@ -6,6 +6,7 @@ import games from "./routes/games";
 import { mongoConnection } from "./connections/databaseConnection";
 import user from "./routes/user";
 import bodyParser from 'body-parser';
+
 dotenv.config();
 
 const app: Express = express();

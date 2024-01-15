@@ -113,12 +113,14 @@ export const getGameById = async (req: Request, res: Response) => {
     }
 }
 export const callBack = async (req: Request, res: Response) => {
-    const { cmd } = req.body;
-    if (!cmd) {
-        return res.status(StatusCodes.BAD_GATEWAY).json({
-            "status": "fail",
-            "error": "ERROR CODE"
-        })
-    }
-    res.status(200).json(cmd)
+   // const { cmd } = req.body;
+    console.log(req.body);
+    
+    // if (!cmd) {
+    //     return res.status(StatusCodes.BAD_GATEWAY).json({
+    //         "status": "fail",
+    //         "error": "ERROR CODE"
+    //     })
+    // }
+    res.status(200).json(req.body)
 }
