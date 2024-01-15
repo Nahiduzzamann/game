@@ -85,7 +85,7 @@ const Login = () => {
 
           {error && <div className="mt-3 text-red-500">{error}</div>}
 
-          <div className="mt-4 text-center border-2 rounded p-1 bg-black text-yellow-100 hover:bg-red-400">
+          <div className="mt-4 text-center border-2 rounded p-1 bg-black text-white hover:bg-red-400">
             {loading ? (
               <Spinner color="yellow.100" size="md" />
             ) : (
@@ -95,7 +95,7 @@ const Login = () => {
 
           <div className='border-b-2 pt-8 border-red-400'></div>
           <label htmlFor="password" className='block text-base mt-5 pb-1 font-semibold'>Don't have an account?</label>
-          <div className="text-center border-2 rounded p-1 bg-yellow-500 text-black hover:bg-red-400">
+          <div className="text-center border-2 rounded p-1 bg-blue-500 text-white hover:bg-red-400">
             <button className='text-center'>Sign Up</button>
           </div>
         </form>
