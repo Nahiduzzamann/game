@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
 
 export const AuthContext = createContext();
-const url = "https://banglamartecommerce.com.bd";
+const url = "http://localhost:3100";
 
 const AuthProvider = ({ children }) => {
 //   const [language, setLanguage] = useState(true);
