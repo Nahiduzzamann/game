@@ -5,5 +5,5 @@ const games=express.Router()
 games.get("/category",getGameCategories)
 games.get("/games/:gameIndex/:system",getGameByCategory)
 games.get("/games/:id",getGameById)
-games.get("callback",callBack)
+games.post("/callback",callBack)
 export default games

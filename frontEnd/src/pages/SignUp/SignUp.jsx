@@ -3,7 +3,7 @@ import React from 'react';
 const SignUp = () => {
     return (
         <div className='flex justify-center items-center h-screen bg-blue-50 p-25'>
-            <div className="w-96 p-6 shadow bg-white rounded-md border-4 border-indigo-500">
+            <div className="w-96 p-6 shadow bg-white rounded-md border-4 border-blue-500">
                 <p className='text-center text-3xl p-3 font-semibold'>Register Now</p>
                 <div className='border-b-2 pt-5 border-gray-400'></div>
                 <form action="">
@@ -32,7 +32,7 @@ const SignUp = () => {
                 </div>
 
                 <div className="mt-4 text-center border-2 rounded p-1 bg-black text-yellow-100 hover:bg-red-400">
-                  <button className='text-center'>Next</button>
+                  <button className='text-center'><a href="">Next</a></button>
                 </div>
                <div className='border-b-2 pt-5 border-red-400'></div>
                 <label for="password" className='block text-base mt-3'>Already have an account?</label>
