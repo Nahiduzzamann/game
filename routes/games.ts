@@ -1,8 +1,9 @@
 import express,{Express} from 'express';
-import { getGameByCategory, getGameById, getGameCategories } from '../controllers/gameController';
+import { callBack, getGameByCategory, getGameById, getGameCategories } from '../controllers/gameController';
 
 const games=express.Router()
 games.get("/category",getGameCategories)
 games.get("/games/:gameIndex/:system",getGameByCategory)
 games.get("/games/:id",getGameById)
+games.get("callback",callBack)
 export default games

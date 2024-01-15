@@ -111,3 +111,6 @@ export const getGameById = async (req: Request, res: Response) => {
         res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error });
     }
 }
+export const callBack=async(req:Request, res:Response)=>{
+    return res.send(200).json(req.body)
+}
