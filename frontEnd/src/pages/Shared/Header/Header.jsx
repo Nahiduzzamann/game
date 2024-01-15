@@ -30,7 +30,7 @@ import LanguageCard from "./LanguageCard";
 import { AuthContext } from "./../../../providers/AuthProvider";
 
 const Header = () => {
-  const { loading, user } = useContext(AuthContext);
+  const { loading, user, setUpdateUserState } = useContext(AuthContext);
   const [data, setData] = useState();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
@@ -52,6 +52,12 @@ const Header = () => {
     //setData(cat);
     //console.log(cat);
   }, []);
+
+  const handleLogOut = () => {
+    localStorage.removeItem("token");
+    setUpdateUserState(Math.random());
+  };
+
   return (
     <div className="bg-white">
       <div className="md:flex items-center justify-between hidden px-6 py-3">
@@ -59,28 +65,36 @@ const Header = () => {
           <img className="w-[150px] cursor-pointer" src={logo} />
         </a>
         <div className="flex gap-4  items-center">
-        {loading ? (
-          <Spinner></Spinner>
-        ) : user ? (
-          <div>{user?.name}</div>
-        ) : (
-          <div className="flex gap-4  items-center">
+          {loading ? (
+            <Spinner></Spinner>
+          ) : user ? (
+            <div>{user?.name}</div>
+          ) : (
+            <div className="flex gap-4  items-center">
+              <button
+                onClick={() => navigate("/login")}
+                className="bg-black hover:bg-gray-800 text-white rounded-md w-[150px] py-2"
+              >
+                Login
+              </button>
+
+              <button
+                onClick={() => navigate("/signup")}
+                className="bg-blue-500 hover:bg-blue-400 text-white rounded-md w-[150px] py-2"
+              >
+                Sign Up
+              </button>
+            </div>
+          )}
+          <LanguageCard />
+          {user && (
             <button
-              onClick={() => navigate("/login")}
-              className="bg-black hover:bg-gray-800 text-white rounded-md w-[150px] py-2"
-            >
-              Login
-            </button>
-            <button
-              onClick={() => navigate("/signup")}
+              onClick={handleLogOut}
               className="bg-blue-500 hover:bg-blue-400 text-white rounded-md w-[150px] py-2"
             >
-              Sign Up
+              Log Out
             </button>
-            
-          </div>
-        )}
-        <LanguageCard />
+          )}
         </div>
       </div>
       <div className="md:flex md:flex-wrap md:gap-6 bg-blue-500 text-white px-6 py-4 hidden">
