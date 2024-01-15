@@ -10,9 +10,17 @@ dotenv.config();
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
-console.log();
-app.use(bodyParser.json());
+
+
+//app.use(express.urlencoded());
+//app.use(express.json());
+
 app.use(cors())
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
+
 app.use(express.static(path.join(__dirname, "frontEnd/dist")));
 app.use("/api", games)
 app.use("/api/icons",express.static(path.join(__dirname, "data/icons")))

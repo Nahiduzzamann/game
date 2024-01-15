@@ -91,6 +91,7 @@ export const getGameByCategory = async (req: Request, res: Response) => {
 // }
 export const getGameById = async (req: Request, res: Response) => {
     const id: number = Number(req.params.id);
+    const userId: string = String(req.params.user_id)
     try {
         const response: AxiosResponse = await axios.post(`http://tbs2api.aslot.net/API/openGame/`, {
             "cmd": "openGame",
@@ -99,9 +100,9 @@ export const getGameById = async (req: Request, res: Response) => {
             "exitUrl": "https://40xbet.com",
             "language": "en",
             "key": "sazzad#991",
-            "login": "sazzad9911",
+            "login": userId,
             "gameId": id,
-            "cdnUrl": "",
+            "cdnUrl": "https://40xbet.com",
             "demo": "0"
         }
         )
@@ -111,6 +112,13 @@ export const getGameById = async (req: Request, res: Response) => {
         res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error });
     }
 }
-export const callBack=async(req:Request, res:Response)=>{
-     res.status(200).json(req.body)
+export const callBack = async (req: Request, res: Response) => {
+    const { cmd } = req.body;
+    if (!cmd) {
+        return res.status(StatusCodes.BAD_GATEWAY).json({
+            "status": "fail",
+            "error": "ERROR CODE"
+        })
+    }
+    res.status(200).json(cmd)
 }
