@@ -7,6 +7,7 @@ const url = "https://banglamartecommerce.com.bd";
 const AuthProvider = ({ children }) => {
 //   const [language, setLanguage] = useState(true);
   const [user, setUser] = useState(null);
+  const [updateUserState, setUpdateUserState] = useState(null);
   // console.log(user);
   const [loading, setLoading] = useState(true);
 
@@ -42,7 +43,7 @@ const AuthProvider = ({ children }) => {
     const token = localStorage.getItem("token");
 
     if (token) {
-      currentUser("/auth/getUser", token)
+      currentUser("/", token)
         .then((res) => {
           setLoading(false);
           setUser(res.data.user);
@@ -54,7 +55,7 @@ const AuthProvider = ({ children }) => {
     } else {
       setUser(null);
     }
-  }, []);
+  }, [updateUserState]);
 
 
 
@@ -65,6 +66,8 @@ const AuthProvider = ({ children }) => {
     signIn,
     logOut,
     updateUser,
+    updateUserState,
+    setUpdateUserState
   };
 
   return (
