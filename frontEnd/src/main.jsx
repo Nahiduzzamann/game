@@ -16,7 +16,7 @@ import Profile from "./layout/Profile.jsx";
 import Withdrawal from "./pages/Withdrawal/index.jsx";
 import History from "./pages/History/index.jsx";
 import Games from "./pages/games/Games.jsx";
-import 'react-responsive-pagination/themes/classic.css';
+import "react-responsive-pagination/themes/classic.css";
 import ClaimVoucher from "./pages/ClaimVoucher/ClaimVoucher.jsx";
 import MyProfile from "./pages/MyProfile/MyProfile.jsx";
 
@@ -30,6 +30,7 @@ import Promotions from "./pages/promotions/index.jsx";
 import PlayGame from "./pages/PlayGame/PlayGame.jsx";
 import Login from "./pages/Login/Login.jsx";
 import SignUp from "./pages/SignUp/SignUp.jsx";
+import AuthProvider from "./providers/AuthProvider.jsx";
 
 const router = createBrowserRouter([
   {
@@ -50,25 +51,25 @@ const router = createBrowserRouter([
         element: <SignUp></SignUp>,
       },
       {
-        path:"games/:system/:index",
-        element:<Games/>
+        path: "games/:system/:index",
+        element: <Games />,
       },
       {
-        path:"games/:id",
-        element:<PlayGame></PlayGame>
+        path: "games/:id",
+        element: <PlayGame></PlayGame>,
       },
       {
-        path:"promotions",
-        element:<Promotions/>
+        path: "promotions",
+        element: <Promotions />,
       },
       {
-        path:"referral",
-        element:<Referral/>
+        path: "referral",
+        element: <Referral />,
       },
       {
-        path:"/:category",
-        element:<Providers/>
-      }
+        path: "/:category",
+        element: <Providers />,
+      },
     ],
   },
   {
@@ -108,19 +109,19 @@ const router = createBrowserRouter([
       },
       {
         path: "withdrawal",
-        element: <Withdrawal/>,
+        element: <Withdrawal />,
       },
       {
         path: "history",
-        element: <History/>,
+        element: <History />,
       },
       {
         path: "turn-over",
-        element: <TurnOverHistory/>,
+        element: <TurnOverHistory />,
       },
       {
         path: "bet-history",
-        element: <BetHistory/>,
+        element: <BetHistory />,
       },
       {
         path: "claimVoucher",
@@ -128,22 +129,22 @@ const router = createBrowserRouter([
       },
       {
         path: "myprofile",
-        element: <MyProfile></MyProfile>
+        element: <MyProfile></MyProfile>,
       },
       {
         path: "changePassword",
-        element: <ChangePasswordPage></ChangePasswordPage>
+        element: <ChangePasswordPage></ChangePasswordPage>,
       },
     ],
   },
-  
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ChakraProvider>
-      <RouterProvider router={router} />
-      
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </ChakraProvider>
   </React.StrictMode>
 );
