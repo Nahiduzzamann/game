@@ -58,8 +58,11 @@ const Header = () => {
         <a onClick={() => navigate("/")}>
           <img className="w-[150px] cursor-pointer" src={logo} />
         </a>
-        {user ? (
+        <div className="flex gap-4  items-center">
+        {loading ? (
           <Spinner></Spinner>
+        ) : user ? (
+          <div>{user?.name}</div>
         ) : (
           <div className="flex gap-4  items-center">
             <button
@@ -74,9 +77,11 @@ const Header = () => {
             >
               Sign Up
             </button>
-            <LanguageCard />
+            
           </div>
         )}
+        <LanguageCard />
+        </div>
       </div>
       <div className="md:flex md:flex-wrap md:gap-6 bg-blue-500 text-white px-6 py-4 hidden">
         <div onClick={() => navigate("/")}>
