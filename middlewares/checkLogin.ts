@@ -1,8 +1,13 @@
 import { Request, Response, NextFunction } from 'express';
 const jwt = require('jsonwebtoken');
 
-export const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
+export interface AuthenticatedRequest extends Request {
+  username?: string;
+}
+
+export const authenticateToken = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
   const token = req.header('Authorization');
+  // console.log(token);
 
   if (!token) {
     return res.status(401).json({ message: 'Unauthorized: Missing token' });
