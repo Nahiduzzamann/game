@@ -58,13 +58,13 @@ const Header = () => {
         </a>
         <div className="flex gap-4  items-center">
           <button
-            onClick={() => navigate("/user/deposit")}
+            onClick={() => navigate("/login")}
             className="bg-black hover:bg-gray-800 text-white rounded-md w-[150px] py-2"
           >
             Login
           </button>
           <button
-            onClick={() => navigate("/user/deposit")}
+            onClick={() => navigate("/signup")}
             className="bg-blue-500 hover:bg-blue-400 text-white rounded-md w-[150px] py-2"
           >
             Sign Up

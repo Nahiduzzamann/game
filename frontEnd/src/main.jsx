@@ -28,6 +28,8 @@ import Providers from "./pages/providers/index.jsx";
 import Referral from "./pages/Referral/index.jsx";
 import Promotions from "./pages/promotions/index.jsx";
 import PlayGame from "./pages/PlayGame/PlayGame.jsx";
+import Login from "./pages/Login/Login.jsx";
+import SignUp from "./pages/SignUp/SignUp.jsx";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +40,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/signup",
+        element: <SignUp></SignUp>,
       },
       {
         path:"games/:system/:index",
