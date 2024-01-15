@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import getCategory from "../../../module/getCategory";
 import url from "../../../module";
 import logo from "../../../assets/logo.png";
@@ -27,8 +27,10 @@ import {
 import { GoCrossReference } from "react-icons/go";
 import { AiFillNotification } from "react-icons/ai";
 import LanguageCard from "./LanguageCard";
+import { AuthContext } from "./../../../providers/AuthProvider";
 
 const Header = () => {
+  const { loading, user } = useContext(AuthContext);
   const [data, setData] = useState();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
@@ -56,21 +58,25 @@ const Header = () => {
         <a onClick={() => navigate("/")}>
           <img className="w-[150px] cursor-pointer" src={logo} />
         </a>
-        <div className="flex gap-4  items-center">
-          <button
-            onClick={() => navigate("/login")}
-            className="bg-black hover:bg-gray-800 text-white rounded-md w-[150px] py-2"
-          >
-            Login
-          </button>
-          <button
-            onClick={() => navigate("/signup")}
-            className="bg-blue-500 hover:bg-blue-400 text-white rounded-md w-[150px] py-2"
-          >
-            Sign Up
-          </button>
-          <LanguageCard />
-        </div>
+        {user ? (
+          <Spinner></Spinner>
+        ) : (
+          <div className="flex gap-4  items-center">
+            <button
+              onClick={() => navigate("/login")}
+              className="bg-black hover:bg-gray-800 text-white rounded-md w-[150px] py-2"
+            >
+              Login
+            </button>
+            <button
+              onClick={() => navigate("/signup")}
+              className="bg-blue-500 hover:bg-blue-400 text-white rounded-md w-[150px] py-2"
+            >
+              Sign Up
+            </button>
+            <LanguageCard />
+          </div>
+        )}
       </div>
       <div className="md:flex md:flex-wrap md:gap-6 bg-blue-500 text-white px-6 py-4 hidden">
         <div onClick={() => navigate("/")}>
