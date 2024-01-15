@@ -31,6 +31,7 @@ import PlayGame from "./pages/PlayGame/PlayGame.jsx";
 import Login from "./pages/Login/Login.jsx";
 import AuthProvider from "./providers/AuthProvider.jsx";
 import Phone from "./pages/SignUp/Phone.jsx";
+import SignUp from "./pages/SignUp/SignUp.jsx";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <Phone></Phone>,
+      },
+      {
+        path: "/signup-details",
+        element: <SignUp></SignUp>,
       },
       {
         path: "games/:system/:index",
