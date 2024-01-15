@@ -112,5 +112,5 @@ export const getGameById = async (req: Request, res: Response) => {
     }
 }
 export const callBack=async(req:Request, res:Response)=>{
-    return res.sendStatus(200).json(req.body)
+     res.status(200).json(req.body)
 }
