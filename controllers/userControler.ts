@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import { Users } from '../connections/databaseConnection';
-
+const jwt = require('jsonwebtoken');
 export const signUp = async (req: Request, res: Response) => {
   try {
     const { name, password, username, phone } = req.body;
@@ -38,35 +38,41 @@ export const signUp = async (req: Request, res: Response) => {
   }
 };
 export const login = async (req: Request, res: Response) => {
-    try {
-      const { username, password } = req.body;
-  
-      // Validate request body
-      if (!username || !password) {
-        return res.status(400).json({ message: 'Username and password are required' });
-      }
-  
-      // Check if the user exists
-      const user = await Users.findOne({ username });
-  
-      if (!user) {
-        return res.status(401).json({ message: 'Invalid credentials' });
-      }
-  
-      // Ensure that user.password is non-null and non-undefined
-      const passwordMatch = await bcrypt.compare(password, user.password!);
-  
-      if (!passwordMatch) {
-        return res.status(401).json({ message: 'Invalid credentials' });
-      }
-  
-      // Generate a JSON Web Token (JWT)
-    //   const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
-      const token = 'token'
-  
-      res.status(200).json({ token });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Internal server error' });
+  try {
+    const { username, password } = req.body;
+
+    // Validate request body
+    if (!username || !password) {
+      return res.status(400).json({ message: 'Username and password are required' });
     }
-  };
+
+    // Check if the user exists
+    const user = await Users.findOne({ username });
+
+    if (!user) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+
+    // Ensure that user.password is non-null and non-undefined
+    const passwordMatch = await bcrypt.compare(password, user.password!);
+
+    if (!passwordMatch) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+
+    // Generate a JSON Web Token (JWT)
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+
+    res.status(200).json({
+      "Access_Token": token,
+      "message": "Login Successful"
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: 'Internal server error',
+
+    });
+  }
+};
