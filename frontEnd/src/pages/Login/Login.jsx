@@ -3,26 +3,12 @@ import { Spinner, useToast } from '@chakra-ui/react';
 import { AuthContext } from './../../providers/AuthProvider';
 import { useLocation, useNavigate } from "react-router-dom";
 const Login = () => {
-<<<<<<< Updated upstream
   const { signIn, setUpdateUserState } = useContext(AuthContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
-=======
-    return (
-        <div className='flex justify-center items-center h-screen bg-blue-50 p-25'>
-            <div className="w-96 p-6 shadow bg-white rounded-md border-4 border-blue-500">
-                <p className='text-center text-3xl p-3 font-semibold'>Login Form</p>
-                <div className='border-b-2 pt-5 border-gray-400'></div>
-                <form action="">
-                <div className=" mt-3">
-                   <label for="username" className='block text-base mb-2'>Username:</label>
-                    <input type="text" className="w-full text-base py-1 px-1 border-2 border-gray-600 rounded" id="username" name="username" placeholder='Fill Up Hare'></input>
-                </div>
->>>>>>> Stashed changes
-
   const [loading, setLoading] = useState(false);
   const from = location.state?.from?.pathname || "/";
 
