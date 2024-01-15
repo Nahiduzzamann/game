@@ -40,13 +40,14 @@ const AuthProvider = ({ children }) => {
 
 
   useEffect(() => {
+    setLoading(true);
     const token = localStorage.getItem("token");
 
     if (token) {
-      currentUser("/", token)
+      currentUser("/user/getUser", token)
         .then((res) => {
           setLoading(false);
-          setUser(res.data.user);
+          setUser(res.data);
         })
         .catch(() => {
           setLoading(false);
@@ -54,6 +55,7 @@ const AuthProvider = ({ children }) => {
         });
     } else {
       setUser(null);
+      setLoading(false);
     }
   }, [updateUserState]);
 
