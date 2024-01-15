@@ -11,7 +11,12 @@ const Phone = () => {
                 <div className=" mt-3">
                    <label for="username" className='block text-base mb-2'>Phone Number:</label>
                    <div className='flex'>
-                   <FaFlag className='border-2 border-gray-600 me-2 rounded p-4 bg-blue-500 text-white'/><input type="text" className="w-72 text-base py-1 px-1 border-2 border-gray-600 rounded" id="username" name="username" placeholder='Fill Up Hare'></input>
+                   <div className='border-2 border-gray-600 rounded flex items-center justify-center p-2 me-2 bg-blue-400'>
+                   <FaFlag className=' text-white'/>
+                   </div>
+                   <input type="text" className="w-72 text-base py-1 px-1 border-2 border-gray-600 rounded" id="username" name="username" placeholder='Fill Up Hare'>
+
+                   </input>
                    </div>
                 </div>
 

@@ -26,7 +26,7 @@ app.use("/api", games)
 app.use("/api/icons",express.static(path.join(__dirname, "data/icons")))
 app.use("/api/images",express.static(path.join(__dirname, "data/images")))
 //user 
-app.use("/user", user)
+app.use("/api/user", user)
 app.get("*", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "frontEnd/dist/index.html"))
 });

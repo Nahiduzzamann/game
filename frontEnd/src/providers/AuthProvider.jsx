@@ -1,8 +1,9 @@
 import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
+import url from './../module/index';
 
 export const AuthContext = createContext();
-const url = "http://localhost:3100";
+
 
 const AuthProvider = ({ children }) => {
 //   const [language, setLanguage] = useState(true);
@@ -68,7 +69,6 @@ const AuthProvider = ({ children }) => {
     signIn,
     logOut,
     updateUser,
-    updateUserState,
     setUpdateUserState
   };
 

@@ -51,13 +51,13 @@ const Login = () => {
 
   return (
     <div className='flex justify-center items-center h-screen bg-blue-50 p-25'>
-      <div className="w-96 p-6 shadow bg-white rounded-md border-4 border-indigo-500">
+      <div className="w-96 p-6 shadow bg-white rounded-md border-4 border-blue-500">
         <p className='text-center text-3xl p-3 font-semibold'>Login Form</p>
-        <div className='border-b-2 pt-5 border-gray-400'></div>
+        <div className='border-b-2 pt-2 border-gray-400'></div>
 
         <form onSubmit={handleLogin}>
-          <div className="mt-3">
-            <label htmlFor="username" className='block text-base mb-2'>Username:</label>
+          <div className="mt-5">
+            <label htmlFor="username" className='block text-base mb-2 font-semibold'>Username: <span className='text-red-500 font-bold'>*</span></label>
             <input
               type="text"
               className="w-full text-base py-1 px-1 border-2 border-gray-600 rounded"
@@ -70,7 +70,7 @@ const Login = () => {
           </div>
 
           <div className="mt-3">
-            <label htmlFor="password" className='block text-base mb-2'>Password:</label>
+            <label htmlFor="password" className='block text-base mb-2 font-semibold'>Password: <span className='text-red-500 font-bold'>*</span></label>
             <input
               type="password"
               className="w-full text-base py-1 px-1 border-2 border-gray-600 rounded"
@@ -80,12 +80,12 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <div className='text-end text-indigo-800'><a href="facebook.com">Forget Password?</a></div>
+            <div className='text-end text-indigo-800 underline underline-offset-4'><a href="facebook.com">Forget Password?</a></div>
           </div>
 
           {error && <div className="mt-3 text-red-500">{error}</div>}
 
-          <div className="mt-4 text-center border-2 rounded p-1 bg-black text-yellow-100 hover:bg-red-400">
+          <div className="mt-4 text-center border-2 rounded p-1 bg-black text-white hover:bg-red-400">
             {loading ? (
               <Spinner color="yellow.100" size="md" />
             ) : (
@@ -93,9 +93,9 @@ const Login = () => {
             )}
           </div>
 
-          <div className='border-b-2 pt-5 border-red-400'></div>
-          <label htmlFor="password" className='block text-base mt-3'>Don't have an account?</label>
-          <div className="text-center border-2 rounded p-1 bg-yellow-500 text-black hover:bg-red-400">
+          <div className='border-b-2 pt-8 border-red-400'></div>
+          <label htmlFor="password" className='block text-base mt-5 pb-1 font-semibold'>Don't have an account?</label>
+          <div className="text-center border-2 rounded p-1 bg-blue-500 text-white hover:bg-red-400">
             <button className='text-center'>Sign Up</button>
           </div>
         </form>
