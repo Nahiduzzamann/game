@@ -185,7 +185,7 @@ const Header = () => {
                       >
                         <img
                           className="w-5 h-5"
-                          src={data.subCategory[0]?.icon}
+                          src={`${url}${data.subCategory[0]?.icon}`}
                         />
                         {data.title}
                       </div>
