@@ -30,8 +30,8 @@ const Login = () => {
       .then((res) => {
         saveToken(res.data.Access_Token);
         setLoading(false);
-        navigate(from, { replace: true });
         setUpdateUserState(res.data);
+        navigate(from, { replace: true });
       
         toast({
           title: 'Success Full',
