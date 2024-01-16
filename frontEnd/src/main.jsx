@@ -60,7 +60,7 @@ const router = createBrowserRouter([
         element: <Games />,
       },
       {
-        path: "games/:id",
+        path: "play-game/:id",
         element: <PlayGame></PlayGame>,
       },
       {

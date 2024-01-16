@@ -51,7 +51,7 @@ function Items({ data }) {
   const navigate = useNavigate();
 
   const handlePlayGame = (id) => {
-    navigate(`/games/${id}`);
+    navigate(`/play-game/${id}`);
   };
   return (
     <div className="grid 2xl:grid-cols-6 xl:grid-cols-5 md:grid-cols-4 grid-cols-3 gap-4 ">

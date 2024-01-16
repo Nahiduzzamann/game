@@ -9,7 +9,7 @@ const Main = () => {
   const location = useLocation();
 
   const noHeaderFooter =
-    location.pathname.includes("/games")
+    location.pathname.includes("/play-game")
 
   return (
     <div className="bg-[#EBEBEB]">
