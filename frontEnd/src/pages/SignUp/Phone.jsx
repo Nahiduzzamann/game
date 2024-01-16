@@ -46,10 +46,10 @@ const Phone = () => {
 
         <form onSubmit={handleSignUp}>
           <div className="mt-3">
-            <label className="block text-base mb-2">Phone Number:</label>
+            <label className="block text-base mb-2 font-semibold">Phone Number:</label>
             <div className="flex">
-              <div className="border-2 border-gray-600 rounded flex items-center justify-center p-2 me-2 bg-blue-400">
-                <FaFlag className="text-white" />
+              <div className=" border-gray-600 rounded flex items-center justify-center p-2 me-2 bg-blue-200">
+                <FaFlag className="text-blue-600" />
               </div>
               <input
                 type="text"
@@ -64,7 +64,7 @@ const Phone = () => {
           </div>
 
           <div className="mt-3">
-            <label className="block text-base mb-2">Referral Code:</label>
+            <label className="block text-base mb-2 font-semibold">Referral Code:</label>
             <input
               type="text"
               className="w-full text-base py-1 px-1 border-2 border-gray-600 rounded"
@@ -93,12 +93,12 @@ const Phone = () => {
 
           {error && <div className="mt-3 text-red-500">{error}</div>}
 
-          <button className={`mt-4 w-full text-center border-2 rounded p-2 bg-yellow-500 hover:bg-red-400  ${!isChecked && 'cursor-not-allowed'}`}>
+          <button className={`mt-4 w-full text-center border-2 rounded p-2 bg-black text-white font-bold hover:bg-red-400  ${!isChecked && 'cursor-not-allowed'}`}>
             {loading ? (
               <Spinner color="yellow.100" size="md" />
             ) : (
              
-                "Sign Up"
+                "Next"
              
             )}
           </button>

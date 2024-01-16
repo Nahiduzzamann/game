@@ -77,7 +77,7 @@ const SignUp = () => {
 
         <form onSubmit={handleSignUp}>
           <div className="mt-3">
-            <label className="block text-base mb-2">Username:</label>
+            <label className="block text-base mb-2 font-semibold">Username:</label>
             <input
               type="text"
               className={`w-full text-base py-1 px-1 border-2 border-gray-600 rounded ${usernameValidation ? '':'border-red-600'}`}
@@ -89,7 +89,7 @@ const SignUp = () => {
             />
           </div>
           <div className="mt-3">
-            <label className="block text-base mb-2">Full Name:</label>
+            <label className="block text-base mb-2 font-semibold">Full Name:</label>
             <input
               type="text"
               className="w-full text-base py-1 px-1 border-2 border-gray-600 rounded"
@@ -102,7 +102,7 @@ const SignUp = () => {
           </div>
 
           <div className="mt-3">
-            <label className="block text-base mb-2">Password:</label>
+            <label className="block text-base mb-2 font-semibold">Password:</label>
             <input
               type="password"
               className="w-full text-base py-1 px-1 border-2 border-gray-600 rounded"
@@ -115,7 +115,7 @@ const SignUp = () => {
           </div>
 
           <div className="mt-3">
-            <label className="block text-base mb-2">Confirm Password:</label>
+            <label className="block text-base mb-2 font-semibold">Confirm Password:</label>
             <input
               type="password"
               className="w-full text-base py-1 px-1 border-2 border-gray-600 rounded"
@@ -129,7 +129,7 @@ const SignUp = () => {
 
           {error && <div className="mt-3 text-red-500">{error}</div>}
 
-          <button className="mt-4 w-full text-center border-2 rounded p-2 bg-black text-yellow-100 hover:bg-red-400">
+          <button className="mt-4 w-full text-center border-2 rounded p-2 bg-black text-white hover:bg-red-400 font-semibold">
             {loading ? (
               <Spinner color="yellow.100" size="md" />
             ) : (
@@ -140,7 +140,7 @@ const SignUp = () => {
           </button>
 
           <div className="border-b-2 pt-5 border-red-400"></div>
-          <label className="block text-base mt-3">
+          <label className="block text-base mt-3 font-semibold">
             Already have an account?
           </label>
           <Link to="/login" className="text-center flex items-center justify-center border-2 rounded p-1 bg-yellow-500 text-black hover:bg-red-400">
