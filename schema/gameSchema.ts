@@ -7,8 +7,18 @@ const users = new Schema({
   username: { type: String, unique: true },
   phone: { type: String, length: 11 },
   date: { type: Date, default: Date.now },
-
+  balance:{type:Number,default:0}
 });
+const gameHistory=new Schema({
+  sessionId:String,
+  bet:Number,
+  win:Number,
+  tradeId:String,
+  date:{type:Date,default:Date.now},
+  username:String,
+  gameId:String,
+  id:Number
+})
 const gameList = new Schema({
   id: {
     type: String
@@ -83,4 +93,4 @@ const games = new Schema({
     }
   }
 })
-export { users,games }
+export { users,games,gameHistory }
