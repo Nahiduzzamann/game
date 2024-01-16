@@ -49,6 +49,10 @@ const Header = () => {
       }
     };
     cats();
+    const category=localStorage.getItem("category");
+    if(category){
+      setData(JSON.parse(category))
+    }
     //setData(cat);
     //console.log(cat);
   }, []);

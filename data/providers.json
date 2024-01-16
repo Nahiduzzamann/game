@@ -145,9 +145,9 @@
     },
     {
         "title":"Roulette",
-        "icon":"/icons/roulette.png",
-        "image":"/icons/roulette.png",
-        "slag":"roulette"
+        "icon":"/icons/yggdrasil.png",
+        "image":"/icons/yggdrasil.png",
+        "slag":"roulette" 
     },
     {
         "title":"Bingo",
