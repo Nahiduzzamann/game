@@ -138,17 +138,20 @@ export const callBack = async (req: Request, res: Response) => {
 }
 const writeBet = async (req: Request, res: Response) => {
     const { login, sessionId, bet, win, tradeId, gameId, betInfo } = req.body
-
-
+    //return res.status(StatusCodes.OK).json({bet,win,tradeId,gameId,betInfo})
+    
     if (!login || !sessionId || !bet || !win || !tradeId || !gameId || !betInfo) {
+        
         return res.status(StatusCodes.OK).json({
             "status": "fail",
             "error": "user_not_found"
         })
+       
+        
     }
     try {
-
         const user = (await Users.findOne({ username: login })) as UserModel
+        
         if (user.balance < parseInt(bet)) {
             return res.status(StatusCodes.OK).json({
                 "status": "fail",
@@ -166,6 +169,8 @@ const writeBet = async (req: Request, res: Response) => {
             id: id
         })
         const balance = (user.balance - parseFloat(bet)) + parseFloat(win)
+        console.log(balance);
+        
         const updateUser = await Users.updateOne({ username: login }, {
             balance: balance.toFixed(2)
         })
@@ -179,6 +184,7 @@ const writeBet = async (req: Request, res: Response) => {
         })
 
     } catch (error) {
+        //console.log(error);
         res.status(StatusCodes.OK).json({
             "status": "fail",
             "error": "user_not_found"
