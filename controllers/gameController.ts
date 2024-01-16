@@ -9,8 +9,11 @@ import RootObject from '../data/gamesTypes';
 import uniqueArray from '../functions/uniqueArray';
 import CategoryTypes from '../data/categoryTypes';
 import axios, { AxiosResponse } from "axios"
-import { Games } from '../connections/databaseConnection';
+import { Games, History, Users } from '../connections/databaseConnection';
 import { GameTypes, Providers } from '../data/gameDataTypes';
+import { AuthenticatedRequest } from '../middlewares/checkLogin';
+import { UserModel } from '../data/allTypes';
+import randomNumber from '../functions/randomNumber';
 const providers: Providers[] = require("../data/providers.json")
 const categories: CategoryTypes = require("../data/category.json")
 const url = "http://localhost:3100"
@@ -89,9 +92,9 @@ export const getGameByCategory = async (req: Request, res: Response) => {
 //         res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error });
 //     }
 // }
-export const getGameById = async (req: Request, res: Response) => {
+export const getGameById = async (req: AuthenticatedRequest, res: Response) => {
     const id: number = Number(req.params.id);
-    const userId: string = String(req.params.user_id)
+    const userId = req.username;
     try {
         const response: AxiosResponse = await axios.post(`http://tbs2api.aslot.net/API/openGame/`, {
             "cmd": "openGame",
@@ -113,14 +116,97 @@ export const getGameById = async (req: Request, res: Response) => {
     }
 }
 export const callBack = async (req: Request, res: Response) => {
-   // const { cmd } = req.body;
-    console.log(req.body);
-    
-    // if (!cmd) {
-    //     return res.status(StatusCodes.BAD_GATEWAY).json({
-    //         "status": "fail",
-    //         "error": "ERROR CODE"
-    //     })
-    // }
-    res.status(200).json(req.body)
+    const { cmd } = req.body;
+
+    if (!cmd) {
+        return res.status(StatusCodes.BAD_REQUEST).json({
+            "status": "fail",
+            "error": "ERROR CODE"
+        })
+    }
+    if (cmd.match("writeBet")) {
+        writeBet(req, res)
+    } else if (cmd.match("getBalance")) {
+        getBalance(req, res)
+    } else {
+        res.status(StatusCodes.BAD_GATEWAY).json({
+            "status": "fail",
+            "error": "ERROR CODE"
+        })
+    }
+
+}
+const writeBet = async (req: Request, res: Response) => {
+    const { login, sessionId, bet, win, tradeId, gameId, betInfo } = req.body
+
+
+    if (!login || !sessionId || !bet || !win || !tradeId || !gameId || !betInfo) {
+        return res.status(StatusCodes.OK).json({
+            "status": "fail",
+            "error": "user_not_found"
+        })
+    }
+    try {
+
+        const user = (await Users.findOne({ username: login })) as UserModel
+        if (user.balance < parseInt(bet)) {
+            return res.status(StatusCodes.OK).json({
+                "status": "fail",
+                "error": "fail_balance"
+            })
+        }
+        const id = randomNumber()
+        const history = await History.create({
+            sessionId: sessionId,
+            bet: parseFloat(bet).toFixed(2),
+            win: parseFloat(win).toFixed(2),
+            tradeId: tradeId,
+            username: login,
+            gameId: gameId,
+            id: id
+        })
+        const balance = (user.balance - parseFloat(bet)) + parseFloat(win)
+        const updateUser = await Users.updateOne({ username: login }, {
+            balance: balance.toFixed(2)
+        })
+        res.status(StatusCodes.OK).json({
+            "status": "success",
+            "error": "",
+            "login": login,
+            "balance": balance.toFixed(2).toString(),
+            "currency": "BDT",
+            "operationId": id.toString()
+        })
+
+    } catch (error) {
+        res.status(StatusCodes.OK).json({
+            "status": "fail",
+            "error": "user_not_found"
+        })
+    }
+}
+const getBalance = async (req: Request, res: Response) => {
+    const { login } = req.body;
+    if (!login) {
+        return res.status(StatusCodes.OK).json({
+            "status": "fail",
+            "error": "user_not_found"
+        })
+    }
+    try {
+        const user = (await Users.findOne({ username: login })) as UserModel
+        res.status(StatusCodes.OK).json({
+            status: "success",
+            error: "",
+            login: user.username,
+            balance: (user.balance.toFixed(2)).toString(),
+            currency: "BDT"
+        })
+    } catch (error) {
+        res.status(StatusCodes.OK).json({
+            "status": "fail",
+            "error": "user_not_found"
+        })
+    }
+
 }
