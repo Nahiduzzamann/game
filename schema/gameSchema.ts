@@ -13,7 +13,6 @@ const gameHistory=new Schema({
   sessionId:String,
   bet:Number,
   win:Number,
-  tradeId:String,
   date:{type:Date,default:Date.now},
   username:String,
   gameId:String,

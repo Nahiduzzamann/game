@@ -140,7 +140,7 @@ const writeBet = async (req: Request, res: Response) => {
     const { login, sessionId, bet, win, tradeId, gameId, betInfo } = req.body
     //return res.status(StatusCodes.OK).json({bet,win,tradeId,gameId,betInfo})
     
-    if (!login || !sessionId || !bet || !win || !tradeId || !gameId || !betInfo) {
+    if (!login || !sessionId || !bet || !gameId ) {
         
         return res.status(StatusCodes.OK).json({
             "status": "fail",
@@ -163,7 +163,6 @@ const writeBet = async (req: Request, res: Response) => {
             sessionId: sessionId,
             bet: parseFloat(bet).toFixed(2),
             win: parseFloat(win).toFixed(2),
-            tradeId: tradeId,
             username: login,
             gameId: gameId,
             id: id
