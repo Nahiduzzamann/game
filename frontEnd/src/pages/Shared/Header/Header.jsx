@@ -28,6 +28,7 @@ import { GoCrossReference } from "react-icons/go";
 import { AiFillNotification } from "react-icons/ai";
 import LanguageCard from "./LanguageCard";
 import { AuthContext } from "./../../../providers/AuthProvider";
+import { GrMoney } from "react-icons/gr";
 
 const Header = () => {
   const { loading, user, setUpdateUserState } = useContext(AuthContext);
@@ -49,9 +50,9 @@ const Header = () => {
       }
     };
     cats();
-    const category=localStorage.getItem("category");
-    if(category){
-      setData(JSON.parse(category))
+    const category = localStorage.getItem("category");
+    if (category) {
+      setData(JSON.parse(category));
     }
     //setData(cat);
     //console.log(cat);
@@ -72,7 +73,13 @@ const Header = () => {
           {loading ? (
             <Spinner></Spinner>
           ) : user ? (
-            <Link to='/user/deposit' className="bg-blue-100 rounded hover:bg-blue-200 border flex justify-center items-center border-blue-500 p-2 font-semibold">Hi, {user?.name} | {user.balance} BDT<FaArrowPointer className="text-blue-500 ml-2" /></Link>
+            <Link
+              to="/user/deposit"
+              className="bg-blue-100 rounded hover:bg-blue-200 border flex justify-center items-center border-blue-500 p-2 font-semibold"
+            >
+              Hi, {user?.name} | {user.balance} BDT
+              <FaArrowPointer className="text-blue-500 ml-2" />
+            </Link>
           ) : (
             <div className="flex gap-4  items-center">
               <button
@@ -142,7 +149,14 @@ const Header = () => {
         <div onClick={() => navigate("/")}>
           <img className="w-[130px]" src={logo} />
         </div>
-        <LanguageCard />
+        {user ? (
+          <div className="flex gap-2 items-center">
+            <GrMoney />
+            {user.balance}
+          </div>
+        ) : (
+          <LanguageCard />
+        )}
       </div>
       <Drawer
         isOpen={isOpen}
