@@ -168,7 +168,7 @@ const writeBet = async (req: Request, res: Response) => {
             id: id
         })
         const balance = (user.balance - parseFloat(bet)) + parseFloat(win)
-        console.log(balance);
+        //console.log(balance);
         
         const updateUser = await Users.updateOne({ username: login }, {
             balance: balance.toFixed(2)
