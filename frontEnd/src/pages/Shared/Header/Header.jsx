@@ -37,6 +37,7 @@ const Header = () => {
   const btnRef = React.useRef();
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  //console.log(user);
 
   useEffect(() => {
     const cats = async () => {
@@ -77,7 +78,7 @@ const Header = () => {
               to="/user/deposit"
               className="bg-blue-100 rounded hover:bg-blue-200 border flex justify-center items-center border-blue-500 p-2 font-semibold"
             >
-              Hi, {user?.name} | {user.balance} BDT
+              Hi, {user?.username} | <span className="ml-2 font-bold text-blue-500">{user.balance?.toString()} BDT</span>
               <FaArrowPointer className="text-blue-500 ml-2" />
             </Link>
           ) : (
@@ -150,9 +151,9 @@ const Header = () => {
           <img className="w-[130px]" src={logo} />
         </div>
         {user ? (
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 items-center text-blue-500 font-bold text-xl">
             <GrMoney />
-            {user.balance}
+            {user.balance} BDT
           </div>
         ) : (
           <LanguageCard />

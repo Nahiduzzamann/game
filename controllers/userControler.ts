@@ -146,13 +146,7 @@ export const getUser = async (req: AuthenticatedRequest, res: Response) => {
     }
 
     // Return the user details
-    res.status(200).json({
-      name: user.name,
-      username: user.username,
-      phone: user.phone,
-      date: user.date,
-      // Add any other user properties you want to include
-    });
+    res.status(200).json(user);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });
