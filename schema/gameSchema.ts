@@ -10,7 +10,6 @@ const users = new Schema({
   balance:{type:Number,default:0}
 });
 const gameHistory=new Schema({
-  sessionId:String,
   bet:Number,
   win:Number,
   date:{type:Date,default:Date.now},
