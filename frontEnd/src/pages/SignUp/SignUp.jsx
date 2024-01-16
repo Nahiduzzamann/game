@@ -129,25 +129,25 @@ const SignUp = () => {
 
           {error && <div className="mt-3 text-red-500">{error}</div>}
 
-          <div className="mt-4 text-center border-2 rounded p-2 bg-black text-yellow-100 hover:bg-red-400">
+          <button className="mt-4 w-full text-center border-2 rounded p-2 bg-black text-yellow-100 hover:bg-red-400">
             {loading ? (
               <Spinner color="yellow.100" size="md" />
             ) : (
-              <button type="submit" className="text-center">
-                Sign Up
-              </button>
+              
+                "Sign Up"
+              
             )}
-          </div>
+          </button>
 
           <div className="border-b-2 pt-5 border-red-400"></div>
           <label className="block text-base mt-3">
             Already have an account?
           </label>
-          <div className="text-center border-2 rounded p-1 bg-yellow-500 text-black hover:bg-red-400">
-            <Link to="/login" className="text-center">
+          <Link to="/login" className="text-center flex items-center justify-center border-2 rounded p-1 bg-yellow-500 text-black hover:bg-red-400">
+           
               Login
-            </Link>
-          </div>
+           
+          </Link>
         </form>
       </div>
     </div>

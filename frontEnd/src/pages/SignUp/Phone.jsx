@@ -93,19 +93,15 @@ const Phone = () => {
 
           {error && <div className="mt-3 text-red-500">{error}</div>}
 
-          <div className={`mt-4 text-center border-2 rounded p-2 bg-yellow-500 hover:bg-red-400  ${!isChecked && 'cursor-not-allowed'}`}>
+          <button className={`mt-4 w-full text-center border-2 rounded p-2 bg-yellow-500 hover:bg-red-400  ${!isChecked && 'cursor-not-allowed'}`}>
             {loading ? (
               <Spinner color="yellow.100" size="md" />
             ) : (
-              <button
-                disabled={!isChecked}
-                type="submit"
-                className={`text-center`}
-              >
-                Sign Up
-              </button>
+             
+                "Sign Up"
+             
             )}
-          </div>
+          </button>
         </form>
       </div>
     </div>
