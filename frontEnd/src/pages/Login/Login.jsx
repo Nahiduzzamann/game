@@ -103,15 +103,12 @@ const Login = () => {
 
           {error && <div className="mt-3 text-red-500">{error}</div>}
 
-          <div className="mt-4 text-center border-2 rounded p-1 bg-black text-white hover:bg-red-400">
-            {loading ? (
-              <Spinner color="yellow.100" size="md" />
-            ) : (
-              <button type="submit" className="text-center">
-                Login
-              </button>
-            )}
-          </div>
+          <button
+            type="submit"
+            className="w-full mt-4 text-center border-2 rounded p-1 bg-black text-white hover:bg-red-400"
+          >
+            {loading ? <Spinner color="yellow.100" size="md" /> : "Login"}
+          </button>
 
           <div className="border-b-2 pt-8 border-red-400"></div>
           <label
@@ -120,11 +117,12 @@ const Login = () => {
           >
             Don not have an account?
           </label>
-          <div className="text-center border-2 rounded p-1 bg-blue-500 text-white hover:bg-red-400">
-            <Link to="/signup" className="text-center">
-              Sign Up
-            </Link>
-          </div>
+          <Link
+            to="/signup"
+            className=" flex items-center justify-center border-2 rounded p-1 bg-blue-500 text-white hover:bg-red-400"
+          >
+            Sign Up
+          </Link>
         </form>
       </div>
     </div>
