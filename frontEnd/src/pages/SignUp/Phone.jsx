@@ -28,9 +28,8 @@ const Phone = () => {
       setLoading(true);
       // Assuming a successful sign-up
       // You should replace this with your actual sign-up logic
-      await new Promise((resolve) => setTimeout(resolve, 2000));
       // After a successful sign-up, navigate to the registration page
-      navigate("/signup-details");
+      navigate("/signup-details",{state:{phone:phoneNumber}});
     } catch (error) {
       console.error("Error during sign up:", error);
       setError("An unexpected error occurred");
@@ -94,14 +93,14 @@ const Phone = () => {
 
           {error && <div className="mt-3 text-red-500">{error}</div>}
 
-          <div className="mt-4 text-center border-2 rounded p-2 bg-yellow-500 hover:bg-red-400">
+          <div className={`mt-4 text-center border-2 rounded p-2 bg-yellow-500 hover:bg-red-400  ${!isChecked && 'cursor-not-allowed'}`}>
             {loading ? (
               <Spinner color="yellow.100" size="md" />
             ) : (
               <button
                 disabled={!isChecked}
                 type="submit"
-                className="text-center"
+                className={`text-center`}
               >
                 Sign Up
               </button>

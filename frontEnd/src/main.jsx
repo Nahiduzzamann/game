@@ -32,6 +32,7 @@ import Login from "./pages/Login/Login.jsx";
 import AuthProvider from "./providers/AuthProvider.jsx";
 import Phone from "./pages/SignUp/Phone.jsx";
 import SignUp from "./pages/SignUp/SignUp.jsx";
+import PrivateRoute from "./layout/PrivateRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -57,11 +58,11 @@ const router = createBrowserRouter([
       },
       {
         path: "games/:system/:index",
-        element: <Games />,
+        element: <PrivateRoute><Games /></PrivateRoute>,
       },
       {
         path: "play-game/:id",
-        element: <PlayGame></PlayGame>,
+        element: <PrivateRoute><PlayGame></PlayGame></PrivateRoute>,
       },
       {
         path: "promotions",
@@ -105,7 +106,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/user",
-    element: <Profile></Profile>,
+    element: <PrivateRoute><Profile></Profile></PrivateRoute>,
     // errorElement: <ErrorPage />,
     children: [
       {

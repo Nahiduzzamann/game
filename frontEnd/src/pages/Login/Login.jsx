@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Spinner, useToast } from '@chakra-ui/react';
 import { AuthContext } from './../../providers/AuthProvider';
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 const Login = () => {
   const { signIn, setUpdateUserState } = useContext(AuthContext);
   const [username, setUsername] = useState('');
@@ -11,14 +11,13 @@ const Login = () => {
   const location = useLocation();
   const [loading, setLoading] = useState(false);
   const from = location.state?.from?.pathname || "/";
-
   const toast = useToast()
 
   const saveToken = (t) => {
     localStorage.removeItem("token");
     localStorage.setItem("token", t);
   };
-  
+
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -29,19 +28,20 @@ const Login = () => {
       password:password
     }, null)
       .then((res) => {
-        
         saveToken(res.data.Access_Token);
-
         setLoading(false);
+        navigate(from, { replace: true });
         setUpdateUserState(res.data);
+      
         toast({
           title: 'Success Full',
           description: "Now you have logged in your account",
           status: 'success',
-          duration: 9000,
+          duration: 5000,
           isClosable: true,
         })
-        navigate(from, { replace: true });
+       
+        
       })
       .catch((error) => {
         setLoading(false);
@@ -94,9 +94,9 @@ const Login = () => {
           </div>
 
           <div className='border-b-2 pt-8 border-red-400'></div>
-          <label htmlFor="password" className='block text-base mt-5 pb-1 font-semibold'>Don't have an account?</label>
+          <label htmlFor="password" className='block text-base mt-5 pb-1 font-semibold'>Don not have an account?</label>
           <div className="text-center border-2 rounded p-1 bg-blue-500 text-white hover:bg-red-400">
-            <button className='text-center'>Sign Up</button>
+            <Link to='/signup' className='text-center'>Sign Up</Link>
           </div>
         </form>
       </div>
