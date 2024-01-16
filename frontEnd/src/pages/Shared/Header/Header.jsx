@@ -15,8 +15,8 @@ import {
   Spinner,
 } from "@chakra-ui/react";
 import { CiMenuFries } from "react-icons/ci";
-import { useNavigate, useLocation } from "react-router-dom";
-import { FaQuora } from "react-icons/fa6";
+import { useNavigate, useLocation, Link } from "react-router-dom";
+import { FaArrowPointer, FaQuora } from "react-icons/fa6";
 import {
   Accordion,
   AccordionItem,
@@ -72,7 +72,7 @@ const Header = () => {
           {loading ? (
             <Spinner></Spinner>
           ) : user ? (
-            <div>{user?.name}</div>
+            <Link to='/user/deposit' className="bg-blue-100 rounded hover:bg-blue-200 border flex justify-center items-center border-blue-500 p-2 font-semibold">Hi, {user?.name}<FaArrowPointer className="text-blue-500 ml-2" /></Link>
           ) : (
             <div className="flex gap-4  items-center">
               <button
