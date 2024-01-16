@@ -144,7 +144,7 @@ const writeBet = async (req: Request, res: Response) => {
         
         return res.status(StatusCodes.OK).json({
             "status": "fail",
-            "error": "user_not_found"
+            "error": "MISSING"
         })
        
         
