@@ -72,7 +72,7 @@ const Header = () => {
           {loading ? (
             <Spinner></Spinner>
           ) : user ? (
-            <Link to='/user/deposit' className="bg-blue-100 rounded hover:bg-blue-200 border flex justify-center items-center border-blue-500 p-2 font-semibold">Hi, {user?.name}<FaArrowPointer className="text-blue-500 ml-2" /></Link>
+            <Link to='/user/deposit' className="bg-blue-100 rounded hover:bg-blue-200 border flex justify-center items-center border-blue-500 p-2 font-semibold">Hi, {user?.name} | {user.balance} BDT<FaArrowPointer className="text-blue-500 ml-2" /></Link>
           ) : (
             <div className="flex gap-4  items-center">
               <button
