@@ -1,21 +1,99 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
+const promotionHistory = new Schema({
+  promotionId: String,
+  userId: String,
+  date: { type: Date, default: Date.now() },
+  completed: { type: Boolean, default: false }
+})
+
+const promotions = new Schema({
+  title: String,
+  description: String,
+  image: String,
+  details: { type: String, default: null },
+  bonusPercentage: Number,
+  turnOverAmount: Number,
+  applicable: { type: Boolean, default: true }
+})
+const bonusHistory = new Schema({
+  date: { type: Date, default: Date.now() },
+  userId: String,
+  amount: Number,
+  promotionId: String
+})
+
+const deposit = new Schema({
+  paymentMethod: { type: String, require: true },
+  amount: { type: Number, require: true },
+  promotionId: { type: String, default: null },
+  date: { type: Date, default: Date.now() },
+  status: { type: String, default: "PENDING" },
+  remarks: { type: String, default: "-" },
+  tranXId: String
+})
+const withdraw = new Schema({
+  walletId: { type: String, require: true },
+  amount: { type: Number, require: true },
+  date: { type: Date, default: Date.now() },
+  status: { type: String, default: "PENDING" },
+  remarks: { type: String, default: "-" },
+
+})
+const transfer = new Schema({
+  paymentMethod: { type: String, require: true },
+  amount: { type: Number, require: true },
+  date: { type: Date, default: Date.now() },
+  status: { type: String, default: "PENDING" },
+  tranXId: String,
+  fromWalletId:String,
+  toWalletId:String
+})
+const rewards = new Schema({
+  tranXId: String,
+  date: { type: Date, default: Date.now() },
+  balanceAt: Number,
+  amount: Number,
+  rewardsId: String
+})
+const rewardsList = new Schema({
+  title: String,
+  targetAmount: Number,
+  bonusAmount: Number,
+})
+const userWallets = new Schema({
+  walletNumber: { type: String, require: true },
+  walletId: { type: String, require: true },
+  channel: String,
+  userId: String
+})
+const wallets = new Schema({
+  methodName: String,
+  icon: String,
+  slogan: String,
+  walletNumber: { type: String, require: true },
+})
 const users = new Schema({
   name: String, // String is shorthand for {type: String}
   password: String,
   username: { type: String, unique: true },
   phone: { type: String, length: 11 },
   date: { type: Date, default: Date.now },
-  balance:{type:Number,default:0}
+  balance: { type: Number, default: 0 }
 });
-const gameHistory=new Schema({
-  bet:Number,
-  win:Number,
-  date:{type:Date,default:Date.now},
-  username:String,
-  gameId:String,
-  id:Number
+const gameHistory = new Schema({
+  bet: Number,
+  win: Number,
+  date: { type: Date, default: Date.now },
+  username: String,
+  gameId: String,
+  id: Number
+})
+const notification=new Schema({
+  date:{type:Date,default:Date.now()},
+  title:String,
+  details:String
 })
 const gameList = new Schema({
   id: {
@@ -91,4 +169,4 @@ const games = new Schema({
     }
   }
 })
-export { users,games,gameHistory }
+export { users, games, gameHistory, wallets, userWallets, rewards, rewardsList, transfer,withdraw,deposit, bonusHistory, promotions, promotionHistory,notification}

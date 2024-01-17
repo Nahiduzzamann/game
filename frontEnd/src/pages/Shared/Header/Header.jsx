@@ -109,12 +109,12 @@ const Header = () => {
           )}
         </div>
       </div>
-      <div className="md:flex md:flex-wrap md:gap-6 bg-blue-500 text-white px-6 py-4 hidden">
+      <div className="md:flex md:flex-wrap  bg-blue-500 text-white px-6  hidden">
         <div onClick={() => navigate("/")}>
           <div
             className={`${
               pathname === "/" && "text-green-300"
-            } cursor-pointer hover:text-gray-300 font-semibold text-md `}
+            } cursor-pointer px-4 py-4 hover:text-gray-300 font-semibold text-md `}
           >
             Home
           </div>
@@ -130,7 +130,7 @@ const Header = () => {
           <div
             className={`${
               pathname === "/promotions" && "text-green-300"
-            } cursor-pointer hover:text-gray-300 font-semibold text-md `}
+            } cursor-pointer px-4 py-4 hover:text-gray-300 font-semibold text-md `}
           >
             Promotions
           </div>
@@ -139,7 +139,7 @@ const Header = () => {
           <div
             className={`${
               pathname === "/referral" && "text-green-300"
-            } cursor-pointer hover:text-gray-300 font-semibold text-md `}
+            } cursor-pointer px-4 py-4 hover:text-gray-300 font-semibold text-md `}
           >
             Referral
           </div>
@@ -255,7 +255,7 @@ const Options = ({ data, i, active }) => {
 
   return (
     <div
-      className="h-full"
+      className="h-full  px-4 py-4  "
       //onClick={() => navigate(`/games/${data.slag}/${i}`)}
       key={i}
       onMouseEnter={() => setHover(true)}

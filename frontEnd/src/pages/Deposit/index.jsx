@@ -47,40 +47,33 @@ export default function Deposit() {
           ))}
         </div>
 
-        <p className="font-bold pt-5 pb-2">
-          Deposit Channel <span className="text-red-500">*</span>
-        </p>
-        <div className="text-center">
-          <p className="h-12 w-20 border-2 border-gray-500 rounded-lg p-2 m-2 hover:bg-gray-400">
-            {" "}
-            DPAY
-          </p>
-        </div>
+       
+        
         <div>
-          <div className="text-center pt-4 flex">
+          <div className="text-center pt-4 flex items-center">
             {[200, 500, 1000].map((amount) => (
-              <p
+              <div
                 key={amount}
                 onClick={() => handleAmountClick(amount)}
-                className={`h-10 w-36 bg-black text-white font-bold text-center rounded-lg p-1 m-2 cursor-pointer ${
+                className={`h-10 w-36 flex justify-center bg-black text-white items-center font-bold text-center rounded-lg p-1 m-2 cursor-pointer ${
                   selectedAmount == amount ? "bg-blue-500" : ""
                 }`}
               >
                 {amount}
-              </p>
+              </div>
             ))}
           </div>
           <div className="text-center flex">
             {[5000, 10000, 20000].map((amount) => (
-              <p
+              <div
                 key={amount}
                 onClick={() => handleAmountClick(amount)}
-                className={`h-10 w-36 bg-black text-white font-bold text-center rounded-lg p-1 m-2 cursor-pointer ${
+                className={`h-10 w-36 bg-black flex justify-center items-center text-white font-bold text-center rounded-lg p-1 m-2 cursor-pointer ${
                   selectedAmount == amount ? "bg-blue-500" : ""
                 }`}
               >
                 {amount}
-              </p>
+              </div>
             ))}
           </div>
 
