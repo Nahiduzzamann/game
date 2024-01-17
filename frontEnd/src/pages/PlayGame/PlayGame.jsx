@@ -14,7 +14,7 @@ const PlayGame = () => {
       try {
         const res = await gateGameById(id);
         setIframeUrl(res.data?.content?.game?.url);
-        //console.log(res.data);
+        console.log(res.data);
         if (!res.data.content) {
           setOk(true);
         }

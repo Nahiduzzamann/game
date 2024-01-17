@@ -105,7 +105,7 @@ export const getGameById = async (req: AuthenticatedRequest, res: Response) => {
             "key": "sazzad#991",
             "login": userId,
             "gameId": id,
-            "cdnUrl": "https://40xbet.com",
+            "cdnUrl": "",
             "demo": "0"
         }
         )
