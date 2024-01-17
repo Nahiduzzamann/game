@@ -90,10 +90,10 @@ export const login = async (req: Request, res: Response) => {
 
 export const updateUser = async (req: Request, res: Response) => {
   try {
-    const { username,name, password, phone } = req.body;
+    const { username,name, phone } = req.body;
 
     // Validate request body
-    if(!name && !password && !phone) {
+    if(!name  && !phone) {
       return res.status(400).json({ message: 'Invalid request' });
     }
 
@@ -108,11 +108,11 @@ export const updateUser = async (req: Request, res: Response) => {
       user.name = name;
     }
 
-    if (password) {
-      // Hash the new password
-      const hashedPassword = await bcrypt.hash(password, 10);
-      user.password = hashedPassword;
-    }
+    // if (password) {
+    //   // Hash the new password
+    //   const hashedPassword = await bcrypt.hash(password, 10);
+    //   user.password = hashedPassword;
+    // }
 
     if (phone) {
       user.phone = phone;
@@ -123,7 +123,7 @@ export const updateUser = async (req: Request, res: Response) => {
 
     res.status(200).json({ message: 'User updated successfully' });
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).json({ message: 'Internal server error' });
   }
 };

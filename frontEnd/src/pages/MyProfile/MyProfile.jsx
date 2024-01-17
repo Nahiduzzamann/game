@@ -1,31 +1,61 @@
-import React, { useState } from 'react';
+import React, { useContext, useState, useEffect } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
+import { Spinner, useToast } from "@chakra-ui/react";
 
 const MyProfile = () => {
-  const [userData, setUserData] = useState({
-    email: 'example@email.com',
-    username: 'john_doe',
-    dob: '1990-01-01',
-    phoneNumber: '123-456-7890',
-    fullName: 'John Doe',
-    currency: 'BDT',
-  });
-
+  const { user, updateUser, setUpdateUserState } = useContext(AuthContext);
+  const [name, setName] = useState("");
+  const [userName, setUserName] = useState("");
+  const [phone, setPhone] = useState("");
   const [isEditing, setIsEditing] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const toast = useToast();
+
+  useEffect(() => {
+    setName(user?.name || "");
+    setUserName(user?.username || "");
+    setPhone(user?.phone || "");
+  }, [user]);
 
   const handleEditClick = () => {
     setIsEditing(!isEditing);
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUserData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // You can implement submission logic here, e.g., make an API call to update the user's profile
-    console.log('Form submitted with data:', userData);
-    setIsEditing(false); // Disable editing after submission
+    const token = localStorage.getItem("token");
+    setLoading(true);
+
+    try {
+      const response = await updateUser(
+        "/user/updateUser",
+        {
+          username: userName,
+          name: name,
+          phone: phone,
+        },
+        token
+      );
+
+      toast({
+        title: "Update Successful",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+      setUpdateUserState(Math.random());
+      setIsEditing(false);
+    } catch (error) {
+      toast({
+        title: "Update Failed",
+        description: "Failed to update profile. Please try again.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -36,15 +66,15 @@ const MyProfile = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="mb-4">
             <label className="block text-gray-600 text-sm font-bold mb-2">
-              Email
+              Full Name
             </label>
             <input
-              type="email"
-              name="email"
-              value={userData.email}
-              onChange={handleInputChange}
-              className={`border border-blue-500 p-2 rounded bg-white  w-full ${
-                isEditing ? 'cursor-text' : 'cursor-not-allowed'
+              type="name"
+              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className={`border border-blue-500 p-2 rounded bg-white w-full ${
+                isEditing ? "cursor-text" : "cursor-not-allowed"
               }`}
               disabled={!isEditing}
             />
@@ -57,28 +87,10 @@ const MyProfile = () => {
             <input
               type="text"
               name="username"
-              value={userData.username}
-              onChange={handleInputChange}
-              className={`border border-blue-500 p-2 rounded bg-white w-full ${
-                isEditing ? 'cursor-text' : 'cursor-not-allowed'
-              }`}
-              disabled={!isEditing}
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-gray-600 text-sm font-bold mb-2">
-              Date of Birth
-            </label>
-            <input
-              type="date"
-              name="dob"
-              value={userData.dob}
-              onChange={handleInputChange}
-              className={`border border-blue-500 p-2 rounded bg-white w-full ${
-                isEditing ? 'cursor-text' : 'cursor-not-allowed'
-              }`}
-              disabled={!isEditing}
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
+              className={`border border-blue-500 p-2 rounded bg-white w-full cursor-not-allowed`}
+              disabled={true}
             />
           </div>
 
@@ -89,42 +101,10 @@ const MyProfile = () => {
             <input
               type="tel"
               name="phoneNumber"
-              value={userData.phoneNumber}
-              onChange={handleInputChange}
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               className={`border border-blue-500 p-2 rounded bg-white w-full ${
-                isEditing ? 'cursor-text' : 'cursor-not-allowed'
-              }`}
-              disabled={!isEditing}
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-gray-600 text-sm font-bold mb-2">
-              Full Name
-            </label>
-            <input
-              type="text"
-              name="fullName"
-              value={userData.fullName}
-              onChange={handleInputChange}
-              className={`border border-blue-500 p-2 rounded bg-white w-full ${
-                isEditing ? 'cursor-text' : 'cursor-not-allowed'
-              }`}
-              disabled={!isEditing}
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-gray-600 text-sm font-bold mb-2">
-              Currency
-            </label>
-            <input
-              type="text"
-              name="currency"
-              value={userData.currency}
-              onChange={handleInputChange}
-              className={`border border-blue-500 p-2 rounded bg-white w-full ${
-                isEditing ? 'cursor-text' : 'cursor-not-allowed'
+                isEditing ? "cursor-text" : "cursor-not-allowed"
               }`}
               disabled={!isEditing}
             />
@@ -136,14 +116,16 @@ const MyProfile = () => {
           onClick={handleEditClick}
           className="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg mr-4 hover:bg-blue-700"
         >
-          {isEditing ? 'Cancel' : 'Edit Profile'}
+          {isEditing ? "Cancel" : "Edit Profile"}
         </button>
+
         {isEditing && (
           <button
             type="submit"
             className="bg-green-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700"
+            disabled={loading}
           >
-            Save
+            {loading ? <Spinner /> : "Save"}
           </button>
         )}
       </form>

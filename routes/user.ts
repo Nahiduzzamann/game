@@ -5,6 +5,6 @@ import { authenticateToken } from '../middlewares/checkLogin';
 const user=express.Router()
 user.post("/signup",signUp)
 user.post("/login",login)
-user.put("/updateUser",updateUser)
+user.put("/updateUser",authenticateToken,updateUser)
 user.get("/getUser",authenticateToken,getUser)
 export default user
