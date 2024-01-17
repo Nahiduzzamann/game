@@ -14,6 +14,7 @@ import { GameTypes, Providers } from '../data/gameDataTypes';
 import { AuthenticatedRequest } from '../middlewares/checkLogin';
 import { UserModel } from '../data/allTypes';
 import randomNumber from '../functions/randomNumber';
+import { ObjectId } from 'mongodb';
 const providers: Providers[] = require("../data/providers.json")
 const categories: CategoryTypes = require("../data/category.json")
 const url = "http://localhost:3100"
@@ -28,6 +29,19 @@ interface Category {
 export const getGameCategories = async (req: Request, res: Response) => {
     try {
         const games = (await Games.find()) as GameTypes
+        const date = new Date()
+        var yesterday = new Date(date.getTime());
+        yesterday.setDate(date.getDate() - 1);
+        if (new Date(games[0].dateTime) < yesterday) {
+            console.log("Updated game list")
+            const response: AxiosResponse = await axios.post(`http://tbs2api.aslot.net/API/`, {
+                "cmd": "gamesList",
+                "hall": "3202296",
+                "key": "sazzad#991",
+            }
+            )
+            await Games.updateOne({ _id: new ObjectId(games[0]._id) }, response.data)
+        }
         const gameList = games[0].content.gameList;
         let arr: Category[] = [];
         categories.map(cat => {
@@ -63,10 +77,10 @@ export const getGameByCategory = async (req: Request, res: Response) => {
 
     const system: string = String(req.params.system)
     try {
-
+       
         const games = (await Games.find()) as GameTypes
         const gameList = games[0].content.gameList;
-        res.status(StatusCodes.OK).json(gameList.filter(d => (d.categories == categories[gameIndex].slag && d.title === system)))
+        res.status(StatusCodes.OK).json(gameList.filter(d => ((d.categories == categories[gameIndex].slag || d.categories == "") && d.title === system)))
     } catch (error) {
         res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error });
     }
@@ -139,19 +153,19 @@ export const callBack = async (req: Request, res: Response) => {
 const writeBet = async (req: Request, res: Response) => {
     const { login, sessionId, bet, win, tradeId, gameId, betInfo } = req.body
     //return res.status(StatusCodes.OK).json({bet,win,tradeId,gameId,betInfo})
-    
-    if (!login || !bet ||!win || !gameId ) {
-        
+
+    if (!login || !bet || !win || !gameId) {
+
         return res.status(StatusCodes.OK).json({
             "status": "fail",
             "error": "MISSING"
         })
-       
-        
+
+
     }
     try {
         const user = (await Users.findOne({ username: login })) as UserModel
-        
+
         if (user.balance < parseInt(bet)) {
             return res.status(StatusCodes.OK).json({
                 "status": "fail",
@@ -168,7 +182,7 @@ const writeBet = async (req: Request, res: Response) => {
         })
         const balance = (user.balance - parseFloat(bet)) + parseFloat(win)
         //console.log(balance);
-        
+
         const updateUser = await Users.updateOne({ username: login }, {
             balance: balance.toFixed(2)
         })
