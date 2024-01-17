@@ -11,6 +11,8 @@ export default function Games() {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(data?.length / itemsPerPage);
+
+  
   useEffect(() => {
     const games = async () => {
       try {
