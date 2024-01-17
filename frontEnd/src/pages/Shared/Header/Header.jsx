@@ -72,7 +72,7 @@ const Header = () => {
         </a>
         <div className="flex gap-4  items-center">
           {loading ? (
-            <Spinner></Spinner>
+            <Spinner className="text-blue-500"></Spinner>
           ) : user ? (
             <Link
               to="/user/deposit"
