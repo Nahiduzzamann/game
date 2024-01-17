@@ -32,7 +32,6 @@ const MyProfile = () => {
         {
           username: userName,
           name: name,
-          phone: phone,
         },
         token
       );
@@ -102,11 +101,8 @@ const MyProfile = () => {
               type="tel"
               name="phoneNumber"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              className={`border border-blue-500 p-2 rounded bg-white w-full ${
-                isEditing ? "cursor-text" : "cursor-not-allowed"
-              }`}
-              disabled={!isEditing}
+              className={`border border-blue-500 p-2 rounded bg-white w-full cursor-not-allowed`}
+              disabled={true}
             />
           </div>
         </div>

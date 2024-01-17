@@ -58,7 +58,7 @@ const router = createBrowserRouter([
       },
       {
         path: "games/:system/:index",
-        element: <PrivateRoute><Games /></PrivateRoute>,
+        element: <Games />,
       },
       {
         path: "play-game/:id",
