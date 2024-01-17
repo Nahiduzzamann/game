@@ -9,6 +9,7 @@ const AuthProvider = ({ children }) => {
 //   const [language, setLanguage] = useState(true);
   const [user, setUser] = useState(null);
   const [updateUserState, setUpdateUserState] = useState(null);
+
   // console.log(user);
   const [loading, setLoading] = useState(true);
 

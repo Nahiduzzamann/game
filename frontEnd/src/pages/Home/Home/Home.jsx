@@ -4,7 +4,9 @@ import ReferralsSection from "../ReferralsSection/ReferralsSection";
 import Slider from "../Slider";
 
 
+
 const Home = () => {
+ 
   return (
 
     <div>
