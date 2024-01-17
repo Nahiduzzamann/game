@@ -23,14 +23,22 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, "frontEnd/dist")));
+app.use(express.static(path.join(__dirname, "dashboard/dist")));
 app.use("/api", games)
 app.use("/api/icons",express.static(path.join(__dirname, "data/icons")))
 app.use("/api/images",express.static(path.join(__dirname, "data/images")))
 //user 
 app.use("/api/user", user)
+app.get("/dashboard", (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, "dashboard/dist/index.html"))
+});
+app.get("/auth", (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, "dashboard/dist/index.html"))
+});
 app.get("*", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "frontEnd/dist/index.html"))
 });
+
 
 mongoConnection().then(() => {
   app.listen(port, () => {
