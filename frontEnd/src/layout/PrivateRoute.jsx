@@ -1,6 +1,6 @@
 import React,{ useContext } from "react";
 import { Navigate, useLocation } from "react-router";
-import { Spinner } from "@chakra-ui/react";
+import { Progress } from "@chakra-ui/react";
 import { AuthContext } from "../providers/AuthProvider";
 
 
@@ -9,7 +9,7 @@ const PrivateRoute = ({ children }) => {
     const location = useLocation();
 
     if(loading){
-        return <Spinner className="progress w-full"></Spinner>
+        return <Progress size='xs' isIndeterminate />
     }
 
     if (user) {
