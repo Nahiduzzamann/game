@@ -148,17 +148,22 @@ export default function Deposit() {
                 <AlertDialogOverlay />
 
                 <AlertDialogContent>
-                  <AlertDialogHeader>Discard Changes?</AlertDialogHeader>
+                  <AlertDialogHeader>Deposit Details</AlertDialogHeader>
                   <AlertDialogCloseButton />
                   <AlertDialogBody>
-                    <div></div>
+                    <div className="border-t-4 p-5">
+
+                      <p className="p-2 font-semibold">Deposit amount <span className="ps-40">৳ NaN</span></p>
+                      <p className="p-2 font-semibold">Bonus Amount <span className="ps-40">৳ NaN</span></p>
+                      <p className="p-2 font-semibold">Target Turnover <span className="ps-40">৳ NaN</span></p>
+                    </div>
                   </AlertDialogBody>
                   <AlertDialogFooter>
                     <Button ref={cancelRef} onClick={onClose}>
                       No
                     </Button>
                     <Button colorScheme="red" ml={3}>
-                      Yes
+                      Confirm
                     </Button>
                   </AlertDialogFooter>
                 </AlertDialogContent>
