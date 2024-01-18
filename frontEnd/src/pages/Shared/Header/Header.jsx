@@ -74,8 +74,8 @@ const Header = () => {
             <Spinner className="text-blue-500"></Spinner>
           ) : user ? (
             <div className="bg-blue-100 rounded border flex justify-center items-center border-blue-500 p-2 font-semibold">
-              <Link to={`/user/myprofile`} className="hover:underline">
-                Hi, {user?.username} |{" "}
+              <Link to={`/user/myprofile`} className="">
+                Hi, <span className="hover:underline">{user?.username}</span> |{" "}
               </Link>
               <Link to={`/user/deposit`} className="ml-2 hover:underline font-bold text-blue-500 flex justify-center items-center">
                 {user.balance?.toString()} BDT
