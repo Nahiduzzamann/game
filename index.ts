@@ -6,6 +6,7 @@ import games from "./routes/games";
 import { mongoConnection } from "./connections/databaseConnection";
 import user from "./routes/user";
 import bodyParser from 'body-parser';
+import balance from "./routes/balance";
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "frontEnd/dist")));
 app.use(express.static(path.join(__dirname, "dashboard/dist")));
 app.use("/api", games)
+app.use("/api/balance",balance)
 app.use("/api/icons",express.static(path.join(__dirname, "data/icons")))
 app.use("/api/images",express.static(path.join(__dirname, "data/images")))
 //user 

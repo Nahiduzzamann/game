@@ -17,7 +17,7 @@ import randomNumber from '../functions/randomNumber';
 import { ObjectId } from 'mongodb';
 const providers: Providers[] = require("../data/providers.json")
 const categories: CategoryTypes = require("../data/category.json")
-const url = "http://localhost:3100"
+
 interface Async {
     (source: string): Promise<string>;
 }

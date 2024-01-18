@@ -15,7 +15,7 @@ const promotions = new Schema({
   details: { type: String, default: null },
   bonusPercentage: Number,
   turnOverAmount: Number,
-  applicable: { type: Boolean, default: true }
+  applicable: { type: Boolean, default: false }
 })
 const bonusHistory = new Schema({
   date: { type: Date, default: Date.now() },
@@ -25,13 +25,14 @@ const bonusHistory = new Schema({
 })
 
 const deposit = new Schema({
-  paymentMethod: { type: String, require: true },
+  walletId: { type: String, require: true },
   amount: { type: Number, require: true },
-  promotionId: { type: String, default: null },
+  promotionId: { type: String, require:false },
   date: { type: Date, default: Date.now() },
   status: { type: String, default: "PENDING" },
   remarks: { type: String, default: "-" },
-  tranXId: String
+  tranXId: String,
+  userId:String
 })
 const withdraw = new Schema({
   walletId: { type: String, require: true },
