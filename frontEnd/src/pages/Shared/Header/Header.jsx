@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { CiMenuFries } from "react-icons/ci";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import { FaArrowPointer, FaQuora } from "react-icons/fa6";
+import { FaPlus, FaQuora } from "react-icons/fa6";
 import {
   Accordion,
   AccordionItem,
@@ -37,7 +37,6 @@ const Header = () => {
   const btnRef = React.useRef();
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  //console.log(user);
 
   useEffect(() => {
     const cats = async () => {
@@ -74,13 +73,15 @@ const Header = () => {
           {loading ? (
             <Spinner className="text-blue-500"></Spinner>
           ) : user ? (
-            <Link
-              to="/user/deposit"
-              className="bg-blue-100 rounded hover:bg-blue-200 border flex justify-center items-center border-blue-500 p-2 font-semibold"
-            >
-              Hi, {user?.username} | <span className="ml-2 font-bold text-blue-500">{user.balance?.toString()} BDT</span>
-              <FaArrowPointer className="text-blue-500 ml-2" />
-            </Link>
+            <div className="bg-blue-100 rounded border flex justify-center items-center border-blue-500 p-2 font-semibold">
+              <Link to={`/user/myprofile`} className="">
+                Hi, <span className="hover:underline">{user?.username}</span> |{" "}
+              </Link>
+              <Link to={`/user/deposit`} className="ml-2 hover:underline font-bold text-blue-500 flex justify-center items-center">
+                {user.balance?.toString()} BDT
+                <FaPlus className="text-blue-500 hover:border-blue-500 ml-2 border-2 border-blue-300 " />
+              </Link>
+            </div>
           ) : (
             <div className="flex gap-4  items-center">
               <button
@@ -151,10 +152,10 @@ const Header = () => {
           <img className="w-[130px]" src={logo} />
         </div>
         {user ? (
-          <div className="flex gap-2 items-center text-blue-500 font-bold text-xl">
+          <Link to={`/user/deposit`} className="flex gap-2 items-center text-blue-500 font-bold text-xl">
             <GrMoney />
             {user.balance} BDT
-          </div>
+          </Link>
         ) : (
           <LanguageCard />
         )}
