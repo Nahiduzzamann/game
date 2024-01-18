@@ -39,7 +39,7 @@ app.get("/auth", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "dashboard/dist/index.html"))
 });
 app.get("*", (req: Request, res: Response) => {
-  res.redirect("http://localhost:5173")
+  res.redirect("http://62.72.30.150:5173")
   //res.sendFile(path.join(__dirname, "frontEnd/dist/index.html"))
 });
 
