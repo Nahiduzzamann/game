@@ -1,15 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { Select } from "@chakra-ui/react";
+import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogCloseButton,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogOverlay,
+  Button,
+  Select,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { BsQuestionOctagonFill } from "react-icons/bs";
 import getWallet from "../../module/getWallet";
 import url from "../../module";
-
 
 export default function Deposit() {
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedAmount, setSelectedAmount] = useState(200);
   const [inputAmount, setInputAmount] = useState(200);
-  const [apiData, setApiData]=useState(null)
+  const [apiData, setApiData] = useState(null);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = React.useRef();
 
   const handleAmountClick = (amount) => {
     setSelectedAmount(amount);
@@ -24,13 +36,15 @@ export default function Deposit() {
     setSelectedImage(name);
   };
 
-  useEffect(()=>{
-    getWallet().then(response=>{
-      setApiData(response.data)
-    }).catch(error=>{
-      console.error(error)
-    })
-  },[])
+  useEffect(() => {
+    getWallet()
+      .then((response) => {
+        setApiData(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   return (
     <div className="bg-gray-500 rounded-lg p-4">
@@ -60,8 +74,6 @@ export default function Deposit() {
           ))}
         </div>
 
-       
-        
         <div>
           <div className="text-center pt-4 flex items-center">
             {[200, 500, 1000].map((amount) => (
@@ -121,12 +133,42 @@ export default function Deposit() {
         </Select>
 
         <div className="pt-5 text-center">
-          <form
-            action="/action_page.php"
-            className="bg-[#0082D6] p-2 rounded-lg font-bold hover:bg-[#58b4f1]"
-          >
-            <button className="text-white">Submit</button>
-          </form>
+          <div className="bg-[#0082D6] p-2 rounded-lg font-bold hover:bg-[#58b4f1]">
+            <button className="text-white" onClick={onOpen}>
+              Deposite
+            </button>
+            <div>
+              <AlertDialog
+                motionPreset="slideInBottom"
+                leastDestructiveRef={cancelRef}
+                onClose={onClose}
+                isOpen={isOpen}
+                isCentered
+              >
+                <AlertDialogOverlay />
+
+                <AlertDialogContent>
+                  <AlertDialogHeader>Deposit Details</AlertDialogHeader>
+                  <AlertDialogCloseButton />
+                  <AlertDialogBody>
+                    <div className="border-t-4 border-indigo-300 p-5">
+                      <p className="p-2 font-semibold">Deposit amount <span className="ps-40">৳ NaN</span></p>
+                      <p className="p-2 font-semibold">Bonus Amount <span className="ps-40">৳ NaN</span></p>
+                      <p className="p-2 font-semibold">Target Turnover <span className="ps-40">৳ NaN</span></p>
+                    </div>
+                  </AlertDialogBody>
+                  <AlertDialogFooter>
+                    <Button ref={cancelRef} onClick={onClose}>
+                      No
+                    </Button>
+                    <Button colorScheme="red" ml={3}>
+                      Confirm
+                    </Button>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            </div>
+          </div>
         </div>
       </div>
     </div>

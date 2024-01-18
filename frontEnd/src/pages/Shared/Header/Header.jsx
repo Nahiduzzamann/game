@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { CiMenuFries } from "react-icons/ci";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import { FaPlus, FaQuora } from "react-icons/fa6";
+import { FaBangladeshiTakaSign, FaPlus, FaQuora } from "react-icons/fa6";
 import {
   Accordion,
   AccordionItem,
@@ -78,6 +78,7 @@ const Header = () => {
                 Hi, <span className="hover:underline">{user?.username}</span> |{" "}
               </Link>
               <Link to={`/user/deposit`} className="ml-2 hover:underline font-bold text-blue-500 flex justify-center items-center">
+              <FaBangladeshiTakaSign />
                 {user.balance?.toString()} BDT
                 <FaPlus className="text-blue-500 hover:border-blue-500 ml-2 border-2 border-blue-300 " />
               </Link>
