@@ -39,6 +39,10 @@ const AuthProvider = ({ children }) => {
     axios.put(`${url}${route}`, data, {
       headers: { Authorization: `Bearer ${token}` },
     });
+  const updatePassword = async (route, data, token) =>
+    axios.put(`${url}${route}`, data, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
 
 
   useEffect(() => {
@@ -70,7 +74,8 @@ const AuthProvider = ({ children }) => {
     signIn,
     logOut,
     updateUser,
-    setUpdateUserState
+    setUpdateUserState,
+    updatePassword
   };
 
   return (
