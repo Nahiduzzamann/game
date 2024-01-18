@@ -152,10 +152,10 @@ const Header = () => {
           <img className="w-[130px]" src={logo} />
         </div>
         {user ? (
-          <div className="flex gap-2 items-center text-blue-500 font-bold text-xl">
+          <Link to={`/user/deposit`} className="flex gap-2 items-center text-blue-500 font-bold text-xl">
             <GrMoney />
             {user.balance} BDT
-          </div>
+          </Link>
         ) : (
           <LanguageCard />
         )}
