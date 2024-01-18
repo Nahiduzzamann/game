@@ -87,7 +87,7 @@ const navigate = useNavigate()
               </label>
               <div className="flex">
                 <div className="border-gray-600 rounded flex items-center justify-center p-2 me-2 bg-blue-200">
-                  <FaFlag className="text-red-100" />
+                  <FaFlag className="text-lime-600" />
                 </div>
                 <input
                   type="text"
