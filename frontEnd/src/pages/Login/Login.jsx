@@ -97,7 +97,7 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <div className="text-end text-indigo-800 underline underline-offset-4">
-              <a href="facebook.com">Forget Password?</a>
+              <Link to="/forgot-password">Forget Password?</Link>
             </div>
           </div>
 

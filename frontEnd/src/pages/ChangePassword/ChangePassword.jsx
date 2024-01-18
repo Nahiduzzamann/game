@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import { AuthContext } from '../../providers/AuthProvider';
+import { Spinner, useToast } from '@chakra-ui/react';
 
 const ChangePasswordPage = () => {
+  const { user, updatePassword } = useContext(AuthContext);
+  const [error, setError] = useState("");
   const [currentPassword, setCurrentPassword] = useState(null);
   const [newPassword, setNewPassword] = useState(null);
   const [confirmNewPassword, setConfirmNewPassword] = useState(null);
-
+  const [loading, setLoading] = useState(false);
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-  console.log( newPassword, confirmNewPassword );
+  const toast = useToast();
 
   const togglePasswordVisibility = (passwordType) => {
     switch (passwordType) {
@@ -28,12 +31,42 @@ const ChangePasswordPage = () => {
     }
   };
 
-  const handleUpdatePassword = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // You can implement password update logic here, e.g., make an API call
-    console.log('Password updated with data:', currentPassword);
-    // Reset the form after successful password update
-    
+    const token = localStorage.getItem("token");
+    setLoading(true);
+    setError("");
+    try {
+      const response = await updatePassword(
+        "/user/updatePassword",
+        {
+          username: user?.username,
+          currentPassword: currentPassword,
+          newPassword:newPassword
+        },
+        token
+      );
+
+      toast({
+        title: "Password Update Successful",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+      // console.log(response);
+      // setUpdateUserState(Math.random());
+    } catch (error) {
+      setError(error.response.data.message || "Login failed");
+      toast({
+        title: "Update Failed",
+        description: "Failed to update password. Please try again.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
 
@@ -41,7 +74,7 @@ const ChangePasswordPage = () => {
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">Change Password</h1>
 
-      <form onSubmit={handleUpdatePassword}>
+      <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-600 text-sm font-bold mb-2">
             Current Password
@@ -126,7 +159,7 @@ const ChangePasswordPage = () => {
             </p>
           )}
         </div>
-
+        {error && <div className="mt-3 text-red-500">{error}</div>}
         <button
           type="submit"
           className={`bg-blue-500 text-white font-bold py-2 px-4 rounded-lg ${
@@ -134,7 +167,8 @@ const ChangePasswordPage = () => {
           }`}
        
         >
-          Update Password
+           {loading ? <Spinner /> : "Update Password"}
+          
         </button>
       </form>
     </div>

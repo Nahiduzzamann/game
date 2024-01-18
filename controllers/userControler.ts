@@ -127,6 +127,49 @@ export const updateUser = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 };
+export const updatePassword = async (req: Request, res: Response) => {
+  const { username,currentPassword,newPassword } = req.body;
+  try {
+    
+
+    // Validate request body
+    if(!username  && !newPassword) {
+      return res.status(400).json({ message: 'Invalid request' });
+    }
+
+    // Check if the user exists
+    const user = await Users.findOne({ username });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Ensure user.password is a string before proceeding
+    if (typeof user.password !== 'string') {
+      return res.status(500).json({ message: 'Invalid user data' });
+    }
+
+    // Compare the current password with the stored hash
+    const passwordMatch = await bcrypt.compare(currentPassword, user.password);
+
+    if (!passwordMatch) {
+      // If passwords don't match, return an error
+      return res.status(401).json({ message: 'Current password is incorrect' });
+    }
+
+    // Hash the new password
+    const newHashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Update the user's password in the database
+    user.password = newHashedPassword;
+    await user.save();
+
+    res.status(200).json({ message: 'Password updated successfully' });
+  } catch (error) {
+    // console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
 
 
 export const getUser = async (req: AuthenticatedRequest, res: Response) => {
