@@ -29,6 +29,7 @@ app.use("/api", games)
 app.use("/api/balance",balance)
 app.use("/api/icons",express.static(path.join(__dirname, "data/icons")))
 app.use("/api/images",express.static(path.join(__dirname, "data/images")))
+
 //user 
 app.use("/api/user", user)
 app.get("/dashboard", (req: Request, res: Response) => {
