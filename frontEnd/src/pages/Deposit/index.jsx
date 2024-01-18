@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Select } from "@chakra-ui/react";
 import { BsQuestionOctagonFill } from "react-icons/bs";
+import getWallet from "../../module/getWallet";
+import url from "../../module";
+
 
 export default function Deposit() {
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedAmount, setSelectedAmount] = useState(200);
   const [inputAmount, setInputAmount] = useState(200);
+  const [apiData, setApiData]=useState(null)
 
   const handleAmountClick = (amount) => {
     setSelectedAmount(amount);
@@ -19,6 +23,15 @@ export default function Deposit() {
   const handleImageClick = (name) => {
     setSelectedImage(name);
   };
+
+  useEffect(()=>{
+    getWallet().then(response=>{
+      setApiData(response.data)
+    }).catch(error=>{
+      console.error(error)
+    })
+  },[])
+
   return (
     <div className="bg-gray-500 rounded-lg p-4">
       <div className="p-5 bg-white rounded-md">
@@ -30,7 +43,7 @@ export default function Deposit() {
           Payment Methods <span className="text-red-500 ">*</span>
         </p>
         <div className="flex">
-          {["nagad", "rocket", "bkash", "upay"].map((name, index) => (
+          {apiData?.map((data, index) => (
             <div
               key={index}
               onClick={() => handleImageClick(name)}
@@ -40,8 +53,8 @@ export default function Deposit() {
             >
               <img
                 className="h-12 w-20"
-                src={`https://www.babu88.co/static/svg/deposit-ewallet-${name}.svg`}
-                alt={`Image ${name}`}
+                src={`${url}${data.icon}`}
+                alt={`${data.methodName}`}
               />
             </div>
           ))}
