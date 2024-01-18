@@ -10,6 +10,21 @@ const ForgotPassword =()=>{
         <div className="pt-5 border-gray-400">
 
         <form>
+        <div className="mt-5">
+            <label
+              htmlFor="username"
+              className="block text-base mb-2 font-semibold"
+            >
+              Username: <span className="text-red-500 font-bold">*</span>
+            </label>
+            <input
+              type="text"
+              className="w-full text-base py-1 px-1 border-2 border-gray-600 rounded"
+              id="username"
+              name="username"
+              placeholder="Fill Up Here"
+            />
+          </div>
           <div className="mt-3">
             <label className="block text-base mb-2 font-semibold">Enter your phone number to reset : <span className='text-red-500'>*</span></label>
             <div className="flex">
