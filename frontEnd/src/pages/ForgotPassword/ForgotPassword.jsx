@@ -127,7 +127,7 @@ const ForgotPassword = () => {
               disabled={loading || (showTimer && timeLeft === 0)}
             >
               {loading
-                ? 'Next'
+                ? 'Requesting'
                 : showTimer
                 ? 'Change Password'
                 : 'Request OTP'}
