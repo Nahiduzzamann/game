@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { AuthContext } from '../../providers/AuthProvider';
-import { Spinner, Toast, useToast } from '@chakra-ui/react';
+import { Spinner, useToast } from '@chakra-ui/react';
 
 const ChangePasswordPage = () => {
-  const { user, updatePassword, setUpdateUserState } = useContext(AuthContext);
+  const { user, updatePassword } = useContext(AuthContext);
   const [error, setError] = useState("");
   const [currentPassword, setCurrentPassword] = useState(null);
   const [newPassword, setNewPassword] = useState(null);
