@@ -151,8 +151,7 @@ export default function Deposit() {
                   <AlertDialogHeader>Deposit Details</AlertDialogHeader>
                   <AlertDialogCloseButton />
                   <AlertDialogBody>
-                    <div className="border-t-4 p-5">
-
+                    <div className="border-t-4 border-indigo-300 p-5">
                       <p className="p-2 font-semibold">Deposit amount <span className="ps-40">৳ NaN</span></p>
                       <p className="p-2 font-semibold">Bonus Amount <span className="ps-40">৳ NaN</span></p>
                       <p className="p-2 font-semibold">Target Turnover <span className="ps-40">৳ NaN</span></p>
