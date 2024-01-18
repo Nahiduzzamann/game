@@ -133,12 +133,9 @@ export default function Deposit() {
         </Select>
 
         <div className="pt-5 text-center">
-          <form
-            action="/action_page.php"
-            className="bg-[#0082D6] p-2 rounded-lg font-bold hover:bg-[#58b4f1]"
-          >
+          <div className="bg-[#0082D6] p-2 rounded-lg font-bold hover:bg-[#58b4f1]">
             <button className="text-white" onClick={onOpen}>
-            Deposite
+              Deposite
             </button>
             <div>
               <AlertDialog
@@ -154,9 +151,7 @@ export default function Deposit() {
                   <AlertDialogHeader>Discard Changes?</AlertDialogHeader>
                   <AlertDialogCloseButton />
                   <AlertDialogBody>
-                    <div>
-                      
-                    </div>
+                    <div></div>
                   </AlertDialogBody>
                   <AlertDialogFooter>
                     <Button ref={cancelRef} onClick={onClose}>
@@ -169,7 +164,7 @@ export default function Deposit() {
                 </AlertDialogContent>
               </AlertDialog>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
