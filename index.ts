@@ -23,8 +23,8 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-app.use(express.static(path.join(__dirname, "frontEnd/dist")));
-app.use(express.static(path.join(__dirname, "dashboard/dist")));
+//app.use(express.static(path.join(__dirname, "frontEnd/dist")));
+//app.use(express.static(path.join(__dirname, "dashboard/dist")));
 app.use("/api", games)
 app.use("/api/balance",balance)
 app.use("/api/icons",express.static(path.join(__dirname, "data/icons")))
@@ -39,7 +39,8 @@ app.get("/auth", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "dashboard/dist/index.html"))
 });
 app.get("*", (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, "frontEnd/dist/index.html"))
+  res.redirect("http://localhost:5173")
+  //res.sendFile(path.join(__dirname, "frontEnd/dist/index.html"))
 });
 
 
