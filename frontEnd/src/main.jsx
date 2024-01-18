@@ -33,6 +33,7 @@ import AuthProvider from "./providers/AuthProvider.jsx";
 import Phone from "./pages/SignUp/Phone.jsx";
 import SignUp from "./pages/SignUp/SignUp.jsx";
 import PrivateRoute from "./layout/PrivateRoute.jsx";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword.jsx";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login></Login>,
+      },
+      {
+        path: "/forgot-password",
+        element: <ForgotPassword></ForgotPassword>,
       },
       {
         path: "/signup",
