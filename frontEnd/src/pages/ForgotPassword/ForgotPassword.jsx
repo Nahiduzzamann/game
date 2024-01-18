@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaFlag } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const ForgotPassword = () => {
   const [username, setUsername] = useState('');
@@ -8,7 +9,7 @@ const ForgotPassword = () => {
   const [loading, setLoading] = useState(false);
   const [showTimer, setShowTimer] = useState(false);
   const [timeLeft, setTimeLeft] = useState(10); 
-
+const navigate = useNavigate()
   const handleRequestOTP = () => {
     setTimeLeft(20)
     // Assume an API request here to send OTP
@@ -32,6 +33,7 @@ const ForgotPassword = () => {
       // You can replace this with your actual navigation logic
       // history.push('/change-password');
       alert('Password changed successfully!');
+      navigate('/')
     }, 500); // Adjust the delay time accordingly
   };
 
