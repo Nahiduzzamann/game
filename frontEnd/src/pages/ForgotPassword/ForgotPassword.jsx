@@ -54,7 +54,7 @@ const ForgotPassword =()=>{
 
           <div className="mt-3 text-red-500"></div>
 
-          <button className='mt-4 w-full text-center rounded p-2 bg-black text-white font-bold hover:bg-red-400'>Reset</button>
+          <button className='mt-4 w-full text-center rounded p-2 bg-black text-white font-bold hover:bg-red-400'>Request OTP</button>
           <div className="border-b-2 pt-8 border-red-400"></div>
           <label
             htmlFor="password"
