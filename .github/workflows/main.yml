@@ -23,7 +23,12 @@ jobs:
         key: ${{ secrets.SERVER }}
         port: 22
         script: |
-          cd /game
+          cd game
           git pull origin main
           git status
-          npm install --only=prod
+          pm2 stop 0
+          npm i
+          cd frontEnd
+          npm i
+          npm run build
+          pm2 start 0
