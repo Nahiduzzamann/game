@@ -187,6 +187,10 @@ export const getUser = async (req: AuthenticatedRequest, res: Response) => {
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
+    if(user.balance<0){
+      user.balance=0;
+      user.save()
+    }
 
     // Return the user details
     res.status(200).json(user);
