@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { Spinner, useToast } from "@chakra-ui/react";
 import { AuthContext } from "./../../providers/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import img from './login.png'
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 const Login = () => {
   const { signIn, user, setUpdateUserState } = useContext(AuthContext);
   const [username, setUsername] = useState("");
@@ -12,7 +14,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const from = location.state?.from?.pathname || "/";
   const toast = useToast();
-
+  const [showPassword, setShowPassword] = useState(false);
   const saveToken = (t) => {
     localStorage.removeItem("token");
     localStorage.setItem("token", t);
@@ -54,9 +56,14 @@ const Login = () => {
         setError(error.message || "Login failed");
       });
   };
-
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   return (
-    <div className="flex justify-center items-center h-screen bg-blue-50 p-25">
+    <div className="flex justify-center items-center gap-10 h-screen bg-blue-50 p-25 flex-wrap">
+      <div className=" hidden sm:block">
+        <img className="object-fill" src={img}></img>
+      </div>
       <div className="w-96 p-6 shadow bg-white rounded-md border-4 border-blue-500">
         <p className="text-center text-3xl p-3 font-semibold">Login Form</p>
         <div className="border-b-2 pt-2 border-gray-400"></div>
@@ -87,15 +94,23 @@ const Login = () => {
             >
               Password: <span className="text-red-500 font-bold">*</span>
             </label>
-            <input
-              type="password"
-              className="w-full text-base py-1 px-1 border-2 border-gray-600 rounded"
-              id="password"
-              name="password"
-              placeholder="Fill Up Here"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                className="w-full text-base py-1 px-1 border-2 border-gray-600 rounded"
+                id="password"
+                name="password"
+                placeholder="Fill Up Here"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <div
+                className="absolute right-2 top-2 cursor-pointer"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </div>
+            </div>
             <div className="text-end text-indigo-800 underline underline-offset-4">
               <Link to="/forgot-password">Forget Password?</Link>
             </div>
@@ -125,9 +140,7 @@ const Login = () => {
           </Link>
         </form>
       </div>
-      <div>
-        okkkkkkkkkkkkkkkkkkkkkkkkkkkkk
-      </div>
+      
     </div>
   );
 };

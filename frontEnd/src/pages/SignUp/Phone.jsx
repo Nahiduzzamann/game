@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaFlag } from "react-icons/fa";
 import { Spinner } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-
+import img from '../Login/login.png'
 const Phone = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [referralCode, setReferralCode] = useState("");
@@ -39,7 +39,10 @@ const Phone = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-blue-50 p-25">
+    <div className="flex justify-center flex-wrap gap-10 items-center h-screen bg-blue-50 p-25">
+      <div className=" hidden sm:block">
+        <img className="object-fill" src={img}></img>
+      </div>
       <div className="w-96 p-6 shadow bg-white rounded-md border-4 border-blue-500">
         <p className="text-center text-3xl p-3 font-semibold">Register Now</p>
         <div className="border-b-2 pt-5 border-gray-400"></div>
