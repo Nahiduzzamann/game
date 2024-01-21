@@ -63,23 +63,25 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
   return (
-    <div className="flex justify-center items-center gap-10 h-screen bg-white p-25 flex-wrap">
+    <div className="flex justify-center items-center gap-10 h-screen bg-[#FFF] p-25 flex-wrap">
       <div className=" hidden sm:block">
         <img className="object-fill" src={img}></img>
       </div>
-      <div className="w-96 p-6 shadow bg-gray-300 rounded-md">
+      <div className="w-96 p-6 shadow bg-[#D9D9D9] rounded-md">
         <p className="text-center text-3xl p-3 font-semibold">Login Form</p>
-        <div className="border-b-2 pt-2 border-gray-400"></div>
+        <div className="mt-3">
+          <p className="text-center">Login here to get extra gaming features and more never ended</p>
+        </div>
 
         <form onSubmit={handleLogin}>
           <div className="mt-16">
-            <div className="flex border border-blue-800 rounded-3xl">
+            <div className="flex border border-[#3B82F6] rounded-3xl">
                   <div className="p-3">
-                    <FaRegUserCircle className="text-blue-800" />
+                    <FaRegUserCircle className="text-blue-500" />
                   </div>
             <input 
               type="text"
-              className="bg-gray-300"
+              className="bg-gray-300 outline-0 p-2"
               id="username"
               name="username"
               placeholder="Username "
@@ -91,15 +93,15 @@ const Login = () => {
           </div>
 
           <div className="mt-10">
-            <div className="flex border border-blue-800 rounded-3xl">
+            <div className="flex border border-[#3B82F6] rounded-3xl">
                   <div className="p-3">
-                  <FaLock className="text-blue-800" />
+                  <FaLock className="text-blue-500" />
                   </div>
 
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
-                className="bg-gray-300"
+                className="bg-gray-300 outline-0 p-2"
                 id="password"
                 name="password"
                 placeholder="Password"
@@ -115,7 +117,7 @@ const Login = () => {
               </div>
             </div>
 
-            <div className="text-end text-indigo-800 underline underline-offset-4">
+            <div className="text-end text-blue-500 pt-3 underline-offset-4">
               <Link to="/forgot-password">Forget Password?</Link>
             </div>
           </div>
@@ -124,12 +126,12 @@ const Login = () => {
 
           <button
             type="submit"
-            className="w-full mt-4 text-center border-2 rounded p-1 bg-black text-white hover:bg-red-400"
+            className="w-full mt-4 text-center border-2 rounded-3xl p-1 bg-[#3B82F6] text-white hover:bg-red-400"
           >
             {loading ? <Spinner color="yellow.100" size="md" /> : "Login"}
           </button>
 
-          <div className="border-b-2 pt-8 border-red-400"></div>
+          <div className="border-b-2 pt-8 border-black"></div>
           <label
             htmlFor="password"
             className="block text-base mt-5 pb-1 font-semibold"
@@ -138,7 +140,7 @@ const Login = () => {
           </label>
           <Link
             to="/signup"
-            className=" flex items-center justify-center border-2 rounded p-1 bg-blue-500 text-white hover:bg-red-400"
+            className=" flex items-center justify-center border-2 p-1 bg-black rounded-3xl text-white hover:bg-red-400"
           >
             Sign Up
           </Link>
