@@ -4,11 +4,22 @@ import gateGame from "../../module/getGames";
 import url from "../../module";
 import ResponsivePagination from "react-responsive-pagination";
 import { Box, SkeletonText } from "@chakra-ui/react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+} from "@chakra-ui/react";
+import PlayGame from "../PlayGame/PlayGame";
 
 export default function Games() {
   const itemsPerPage = 30;
   const { system, index } = useParams();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(data?.length / itemsPerPage);
   const array = [
@@ -18,9 +29,10 @@ export default function Games() {
 
   useEffect(() => {
     const games = async () => {
+      setData(null);
       try {
         const res = await gateGame(url, index, system);
-        console.log(res.data);
+        // console.log(res.data);
         setData(res.data);
       } catch (error) {
         console.log(error);
@@ -36,7 +48,7 @@ export default function Games() {
         <Input type="tel" placeholder="Phone number" />
       </InputGroup> */}
 
-      {data.length > 0 ? (
+      {data?.length > 0 ? (
         <Items
           data={data.slice(
             (currentPage - 1) * itemsPerPage,
@@ -76,9 +88,14 @@ export default function Games() {
 
 function Items({ data }) {
   const navigate = useNavigate();
+  // const { isOpen, onOpen, onClose } = useDisclosure();
+  // const [id,setId]=useState()
 
   const handlePlayGame = (id) => {
-    navigate(`/play-game/${id}`);
+    //setId(id)
+    //onOpen()
+   // console.log(url.split("api")[0]);
+    window.open(`${url.split("api")[0]}play-game/${id}`,'_blank');
   };
   return (
     <div className="grid 2xl:grid-cols-6 xl:grid-cols-5 md:grid-cols-4 grid-cols-3 gap-4 ">
@@ -92,6 +109,7 @@ function Items({ data }) {
           {doc.name}
         </div>
       ))}
+     
     </div>
   );
 }

@@ -4,6 +4,9 @@ import { AuthContext } from "./../../providers/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import img from './login.png'
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaRegUserCircle } from "react-icons/fa";
+import { FaLock } from "react-icons/fa";
+
 const Login = () => {
   const { signIn, user, setUpdateUserState } = useContext(AuthContext);
   const [username, setUsername] = useState("");
@@ -60,50 +63,52 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
   return (
-    <div className="flex justify-center items-center gap-10 h-screen bg-blue-50 p-25 flex-wrap">
+    <div className="flex justify-center items-center gap-10 h-screen bg-[#FFF] p-25 flex-wrap">
       <div className=" hidden sm:block">
         <img className="object-fill" src={img}></img>
       </div>
-      <div className="w-96 p-6 shadow bg-white rounded-md border-4 border-blue-500">
+      <div className="w-96 p-6 shadow bg-[#D9D9D9] rounded-md">
         <p className="text-center text-3xl p-3 font-semibold">Login Form</p>
-        <div className="border-b-2 pt-2 border-gray-400"></div>
+        <div className="mt-3">
+          <p className="text-center">Login here to get extra gaming features and more never ended</p>
+        </div>
 
         <form onSubmit={handleLogin}>
-          <div className="mt-5">
-            <label
-              htmlFor="username"
-              className="block text-base mb-2 font-semibold"
-            >
-              Username: <span className="text-red-500 font-bold">*</span>
-            </label>
-            <input
+          <div className="mt-16">
+            <div className="flex border border-[#3B82F6] rounded-3xl">
+                  <div className="p-3">
+                    <FaRegUserCircle className="text-blue-500" />
+                  </div>
+            <input 
               type="text"
-              className="w-full text-base py-1 px-1 border-2 border-gray-600 rounded"
+              className="bg-gray-300 outline-0 p-2"
               id="username"
               name="username"
-              placeholder="Fill Up Here"
+              placeholder="Username "
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
+            </div>
+           
           </div>
 
-          <div className="mt-3">
-            <label
-              htmlFor="password"
-              className="block text-base mb-2 font-semibold"
-            >
-              Password: <span className="text-red-500 font-bold">*</span>
-            </label>
+          <div className="mt-10">
+            <div className="flex border border-[#3B82F6] rounded-3xl">
+                  <div className="p-3">
+                  <FaLock className="text-blue-500" />
+                  </div>
+
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
-                className="w-full text-base py-1 px-1 border-2 border-gray-600 rounded"
+                className="bg-gray-300 outline-0 p-2"
                 id="password"
                 name="password"
-                placeholder="Fill Up Here"
+                placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+              </div>
               <div
                 className="absolute right-2 top-2 cursor-pointer"
                 onClick={togglePasswordVisibility}
@@ -111,7 +116,8 @@ const Login = () => {
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </div>
             </div>
-            <div className="text-end text-indigo-800 underline underline-offset-4">
+
+            <div className="text-end text-blue-500 pt-3 underline-offset-4">
               <Link to="/forgot-password">Forget Password?</Link>
             </div>
           </div>
@@ -120,12 +126,12 @@ const Login = () => {
 
           <button
             type="submit"
-            className="w-full mt-4 text-center border-2 rounded p-1 bg-black text-white hover:bg-red-400"
+            className="w-full mt-4 text-center border-2 rounded-3xl p-1 bg-[#3B82F6] text-white hover:bg-red-400"
           >
             {loading ? <Spinner color="yellow.100" size="md" /> : "Login"}
           </button>
 
-          <div className="border-b-2 pt-8 border-red-400"></div>
+          <div className="border-b-2 pt-8 border-black"></div>
           <label
             htmlFor="password"
             className="block text-base mt-5 pb-1 font-semibold"
@@ -134,7 +140,7 @@ const Login = () => {
           </label>
           <Link
             to="/signup"
-            className=" flex items-center justify-center border-2 rounded p-1 bg-blue-500 text-white hover:bg-red-400"
+            className=" flex items-center justify-center border-2 p-1 bg-black rounded-3xl text-white hover:bg-red-400"
           >
             Sign Up
           </Link>
