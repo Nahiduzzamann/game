@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import gateGameById from "../../module/getGameById";
 import { Spinner } from "@chakra-ui/react";
 
-const PlayGame = () => {
+const PlayGame = ({}) => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [iframeUrl, setIframeUrl] = useState("");
