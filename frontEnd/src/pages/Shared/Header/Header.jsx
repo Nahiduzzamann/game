@@ -143,7 +143,7 @@ const Header = () => {
               pathname === "/referral" && "text-green-300"
             } cursor-pointer px-4 py-4 hover:text-gray-300 font-semibold text-md `}
           >
-            Referral
+            Rewards
           </div>
         </div>
       </div>
@@ -220,7 +220,7 @@ const Header = () => {
             <p className="font-medium text-md">Others</p>
             <div className=" hover:bg-gray-50 flex gap-2 items-center py-2 px-2 cursor-pointer text-gray-400  text-md">
               <GoCrossReference />
-              Referral
+              Rewards
             </div>
             <div className=" hover:bg-gray-50 flex gap-2 items-center py-2 px-2 cursor-pointer text-gray-400  text-md">
               <AiFillNotification />
