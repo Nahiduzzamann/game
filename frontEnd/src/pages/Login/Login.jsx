@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Spinner, useToast } from "@chakra-ui/react";
 import { AuthContext } from "./../../providers/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import img from './login.png'
+import img from './4957136_Mobile login 1.svg'
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
@@ -63,11 +63,11 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
   return (
-    <div className="flex justify-center items-center gap-10 h-screen bg-[#FFF] p-25 flex-wrap">
+    <div className="flex justify-around items-center h-screen bg-[#FFF] p-25 flex-wrap">
       <div className=" hidden sm:block">
         <img className="object-fill" src={img}></img>
       </div>
-      <div className="w-96 p-6 shadow bg-[#D9D9D9] rounded-md">
+      <div className="w-96 p-6 shadow bg-[#D9D9D9] rounded-3xl">
         <p className="text-center text-3xl p-3 font-semibold">Login Form</p>
         <div className="mt-3">
           <p className="text-center">Login here to get extra gaming features and more never ended</p>
@@ -81,7 +81,7 @@ const Login = () => {
                   </div>
             <input 
               type="text"
-              className="bg-gray-300 outline-0 p-2"
+              className="bg-[#D9D9D9] outline-0 p-2"
               id="username"
               name="username"
               placeholder="Username "
@@ -101,7 +101,7 @@ const Login = () => {
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
-                className="bg-gray-300 outline-0 p-2"
+                className="bg-[#D9D9D9] outline-0 p-2"
                 id="password"
                 name="password"
                 placeholder="Password"
