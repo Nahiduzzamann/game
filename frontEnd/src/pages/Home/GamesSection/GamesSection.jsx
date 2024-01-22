@@ -34,7 +34,7 @@ const GamesSection = () => {
     const contentSection = document.getElementById("contentSection");
   
     if (contentSection) {
-      contentSection.scrollIntoView({ behavior: "smooth" });
+      contentSection.scrollIntoView({ behavior: "smooth", block:"center" });
     }
 
   };
@@ -49,7 +49,7 @@ const GamesSection = () => {
   return (
     <div className="px-6 py-3">
       <Tabs isFitted variant="" colorScheme="blue">
-        <TabList mb="1em" className="w-full bg-white  pt-4"  id="contentSection">
+        <TabList mb="1em" className="w-full bg-white  pt-4" >
           <div className="grid grid-cols-4 lg:gap-12 md:gap-10 gap-2 w-full">
             {dataCategory &&
               dataCategory?.map((data, i) => {
@@ -83,11 +83,11 @@ const GamesSection = () => {
               })}
           </div>
         </TabList>
-        <TabPanels className="bg-[#D9D9D9] rounded-md">
+        <TabPanels  id="contentSection" className="bg-[#D9D9D9] rounded-md">
           {dataCategory &&
             dataCategory?.map((data, i) => (
               <TabPanel key={i}>
-                 <h1 className="ml-2 text-lg md:text-xl font-semibold text-blue-500">{data?.title}</h1>
+                 <h1 className="ml-2 text-lg md:text-xl font-semibold text-black">{data?.title}</h1>
                 <div className="flex cursor-pointer overflow-x-auto custom-scrollbar">
                  
                   {dataSubCategory?.map((data, j) => (
@@ -96,7 +96,7 @@ const GamesSection = () => {
                         navigate(`/games/${data.slag}/${i}`);
                       }}
                       key={j}
-                      style={{ width: "200px" }}
+                      style={{ width: "230px" }}
                       className="flex-shrink-0 px-4 gap-2 items-center py-2 flex bg-gray-700 hover:bg-blue-300 text-white m-2 shadow shadow-gray-200 rounded-md h-20"
                     >
                       <img
