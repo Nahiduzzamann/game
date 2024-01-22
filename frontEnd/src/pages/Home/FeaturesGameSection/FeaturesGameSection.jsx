@@ -5,7 +5,7 @@ import "../FavoriteGameSection/style.css";
 import url from "../../../module";
 import gateGame from "../../../module/getGames";
 import { Spinner } from "@chakra-ui/react";
-
+import { Autoplay } from 'swiper/modules';
 export default function FeaturesGameSection() {
   const [data, setData] = useState(null);
 
@@ -36,9 +36,14 @@ export default function FeaturesGameSection() {
       {
         data ? (<Swiper
             watchSlidesProgress={true}
-            autoplay={true}
+           
             spaceBetween={20}
+            modules={[Autoplay]}
             className="mySwiper"
+            autoplay={{
+                delay: 1000, // Adjust the delay in milliseconds (ms)
+                disableOnInteraction: false, // Allow manual interaction without stopping autoplay
+              }}
             breakpoints={{
               300: {
                 slidesPerView: 2,

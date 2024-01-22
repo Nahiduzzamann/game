@@ -4,16 +4,6 @@ import gateGame from "../../module/getGames";
 import url from "../../module";
 import ResponsivePagination from "react-responsive-pagination";
 import { Box, SkeletonText } from "@chakra-ui/react";
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
-} from "@chakra-ui/react";
 import PlayGame from "../PlayGame/PlayGame";
 import { IoMdClose } from "react-icons/io";
 
@@ -110,6 +100,7 @@ function Items({ data }) {
           {doc.name}
         </div>
       ))}
+
       <Modal size={"full"} onClose={onClose} isOpen={isOpen}>
         <ModalOverlay />
         <ModalContent
@@ -132,25 +123,9 @@ function Items({ data }) {
           </ModalBody>
         </ModalContent>
       </Modal>
+
+      
     </div>
   );
 }
 
-const ModalIconButton = ({ onClose }) => {
-  return (
-    <Box
-      position="fixed"
-      top={0}
-      left={0}
-      right={0}
-      bottom={0}
-      bg="transparent" // Adjust the background color as needed
-      zIndex="overlay"
-      onClick={onClose}
-    >
-      <div className="flex  bg-white rounded-md shadow-sm justify-center items-center">
-        <IoMdClose size={24} />
-      </div>
-    </Box>
-  );
-};

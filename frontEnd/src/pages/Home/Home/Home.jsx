@@ -4,6 +4,7 @@ import ReferralsSection from "../ReferralsSection/ReferralsSection";
 import Slider from "../Slider";
 import FavoriteGameSection from "../FavoriteGameSection/FavoriteGameSection";
 import FeaturesGameSection from "../FeaturesGameSection/FeaturesGameSection";
+import DownloadSection from "../Download/Download";
 
 
 
@@ -16,6 +17,7 @@ const Home = () => {
       <GamesSection></GamesSection>
       <FavoriteGameSection></FavoriteGameSection>
       <FeaturesGameSection></FeaturesGameSection>
+      <DownloadSection></DownloadSection>
       <ReferralsSection></ReferralsSection>
     </div>
   );
