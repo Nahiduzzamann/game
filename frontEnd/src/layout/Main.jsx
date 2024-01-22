@@ -19,7 +19,7 @@ const Main = () => {
     location.pathname.includes("/play-game")
 
   return (
-    <div className="bg-[#EBEBEB]">
+    <div className="bg-White">
       {noHeaderFooter || <Header></Header>}
       <Outlet></Outlet>
       {noHeaderFooter || <Footer></Footer>}

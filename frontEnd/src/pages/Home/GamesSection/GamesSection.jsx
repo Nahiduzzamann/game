@@ -1,7 +1,7 @@
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import url from "../../../module";
-import getCategory from "../../../module/getCategory";
+// import getCategory from "../../../module/getCategory";
 import { useNavigate } from "react-router-dom";
 
 const GamesSection = () => {
@@ -30,55 +30,83 @@ const GamesSection = () => {
     }
   }, [dataCategory]);
 
+  const scrollToContent = () => {
+    const contentSection = document.getElementById("contentSection");
+  
+    if (contentSection) {
+      contentSection.scrollIntoView({ behavior: "smooth" });
+    }
+
+  };
   const handleSubCategory = (index = 0) => {
     const category = dataCategory[index];
     const subCategory = category.subCategory;
     setDataSubCategory(subCategory);
+    console.log(index);
+    
   };
-
+  
   return (
     <div className="px-6 py-3">
       <Tabs isFitted variant="" colorScheme="blue">
-        <TabList mb="1em" className="w-full bg-[#EBEBEB]  pt-4">
+        <TabList mb="1em" className="w-full bg-white  pt-4"  id="contentSection">
           <div className="grid grid-cols-4 lg:gap-12 md:gap-10 gap-2 w-full">
             {dataCategory &&
               dataCategory?.map((data, i) => {
                 return (
                   <Tab
-                    onClick={() => handleSubCategory(i)}
+                 
+                    onClick={() => {
+                      handleSubCategory(i)
+                      scrollToContent()
+                    }}
                     key={i}
-                    style={{ padding: "0px", borderRadius:'10%' }}
+                    style={{ padding: "0px", borderRadius: "10%" }}
                     className="bg-[#D9D9D9]  w-full border-black shadow-md shadow-black relative "
                   >
                     <img
-                    style={{ padding: "0px", borderRadius:'10%' }}
-                      src={`./casino${i+1}.png`}
+                      style={{ padding: "0px", borderRadius: "10%" }}
+                      src={`./casino${i + 1}.png`}
                       alt="Your Image"
                       className="object-cover object-center w-full h-full "
                     />
-                    <div style={{ padding: "0px", borderRadius:'10%' }} className="flex items-end justify-center absolute w-full h-full  bg-gradient-to-b  from-[#fffcfc00] via-transparent to-[#000000]">
-                      <h2 className="md:text-2xl text-sm font-semibold text-white pb-2">{data?.title}</h2>
+                    <div
+                      style={{ padding: "0px", borderRadius: "10%" }}
+                      className="flex items-end justify-center absolute w-full h-full  bg-gradient-to-b  from-[#fffcfc00] via-transparent to-[#000000] hover:to-blue-500"
+                    >
+                      <h2 className="md:text-2xl text-sm font-semibold text-white pb-2">
+                        {data?.title}
+                      </h2>
                     </div>
                   </Tab>
                 );
               })}
           </div>
         </TabList>
-        <TabPanels className="bg-white rounded-md  ">
+        <TabPanels className="bg-[#D9D9D9] rounded-md">
           {dataCategory &&
             dataCategory?.map((data, i) => (
               <TabPanel key={i}>
-                <div className="grid cursor-pointer md:grid-cols-4 xl:grid-cols-8 grid-cols-2">
+                 <h1 className="ml-2 text-lg md:text-xl font-semibold text-blue-500">{data?.title}</h1>
+                <div className="flex cursor-pointer overflow-x-auto custom-scrollbar">
+                 
                   {dataSubCategory?.map((data, j) => (
                     <div
                       onClick={() => {
                         navigate(`/games/${data.slag}/${i}`);
                       }}
                       key={j}
-                      className="p-2 flex gap-2 items-center bg-gray-700 hover:bg-blue-200 text-white m-2 shadow shadow-gray-200 rounded-md"
+                      style={{ width: "200px" }}
+                      className="flex-shrink-0 px-4 gap-2 items-center py-2 flex bg-gray-700 hover:bg-blue-300 text-white m-2 shadow shadow-gray-200 rounded-md h-20"
                     >
-                      <img src={`${url}${data?.icon}`}></img>
-                      <div className="text-lg">{data.title}</div>
+                      <img
+                        className=""
+                        src={`${url}${data?.icon}`}
+                        alt={data.title}
+                      />
+                      <div className="text-sm md:text-lg font-semibold">
+                        {data.title}
+                      </div>
                     </div>
                   ))}
                 </div>

@@ -6,3 +6,18 @@
     color: red; /* Set your desired active link styles */
     font-weight: bold;
   }
+
+  /* Add this to your global styles or component styles */
+.custom-scrollbar::-webkit-scrollbar {
+  /* width: 10px; */
+  height: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #8DADE1; /* Change this to your desired scrollbar color */
+  border-radius: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: #d9d9d9; /* Change this to your desired scrollbar track color */
+}
