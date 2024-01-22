@@ -126,54 +126,7 @@ const Phone = () => {
     </div>
   );
 
-  return (
-    <div className="flex justify-center flex-wrap gap-10 items-center h-screen bg-blue-50 p-25">
-      <div className=" hidden sm:block">
-        <img className="object-fill" src={img}></img>
-      </div>
-      <div className="w-96 p-6 shadow bg-white rounded-md border-4 border-blue-500">
-        <p className="text-center text-3xl p-3 font-semibold">Register Now</p>
-        <div className="border-b-2 pt-5 border-gray-400"></div>
 
-        <form onSubmit={handleSignUp}>
-          <div className="mt-3">
-            <label className="block text-base mb-2 font-semibold">
-              Phone Number:
-            </label>
-            <div className="flex">
-              <div className=" border-gray-600 rounded flex items-center justify-center p-2 me-2 bg-blue-200">
-                <FaFlag className="text-blue-600" />
-              </div>
-              <input
-                type="text"
-                className="w-72 text-base py-1 px-1 border-2 border-gray-600 rounded"
-                id="phoneNumber"
-                name="phoneNumber"
-                placeholder="Fill Up Here"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-              />
-            </div>
-          </div>
-
-          <div className="mt-3">
-            <label className="block text-base mb-2 font-semibold">
-              Referral Code:
-            </label>
-            <input
-              type="text"
-              className="w-full text-base py-1 px-1 border-2 border-gray-600 rounded"
-              id="referralCode"
-              name="referralCode"
-              placeholder="(Optional)"
-              value={referralCode}
-              onChange={(e) => setReferralCode(e.target.value)}
-            />
-          </div>
-        </form>
-      </div>
-    </div>
-  );
 };
 
 export default Phone;

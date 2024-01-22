@@ -68,6 +68,7 @@ export default function Slider() {
   return (
     <div className="box">
       <Carousel
+      infiniteLoop={true}
       autoPlay={true}
         showIndicators
         showStatus ={false}

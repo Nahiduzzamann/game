@@ -1,12 +1,12 @@
 .swiper {
   margin: 16px;
+ 
   }
   .swiper-slide {
-    aspect-ratio: 1 / 1;
-    background: #882525;
+    aspect-ratio: 2 / 1;
     text-align: center;
   }
-  .swiper-slide:nth-child(2) {
+  /* .swiper-slide:nth-child(2) {
     background: #8acc7d;
   }
   .swiper-slide:nth-child(3) {
@@ -23,4 +23,4 @@
   }
   .swiper-slide:nth-child(7) {
     background: #cc7dae;
-  }
+  } */
