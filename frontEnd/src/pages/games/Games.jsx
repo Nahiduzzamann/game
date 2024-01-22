@@ -4,16 +4,6 @@ import gateGame from "../../module/getGames";
 import url from "../../module";
 import ResponsivePagination from "react-responsive-pagination";
 import { Box, SkeletonText } from "@chakra-ui/react";
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
-} from "@chakra-ui/react";
 import PlayGame from "../PlayGame/PlayGame";
 
 export default function Games() {
@@ -109,7 +99,7 @@ function Items({ data }) {
           {doc.name}
         </div>
       ))}
-     
+      
     </div>
   );
 }
