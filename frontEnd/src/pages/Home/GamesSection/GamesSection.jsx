@@ -62,7 +62,7 @@ const GamesSection = () => {
                     }}
                     key={i}
                     style={{ padding: "0px", borderRadius: "10%" }}
-                    className="bg-[#D9D9D9]  w-full border-black shadow-md shadow-black relative "
+                    className=" shadow-md shadow-black relative "
                   >
                     <img
                       style={{ padding: "0px", borderRadius: "10%" }}

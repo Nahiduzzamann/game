@@ -33,12 +33,12 @@ const DownloadSection = () => {
             <img
               src={downloadIcon1}
               alt="Download 1"
-              className="w-20 md:w-32 lg:w-64"
+              className="w-20 md:w-32 lg:w-64 hover:cursor-pointer"
             />
             <img
               src={downloadIcon2}
               alt="Download 2"
-              className="w-20 md:w-32 lg:w-64"
+              className="w-20 md:w-32 lg:w-64 hover:cursor-pointer"
             />
           </div>
         </div>
