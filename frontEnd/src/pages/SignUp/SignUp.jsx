@@ -108,7 +108,7 @@ const SignUp = () => {
                 <input
                   required
                   type="text"
-                  className="bg-[#D9D9D9] outline-0 "
+                  className="bg-[#D9D9D9] outline-0  "
                   id="username"
                   name="username"
                   placeholder="Username "
@@ -136,37 +136,49 @@ const SignUp = () => {
               </div>
             </div>
             <div className="mt-[7%]">
-              <div className="flex border border-[#3B82F6] rounded-3xl">
+              <div className="flex items-center border border-[#3B82F6] rounded-3xl">
                 <div className="p-3">
                   <FaKey className="text-blue-500" />
                 </div>
                 <input
                   required
-                  type="text"
-                  className="bg-[#D9D9D9] outline-0 "
+                  type={showPassword ? "text" : "password"}
+                  className="bg-[#D9D9D9] outline-0 flex-1 "
                   id="password"
                   name="password"
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
+                <div
+                  className=" px-3 cursor-pointer"
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </div>
               </div>
             </div>
             <div className="mt-[7%]">
-              <div className="flex border border-[#3B82F6] rounded-3xl">
+              <div className="flex items-center border border-[#3B82F6] rounded-3xl">
                 <div className="p-3">
                   <FaKey className="text-blue-500" />
                 </div>
                 <input
                   required
-                  type="text"
-                  className="bg-[#D9D9D9] outline-0 "
+                  type={showPassword ? "text" : "password"}
+                  className="bg-[#D9D9D9] outline-0 flex-1 "
                   id="confirmPassword"
                   name="confirmPassword"
                   placeholder="Confirm Password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
+                <div
+                  className=" px-3 cursor-pointer"
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </div>
               </div>
             </div>
             {error && <div className="mt-3 text-red-500">{error}</div>}

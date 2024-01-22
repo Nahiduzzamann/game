@@ -42,7 +42,7 @@ export default function Games() {
     games();
   }, [system, index]);
   return (
-    <div className=" container mx-auto py-5 ">
+    <div className=" container mx-auto py-5 px-5 ">
       {/* <InputGroup>
         <InputLeftElement pointerEvents="none"></InputLeftElement>
         <Input type="tel" placeholder="Phone number" />
