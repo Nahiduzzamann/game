@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "../FavoriteGameSection/style.css";
@@ -16,10 +16,14 @@ import {
 import { Autoplay } from "swiper/modules";
 import PlayGame from "../../PlayGame/PlayGame";
 import { IoMdClose } from "react-icons/io";
+import { AuthContext } from "../../../providers/AuthProvider";
+import { useNavigate } from "react-router-dom";
 export default function FeaturesGameSection() {
+  const { user } = useContext(AuthContext);
   const [data, setData] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [id, setId] = useState();
+  const navigate =useNavigate()
 // console.log(id);
   useEffect(() => {
     const games = async () => {
@@ -34,13 +38,15 @@ export default function FeaturesGameSection() {
     };
     games();
   }, []);
-  // const handlePlayGame = (id) => {
-  //   console.log(id);
-  //   setId(id);
-  //   onOpen();
-  //   // console.log(url.split("api")[0]);
-  //   // window.open(`${url.split("api")[0]}play-game/${id}`, "_blank");
-  // };
+  const handlePlayGame = (id) => {
+    if(!user){
+      return navigate('/login')
+    }
+    setId(id);
+    onOpen();
+    // console.log(url.split("api")[0]);
+    // window.open(`${url.split("api")[0]}play-game/${id}`, "_blank");
+  };
   return (
     <div className="mx-6 my-3 bg-[#D9D9D9] rounded-md p-2">
       <h1 className="m-4 text-lg md:text-xl font-semibold text-black">
@@ -75,8 +81,8 @@ export default function FeaturesGameSection() {
             <SwiperSlide key={i} className="swiper-slide">
               <div
                 onClick={() => {
-                  setId(doc?.id);
-                  onOpen();
+                  handlePlayGame(doc?.id)
+                 
                 }}
                 key={i}
                 className="w-full line-clamp-1 text-center font-semibold hover:text-blue-500 hover:opacity-50 cursor-pointer"

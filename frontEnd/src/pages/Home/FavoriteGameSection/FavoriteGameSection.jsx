@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "./style.css";
@@ -16,10 +16,14 @@ import {
 import { Autoplay } from "swiper/modules";
 import PlayGame from "../../PlayGame/PlayGame";
 import { IoMdClose } from "react-icons/io";
+import { AuthContext } from "../../../providers/AuthProvider";
+import { useNavigate } from "react-router-dom";
 export default function FavoriteGameSection() {
+  const { user } = useContext(AuthContext);
   const [data, setData] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [id, setId] = useState();
+  const navigate =useNavigate()
   useEffect(() => {
     const games = async () => {
       setData(null);
@@ -34,6 +38,9 @@ export default function FavoriteGameSection() {
     games();
   }, []);
   const handlePlayGame = (id) => {
+    if(!user){
+      return navigate('/login')
+    }
     setId(id);
     onOpen();
     // console.log(url.split("api")[0]);

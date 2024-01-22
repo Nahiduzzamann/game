@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import gateGame from "../../module/getGames";
 import url from "../../module";
@@ -13,6 +13,7 @@ import {
   ModalCloseButton,
   ModalContent
 } from '@chakra-ui/react'
+import { AuthContext } from "../../providers/AuthProvider";
 
 export default function Games() {
   const itemsPerPage = 30;
@@ -85,15 +86,19 @@ export default function Games() {
 }
 
 function Items({ data }) {
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [id, setId] = useState();
 
   const handlePlayGame = (id) => {
+    if(!user){
+      return navigate('/login')
+    }
     setId(id);
     onOpen();
     // console.log(url.split("api")[0]);
-    //window.open(`${url.split("api")[0]}play-game/${id}`,'_blank');
+    // window.open(`${url.split("api")[0]}play-game/${id}`, "_blank");
   };
   return (
     <div className="grid 2xl:grid-cols-6 xl:grid-cols-5 md:grid-cols-4 grid-cols-3 gap-4 ">
