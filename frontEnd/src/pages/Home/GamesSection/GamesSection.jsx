@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const GamesSection = () => {
   const [dataCategory, setDataCategory] = useState(null);
   const [dataSubCategory, setDataSubCategory] = useState(null);
-  // console.log(dataSubCategory);
+  const [activeTab, setActiveTab] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const GamesSection = () => {
     const category = dataCategory[index];
     const subCategory = category.subCategory;
     setDataSubCategory(subCategory);
-    console.log(index);
+    setActiveTab(index);
     
   };
   
@@ -72,7 +72,7 @@ const GamesSection = () => {
                     />
                     <div
                       style={{ padding: "0px", borderRadius: "10%" }}
-                      className="flex items-end justify-center absolute w-full h-full  bg-gradient-to-b  from-[#fffcfc00] via-transparent to-[#000000] hover:to-blue-500"
+                      className={`flex items-end justify-center absolute w-full h-full  bg-gradient-to-b  from-[#fffcfc00] via-transparent  ${activeTab == i ? 'to-blue-500':'to-[#000000]'} hover:to-blue-500`}
                     >
                       <h2 className="md:text-2xl text-sm font-semibold text-white pb-2">
                         {data?.title}
@@ -83,11 +83,11 @@ const GamesSection = () => {
               })}
           </div>
         </TabList>
-        <TabPanels className="bg-[#D9D9D9] rounded-md">
+        <TabPanels className="bg-[#D9D9D9] shadow-md rounded-md mt-6">
           {dataCategory &&
             dataCategory?.map((data, i) => (
               <TabPanel key={i}>
-                 <h1 className="ml-2 text-lg md:text-xl font-semibold text-blue-500">{data?.title}</h1>
+                 <h1 className="ml-2 text-lg md:text-xl font-semibold text-blue-500 ">{data?.title}</h1>
                 <div className="flex cursor-pointer overflow-x-auto custom-scrollbar">
                  
                   {dataSubCategory?.map((data, j) => (

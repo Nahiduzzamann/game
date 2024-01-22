@@ -1,0 +1,26 @@
+.swiper {
+  margin: 16px;
+  }
+  .swiper-slide {
+    aspect-ratio: 1 / 1;
+    background: #882525;
+    text-align: center;
+  }
+  .swiper-slide:nth-child(2) {
+    background: #8acc7d;
+  }
+  .swiper-slide:nth-child(3) {
+    background: #b7cc7d;
+  }
+  .swiper-slide:nth-child(4) {
+    background: #9eb75c;
+  }
+  .swiper-slide:nth-child(5) {
+    background: #7da8cc;
+  }
+  .swiper-slide:nth-child(6) {
+    background: #96cc7d;
+  }
+  .swiper-slide:nth-child(7) {
+    background: #cc7dae;
+  }

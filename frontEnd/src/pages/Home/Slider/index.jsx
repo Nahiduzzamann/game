@@ -19,55 +19,56 @@ export default function Slider() {
     img5,
     img6,
   ];
-  const rotateAnimationHandler = (props, state) => {
-    const transitionTime = props.transitionTime + "ms";
-    const transitionTimingFunction = "ease-in-out";
-    let slideStyle = {
-      display: "block",
-      minHeight: "100%",
-      transitionTimingFunction: transitionTimingFunction,
-      msTransitionTimingFunction: transitionTimingFunction,
-      MozTransitionTimingFunction: transitionTimingFunction,
-      WebkitTransitionTimingFunction: transitionTimingFunction,
-      OTransitionTimingFunction: transitionTimingFunction,
-      transform: `rotate(0)`,
-      position:
-        state.previousItem === state.selectedItem ? "relative" : "absolute",
-      inset: "0 0 0 0",
-      zIndex: state.previousItem === state.selectedItem ? "1" : "-2",
-      opacity: state.previousItem === state.selectedItem ? "1" : "0",
-      WebkitTransitionDuration: transitionTime,
-      MozTransitionDuration: transitionTime,
-      OTransitionDuration: transitionTime,
-      transitionDuration: transitionTime,
-      msTransitionDuration: transitionTime,
-    };
-    return {
-      slideStyle,
-      selectedStyle: {
-        ...slideStyle,
-        opacity: 1,
-        position: "relative",
-        zIndex: 2,
-        filter: `blur(0)`,
-      },
-      prevStyle: {
-        ...slideStyle,
-        transformOrigin: " 0 100%",
-        transform: `rotate(${
-          state.previousItem > state.selectedItem ? "-45deg" : "45deg"
-        })`,
-        opacity: "0",
-        filter: `blur( ${
-          state.previousItem === state.selectedItem ? "0px" : "5px"
-        })`,
-      },
+  // const rotateAnimationHandler = (props, state) => {
+  //   const transitionTime = props.transitionTime + "ms";
+  //   const transitionTimingFunction = "ease-in-out";
+  //   let slideStyle = {
+  //     display: "block",
+  //     minHeight: "100%",
+  //     transitionTimingFunction: transitionTimingFunction,
+  //     msTransitionTimingFunction: transitionTimingFunction,
+  //     MozTransitionTimingFunction: transitionTimingFunction,
+  //     WebkitTransitionTimingFunction: transitionTimingFunction,
+  //     OTransitionTimingFunction: transitionTimingFunction,
+  //     transform: `rotate(0)`,
+  //     position:
+  //       state.previousItem === state.selectedItem ? "relative" : "absolute",
+  //     inset: "0 0 0 0",
+  //     zIndex: state.previousItem === state.selectedItem ? "1" : "-2",
+  //     opacity: state.previousItem === state.selectedItem ? "1" : "0",
+  //     WebkitTransitionDuration: transitionTime,
+  //     MozTransitionDuration: transitionTime,
+  //     OTransitionDuration: transitionTime,
+  //     transitionDuration: transitionTime,
+  //     msTransitionDuration: transitionTime,
+  //   };
+  //   return {
+  //     slideStyle,
+  //     selectedStyle: {
+  //       ...slideStyle,
+  //       opacity: 1,
+  //       position: "relative",
+  //       zIndex: 2,
+  //       filter: `blur(0)`,
+  //     },
+  //     prevStyle: {
+  //       ...slideStyle,
+  //       transformOrigin: " 0 100%",
+  //       transform: `rotate(${
+  //         state.previousItem > state.selectedItem ? "-45deg" : "45deg"
+  //       })`,
+  //       opacity: "0",
+  //       filter: `blur( ${
+  //         state.previousItem === state.selectedItem ? "0px" : "5px"
+  //       })`,
+  //     },
       
-    };
-  };
+  //   };
+  // };
   return (
     <div className="box">
       <Carousel
+      autoPlay={true}
         showIndicators
         showStatus ={false}
         showThumbs={false}
@@ -101,7 +102,7 @@ export default function Slider() {
           );
         }}
         transitionTime={310}
-        animationHandler={rotateAnimationHandler}
+        // animationHandler={rotateAnimationHandler}
         swipeable={false}        
       >
         {images.map((URL, index) => (
