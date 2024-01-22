@@ -1,17 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { FaFlag } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import {
+  FaCode,
+  FaCodepen,
+  FaFlag,
+  FaLock,
+  FaPhone,
+  FaRegUserCircle,
+} from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import img from "./4957136_Mobile login 1.svg";
 
 const ForgotPassword = () => {
-  const [username, setUsername] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [otp, setOtp] = useState('');
+  const [username, setUsername] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
   const [showTimer, setShowTimer] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(10); 
-const navigate = useNavigate()
-  const handleRequestOTP = () => {
-    setTimeLeft(20)
+  const [timeLeft, setTimeLeft] = useState(10);
+  const navigate = useNavigate();
+  const handleRequestOTP = (e) => {
+    e.preventDefault();
+    setTimeLeft(20);
     // Assume an API request here to send OTP
     setLoading(true);
     // Simulate API request delay
@@ -21,8 +30,9 @@ const navigate = useNavigate()
     }, 500); // Adjust the delay time accordingly
   };
 
-  const handleChangePassword = () => {
-    setTimeLeft(0)
+  const handleChangePassword = (e) => {
+    e.preventDefault();
+    setTimeLeft(0);
     // Assume an API request here to verify OTP and change password
     setLoading(true);
 
@@ -32,8 +42,8 @@ const navigate = useNavigate()
       // Navigate to the change password page upon success
       // You can replace this with your actual navigation logic
       // history.push('/change-password');
-      alert('Password changed successfully!');
-      navigate('/')
+      alert("Password changed successfully!");
+      navigate("/");
     }, 500); // Adjust the delay time accordingly
   };
 
@@ -45,56 +55,61 @@ const navigate = useNavigate()
         setTimeLeft((prevTime) => prevTime - 1);
       }, 1000);
     }
-    if(timeLeft == 0){
-      setShowTimer(false)
+    if (timeLeft == 0) {
+      setShowTimer(false);
     }
 
     return () => {
       clearInterval(timer);
     };
   }, [showTimer, timeLeft]);
-
   return (
-    <div className="flex justify-center items-center h-screen bg-blue-50 p-25">
-      <div className="w-96 p-6 shadow bg-white rounded-md border-4 border-blue-500">
-        <p className="text-center text-3xl p-3 font-semibold">
-          Reset Password
-        </p>
-        <div className="border-b-2 pt-2 border-gray-400"></div>
-        <div className="pt-5 border-gray-400">
-          <form>
-            <div className="mt-5">
-              <label
-                htmlFor="username"
-                className="block text-base mb-2 font-semibold"
-              >
-                Username: <span className="text-red-500 font-bold">*</span>
-              </label>
-              <input
-                type="text"
-                className="w-full text-base py-1 px-1 border-2 border-gray-600 rounded"
-                id="username"
-                name="username"
-                placeholder="Fill Up Here"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </div>
-            <div className="mt-3">
-              <label className="block text-base mb-2 font-semibold">
-                Enter your phone number to reset :{' '}
-                <span className="text-red-500">*</span>
-              </label>
-              <div className="flex">
-                <div className="border-gray-600 rounded flex items-center justify-center p-2 me-2 bg-blue-200">
-                  <FaFlag className="text-lime-600" />
+    <div className="grid lg:grid-cols-2 grid-cols-1 gap-20 items-center  bg-[#FFF] py-[5%] px-[10%] ">
+      <div className=" hidden lg:flex justify-center h-full items-center">
+        <img className="object-fill " src={img}></img>
+      </div>
+      <div className=" flex justify-center h-full items-center">
+        <div className="py-[10%] px-[10%]  shadow bg-[#D9D9D9] rounded-3xl">
+          <p className="text-center text-3xl p-3 font-semibold">
+            Reset Password
+          </p>
+          <div className="mt-3">
+            <p className="text-center">
+              Give your username and phone number we will send you a OTP
+            </p>
+          </div>
+
+          <form onSubmit={showTimer ? handleChangePassword : handleRequestOTP}>
+            <div className="mt-[10%]">
+              <div className="flex border border-[#3B82F6] rounded-3xl">
+                <div className="p-3">
+                  <FaRegUserCircle className="text-blue-500" />
                 </div>
                 <input
+                  required
                   type="text"
-                  className="w-72 text-base py-1 px-1 border-2 border-gray-600 rounded"
+                  className="bg-[#D9D9D9] outline-0 "
+                  id="username"
+                  name="username"
+                  placeholder="Username "
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className="mt-[8%]">
+              <div className="flex border items-center border-[#3B82F6] rounded-3xl">
+                <div className="p-3">
+                  <FaPhone className="text-blue-500" />
+                </div>
+
+                <input
+                  required
+                  className="bg-[#D9D9D9] outline-0  "
                   id="phoneNumber"
                   name="phoneNumber"
-                  placeholder="Fill Up Here"
+                  placeholder="Phone Number"
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
                 />
@@ -102,19 +117,21 @@ const navigate = useNavigate()
             </div>
 
             {showTimer && (
-              <div className="mt-3">
-                <label className="block text-base mb-2 font-semibold">
-                  Request OTP: <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  className="w-full text-base py-1 px-1 border-2 border-gray-600 rounded"
-                  id="otp"
-                  name="otp"
-                  placeholder="Fill Up Here"
-                  value={otp}
-                  onChange={(e) => setOtp(e.target.value)}
-                />
+              <div>
+                <div className="mt-[8%] flex border items-center border-[#3B82F6] rounded-3xl">
+                  <div className="p-3">
+                    <FaCodepen className="text-blue-500" />
+                  </div>
+                  <input
+                    type="text"
+                    className=" flex-1 bg-transparent "
+                    id="otp"
+                    name="otp"
+                    placeholder="Submit OTP"
+                    value={otp}
+                    onChange={(e) => setOtp(e.target.value)}
+                  />
+                </div>
                 <div className="text-red-500 mt-2">
                   Time left: {timeLeft} seconds
                 </div>
@@ -122,18 +139,27 @@ const navigate = useNavigate()
             )}
 
             <button
-              className={`mt-4 w-full text-center rounded p-2 ${
-                loading ? 'bg-gray-500 cursor-not-allowed' : 'bg-black text-white'
+              type="submit"
+              className={`mt-[10%] w-full text-center rounded-3xl p-2 ${
+                loading
+                  ? "bg-gray-500 cursor-not-allowed"
+                  : "bg-blue-500 text-white"
               } font-bold hover:bg-red-400`}
-              onClick={showTimer ? handleChangePassword : handleRequestOTP}
               disabled={loading || (showTimer && timeLeft === 0)}
             >
               {loading
-                ? 'Requesting'
+                ? "Requesting"
                 : showTimer
-                ? 'Change Password'
-                : 'Request OTP'}
+                ? "Change Password"
+                : "Request OTP"}
             </button>
+
+            <Link
+              to="/login"
+              className="mt-[8%] flex py-2 items-center justify-center border-2 p-1 bg-black rounded-3xl text-white hover:bg-red-400"
+            >
+              Back
+            </Link>
           </form>
         </div>
       </div>
