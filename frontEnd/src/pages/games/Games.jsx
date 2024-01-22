@@ -3,9 +3,16 @@ import { useNavigate, useParams } from "react-router-dom";
 import gateGame from "../../module/getGames";
 import url from "../../module";
 import ResponsivePagination from "react-responsive-pagination";
-import { Box, SkeletonText } from "@chakra-ui/react";
+import { Box, SkeletonText,useDisclosure } from "@chakra-ui/react";
 import PlayGame from "../PlayGame/PlayGame";
 import { IoMdClose } from "react-icons/io";
+import {
+  Modal,
+  ModalOverlay,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent
+} from '@chakra-ui/react'
 
 export default function Games() {
   const itemsPerPage = 30;
