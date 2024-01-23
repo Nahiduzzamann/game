@@ -102,7 +102,7 @@ const Login = () => {
 
                 <input
                   type={showPassword ? "text" : "password"}
-                  className="bg-[#D9D9D9] outline-0 w-full "
+                  className="bg-[#D9D9D9] outline-0  "
                   id="password"
                   name="password"
                   placeholder="Password"
