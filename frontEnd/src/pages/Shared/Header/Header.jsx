@@ -29,6 +29,7 @@ import { AiFillNotification } from "react-icons/ai";
 import LanguageCard from "./LanguageCard";
 import { AuthContext } from "./../../../providers/AuthProvider";
 import { GrMoney } from "react-icons/gr";
+import { FaSignOutAlt } from "react-icons/fa";
 
 const Header = () => {
   const { loading, user, setUpdateUserState } = useContext(AuthContext);
@@ -166,6 +167,7 @@ const Header = () => {
         placement="left"
         onClose={onClose}
         finalFocusRef={btnRef}
+        
       >
         <DrawerOverlay />
         <DrawerContent>
@@ -186,7 +188,7 @@ const Header = () => {
                         key={i}
                       >
                         <img
-                          className="w-5 h-5"
+                          className="w-5 h-5 bg-slate-500 rounded"
                           src={`${url}${data.subCategory[0]?.icon}`}
                         />
                         {data.title}
@@ -206,7 +208,7 @@ const Header = () => {
                           className="   hover:bg-gray-400 text-black flex px-2 py-1 overflow-hidden rounded-sm "
                         >
                           <div className="flex gap-2 items-center">
-                            <img className=" h-5" src={`${url}${doc.icon}`} />
+                            <img className=" h-5 bg-slate-500 rounded" src={`${url}${doc.icon}`} />
                             <div className="w-full">{doc.title}</div>
                           </div>
                         </div>
@@ -239,6 +241,13 @@ const Header = () => {
             >
               <FaQuora />
               FAQ
+            </div>
+            <div
+              onClick={handleLogOut}
+              className=" hover:bg-gray-50 flex gap-2 items-center py-2 px-2 cursor-pointer text-gray-400  text-md"
+            >
+              <FaSignOutAlt />
+              Log Out
             </div>
           </DrawerBody>
 
