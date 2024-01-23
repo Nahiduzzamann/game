@@ -11,7 +11,7 @@ const DownloadSection = () => {
       <div className=" flex md:hidden  flex-col justify-center items-center">
         <img src={mobile} alt="Left" className="w-60 h-auto" />
       </div>
-      <div className="flex md:h-[370px] lg:h-[500] items-center justify-around bg-[#8DADE1] mx-6 my-2 md:my-10 lg:my-14 rounded-md">
+      <div className="flex md:h-[370px] lg:h-[500] items-center justify-around bg-[#8DADE1] mx-6 my-2 md:my-10 lg:my-20 rounded-md">
         {/* Left Image */}
         <div className=" hidden md:block">
           <img src={leftImage} alt="Left" className="md:w-64 lg:w-80 h-auto" />
@@ -33,12 +33,12 @@ const DownloadSection = () => {
             <img
               src={downloadIcon1}
               alt="Download 1"
-              className="w-20 md:w-32 lg:w-64 hover:cursor-pointer"
+              className="w-20 md:w-32 lg:w-52 hover:cursor-pointer"
             />
             <img
               src={downloadIcon2}
               alt="Download 2"
-              className="w-20 md:w-32 lg:w-64 hover:cursor-pointer"
+              className="w-20 md:w-32 lg:w-52 hover:cursor-pointer"
             />
           </div>
         </div>

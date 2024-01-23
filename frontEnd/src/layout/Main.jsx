@@ -16,7 +16,7 @@ const Main = () => {
 
   },[location])
   const noHeaderFooter =
-    location.pathname.includes("/login")  || location.pathname.includes('/signup');
+    location.pathname.includes("/login")  || location.pathname.includes('/signup') ||location.pathname.includes('/forgot-password');
 
   return (
     <div className="bg-White">
