@@ -16,7 +16,7 @@ const Main = () => {
 
   },[location])
   const noHeaderFooter =
-    location.pathname.includes("/play-game")
+    location.pathname.includes("/login")  || location.pathname.includes('/signup');
 
   return (
     <div className="bg-White">
