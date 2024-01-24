@@ -64,12 +64,12 @@ const ForgotPassword = () => {
     };
   }, [showTimer, timeLeft]);
   return (
-    <div className="grid lg:grid-cols-2 grid-cols-1 gap-20 items-center  bg-[#FFF] py-[5%] px-[10%] ">
+    <div className="grid lg:grid-cols-2 grid-cols-1 md:gap-20 items-center min-h-screen  bg-[#FFF] md:py-[5%] md:px-[10%] ">
       <div className=" hidden lg:flex justify-center h-full items-center">
         <img className="object-fill " src={img}></img>
       </div>
       <div className=" flex justify-center h-full items-center">
-        <div className="py-[10%] px-[10%]  shadow bg-[#D9D9D9] rounded-3xl">
+        <div className="py-[10%] px-[10%] min-h-screen md:min-h-min  shadow bg-[#D9D9D9] md:rounded-3xl">
           <p className="text-center text-3xl p-3 font-semibold">
             Reset Password
           </p>
