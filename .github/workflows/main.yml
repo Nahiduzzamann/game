@@ -30,3 +30,7 @@ jobs:
           cd frontEnd
           npm i
           npm run build
+          cd ..
+          cd dashboard
+          npm i
+          npm run build
