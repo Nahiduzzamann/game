@@ -10,18 +10,25 @@ import {
   Button,
   Select,
   useDisclosure,
+  Spinner,
+  useToast,
 } from "@chakra-ui/react";
 import { BsQuestionOctagonFill } from "react-icons/bs";
 import getWallet from "../../module/getWallet";
 import url from "../../module";
+import getPromotions from "../../module/getPromotions";
 
 export default function Deposit() {
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedAmount, setSelectedAmount] = useState(200);
   const [inputAmount, setInputAmount] = useState(200);
   const [apiData, setApiData] = useState(null);
+  const [promotions, setPromotions] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
+  const [depositBonus, setDepositBonus] = useState(null);
+  const [loader, setLoader] = useState(false);
+  const toast = useToast();
 
   const handleAmountClick = (amount) => {
     setSelectedAmount(amount);
@@ -37,17 +44,59 @@ export default function Deposit() {
   };
 
   useEffect(() => {
-    getWallet()
-      .then((response) => {
-        setApiData(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    apiCall();
   }, []);
+  const apiCall = async () => {
+    try {
+      const walletRes = await getWallet();
+      setApiData(walletRes.data);
+      localStorage.setItem("wallets", JSON.stringify(walletRes.data));
+      const promotionRes = await getPromotions(true);
+      setPromotions(promotionRes.data);
+    } catch (error) {
+      console.error(error.response.data.error);
+    }
+  };
+  const callDeposit = async () => {
+    if (!inputAmount || !selectedImage) {
+      return toast({
+        title: "Enter amount and select payment method",
+        status: "info",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+    try {
+      openPopup();
+    } catch (error) {}
+  };
+  const openPopup = () => {
+    const hostname = window.location.hostname;
+    console.log(hostname);
+    const url = `http://localhost:5173/pay?walletId=${selectedImage}&amount=${inputAmount}&promotionId=${
+      promotions?.filter((d) => d._id.match(depositBonus))[0]?._id
+    }`;
+    const width = 300;
+    const height = 400;
+    const popupSettings = `width=${width},height=${height},resizable=yes,scrollbars=yes,status=yes`;
+    window.open(url, "_blank", popupSettings);
+  };
+  if (!apiData || !promotions) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        ></Spinner>
+      </div>
+    );
+  }
 
   return (
-    <div className="bg-gray-500 rounded-lg p-4">
+    <div className="bg-gray-500 rounded-lg md:mt-0 mt-5 p-4">
       <div className="p-5 bg-white rounded-md">
         <h1 className="text-center p-5 font-bold border-b-4 border-indigo-300 text-3xl">
           Deposit
@@ -60,16 +109,21 @@ export default function Deposit() {
           {apiData?.map((data, index) => (
             <div
               key={index}
-              onClick={() => handleImageClick(name)}
-              className={`border-2 border-gray-500 rounded-lg p-2 m-2 hover:bg-gray-200 cursor-pointer ${
-                selectedImage === name ? "bg-gray-200 border-[#0082D6]" : ""
+              onClick={() => handleImageClick(data._id)}
+              className={` flex  items-center rounded-md overflow-hidden m-2  hover:bg-gray-300 cursor-pointer ${
+                selectedImage === data._id
+                  ? "bg-blue-300 border-[#0082D6]"
+                  : "bg-gray-200"
               }`}
             >
               <img
-                className="h-12 w-20"
+                className="h-12 w-12"
                 src={`${url}${data.icon}`}
                 alt={`${data.methodName}`}
               />
+              <div className="w-full mx-2 text-center  font-medium my-1">
+                {data.methodName}
+              </div>
             </div>
           ))}
         </div>
@@ -113,29 +167,47 @@ export default function Deposit() {
           />
         </div>
 
-        <p className="font-bold pt-5 pb-2">
-          Deposit Bonus <span className="text-red-500 ">*</span>
-        </p>
+        <p className="font-bold pt-5 pb-2">Deposit Bonus</p>
 
-        <Select placeholder="No Bounce">
-          <option value="option3">
-            Slots 5% Unlimited Deposit Bonus -5.00%
-          </option>
-          <option value="option1">
-            Live Casino 5% Unlimited Deposit Bonus -5.00%
-          </option>
-          <option value="option2">
-            Live Casino Weekly 20% Deposit Bonus -20.00%
-          </option>
-          <option value="option3">
-            Slots 20% Weekly Deposit Bonus -20.00%
-          </option>
+        <Select
+          onChange={(e) => {
+            setDepositBonus(e.target.value);
+          }}
+          placeholder="No Bounce"
+        >
+          {promotions?.map((doc, i) => (
+            <option key={i} value={doc._id}>
+              {doc.title}
+            </option>
+          ))}
         </Select>
 
         <div className="pt-5 text-center">
-          <div className="bg-[#0082D6] p-2 rounded-lg font-bold hover:bg-[#58b4f1]">
-            <button className="text-white" onClick={onOpen}>
-              Deposite
+          <div
+            onClick={() => {
+              if (loader) {
+                return;
+              }
+              if (depositBonus) {
+                onOpen();
+              } else {
+                callDeposit();
+              }
+            }}
+            className="bg-[#0082D6] p-2 rounded-lg font-bold hover:bg-[#58b4f1]"
+          >
+            <button className="text-white">
+              {loader ? (
+                <Spinner
+                  thickness="2px"
+                  speed="0.65s"
+                  emptyColor="gray.100"
+                  color="blue.500"
+                  size={"sm"}
+                />
+              ) : (
+                "Deposit"
+              )}
             </button>
             <div>
               <AlertDialog
@@ -152,17 +224,57 @@ export default function Deposit() {
                   <AlertDialogCloseButton />
                   <AlertDialogBody>
                     <div className="border-t-4 border-indigo-300 p-5">
-                      <p className="p-2 font-semibold">Deposit amount <span className="ps-40">৳ NaN</span></p>
-                      <p className="p-2 font-semibold">Bonus Amount <span className="ps-40">৳ NaN</span></p>
-                      <p className="p-2 font-semibold">Target Turnover <span className="ps-40">৳ NaN</span></p>
+                      <div className="p-2 font-semibold flex justify-between">
+                        Deposit amount{" "}
+                        <span className="ps-40">৳ {inputAmount}</span>
+                      </div>
+                      <div className="p-2 font-semibold flex justify-between">
+                        Bonus Amount{" "}
+                        <span className="ps-40">
+                          ৳{" "}
+                          {(inputAmount *
+                            promotions?.filter((d) =>
+                              d._id.match(depositBonus)
+                            )[0]?.bonusPercentage) /
+                            100}
+                        </span>
+                      </div>
+                      <div className="p-2 font-semibold flex justify-between">
+                        Target Turnover{" "}
+                        <span className="ps-40">
+                          ৳{" "}
+                          {
+                            promotions?.filter((d) =>
+                              d._id.match(depositBonus)
+                            )[0]?.turnOverAmount
+                          }
+                        </span>
+                      </div>
                     </div>
                   </AlertDialogBody>
                   <AlertDialogFooter>
                     <Button ref={cancelRef} onClick={onClose}>
                       No
                     </Button>
-                    <Button colorScheme="red" ml={3}>
-                      Confirm
+                    <Button
+                      disabled={loader}
+                      onClick={() => {
+                        callDeposit();
+                      }}
+                      colorScheme="red"
+                      ml={3}
+                    >
+                      {loader ? (
+                        <Spinner
+                          thickness="2px"
+                          speed="0.65s"
+                          emptyColor="gray.100"
+                          color="blue.500"
+                          size={"sm"}
+                        />
+                      ) : (
+                        "Confirm"
+                      )}
                     </Button>
                   </AlertDialogFooter>
                 </AlertDialogContent>

@@ -29,6 +29,7 @@ app.use("/api", games)
 app.use("/api/balance",balance)
 app.use("/api/icons",express.static(path.join(__dirname, "data/icons")))
 app.use("/api/images",express.static(path.join(__dirname, "data/images")))
+app.use("/api/data/images",express.static(path.join(__dirname, "data/images")))
 app.get("/deployment", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "deployment.php"))
 });

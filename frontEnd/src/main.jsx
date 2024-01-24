@@ -34,7 +34,7 @@ import Phone from "./pages/SignUp/Phone.jsx";
 import SignUp from "./pages/SignUp/SignUp.jsx";
 import PrivateRoute from "./layout/PrivateRoute.jsx";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword.jsx";
-
+import BankPay from "./pages/Bank/Index.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -67,7 +67,11 @@ const router = createBrowserRouter([
       },
       {
         path: "play-game/:id",
-        element: <PrivateRoute><PlayGame></PlayGame></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <PlayGame></PlayGame>
+          </PrivateRoute>
+        ),
       },
       {
         path: "promotions",
@@ -111,7 +115,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/user",
-    element: <PrivateRoute><Profile></Profile></PrivateRoute>,
+    element: (
+      <PrivateRoute>
+        <Profile></Profile>
+      </PrivateRoute>
+    ),
     // errorElement: <ErrorPage />,
     children: [
       {
@@ -146,7 +154,15 @@ const router = createBrowserRouter([
         path: "changePassword",
         element: <ChangePasswordPage></ChangePasswordPage>,
       },
+      {
+        path: "pay",
+        element: <BankPay />,
+      },
     ],
+  },
+  {
+    path: "pay",
+    element: <BankPay />,
   },
 ]);
 
