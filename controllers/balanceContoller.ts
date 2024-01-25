@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import { StatusCodes } from "http-status-codes";
 import { uploadImageBanner, uploadImageSquire } from "./fileUploadController";
-import { Deposit, PromotionHistory, Promotions, Wallets } from "../connections/databaseConnection";
+import { Deposit, PromotionHistory, Promotions, UserWallets, Wallets } from "../connections/databaseConnection";
 import { AuthenticatedRequest } from "../middlewares/checkLogin";
 interface FilePath {
     path: string
@@ -50,6 +50,35 @@ export const createWallet = async (req: Request, res: Response) => {
             slogan,
             walletNumber,
             icon: path
+        })
+        res.status(StatusCodes.OK).json(wallet)
+    } catch (error) {
+        res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error })
+    }
+}
+export const createUserWallet = async (req: AuthenticatedRequest, res: Response) => {
+    const { walletNumber, walletId } = req.body;
+    const { username } = req
+    if (!walletNumber || !walletId) {
+        return res.status(StatusCodes.BAD_GATEWAY).json({ error: "Parameter are required" })
+    }
+
+    try {
+        const wallet = await UserWallets.create({
+            walletNumber,
+            walletId,
+            userId: username
+        })
+        res.status(StatusCodes.OK).json(wallet)
+    } catch (error) {
+        res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error })
+    }
+}
+export const getUserWallets = async (req: AuthenticatedRequest, res: Response) => {
+    const { username } = req
+    try {
+        const wallet = await UserWallets.find({
+            userId: username
         })
         res.status(StatusCodes.OK).json(wallet)
     } catch (error) {
@@ -114,7 +143,7 @@ export const getDeposit = async (req: AuthenticatedRequest, res: Response) => {
 
         const deposit = await Deposit.find({
             userId: username
-        }).sort({date:-1})
+        }).sort({ date: -1 })
         res.status(StatusCodes.OK).json(deposit)
     } catch (error) {
         res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error })

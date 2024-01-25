@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { v1 } from "uuid";
 import HistoryCard from "./HistoryCard";
 import getDeposits from "../../module/getDeposits";
-import {Spinner} from "@chakra-ui/react"
-import url from "../../module";
+import { Spinner } from "@chakra-ui/react";
+
+import ResponsivePagination from "react-responsive-pagination";
 
 export default function DepositHistory() {
+  const itemsPerPage = 5;
   const [data, setData] = useState(null);
   const [search, setSearch] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.ceil(data?.length / itemsPerPage);
   useEffect(() => {
     getDeposits().then((res) => {
       //console.log(res.data);
@@ -39,16 +42,24 @@ export default function DepositHistory() {
       </div>
       {data
         ?.filter((s) => s.tranXId.match(search))
+        ?.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
         .map((d, i) => (
-          <HistoryCard key={i} 
-          id={d.tranXId}
-          amount={d.amount}
-          date={d.date}
-          remarks={d.remarks}
-          status={d.status}
-          promotionId={d.promotionId}
-          walletId={d.walletId} />
+          <HistoryCard
+            key={i}
+            id={d.tranXId}
+            amount={d.amount}
+            date={d.date}
+            remarks={d.remarks}
+            status={d.status}
+            promotionId={d.promotionId}
+            walletId={d.walletId}
+          />
         ))}
+      <ResponsivePagination
+        current={currentPage}
+        total={totalPages}
+        onPageChange={setCurrentPage}
+      />
     </div>
   );
 }

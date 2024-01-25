@@ -1,7 +1,7 @@
 import express,{Express} from 'express';
 import multer from "multer"
 import { authenticateToken } from '../middlewares/checkLogin';
-import { createPromotions, createWallet, getDeposit, getPromotions, getWallets, makeDeposit } from '../controllers/balanceContoller';
+import { createPromotions, createUserWallet, createWallet, getDeposit, getPromotions, getUserWallets, getWallets, makeDeposit } from '../controllers/balanceContoller';
 const upload = multer()
 
 const balance=express.Router()
@@ -11,4 +11,6 @@ balance.post("/wallet/add",[authenticateToken,upload.single("icon")],createWalle
 balance.get("/wallet/get",getWallets)
 balance.post("/deposit",authenticateToken,makeDeposit)
 balance.get("/deposit/get",authenticateToken,getDeposit)
+balance.get("/user/wallet/get",authenticateToken,getUserWallets)
+balance.post("/user/wallet/create",authenticateToken,createUserWallet)
 export default balance

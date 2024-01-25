@@ -1,6 +1,6 @@
 
 import mongoose from "mongoose";
-import { deposit, gameHistory, games, promotionHistory, promotions, users, wallets } from "../schema/gameSchema";
+import { deposit, gameHistory, games, promotionHistory, promotions, userWallets, users, wallets } from "../schema/gameSchema";
 
 export const mongoConnection = async () => {
   try {
@@ -18,3 +18,4 @@ export const Deposit=mongoose.model("deposit",deposit)
 export const Promotions=mongoose.model("promotions",promotions)
 export const Wallets=mongoose.model("wallets",wallets)
 export const PromotionHistory=mongoose.model("promotionHistory",promotionHistory)
+export const UserWallets=mongoose.model("userWallet",userWallets)

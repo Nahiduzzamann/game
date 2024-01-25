@@ -66,7 +66,7 @@ const rewardsList = new Schema({
 const userWallets = new Schema({
   walletNumber: { type: String, require: true },
   walletId: { type: String, require: true },
-  channel: String,
+  channel: {type:String,default:"Dpay"},
   userId: String
 })
 const wallets = new Schema({
