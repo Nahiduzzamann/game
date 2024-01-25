@@ -259,6 +259,7 @@ export default function Deposit() {
                     <Button
                       disabled={loader}
                       onClick={() => {
+                        onClose()
                         callDeposit();
                       }}
                       colorScheme="red"
