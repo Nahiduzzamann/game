@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Input, Button, Stack, Text, useToast } from "@chakra-ui/react";
+import { Input, Button, Stack, Text, useToast, Spinner } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import getUserWallet from "../../module/getUserWallet";
+import url from "../../module";
 
 const Withdrawal = () => {
   const [withdrawableAmount, setWithdrawableAmount] = useState("");
@@ -8,10 +10,16 @@ const Withdrawal = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const toast = useToast();
-
+  const [selectedImage, setSelectedImage] = useState("");
   useEffect(() => {
-    // Dummy data for demonstration
-    // setPaymentMethods(['Dummy Payment Method 1', 'Dummy Payment Method 2']);
+    getUserWallet()
+    .then((response) => {
+      setPaymentMethods(response.data);
+      // console.log(response.data);
+    })
+    .catch((error) => {
+      console.error("Error fetching wallets:", error);
+    });
   }, []);
 
   const handleWithdrawal = async () => {
@@ -40,7 +48,9 @@ const Withdrawal = () => {
       setLoading(false);
     }
   };
-
+  const handleImageClick = (name) => {
+    setSelectedImage(name);
+  };
   const handleAddPaymentMethod = () => {
     navigate("/user/bank-details");
   };
@@ -66,11 +76,32 @@ const Withdrawal = () => {
           <Text fontSize="sm" fontWeight="medium">
             Payment Methods:
           </Text>
-          <ul className="list-disc ml-4">
-            {paymentMethods.map((method, index) => (
-              <li key={index}>{method}</li>
+          {
+            paymentMethods ? (<div className="flex justify-center items-center flex-wrap gap-4">
+            <span className="text-red-500">  Please select a wallet:</span>
+            {paymentMethods?.map((data, index) => (
+              <div
+                key={index}
+                onClick={() => handleImageClick(data._id)}
+                className={` flex  items-center rounded-md overflow-hidden m-2 p-1 hover:bg-gray-300 cursor-pointer ${
+                  selectedImage === data._id
+                    ? "bg-blue-300 border-[#0082D6]"
+                    : "bg-gray-200"
+                }`}
+              >
+                {/* <img
+                  className="h-12 w-12"
+                  src={`${url}${data.icon}`}
+                  alt={`${data.methodName}`}
+                />
+                <div className="w-full mx-2 text-center  font-medium my-1">
+                  {data.methodName}
+                </div> */}
+                <p>{data.walletNumber}</p>
+              </div>
             ))}
-          </ul>
+          </div>):(<div className="flex justify-center items-center py-4"><Spinner color="blue.500"></Spinner></div>)
+        }
         </Stack>
       ) : (
         <Button
