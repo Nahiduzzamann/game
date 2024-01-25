@@ -18,7 +18,7 @@ export default function HistoryCard({
   const wallet = JSON.parse(localStorage.getItem("wallets"))?.filter(
     (d) => d._id === walletId
   )[0];
-  console.log(promotion);
+  //console.log(promotion);
   return (
     <div className="text-md gap-1 border-b-2 py-2 grid">
       <div>

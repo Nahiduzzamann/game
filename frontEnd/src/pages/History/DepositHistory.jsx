@@ -6,7 +6,7 @@ import { Spinner } from "@chakra-ui/react";
 import ResponsivePagination from "react-responsive-pagination";
 
 export default function DepositHistory() {
-  const itemsPerPage = 5;
+  const itemsPerPage = 4;
   const [data, setData] = useState(null);
   const [search, setSearch] = useState();
   const [currentPage, setCurrentPage] = useState(1);

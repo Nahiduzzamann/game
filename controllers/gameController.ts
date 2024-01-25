@@ -1,3 +1,4 @@
+import { GameHistory } from './../data/allTypes';
 import { Response, Request } from 'express';
 import {
     ReasonPhrases,
@@ -77,7 +78,7 @@ export const getGameByCategory = async (req: Request, res: Response) => {
 
     const system: string = String(req.params.system)
     try {
-       
+
         const games = (await Games.find()) as GameTypes
         const gameList = games[0].content.gameList;
         res.status(StatusCodes.OK).json(gameList.filter(d => ((d.categories == categories[gameIndex].slag || d.categories == "") && d.title === system)))
@@ -227,4 +228,26 @@ const getBalance = async (req: Request, res: Response) => {
         })
     }
 
+}
+export const getGameHistory = async (req: AuthenticatedRequest, res: Response) => {
+    const id: number = Number(req.params.id);
+    const userId = req.username;
+    try {
+        const games = (await Games.find()) as GameTypes
+        const gameList = games[0].content.gameList;
+        const allGames = gameList.filter(d => (d.categories == categories[id].slag))
+        const history = await History.find({ username: userId }) as GameHistory[]
+        let arr: GameHistory[] = []
+        history.map(d => {
+            const checked = allGames?.filter(s => s.id === d.gameId)[0]
+            if (checked) {
+                arr.push(d)
+            }
+        })
+        res.status(StatusCodes.OK).json(arr)
+    } catch (error) {
+        console.log(error);
+
+        res.status(StatusCodes.EXPECTATION_FAILED).json(error);
+    }
 }
