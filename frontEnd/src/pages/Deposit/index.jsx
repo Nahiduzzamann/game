@@ -53,6 +53,7 @@ export default function Deposit() {
       localStorage.setItem("wallets", JSON.stringify(walletRes.data));
       const promotionRes = await getPromotions(true);
       setPromotions(promotionRes.data);
+      localStorage.setItem("promotions", JSON.stringify(promotionRes.data));
     } catch (error) {
       console.error(error.response.data.error);
     }
@@ -259,7 +260,7 @@ export default function Deposit() {
                     <Button
                       disabled={loader}
                       onClick={() => {
-                        onClose()
+                        onClose();
                         callDeposit();
                       }}
                       colorScheme="red"
