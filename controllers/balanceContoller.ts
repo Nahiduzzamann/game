@@ -3,6 +3,8 @@ import { StatusCodes } from "http-status-codes";
 import { uploadImageBanner, uploadImageSquire } from "./fileUploadController";
 import { Deposit, PromotionHistory, Promotions, UserWallets, Wallets } from "../connections/databaseConnection";
 import { AuthenticatedRequest } from "../middlewares/checkLogin";
+import { UserWalletsTypes, WalletsTypes } from "../data/allTypes";
+
 interface FilePath {
     path: string
 }
@@ -77,10 +79,16 @@ export const createUserWallet = async (req: AuthenticatedRequest, res: Response)
 export const getUserWallets = async (req: AuthenticatedRequest, res: Response) => {
     const { username } = req
     try {
+        const walletDetails = await Wallets.find() as WalletsTypes[]
+        let arr: UserWalletsTypes[] = []
         const wallet = await UserWallets.find({
-            userId: username
+            userId: username,
+        }) as UserWalletsTypes[]
+
+        wallet.map(d => {
+            arr.push({ ...d, wallet: walletDetails.filter(s => s._id === d.walletId)[0] })
         })
-        res.status(StatusCodes.OK).json(wallet)
+        res.status(StatusCodes.OK).json(arr)
     } catch (error) {
         res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error })
     }
