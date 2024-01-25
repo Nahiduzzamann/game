@@ -87,8 +87,9 @@ export default function ProfileMenuBar() {
           <div className="text-xs font-medium">Change Password</div>
         </div>
         <div
+         onClick={()=>navigate("/user/bank-details")}
           className={`${
-            pathname === "/user/withddrawal" && "bg-gray-600 text-white"
+            pathname === "/user/bank-details" && "bg-gray-600 text-white"
           } flex items-center gap-2 hover:bg-gray-500 px-2 py-[6px] rounded-md hover:text-white cursor-pointer`}
         >
           <AiTwotoneBank />

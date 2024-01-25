@@ -35,6 +35,7 @@ import SignUp from "./pages/SignUp/SignUp.jsx";
 import PrivateRoute from "./layout/PrivateRoute.jsx";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword.jsx";
 import BankPay from "./pages/Bank/Index.jsx";
+import BankDetails from "./pages/BankDetails/BankDetails.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -129,6 +130,10 @@ const router = createBrowserRouter([
       {
         path: "withdrawal",
         element: <Withdrawal />,
+      },
+      {
+        path: "bank-details",
+        element: <BankDetails></BankDetails>,
       },
       {
         path: "history",
