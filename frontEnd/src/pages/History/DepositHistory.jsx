@@ -1,59 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { v1 } from "uuid";
 import HistoryCard from "./HistoryCard";
-const DATA = [
-  {
-    date: new Date(),
-    method: "Bkash",
-    channel: "DPAY",
-    id: v1(),
-    amount: 500,
-    bonus: 0,
-    status: "Pending",
-    remark: "---",
-  },
-  {
-    date: new Date(),
-    method: "Bkash",
-    channel: "DPAY",
-    id: v1(),
-    amount: 500,
-    bonus: 0,
-    status: "Pending",
-    remark: "---",
-  },
-  {
-    date: new Date(),
-    method: "Bkash",
-    channel: "DPAY",
-    id: v1(),
-    amount: 500,
-    bonus: 0,
-    status: "Pending",
-    remark: "---",
-  },
-  {
-    date: new Date(),
-    method: "Bkash",
-    channel: "DPAY",
-    id: v1(),
-    amount: 500,
-    bonus: 0,
-    status: "Pending",
-    remark: "---",
-  },
-];
+import getDeposits from "../../module/getDeposits";
+import {Spinner} from "@chakra-ui/react"
+import url from "../../module";
 
 export default function DepositHistory() {
-  return(
+  const [data, setData] = useState(null);
+  const [search, setSearch] = useState();
+  useEffect(() => {
+    getDeposits().then((res) => {
+      //console.log(res.data);
+      setData(res.data);
+    });
+  }, []);
+  if (!data) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        ></Spinner>
+      </div>
+    );
+  }
+  return (
     <div>
       <div>
-        <input className="border px-5 py-2 rounded-md w-full" placeholder="Search"/>
+        <input
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="border px-5 py-2 rounded-md w-full"
+          placeholder="Search"
+        />
       </div>
-      {DATA.map((d,i)=>(
-        <HistoryCard key={i} data={d}/>
-      ))}
+      {data
+        ?.filter((s) => s.tranXId.match(search))
+        .map((d, i) => (
+          <HistoryCard key={i} 
+          id={d.tranXId}
+          amount={d.amount}
+          date={d.date}
+          remarks={d.remarks}
+          status={d.status}
+          promotionId={d.promotionId}
+          walletId={d.walletId} />
+        ))}
     </div>
-  )
- 
+  );
 }

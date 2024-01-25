@@ -89,10 +89,10 @@ export const makeDeposit = async (req: AuthenticatedRequest, res: Response) => {
         return res.status(StatusCodes.BAD_GATEWAY).json({ error: "Parameter are required" })
     }
     try {
-        if(promotionId){
+        if (promotionId) {
             await PromotionHistory.create({
                 promotionId,
-                userId:username
+                userId: username
             })
         }
         const deposit = await Deposit.create({
@@ -107,4 +107,16 @@ export const makeDeposit = async (req: AuthenticatedRequest, res: Response) => {
         res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error })
     }
 }
+export const getDeposit = async (req: AuthenticatedRequest, res: Response) => {
+    const { username } = req
 
+    try {
+
+        const deposit = await Deposit.find({
+            userId: username
+        }).sort({date:-1})
+        res.status(StatusCodes.OK).json(deposit)
+    } catch (error) {
+        res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error })
+    }
+}
