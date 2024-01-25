@@ -4,6 +4,7 @@ import { uploadImageBanner, uploadImageSquire } from "./fileUploadController";
 import { Deposit, PromotionHistory, Promotions, UserWallets, Wallets } from "../connections/databaseConnection";
 import { AuthenticatedRequest } from "../middlewares/checkLogin";
 import { UserWalletsTypes, WalletsTypes } from "../data/allTypes";
+import { ObjectId } from "mongodb";
 
 interface FilePath {
     path: string
@@ -79,16 +80,34 @@ export const createUserWallet = async (req: AuthenticatedRequest, res: Response)
 export const getUserWallets = async (req: AuthenticatedRequest, res: Response) => {
     const { username } = req
     try {
-        const walletDetails = await Wallets.find() as WalletsTypes[]
-        let arr: UserWalletsTypes[] = []
-        const wallet = await UserWallets.find({
-            userId: username,
-        }) as UserWalletsTypes[]
+        const combinedWallets = await UserWallets.aggregate([
+            {
+                $match: { userId: username }
+            },
+            {
+                $lookup: {
+                    from: 'wallets',
+                    let: { userIdObj: { $toObjectId: '$walletId' } },
+                    pipeline: [
+                        {
+                            $match: {
+                                $expr: { $eq: ['$_id', '$$userIdObj'] }
+                            }
+                        }
+                    ],
+                    as: 'wallet'
+                }
+            },
+            {
+                $addFields: {
+                    wallet: { $arrayElemAt: ['$wallet', 0] }
+                }
+            }
 
-        wallet.map(d => {
-            arr.push({ ...d, wallet: walletDetails.filter(s => s._id === d.walletId)[0] })
-        })
-        res.status(StatusCodes.OK).json(arr)
+        ])
+
+       // console.log(combinedWallets);
+        res.status(StatusCodes.OK).json(combinedWallets);
     } catch (error) {
         res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error })
     }
