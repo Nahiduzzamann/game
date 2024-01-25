@@ -72,8 +72,8 @@ export default function Deposit() {
   };
   const openPopup = () => {
     const hostname = window.location.hostname;
-    console.log(hostname);
-    const url = `http://localhost:5173/pay?walletId=${selectedImage}&amount=${inputAmount}&promotionId=${
+    //console.log(hostname);
+    const url = `https://${hostname}/pay?walletId=${selectedImage}&amount=${inputAmount}&promotionId=${
       promotions?.filter((d) => d._id.match(depositBonus))[0]?._id
     }`;
     const width = 300;
