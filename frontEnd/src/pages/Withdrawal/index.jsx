@@ -15,7 +15,7 @@ const Withdrawal = () => {
     getUserWallet()
     .then((response) => {
       setPaymentMethods(response.data);
-      console.log(response.data);
+      // console.log(response.data);
     })
     .catch((error) => {
       console.error("Error fetching wallets:", error);
@@ -23,6 +23,23 @@ const Withdrawal = () => {
   }, []);
 
   const handleWithdrawal = async () => {
+    if(!withdrawableAmount){
+      return  toast({
+        title: "Enter Amount",
+        description: "An error occurred during withdrawal.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }else if(!selectedImage){
+      return  toast({
+        title: "Select Wallet",
+        description: "An error occurred during withdrawal.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
     setLoading(true);
 
     // Simulating an API call for withdrawal
@@ -80,8 +97,12 @@ const Withdrawal = () => {
             Payment Methods:
           </Text>
           {
+         
+          paymentMethods &&  <span className="text-red-500"> Select Your Wallet-</span>
+          }
+          {
             paymentMethods ? (<div className="flex justify-center items-center flex-wrap gap-4">
-            <span className="text-red-500"> Select Your Wallet:</span>
+            
             {paymentMethods?.map((data, index) => (
               <div
                 key={index}
