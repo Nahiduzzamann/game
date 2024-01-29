@@ -1,7 +1,8 @@
+import { DepositTypes, GameHistory, UserTypes, PromotionTypes } from './../data/allTypes';
 import { Request, Response } from "express"
 import { StatusCodes } from "http-status-codes";
 import { uploadImageBanner, uploadImageSquire } from "./fileUploadController";
-import { Deposit, PromotionHistory, Promotions, UserWallets, Wallets } from "../connections/databaseConnection";
+import { Deposit, History, PromotionHistory, Promotions, UserWallets, Users, Wallets } from "../connections/databaseConnection";
 import { AuthenticatedRequest } from "../middlewares/checkLogin";
 import { UserWalletsTypes, WalletsTypes } from "../data/allTypes";
 import { ObjectId } from "mongodb";
@@ -106,7 +107,7 @@ export const getUserWallets = async (req: AuthenticatedRequest, res: Response) =
 
         ])
 
-       // console.log(combinedWallets);
+        // console.log(combinedWallets);
         res.status(StatusCodes.OK).json(combinedWallets);
     } catch (error) {
         res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error })
@@ -115,9 +116,9 @@ export const getUserWallets = async (req: AuthenticatedRequest, res: Response) =
 export const deleteUserWallets = async (req: AuthenticatedRequest, res: Response) => {
     const { id } = req.params;
     try {
-        const combinedWallets = await UserWallets.deleteOne({_id:new ObjectId(id)})
+        const combinedWallets = await UserWallets.deleteOne({ _id: new ObjectId(id) })
 
-       // console.log(combinedWallets);
+        // console.log(combinedWallets);
         res.status(StatusCodes.OK).json(combinedWallets);
     } catch (error) {
         res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error })
@@ -182,6 +183,47 @@ export const getDeposit = async (req: AuthenticatedRequest, res: Response) => {
         const deposit = await Deposit.find({
             userId: username
         }).sort({ date: -1 })
+        res.status(StatusCodes.OK).json(deposit)
+    } catch (error) {
+        res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error })
+    }
+}
+export const createWithdraw = async (req: AuthenticatedRequest, res: Response) => {
+    const { amount, walletId } = req.body;
+    const username = req.username;
+    if (!amount || !walletId) {
+        return res.status(StatusCodes.BAD_GATEWAY).json({ error: "Parameter are required" })
+    }
+    let balance = 800;
+    const deposit = await Deposit.find({ userId: username }).sort({ date: -1 }) as DepositTypes[]
+    const promotion = await Promotions.findOne({ _id: new ObjectId(deposit[0].promotionId) }) as PromotionTypes
+
+    const user = await Users.findOne({ username: username }) as UserTypes
+    if (promotion) {
+        const gameHistory = await History.find({ date: { $gte: deposit[0].date } }) as GameHistory[]
+        let turnOverAmount = 0;
+        gameHistory.map(d => {
+            turnOverAmount = turnOverAmount + d.bet;
+        })
+        if (turnOverAmount < promotion.turnOverAmount) {
+            res.status(StatusCodes.BAD_REQUEST).json({ error: "Please complete your turnover amount" })
+            return
+        }
+    }
+    if (user.balance < balance) {
+        return res.status(StatusCodes.BAD_REQUEST).json({ error: "You can only cash out over 800 BDT" })
+    }
+    if (user.balance < parseInt(amount)) {
+        return res.status(StatusCodes.BAD_REQUEST).json({ error: "Low balance to cash out" })
+
+    }
+
+    try {
+        const deposit = await Deposit.create({
+            walletId,
+            amount,
+            userId: username
+        })
         res.status(StatusCodes.OK).json(deposit)
     } catch (error) {
         res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error })

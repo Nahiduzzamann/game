@@ -41,13 +41,13 @@ export function Footer({ brandName, brandLink, routes }) {
 }
 
 Footer.defaultProps = {
-  brandName: "Creative Tim",
-  brandLink: "https://www.creative-tim.com",
+  brandName: "40Xbet",
+  brandLink: "https://www.40xbet.online",
   routes: [
-    { name: "Creative Tim", path: "https://www.creative-tim.com" },
-    { name: "About Us", path: "https://www.creative-tim.com/presentation" },
-    { name: "Blog", path: "https://www.creative-tim.com/blog" },
-    { name: "License", path: "https://www.creative-tim.com/license" },
+    { name: "40Xbet", path: "https://www.40xbet.online" },
+    { name: "About Us", path: "https://40xbet.online/info/aboutUs" },
+    { name: "Contact Us", path: "https://40xbet.online/info/contactUs" },
+    { name: "License", path: "https://40xbet.online/info/ResponsibleGaming" },
   ],
 };
 

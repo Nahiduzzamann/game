@@ -3,6 +3,7 @@ import {
   UserPlusIcon,
   UsersIcon,
   ChartBarIcon,
+  PuzzlePieceIcon
 } from "@heroicons/react/24/solid";
 
 export const statisticsCardsData = [
@@ -20,7 +21,7 @@ export const statisticsCardsData = [
   {
     color: "gray",
     icon: UsersIcon,
-    title: "Today's Users",
+    title: "Total Users",
     value: "2,300",
     footer: {
       color: "text-green-500",
@@ -30,20 +31,20 @@ export const statisticsCardsData = [
   },
   {
     color: "gray",
-    icon: UserPlusIcon,
-    title: "New Clients",
-    value: "3,462",
+    icon: PuzzlePieceIcon,
+    title: "Total Games",
+    value: "50",
     footer: {
       color: "text-red-500",
-      value: "-2%",
-      label: "than yesterday",
+      value: "1 Jan",
+      label: "from today",
     },
   },
   {
     color: "gray",
     icon: ChartBarIcon,
-    title: "Sales",
-    value: "$103,430",
+    title: "Total Revenue",
+    value: "৳53k",
     footer: {
       color: "text-green-500",
       value: "+5%",
