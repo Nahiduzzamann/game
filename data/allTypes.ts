@@ -48,7 +48,8 @@ export interface UserTypes {
     username: string,
     phone: string,
     date: Date,
-    balance: number
+    balance: number,
+    save:()=>{}
 }
 export interface PromotionTypes {
     title: string,

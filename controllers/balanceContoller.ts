@@ -197,8 +197,8 @@ export const createWithdraw = async (req: AuthenticatedRequest, res: Response) =
 
     try {
 
-        let balance = 800;
-        const deposit = await Deposit.find({ userId: username }).sort({ date: -1 }) as DepositTypes[];
+        let balance = 500;
+        const deposit = await Deposit.find({ userId: username, status: "ACCEPTED" }).sort({ date: -1 }) as DepositTypes[];
 
         if (deposit.length === 0) {
             // Handle the case when there is no deposit for the user
@@ -225,6 +225,12 @@ export const createWithdraw = async (req: AuthenticatedRequest, res: Response) =
             return res.status(StatusCodes.BAD_REQUEST).json({ error: "Low balance to cash out" })
 
         }
+        const decreaseAmountBy = parseInt(amount);
+
+        user.balance = user.balance - decreaseAmountBy;
+        user.save();
+
+
         const d = await Deposit.create({
             walletId,
             amount,
