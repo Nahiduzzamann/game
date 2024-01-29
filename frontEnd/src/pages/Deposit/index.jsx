@@ -59,9 +59,9 @@ export default function Deposit() {
     }
   };
   const callDeposit = async () => {
-    if (!inputAmount || !selectedImage) {
+    if (!inputAmount || !selectedImage || !depositBonus) {
       return toast({
-        title: "Enter amount and select payment method",
+        title: "Enter amount, select payment method and Deposite bonus",
         status: "info",
         duration: 5000,
         isClosable: true,
@@ -171,6 +171,7 @@ export default function Deposit() {
         <p className="font-bold pt-5 pb-2">Deposit Bonus</p>
 
         <Select
+        
           onChange={(e) => {
             setDepositBonus(e.target.value);
           }}
