@@ -11,11 +11,7 @@ import { BiTransferAlt } from "react-icons/bi";
 import { MdOutlineAutorenew } from "react-icons/md";
 import { IoGiftOutline } from "react-icons/io5";
 export default function History() {
-  const [selectedImage, setSelectedImage] = useState("");
-
-  const handleImageClick = (name) => {
-    setSelectedImage(name);
-  };
+ 
   return (
     <div className="bg-gray-500 max-w-full overflow-scroll rounded-lg p-4 ">
       <div className="p-5 bg-white rounded-md">

@@ -10,7 +10,7 @@ export default function DepositHistory() {
   const [data, setData] = useState(null);
   const [search, setSearch] = useState();
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(data?.filter((s) => s.tranXId.match(search)).length / itemsPerPage);
+  const totalPages = Math.ceil(data?.filter((s) => s.tranXId?.match(search)).length / itemsPerPage);
   useEffect(() => {
     getDeposits().then((res) => {
       //console.log(res.data);
@@ -44,7 +44,7 @@ export default function DepositHistory() {
         <div className="my-5 mx-2 font-semibold text-xl">No Deposit!</div>
       )}
       {data
-        ?.filter((s) => s.tranXId.match(search))
+        ?.filter((s) => s.tranXId?.match(search))
         ?.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
         .map((d, i) => (
           <HistoryCard

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   AlertDialog,
   AlertDialogBody,
@@ -15,6 +15,7 @@ import {
 import getUserWallet from "../../module/getUserWallet";
 import url from "../../module";
 import makeWithdraw from "../../module/makeWithdraw";
+import { AuthContext } from "../../providers/AuthProvider";
 
 export default function Withdrawal() {
   const [selectedImage, setSelectedImage] = useState("");
@@ -26,7 +27,7 @@ export default function Withdrawal() {
   const cancelRef = React.useRef();
   const [loader, setLoader] = useState(false);
   const toast = useToast();
-
+  const { setUpdateUserState } = useContext(AuthContext);
   const handleAmountClick = (amount) => {
     setSelectedAmount(amount);
     setInputAmount(amount);
@@ -51,7 +52,7 @@ export default function Withdrawal() {
       console.error(error.response.data.error);
     }
   };
-  const callWithdraw = async () => {
+  const callWithdraw = () => {
     if (!inputAmount || !selectedImage) {
       return toast({
         title: "Enter amount",
@@ -60,22 +61,32 @@ export default function Withdrawal() {
         isClosable: true,
       });
     }
-    try {
-      setLoader(true)
-      const withdraw = await makeWithdraw(selectedImage._id,inputAmount);
-     console.log(withdraw);
-     setLoader(false)
+    setLoader(true);
+    makeWithdraw(selectedImage._id, inputAmount)
+      .then(() => {
+        setLoader(false);
+        setUpdateUserState(Math.random())
+          toast({
+            title: "Withdraw Success",
+            status: "info",
+            duration: 10000,
+            isClosable: true,
+          });
+        
+       
+       
+      })
+      .catch((error) => {
+        setLoader(false);
+        console.log(error);
 
-    } catch (error) {
-      setLoader(false)
-      toast({
-        title: (error.response?.data?.error || "Somthing went wrong"),
-        status: "error",
-        duration: 10000,
-        isClosable: true,
+        toast({
+          title: error.response?.data?.error || 'Somthing went wrong',
+          status: "error",
+          duration: 10000,
+          isClosable: true,
+        });
       });
-
-    }
   };
   if (!apiData) {
     return (
@@ -154,7 +165,8 @@ export default function Withdrawal() {
           </div>
 
           <p className="font-bold pt-5 pb-2">
-            Withdraw Amount <span className="text-red-400">(500৳-30,000৳)*</span>
+            Withdraw Amount{" "}
+            <span className="text-red-400">(500৳-30,000৳)*</span>
           </p>
           <input
             type="number"
