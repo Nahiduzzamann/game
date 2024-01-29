@@ -59,9 +59,9 @@ export default function Deposit() {
     }
   };
   const callDeposit = async () => {
-    if (!inputAmount || !selectedImage || !depositBonus) {
+    if (!inputAmount || !selectedImage ) {
       return toast({
-        title: "Enter amount, select payment method and Deposite bonus",
+        title: "Enter amount and select payment method",
         status: "info",
         duration: 5000,
         isClosable: true,

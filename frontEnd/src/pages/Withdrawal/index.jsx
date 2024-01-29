@@ -1,180 +1,3 @@
-// import React, { useState, useEffect } from "react";
-// import { Input, Button, Stack, Text, useToast, Spinner } from "@chakra-ui/react";
-// import { useNavigate } from "react-router-dom";
-// import getUserWallet from "../../module/getUserWallet";
-// import url from "../../module";
-
-// const Withdrawal = () => {
-//   const [withdrawableAmount, setWithdrawableAmount] = useState("");
-//   const [paymentMethods, setPaymentMethods] = useState([]);
-//   const [loading, setLoading] = useState(false);
-//   const navigate = useNavigate();
-//   const toast = useToast();
-//   const [selectedImage, setSelectedImage] = useState("");
-//   useEffect(() => {
-//     getUserWallet()
-//     .then((response) => {
-//       setPaymentMethods(response.data);
-//       // console.log(response.data);
-//     })
-//     .catch((error) => {
-//       console.error("Error fetching wallets:", error);
-//     });
-//   }, []);
-
-//   const handleWithdrawal = async () => {
-//     if(!withdrawableAmount){
-//       return  toast({
-//         title: "Enter Amount",
-//         description: "An error occurred during withdrawal.",
-//         status: "error",
-//         duration: 5000,
-//         isClosable: true,
-//       });
-//     }else if(!selectedImage){
-//       return  toast({
-//         title: "Select Wallet",
-//         description: "An error occurred during withdrawal.",
-//         status: "error",
-//         duration: 5000,
-//         isClosable: true,
-//       });
-//     }
-//     setLoading(true);
-
-//     // Simulating an API call for withdrawal
-//     try {
-//       // Add your withdrawal logic here
-//       await new Promise((resolve) => setTimeout(resolve, 2000));
-//       toast({
-//         title: "Withdrawal Successful",
-//         description: `Successfully withdrew ${withdrawableAmount}`,
-//         status: "success",
-//         duration: 5000,
-//         isClosable: true,
-//       });
-//     } catch (error) {
-//       toast({
-//         title: "Withdrawal Failed",
-//         description: "An error occurred during withdrawal.",
-//         status: "error",
-//         duration: 5000,
-//         isClosable: true,
-//       });
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-//   const handleImageClick = (name) => {
-//     setSelectedImage(name);
-//   };
-//   const handleAddPaymentMethod = () => {
-//     navigate("/user/bank-details");
-//   };
-
-//   return (
-//     <div className="container mx-auto p-4">
-//     {
-//       paymentMethods.length > 0 && <h1 className="text-2xl font-semibold mb-4 ">
-//       Withdraw Your Available Amount{" "}
-//     </h1>
-//     }
-      
-
-//       <Stack spacing={4} mb={4}>
-//         <Input
-//          borderColor='gray.600'
-//           type="text"
-//           value={withdrawableAmount}
-//           onChange={(e) => setWithdrawableAmount(e.target.value)}
-//           placeholder="Enter amount"
-//         />
-//       </Stack>
-
-//       {paymentMethods.length > 0 ? (
-//         <Stack spacing={2} mb={4}>
-//           <Text fontSize="sm" fontWeight="medium">
-//             Payment Methods:
-//           </Text>
-//           {
-         
-//           paymentMethods &&  <span className="text-red-500"> Select Your Wallet-</span>
-//           }
-//           {
-//             paymentMethods ? (<div className="flex justify-center items-center flex-wrap gap-4">
-            
-//             {paymentMethods?.map((data, index) => (
-//               <div
-//                 key={index}
-//                 onClick={() => handleImageClick(data._id)}
-//                 className={` flex  items-center rounded-md overflow-hidden m-2 p-1 hover:bg-gray-300 cursor-pointer ${
-//                   selectedImage === data._id
-//                     ? "bg-blue-300 border-[#0082D6]"
-//                     : "bg-gray-200"
-//                 }`}
-//               >
-//                 <img
-//                   className="h-12 w-12"
-//                   src={`${url}${data.wallet.icon}`}
-//                   alt={`${data.methodName}`}
-//                 />
-//                 <div className="w-full mx-2 text-center  font-medium my-1">
-//                   {data.wallet.methodName}
-//                 </div>
-//                 <p>{data.walletNumber}</p>
-//               </div>
-//             ))}
-//           </div>):(<div className="flex justify-center items-center py-4"><Spinner color="blue.500"></Spinner></div>)
-//         }
-//         </Stack>
-//       ) : (
-//         <Button
-//           onClick={handleAddPaymentMethod}
-//           isLoading={loading}
-//           loadingText="Adding..."
-//           colorScheme="blue"
-//           size="sm"
-//         >
-//           Add Payment Method
-//         </Button>
-//       )}
-//       {paymentMethods.length > 0 && (
-//         <Button
-//           onClick={handleWithdrawal}
-//           isLoading={loading}
-//           loadingText="Withdrawing..."
-//           colorScheme="green"
-//           size="md"
-//         >
-//           Withdraw
-//         </Button>
-//       )}
-//     </div>
-//   );
-// };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { useEffect, useState } from "react";
 import {
   AlertDialog,
@@ -191,9 +14,11 @@ import {
 } from "@chakra-ui/react";
 import getUserWallet from "../../module/getUserWallet";
 import url from "../../module";
+import makeWithdraw from "../../module/makeWithdraw";
 
 export default function Withdrawal() {
   const [selectedImage, setSelectedImage] = useState("");
+  // console.log(selectedImage);
   const [selectedAmount, setSelectedAmount] = useState(200);
   const [inputAmount, setInputAmount] = useState(200);
   const [apiData, setApiData] = useState(null);
@@ -211,8 +36,8 @@ export default function Withdrawal() {
     setInputAmount(e.target.value);
     // You can add validation or other logic as needed
   };
-  const handleImageClick = (name) => {
-    setSelectedImage(name);
+  const handleImageClick = (wallet) => {
+    setSelectedImage(wallet);
   };
 
   useEffect(() => {
@@ -229,22 +54,28 @@ export default function Withdrawal() {
   const callWithdraw = async () => {
     if (!inputAmount || !selectedImage) {
       return toast({
-        title: "Enter amount and select withraw method",
-        status: "info",
+        title: "Enter amount",
+        status: "error",
         duration: 5000,
         isClosable: true,
       });
     }
     try {
-      openPopup();
-    } catch (error) {console.log(error)}
-  };
-  const openPopup = () => {
-    
-    const width = 300;
-    const height = 400;
-    const popupSettings = `width=${width},height=${height},resizable=yes,scrollbars=yes,status=yes`;
-    window.open(url, "_blank", popupSettings);
+      setLoader(true)
+      const withdraw = await makeWithdraw(selectedImage._id,inputAmount);
+     console.log(withdraw);
+     setLoader(false)
+
+    } catch (error) {
+      setLoader(false)
+      toast({
+        title: (error.response.data.error || "Somthing went wrong"),
+        status: "error",
+        duration: 10000,
+        isClosable: true,
+      });
+
+    }
   };
   if (!apiData) {
     return (
@@ -268,15 +99,15 @@ export default function Withdrawal() {
         </h1>
 
         <p className="font-bold pt-5 pb-2">
-        Withdraw Methods <span className="text-red-500 ">*</span>
+          Withdraw Methods <span className="text-red-500 ">*</span>
         </p>
         <div className="flex">
           {apiData?.map((data, index) => (
             <div
               key={index}
-              onClick={() => handleImageClick(data.wallet._id)}
+              onClick={() => handleImageClick(data.wallet)}
               className={` flex  items-center rounded-md overflow-hidden m-2  hover:bg-gray-300 cursor-pointer ${
-                selectedImage === data.wallet._id
+                selectedImage._id === data.wallet._id
                   ? "bg-blue-300 border-[#0082D6]"
                   : "bg-gray-200"
               }`}
@@ -288,7 +119,7 @@ export default function Withdrawal() {
               />
               <div className="w-full mx-2  font-medium my-1">
                 {data.wallet.methodName}
-               <p>{data.wallet.walletNumber}</p>
+                <p>{data.wallet.walletNumber}</p>
               </div>
             </div>
           ))}
@@ -336,10 +167,14 @@ export default function Withdrawal() {
         <div className="pt-5 text-center">
           <div
             onClick={() => {
-              if (loader) {
-                return;
-              }
-              else {
+              if (!selectedImage) {
+                return toast({
+                  title: "Select withraw method",
+                  status: "error",
+                  duration: 5000,
+                  isClosable: true,
+                });
+              } else {
                 onOpen();
               }
             }}
@@ -373,12 +208,26 @@ export default function Withdrawal() {
                   <AlertDialogCloseButton />
                   <AlertDialogBody>
                     <div className="border-t-4 border-indigo-300 p-5">
+                      <div className="p-2 font-semibold items-center flex justify-between border-b-2">
+                        <p>Withdraw method</p>
+                        <div
+                          className={` flex  items-center rounded-md overflow-hidden m-2`}
+                        >
+                          <img
+                            className="h-12 w-12"
+                            src={`${url}${selectedImage?.icon}`}
+                            alt={`${selectedImage?.methodName}`}
+                          />
+                          <div className="w-full mx-2  font-medium my-1">
+                            {selectedImage?.methodName}
+                            <p>{selectedImage?.walletNumber}</p>
+                          </div>
+                        </div>
+                      </div>
                       <div className="p-2 font-semibold flex justify-between">
-                      Withdraw amount{" "}
+                        Withdraw amount{" "}
                         <span className="ps-40">৳ {inputAmount}</span>
                       </div>
-                      
-                     
                     </div>
                   </AlertDialogBody>
                   <AlertDialogFooter>
