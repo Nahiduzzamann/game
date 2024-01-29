@@ -194,37 +194,38 @@ export const createWithdraw = async (req: AuthenticatedRequest, res: Response) =
     if (!amount || !walletId) {
         return res.status(StatusCodes.BAD_GATEWAY).json({ error: "Parameter are required" })
     }
-    let balance = 800;
-    const deposit = await Deposit.find({ userId: username }).sort({ date: -1 }) as DepositTypes[]
-    const promotion = await Promotions.findOne({ _id: new ObjectId(deposit[0].promotionId) }) as PromotionTypes
-
-    const user = await Users.findOne({ username: username }) as UserTypes
-    if (promotion) {
-        const gameHistory = await History.find({ date: { $gte: deposit[0].date } }) as GameHistory[]
-        let turnOverAmount = 0;
-        gameHistory.map(d => {
-            turnOverAmount = turnOverAmount + d.bet;
-        })
-        if (turnOverAmount < promotion.turnOverAmount) {
-            res.status(StatusCodes.BAD_REQUEST).json({ error: "Please complete your turnover amount" })
-            return
-        }
-    }
-    if (user.balance < balance) {
-        return res.status(StatusCodes.BAD_REQUEST).json({ error: "You can only cash out over 800 BDT" })
-    }
-    if (user.balance < parseInt(amount)) {
-        return res.status(StatusCodes.BAD_REQUEST).json({ error: "Low balance to cash out" })
-
-    }
 
     try {
-        const deposit = await Deposit.create({
+        let balance = 800;
+        const deposit = await Deposit.find({ userId: username }).sort({ date: -1 }) as DepositTypes[]
+        const promotion = deposit[0].promotionId? await Promotions.findOne({ _id: new ObjectId(deposit[0].promotionId) }) as PromotionTypes:null;
+
+        const user = await Users.findOne({ username: username }) as UserTypes
+        if (promotion) {
+            const gameHistory = await History.find({ date: { $gte: deposit[0].date } }) as GameHistory[]
+            let turnOverAmount = 0;
+            gameHistory.map(d => {
+                turnOverAmount = turnOverAmount + d.bet;
+            })
+            if (turnOverAmount < promotion.turnOverAmount) {
+                res.status(StatusCodes.BAD_REQUEST).json({ error: "Please complete your turnover amount" })
+                return
+            }
+        }
+        if (user.balance < balance) {
+            return res.status(StatusCodes.BAD_REQUEST).json({ error: "You can only cash out over 800 BDT" })
+        }
+        if (user.balance < parseInt(amount)) {
+            return res.status(StatusCodes.BAD_REQUEST).json({ error: "Low balance to cash out" })
+
+        }
+
+        const d = await Deposit.create({
             walletId,
             amount,
             userId: username
         })
-        res.status(StatusCodes.OK).json(deposit)
+        res.status(StatusCodes.OK).json(d)
     } catch (error) {
         res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error })
     }

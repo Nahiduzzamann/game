@@ -8,29 +8,8 @@ import {
 import { Navbar, Footer } from "@/widgets/layout";
 import routes from "@/routes";
 
-export function Auth() {
-  const navbarRoutes = [
-    {
-      name: "dashboard",
-      path: "/dashboard/home",
-      icon: ChartPieIcon,
-    },
-    {
-      name: "profile",
-      path: "/dashboard/home",
-      icon: UserIcon,
-    },
-    {
-      name: "sign up",
-      path: "/auth/sign-up",
-      icon: UserPlusIcon,
-    },
-    {
-      name: "sign in",
-      path: "/auth/sign-in",
-      icon: ArrowRightOnRectangleIcon,
-    },
-  ];
+export function Auth({setAdmin}) {
+ 
 
   return (
     <div className="relative min-h-screen w-full">
@@ -39,7 +18,7 @@ export function Auth() {
           ({ layout, pages }) =>
             layout === "auth" &&
             pages.map(({ path, element }) => (
-              <Route exact path={path} element={element} />
+              <Route  path={path} element={element} />
             ))
         )}
       </Routes>
