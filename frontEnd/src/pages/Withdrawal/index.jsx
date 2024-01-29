@@ -15,7 +15,7 @@ const Withdrawal = () => {
     getUserWallet()
     .then((response) => {
       setPaymentMethods(response.data);
-      // console.log(response.data);
+      console.log(response.data);
     })
     .catch((error) => {
       console.error("Error fetching wallets:", error);
@@ -57,9 +57,12 @@ const Withdrawal = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-semibold mb-4 ">
-        Withdraw Your Available Amount{" "}
-      </h1>
+    {
+      paymentMethods.length > 0 && <h1 className="text-2xl font-semibold mb-4 ">
+      Withdraw Your Available Amount{" "}
+    </h1>
+    }
+      
 
       <Stack spacing={4} mb={4}>
         <Input
@@ -78,7 +81,7 @@ const Withdrawal = () => {
           </Text>
           {
             paymentMethods ? (<div className="flex justify-center items-center flex-wrap gap-4">
-            <span className="text-red-500">  Please select a wallet:</span>
+            <span className="text-red-500"> Select Your Wallet:</span>
             {paymentMethods?.map((data, index) => (
               <div
                 key={index}
@@ -89,14 +92,14 @@ const Withdrawal = () => {
                     : "bg-gray-200"
                 }`}
               >
-                {/* <img
+                <img
                   className="h-12 w-12"
-                  src={`${url}${data.icon}`}
+                  src={`${url}${data.wallet.icon}`}
                   alt={`${data.methodName}`}
                 />
                 <div className="w-full mx-2 text-center  font-medium my-1">
-                  {data.methodName}
-                </div> */}
+                  {data.wallet.methodName}
+                </div>
                 <p>{data.walletNumber}</p>
               </div>
             ))}
