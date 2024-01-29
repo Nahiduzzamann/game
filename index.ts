@@ -35,10 +35,10 @@ app.get("/deployment", (req: Request, res: Response) => {
 });
 //user 
 app.use("/api/user", user)
-app.get("/dashboard", (req: Request, res: Response) => {
+app.get("/dashboard/*", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "dashboard/dist/index.html"))
 });
-app.get("/auth", (req: Request, res: Response) => {
+app.get("/auth/*", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "dashboard/dist/index.html"))
 });
 app.get("*", (req: Request, res: Response) => {

@@ -1,3 +1,5 @@
+import { GameList } from "./gameDataTypes"
+
 export interface UserModel {
     name: string, // String is shorthand for {type: String}
     password: string,
@@ -14,6 +16,7 @@ export interface GameHistory {
     username: string,
     gameId: string,
     id: number,
+    game:GameList
 }
 export interface WalletsTypes {
     _id: string

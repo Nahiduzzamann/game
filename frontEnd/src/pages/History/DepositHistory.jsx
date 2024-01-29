@@ -10,7 +10,7 @@ export default function DepositHistory() {
   const [data, setData] = useState(null);
   const [search, setSearch] = useState();
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(data?.length / itemsPerPage);
+  const totalPages = Math.ceil(data?.filter((s) => s.tranXId.match(search)).length / itemsPerPage);
   useEffect(() => {
     getDeposits().then((res) => {
       //console.log(res.data);
@@ -19,7 +19,7 @@ export default function DepositHistory() {
   }, []);
   if (!data) {
     return (
-      <div className="h-screen flex items-center justify-center">
+      <div className="min-h-[50vh] flex items-center justify-center">
         <Spinner
           thickness="4px"
           speed="0.65s"
@@ -31,7 +31,7 @@ export default function DepositHistory() {
     );
   }
   return (
-    <div>
+    <div className="min-h-[50vh]">
       <div>
         <input
           value={search}
@@ -40,6 +40,9 @@ export default function DepositHistory() {
           placeholder="Search"
         />
       </div>
+      {data?.length === 0 && (
+        <div className="my-5 mx-2 font-semibold text-xl">No Deposit!</div>
+      )}
       {data
         ?.filter((s) => s.tranXId.match(search))
         ?.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)

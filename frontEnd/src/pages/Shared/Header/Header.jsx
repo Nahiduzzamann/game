@@ -44,7 +44,7 @@ const Header = () => {
       try {
         const cat = await getCategory(url);
         setData(cat.data);
-        console.log(cat.data);
+        //console.log(cat.data);
         localStorage.setItem("category", JSON.stringify(cat?.data));
       } catch (error) {
         console.error(error.message);
