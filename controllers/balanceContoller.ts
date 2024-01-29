@@ -112,6 +112,17 @@ export const getUserWallets = async (req: AuthenticatedRequest, res: Response) =
         res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error })
     }
 }
+export const deleteUserWallets = async (req: AuthenticatedRequest, res: Response) => {
+    const { id } = req.params;
+    try {
+        const combinedWallets = await UserWallets.deleteOne({_id:new ObjectId(id)})
+
+       // console.log(combinedWallets);
+        res.status(StatusCodes.OK).json(combinedWallets);
+    } catch (error) {
+        res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error })
+    }
+}
 export const getWallets = async (req: Request, res: Response) => {
     try {
         const wallet = await Wallets.find()
