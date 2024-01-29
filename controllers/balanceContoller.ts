@@ -196,9 +196,15 @@ export const createWithdraw = async (req: AuthenticatedRequest, res: Response) =
     }
 
     try {
+
         let balance = 800;
-        const deposit = await Deposit.find({ userId: username }).sort({ date: -1 }) as DepositTypes[]
-        const promotion = deposit[0].promotionId? await Promotions.findOne({ _id: new ObjectId(deposit[0].promotionId) }) as PromotionTypes:null;
+        const deposit = await Deposit.find({ userId: username }).sort({ date: -1 }) as DepositTypes[];
+
+        if (deposit.length === 0) {
+            // Handle the case when there is no deposit for the user
+            return res.status(StatusCodes.BAD_REQUEST).json({ error: "No deposit found" });
+        }
+        const promotion = deposit[0].promotionId != "undefined" && deposit[0].promotionId ? await Promotions.findOne({ _id: new ObjectId(deposit[0].promotionId) }) as PromotionTypes : null;
 
         const user = await Users.findOne({ username: username }) as UserTypes
         if (promotion) {
@@ -212,14 +218,13 @@ export const createWithdraw = async (req: AuthenticatedRequest, res: Response) =
                 return
             }
         }
-        if (user.balance < balance) {
+        if (parseInt(amount) < balance) {
             return res.status(StatusCodes.BAD_REQUEST).json({ error: "You can only cash out over 800 BDT" })
         }
         if (user.balance < parseInt(amount)) {
             return res.status(StatusCodes.BAD_REQUEST).json({ error: "Low balance to cash out" })
 
         }
-
         const d = await Deposit.create({
             walletId,
             amount,
@@ -227,6 +232,6 @@ export const createWithdraw = async (req: AuthenticatedRequest, res: Response) =
         })
         res.status(StatusCodes.OK).json(d)
     } catch (error) {
-        res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error })
+        res.status(StatusCodes.EXPECTATION_FAILED).json(error)
     }
 }
