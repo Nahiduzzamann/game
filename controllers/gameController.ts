@@ -237,35 +237,35 @@ export const getGameHistory = async (req: AuthenticatedRequest, res: Response) =
         const gameList = games[0].content.gameList;
         const allGames = gameList.filter(d => (d.categories == categories[id].slag))
         // const history = await History.find({ username: userId }) as GameHistory[]
-        const history = await History.aggregate([
-            {
-                $match: { username: userId }
-            },
-            {
-                $lookup: {
-                  from: 'games',
-                  let: { gameIdObj: '$gameId' },
-                  pipeline: [
-                    {
-                      $match: {
-                        $expr: {
-                            $in: ['$$gameIdObj', '$content.gameList.id']
-                        }
-                      }
-                    }
-                  ],
-                  as: 'game'
-                }
-              },
-            // {
-            //     $addFields: {
-            //         game: { $arrayElemAt: ['$game', 0] }
-            //     }
-            // }
+        // const history = await History.aggregate([
+        //     {
+        //         $match: { username: userId }
+        //     },
+        //     {
+        //         $lookup: {
+        //           from: 'games',
+        //           let: { gameIdObj: '$gameId' },
+        //           pipeline: [
+        //             {
+        //               $match: {
+        //                 $expr: {
+        //                     $in: ['$$gameIdObj', '$content.gameList.id']
+        //                 }
+        //               }
+        //             }
+        //           ],
+        //           as: 'game'
+        //         }
+        //       },
+        //     // {
+        //     //     $addFields: {
+        //     //         game: { $arrayElemAt: ['$game', 0] }
+        //     //     }
+        //     // }
 
-        ])
+        // ])
 
-        res.status(StatusCodes.OK).json(history)
+        res.status(StatusCodes.OK).json([])
     } catch (error) {
         console.log(error);
 
