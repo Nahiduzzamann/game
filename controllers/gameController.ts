@@ -236,36 +236,17 @@ export const getGameHistory = async (req: AuthenticatedRequest, res: Response) =
         const games = (await Games.find()) as GameTypes
         const gameList = games[0].content.gameList;
         const allGames = gameList.filter(d => (d.categories == categories[id].slag))
-        // const history = await History.find({ username: userId }) as GameHistory[]
-        // const history = await History.aggregate([
-        //     {
-        //         $match: { username: userId }
-        //     },
-        //     {
-        //         $lookup: {
-        //           from: 'games',
-        //           let: { gameIdObj: '$gameId' },
-        //           pipeline: [
-        //             {
-        //               $match: {
-        //                 $expr: {
-        //                     $in: ['$$gameIdObj', '$content.gameList.id']
-        //                 }
-        //               }
-        //             }
-        //           ],
-        //           as: 'game'
-        //         }
-        //       },
-        //     // {
-        //     //     $addFields: {
-        //     //         game: { $arrayElemAt: ['$game', 0] }
-        //     //     }
-        //     // }
+        const history = await History.find({ username: userId }) as GameHistory[]
+        let arr: GameHistory[] = []
+        
+        history.map(d => {
+            const game = allGames.find(s => s.id == d.gameId)
+            if (game) {
+               return arr.push({ ...d, game: game })
+            }
+        })
 
-        // ])
-
-        res.status(StatusCodes.OK).json([])
+        res.status(StatusCodes.OK).json(arr.reverse())
     } catch (error) {
         console.log(error);
 
