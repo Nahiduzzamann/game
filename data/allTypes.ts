@@ -16,7 +16,7 @@ export interface GameHistory {
     username: string,
     gameId: string,
     id: number,
-    game:GameList
+    game: GameList
 }
 export interface WalletsTypes {
     _id: string
@@ -30,5 +30,32 @@ export interface UserWalletsTypes {
     walletId: string,
     channel: string,
     userId: string,
-    wallet:WalletsTypes
+    wallet: WalletsTypes
+}
+export interface DepositTypes {
+    walletId: string,
+    amount: number,
+    promotionId: string,
+    date: Date,
+    status: string,
+    remarks: string,
+    tranXId: string,
+    userId: string
+}
+export interface UserTypes {
+    name: string, // String is shorthand for {type: String}
+    password: string,
+    username: string,
+    phone: string,
+    date: Date,
+    balance: number
+}
+export interface PromotionTypes {
+    title: string,
+    description: string,
+    image: string,
+    details: string,
+    bonusPercentage: number,
+    turnOverAmount: number,
+    applicable: boolean
 }
