@@ -288,7 +288,7 @@ export default function Withdrawal() {
               />
               <div className="w-full mx-2  font-medium my-1">
                 {data.wallet.methodName}
-                <p><p>{data.wallet.walletNumber}</p></p>
+               <p>{data.wallet.walletNumber}</p>
               </div>
             </div>
           ))}
