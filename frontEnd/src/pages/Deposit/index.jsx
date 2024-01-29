@@ -139,7 +139,7 @@ export default function Deposit() {
                   selectedAmount == amount ? "bg-blue-500" : ""
                 }`}
               >
-                {amount}
+                {amount}৳
               </div>
             ))}
           </div>
@@ -152,7 +152,7 @@ export default function Deposit() {
                   selectedAmount == amount ? "bg-blue-500" : ""
                 }`}
               >
-                {amount}
+                {amount}৳
               </div>
             ))}
           </div>

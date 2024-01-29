@@ -69,7 +69,7 @@ export default function Withdrawal() {
     } catch (error) {
       setLoader(false)
       toast({
-        title: (error.response.data.error || "Somthing went wrong"),
+        title: (error.response?.data?.error || "Somthing went wrong"),
         status: "error",
         duration: 10000,
         isClosable: true,
@@ -127,7 +127,7 @@ export default function Withdrawal() {
 
         <div>
           <div className="text-center pt-4 flex items-center">
-            {[200, 500, 1000].map((amount) => (
+            {[500, 800, 1000].map((amount) => (
               <div
                 key={amount}
                 onClick={() => handleAmountClick(amount)}
@@ -135,7 +135,7 @@ export default function Withdrawal() {
                   selectedAmount == amount ? "bg-blue-500" : ""
                 }`}
               >
-                {amount}
+                {amount}৳
               </div>
             ))}
           </div>
@@ -148,13 +148,13 @@ export default function Withdrawal() {
                   selectedAmount == amount ? "bg-blue-500" : ""
                 }`}
               >
-                {amount}
+                {amount}৳
               </div>
             ))}
           </div>
 
-          <p className="font-bold pt-5 pb-2 flex justify-between">
-            Withdraw Amount *
+          <p className="font-bold pt-5 pb-2">
+            Withdraw Amount <span className="text-red-400">(500৳-30,000৳)*</span>
           </p>
           <input
             type="number"
