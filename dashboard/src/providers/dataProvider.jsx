@@ -11,13 +11,37 @@ export const AuthContext = createContext();
 
 const DataProvider = ({ children }) => {
     const [depositeData, setDepositeData] = useState(null);
+    const [depositeDataLastMonth, setDepositeDataLastMonth] = useState(null);
     const [revenueData, setRevenueData] = useState(null);
     const [revenueDataLastMonth, setRevenueDataLastMonth] = useState(null);
-    console.log(revenueData);
+    console.log(depositeData);
     useEffect(() => {
         localStorage.setItem('currentTime',new Date())
         getDeposite()
         .then((res)=>{
+           
+            const calculatePercentageRevenueChange = (monthlyHistory) => {
+                if (monthlyHistory.length < 2) {
+                  // Cannot calculate percentage change with only one month
+                  return 100;
+                }
+              
+                const currentRevenue = monthlyHistory[monthlyHistory.length - 1].revenue;
+                const previousRevenue = monthlyHistory[monthlyHistory.length - 2].revenue;
+              
+                if (previousRevenue === 0) {
+                  // Handle division by zero
+                  return 'N/A';
+                }
+              
+                const percentageChange = Math.round(((currentRevenue - previousRevenue) / Math.abs(previousRevenue)) * 100);
+                return percentageChange;
+              };
+              
+              const percentageChange = calculatePercentageRevenueChange(res.data.monthlyDeposit);
+              
+              setDepositeDataLastMonth(percentageChange);
+
             setDepositeData(res.data);
         })
        .catch((err)=>{
@@ -57,16 +81,16 @@ const DataProvider = ({ children }) => {
        })
     }, [])
 
-    const statisticsCardsData=(revenueData,depositeData,revenueDataLastMonth) => [
+    const statisticsCardsData=(revenueData,depositeData,revenueDataLastMonth,depositeDataLastMonth) => [
         {
           color: "gray",
           icon: BanknotesIcon,
           title: "Total Deposit",
           value: `৳${(depositeData?.subTotal/1000).toFixed(1)}k`,
           footer: {
-            color: "text-green-500",
-            value: "+55%",
-            label: "than last week",
+            color: `${depositeDataLastMonth <=0 ? 'text-red-500':'text-green-500'} `,
+            value: `${depositeDataLastMonth <=0 ? '':'+'}${depositeDataLastMonth}%`,
+            label: "than last month",
           },
         },
         {
@@ -84,7 +108,7 @@ const DataProvider = ({ children }) => {
           color: "gray",
           icon: PuzzlePieceIcon,
           title: "Total Games",
-          value: "50",
+          value: "100+",
           footer: {
             color: "text-red-500",
             value: "1 Jan",
@@ -109,7 +133,8 @@ const DataProvider = ({ children }) => {
         depositeData,
         statisticsCardsData,
         revenueData,
-        revenueDataLastMonth
+        revenueDataLastMonth,
+        depositeDataLastMonth
     }
 
     return (
