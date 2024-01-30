@@ -14,6 +14,8 @@ import {
 import { Home, Profile, Tables, Notifications } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
 import Deposit from "./pages/dashboard/deposit";
+import Turnovers from "./pages/dashboard/turnovers";
+import Withdraws from "./pages/dashboard/withdraws";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -39,13 +41,13 @@ export const routes = [
         icon: <ArrowUturnUpIcon {...icon} />,
         name: "turnovers",
         path: "/turnovers",
-        element: <Home />,
+        element: <Turnovers></Turnovers>,
       },
       {
         icon: <ArrowsUpDownIcon {...icon} />,
         name: "withdraws",
         path: "/withdraws",
-        element: <Home />,
+        element: <Withdraws></Withdraws>,
       },
       {
         icon: <InformationCircleIcon {...icon} />,

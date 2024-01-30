@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import HistoryCard from "./HistoryCard";
 import getDeposits from "../../module/getDeposits";
 import { Spinner } from "@chakra-ui/react";
 
 import ResponsivePagination from "react-responsive-pagination";
+import { AuthContext } from "../../providers/AuthProvider";
 
 export default function DepositHistory() {
+  const { selectedLanguage } = useContext(AuthContext);
   const itemsPerPage = 4;
   const [data, setData] = useState(null);
   const [search, setSearch] = useState();
@@ -41,7 +43,11 @@ export default function DepositHistory() {
         />
       </div>
       {data?.length === 0 && (
-        <div className="my-5 mx-2 font-semibold text-xl">No Deposit!</div>
+        <div className="my-5 mx-2 font-semibold text-xl">
+        {
+          selectedLanguage ==='en' ? "No Deposit!":"কোন আমানত!"
+        }
+        </div>
       )}
       {data
         ?.filter((s) => s.tranXId?.match(search))

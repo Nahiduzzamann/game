@@ -4,6 +4,7 @@ import { AuthContext } from '../../providers/AuthProvider';
 import { Spinner, useToast } from '@chakra-ui/react';
 
 const ChangePasswordPage = () => {
+  const { selectedLanguage } = useContext(AuthContext);
   const { user, updatePassword } = useContext(AuthContext);
   const [error, setError] = useState("");
   const [currentPassword, setCurrentPassword] = useState(null);
@@ -72,12 +73,16 @@ const ChangePasswordPage = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Change Password</h1>
+      <h1 className="text-3xl font-bold mb-4">
+      {
+          selectedLanguage ==='en' ? "Change Password":"পাসওয়ার্ড পরিবর্তন করুন"
+        }
+        </h1>
 
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-600 text-sm font-bold mb-2">
-            Current Password
+          Current Password
           </label>
           <div className="relative">
             <input
@@ -103,7 +108,10 @@ const ChangePasswordPage = () => {
 
         <div className="mb-4">
           <label className="block text-gray-600 text-sm font-bold mb-2">
-            New Password
+            
+            {
+          selectedLanguage ==='en' ? "New Password":"নতুন গোপননম্বর"
+        }
           </label>
           <div className="relative">
             <input
@@ -127,7 +135,10 @@ const ChangePasswordPage = () => {
 
         <div className="mb-4">
           <label className="block text-gray-600 text-sm font-bold mb-2">
-            Confirm New Password
+           
+            {
+          selectedLanguage ==='en' ? " Confirm New Password":"নিশ্চিত কর নতুন গোপননম্বর"
+        }
           </label>
           <div className="relative">
             <input
@@ -155,7 +166,10 @@ const ChangePasswordPage = () => {
           </div>
           {newPassword === confirmNewPassword || (
             <p className="text-red-500 text-sm mt-2">
-              New password and confirm password must match.
+              
+              {
+          selectedLanguage ==='en' ? "New password and confirm password must match.":"নতুন পাসওয়ার্ড এবং নিশ্চিত পাসওয়ার্ড অবশ্যই মিলবে।"
+        }
             </p>
           )}
         </div>

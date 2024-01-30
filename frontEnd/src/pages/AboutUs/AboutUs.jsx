@@ -7,20 +7,20 @@ const AboutUs = () => {
     <div className="p-5">
       <h1 className="text-center p-5 font-bold border-b-4 border-indigo-500 text-3xl">
        
-
         {
-          selectedLanguage ==='en' ? " ABOUT US":"এবাউট আস"
+          selectedLanguage ==='en' ? "ABOUT US":"আমাদের সম্পর্কে"
         }
+
       </h1>
 
       <p className="font-bold pt-5 pb-2">{
-          selectedLanguage ==='en' ? " ABOUT US":"এবাউট আস"
+          selectedLanguage ==='en' ? " ABOUT US":"আমাদের সম্পর্কে"
         }
         </p>
 
       <p className="font-bold pt-5 pb-2 underline underline-offset-5">
         {
-          selectedLanguage ==='en' ? " ABOUT US":"এবাউট আস"
+          selectedLanguage ==='en' ? " ABOUT US":"আমাদের সম্পর্কে"
         }
       </p>
       <p className="font-medium">
@@ -70,14 +70,16 @@ const AboutUs = () => {
       </p>
 
       <p className="font-bold pt-5 pb-2 underline underline-offset-5">
-        Security And Customer Service
+        
+        {
+          selectedLanguage ==='en' ? "Security And Customer Service":"নিরাপত্তা এবং গ্রাহক সেবা"
+        }
       </p>
       <p className="font-medium pb-5">
-        40XBET prioritizes security and safety. It uses advanced encryption
-        technology to keep user information secure¹. The platform also offers
-        24/7 customer service.
+        
         {
-          selectedLanguage ==='en' ? "Casino Games":"ক্যাসিনো গেম"
+          selectedLanguage ==='en' ? "40XBET prioritizes security and safety. It uses advanced encryption technology to keep user information secure¹. The platform also offers24/7 customer service."
+          :"40XBET নিরাপত্তা এবং নিরাপত্তাকে অগ্রাধিকার দেয়। এটি উন্নত এনক্রিপশন ব্যবহার করে  ব্যবহারকারীর তথ্য নিরাপদ রাখতে প্রযুক্তি¹। প্ল্যাটফর্মটিও অফার করে  24/7 গ্রাহক পরিষেবা।"
         }
       </p>
     </div>
