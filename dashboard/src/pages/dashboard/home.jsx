@@ -29,11 +29,11 @@ import { CheckCircleIcon, ClockIcon } from "@heroicons/react/24/solid";
 import { AuthContext } from "@/providers/dataProvider";
 
 export function Home() {
-  const { statisticsCardsData,revenueData,depositeData,revenueDataLastMonth } = useContext(AuthContext);
+  const { statisticsCardsData,revenueData,depositeData,revenueDataLastMonth,depositeDataLastMonth } = useContext(AuthContext);
   return (
     <div className="mt-12">
       <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
-        {statisticsCardsData(revenueData,depositeData,revenueDataLastMonth)?.map(({ icon, title, footer, ...rest }) => (
+        {statisticsCardsData(revenueData,depositeData,revenueDataLastMonth,depositeDataLastMonth)?.map(({ icon, title, footer, ...rest }) => (
           revenueData ? (<StatisticsCard
             key={title}
             {...rest}
@@ -52,7 +52,7 @@ export function Home() {
         ))}
       </div>
       <div className="mb-6 grid grid-cols-1 gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
-        {statisticsChartsData.map((props) => (
+        {statisticsChartsData(revenueData,depositeData,revenueDataLastMonth,depositeDataLastMonth)?.map((props) => (
           <StatisticsChart
             key={props.title}
             {...props}

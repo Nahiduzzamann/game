@@ -1,6 +1,6 @@
 import { chartsConfig } from "@/configs";
 
-const websiteViewsChart = {
+const websiteViewsChart=(revenueData,depositeData,revenueDataLastMonth,depositeDataLastMonth) => ({
   type: "bar",
   height: 220,
   series: [
@@ -23,15 +23,15 @@ const websiteViewsChart = {
       categories: ["M", "T", "W", "T", "F", "S", "S"],
     },
   },
-};
+});
 
-const dailySalesChart = {
+const dailySalesChart=(revenueData,depositeData,revenueDataLastMonth,depositeDataLastMonth) => ({
   type: "line",
   height: 220,
   series: [
     {
       name: "Sales",
-      data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
+      data:depositeData?.monthlyDeposit.reverse().slice(0,8).map((data)=>data.deposit) || [0,0,0,0,0,0,0,0,0],
     },
   ],
   options: {
@@ -45,7 +45,7 @@ const dailySalesChart = {
     },
     xaxis: {
       ...chartsConfig.xaxis,
-      categories: [
+      categories: depositeData?.monthlyDeposit.reverse().slice(0,8).map((data)=>data.month) ||  [
         "Apr",
         "May",
         "Jun",
@@ -58,9 +58,9 @@ const dailySalesChart = {
       ],
     },
   },
-};
+});
 
-const completedTaskChart = {
+const completedTaskChart=(revenueData,depositeData,revenueDataLastMonth,depositeDataLastMonth) => ({
   type: "line",
   height: 220,
   series: [
@@ -93,39 +93,39 @@ const completedTaskChart = {
       ],
     },
   },
-};
-const completedTasksChart = {
-  ...completedTaskChart,
+});
+const completedTasksChart=(revenueData,depositeData,revenueDataLastMonth,depositeDataLastMonth) => ({
+  ...completedTaskChart(revenueData,depositeData,revenueDataLastMonth,depositeDataLastMonth),
   series: [
     {
       name: "Tasks",
       data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
     },
   ],
-};
+});
 
-export const statisticsChartsData = [
+export const statisticsChartsData=(revenueData,depositeData,revenueDataLastMonth,depositeDataLastMonth) => ([
   {
     color: "white",
     title: "Website View",
     description: "Last Campaign Performance",
     footer: "campaign sent 2 days ago",
-    chart: websiteViewsChart,
+    chart: websiteViewsChart(revenueData,depositeData,revenueDataLastMonth,depositeDataLastMonth),
   },
   {
     color: "white",
     title: "Deposit Report",
     description: "15% increase in today sales",
     footer: "updated 4 min ago",
-    chart: dailySalesChart,
+    chart: dailySalesChart(revenueData,depositeData,revenueDataLastMonth,depositeDataLastMonth),
   },
   {
     color: "white",
     title: "Revenue Report",
     description: "Last Campaign Performance",
     footer: "just updated",
-    chart: completedTasksChart,
+    chart: completedTasksChart(revenueData,depositeData,revenueDataLastMonth,depositeDataLastMonth),
   },
-];
+]);
 
 export default statisticsChartsData;
