@@ -6,13 +6,22 @@ const AboutUs = () => {
   return (
     <div className="p-5">
       <h1 className="text-center p-5 font-bold border-b-4 border-indigo-500 text-3xl">
-        ABOUT US
+       
+
+        {
+          isEnglish ? " ABOUT US":"এবাউট আস"
+        }
       </h1>
 
-      <p className="font-bold pt-5 pb-2">ABOUT US</p>
+      <p className="font-bold pt-5 pb-2">{
+          isEnglish ? " ABOUT US":"এবাউট আস"
+        }
+        </p>
 
       <p className="font-bold pt-5 pb-2 underline underline-offset-5">
-        About Us
+        {
+          isEnglish ? " ABOUT US":"এবাউট আস"
+        }
       </p>
       <p className="font-medium">
         {isEnglish
@@ -21,30 +30,43 @@ const AboutUs = () => {
       </p>
 
       <p className="font-bold pt-5 pb-2 underline underline-offset-5">
-        Sports Betting
+        
+        {
+          isEnglish ? " Sports Betting":"ক্রীড়া পণ"
+        }
       </p>
       <p className="font-medium">
-        40XBET provides extensive sports betting opportunities. Users can place
-        bets on various sports events including IPL, World Cup, Big Bash League,
-        CPL, T20, Test Cricket, and ICC matches.
+      {
+          isEnglish ? "40XBET provides extensive sports betting opportunities. Users can place bets on various sports events including IPL, World Cup, Big Bash League, CPL, T20, Test Cricket, and ICC matches."
+          :"40XBET ব্যাপক স্পোর্টস বেটিং সুযোগ প্রদান করে। ব্যবহারকারীরা IPL, বিশ্বকাপ, বিগ ব্যাশ লিগ, CPL, T20, টেস্ট ক্রিকেট, এবং ICC ম্যাচ সহ বিভিন্ন ক্রীড়া ইভেন্টে বাজি রাখতে পারে।"
+      }
       </p>
 
       <p className="font-bold pt-5 pb-2 underline underline-offset-5">
-        Casino Games
+       
+        {
+          isEnglish ? "Casino Games":"ক্যাসিনো গেম"
+        }
       </p>
       <p className="font-medium">
-        40XBET offers a range of casino games. Users can enjoy games like
-        roulette, poker, baccarat, as well as all the latest live casino trends
-        from industry leading providers like Pragmatic Play or Evolution Gaming.
+      {
+          isEnglish ? "40XBET offers a range of casino games. Users can enjoy games like roulette, poker, baccarat, as well as all the latest live casino trendsfrom industry leading providers like Pragmatic Play or Evolution Gaming."
+          :"40XBET ক্যাসিনো গেমের একটি পরিসীমা অফার করে। ব্যবহারকারীরা গেমস উপভোগ করতে পারবেন রুলেট, পোকার, ব্যাকার্যাট, সেইসাথে সব সর্বশেষ লাইভ ক্যাসিনো প্রবণতা প্রাগম্যাটিক প্লে বা ইভোলিউশন গেমিংয়ের মতো শিল্পের শীর্ষস্থানীয় সরবরাহকারীদের থেকে।"
+        }
+        
       </p>
 
       <p className="font-bold pt-5 pb-2 underline underline-offset-5">
-        Mobile Application
+        
+        {
+          isEnglish ? "Mobile Application":"মোবাইল অ্যাপ্লিকেশন"
+        }
       </p>
       <p className="font-medium">
-        40XBET offers a mobile application that replicates all the gambling
-        features found on the official site. The app provides a more streamlined
-        and expeditious interface for users.
+        {
+          isEnglish ? "40XBET offers a mobile application that replicates all the gambling features found on the official site. The app provides a more streamlined and expeditious interface for users."
+          :"40XBET একটি মোবাইল অ্যাপ্লিকেশন অফার করে যা অফিসিয়াল সাইটে পাওয়া সমস্ত জুয়া বৈশিষ্ট্যের প্রতিলিপি করে। অ্যাপটি ব্যবহারকারীদের জন্য আরও সুগম এবং দ্রুত ইন্টারফেস প্রদান করে।"
+        }
       </p>
 
       <p className="font-bold pt-5 pb-2 underline underline-offset-5">
@@ -54,6 +76,9 @@ const AboutUs = () => {
         40XBET prioritizes security and safety. It uses advanced encryption
         technology to keep user information secure¹. The platform also offers
         24/7 customer service.
+        {
+          isEnglish ? "Casino Games":"ক্যাসিনো গেম"
+        }
       </p>
     </div>
   );
