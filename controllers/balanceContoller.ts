@@ -219,16 +219,13 @@ export const createWithdraw = async (req: AuthenticatedRequest, res: Response) =
             }
         }
         if (parseInt(amount) < balance) {
-            return res.status(StatusCodes.BAD_REQUEST).json({ error: "You can only cash out over 800 BDT" })
+            return res.status(StatusCodes.BAD_REQUEST).json({ error: "You can only cash out over 500 BDT" })
         }
         if (user.balance < parseInt(amount)) {
             return res.status(StatusCodes.BAD_REQUEST).json({ error: "Low balance to cash out" })
 
         }
-        const decreaseAmountBy = parseInt(amount);
-
-        user.balance = user.balance - decreaseAmountBy;
-        user.save();
+        
 
 
         const d = await Deposit.create({
@@ -236,6 +233,10 @@ export const createWithdraw = async (req: AuthenticatedRequest, res: Response) =
             amount,
             userId: username
         })
+        const decreaseAmountBy = parseInt(amount);
+
+        user.balance = user.balance - decreaseAmountBy;
+        user.save();
         res.status(StatusCodes.OK).json(d)
     } catch (error) {
         res.status(StatusCodes.EXPECTATION_FAILED).json(error)

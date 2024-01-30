@@ -75,7 +75,7 @@ export function Home() {
           >
             <div>
               <Typography variant="h6" color="blue-gray" className="mb-1">
-                Projects
+                Turnover
               </Typography>
               <Typography
                 variant="small"
@@ -201,7 +201,7 @@ export function Home() {
             className="m-0 p-6"
           >
             <Typography variant="h6" color="blue-gray" className="mb-2">
-              Orders Overview
+              Deposit Overview
             </Typography>
             <Typography
               variant="small"

@@ -5,10 +5,19 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 
 export function SignIn() {
+  const [email,setEmail]=useState("admin@40xbet.com")
+  const [password,setPassword]=useState("123456")
+
+  const handleLogin=(e)=>{
+    e.preventDefault()
+    localStorage.setItem("admin","ok")
+    window.location.reload()
+  }
   return (
     <section className="m-8 flex gap-4">
       <div className="w-full lg:w-3/5 mt-24">
@@ -16,12 +25,12 @@ export function SignIn() {
           <Typography variant="h2" className="font-bold mb-4">Sign In</Typography>
           <Typography variant="paragraph" color="blue-gray" className="text-lg font-normal">Enter your email and password to Sign In.</Typography>
         </div>
-        <form className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2">
+        <form onSubmit={handleLogin} className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2">
           <div className="mb-1 flex flex-col gap-6">
             <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
               Your email
             </Typography>
-            <Input
+            <Input value={email} onChange={e=>setEmail(e.target.value)}
               size="lg"
               placeholder="name@mail.com"
               className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
@@ -32,7 +41,7 @@ export function SignIn() {
             <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
               Password
             </Typography>
-            <Input
+            <Input value={password} onChange={e=>setPassword(e.target.value)}
               type="password"
               size="lg"
               placeholder="********"
@@ -42,7 +51,7 @@ export function SignIn() {
               }}
             />
           </div>
-          <Checkbox
+          <Checkbox required
             label={
               <Typography 
                 variant="small"
@@ -60,7 +69,7 @@ export function SignIn() {
             }
             containerProps={{ className: "-ml-2.5" }}
           />
-          <Button className="mt-6" fullWidth>
+          <Button type={"submit"} className="mt-6" fullWidth>
             Sign In
           </Button>
 
@@ -115,10 +124,13 @@ export function SignIn() {
       <div className="w-2/5 h-full hidden lg:block">
         <div
           src="/img/pattern.png"  style={{
-            //backgroundImage:
+            backgroundImage:"url('/img/pattern.png')"
           }}
-          className="h-full w-full object-cover rounded-3xl"
-        />
+          className="h-[93vh] flex flex-wrap justify-center items-center w-full object-cover rounded-3xl"
+        >
+          <img className="h-20 bg-blue-gray-900" src="/img/logo.png"/>
+          
+          </div>
       </div>
 
     </section>
