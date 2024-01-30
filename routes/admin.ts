@@ -1,17 +1,10 @@
 import express, { Express } from "express";
-import {
-  getUser,
-  login,
-  updatePassword,
-  signUp,
-  updateUser,
-} from "../controllers/userControler";
+
 import { authenticateToken } from "../middlewares/checkLogin";
+import { depositReport, revenueReport } from "../controllers/adminController";
 
 const admin = express.Router();
-admin.post("/signup", signUp);
-admin.post("/login", login);
-admin.put("/updateUser", authenticateToken, updateUser);
-admin.put("/updatePassword", authenticateToken, updatePassword);
-admin.get("/getUser", authenticateToken, getUser);
+admin.get("/deposit/report", depositReport);
+admin.get("/revenue/report", revenueReport);
+
 export default admin;
