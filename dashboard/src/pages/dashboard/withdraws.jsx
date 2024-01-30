@@ -1,16 +1,14 @@
-import { authorsTableData } from '@/data';
-import { Avatar, Card, CardBody, CardHeader, Chip, Typography } from '@material-tailwind/react';
-import React, { useState } from 'react'
+import { authorsTableData } from "@/data";
+import { Avatar, Card, CardBody, CardHeader, Chip, Typography } from "@material-tailwind/react";
+import { useState } from "react";
 import ResponsivePagination from "react-responsive-pagination";
-
-export default function Deposit() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
-  const totalPages = Math.ceil(authorsTableData?.length / itemsPerPage);
-  return (
-    <div className="mt-12 mb-8 flex flex-col gap-12">
-      
-      <Card>
+const Withdraws =()=>{
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 5;
+    const totalPages = Math.ceil(authorsTableData?.length / itemsPerPage);
+    return (
+        <div className="mt-12 mb-8 flex flex-col gap-12">
+           <Card>
         <CardHeader variant="gradient" color="gray" className="mb-8 p-6">
           <Typography variant="h6" color="white">
             Authors Table
@@ -100,7 +98,6 @@ export default function Deposit() {
                   );
                 }
               )}
-       
             </tbody>
           </table>
           <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
@@ -112,6 +109,7 @@ export default function Deposit() {
        </div>
         </CardBody>
       </Card>
-    </div>
-  )
+        </div>
+    )
 }
+export default Withdraws
