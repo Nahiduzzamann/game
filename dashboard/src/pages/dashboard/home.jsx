@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Typography,
   Card,
@@ -12,6 +12,7 @@ import {
   Avatar,
   Tooltip,
   Progress,
+  Spinner,
 } from "@material-tailwind/react";
 import {
   EllipsisVerticalIcon,
@@ -20,19 +21,20 @@ import {
 import { StatisticsCard } from "@/widgets/cards";
 import { StatisticsChart } from "@/widgets/charts";
 import {
-  statisticsCardsData,
   statisticsChartsData,
   projectsTableData,
   ordersOverviewData,
 } from "@/data";
 import { CheckCircleIcon, ClockIcon } from "@heroicons/react/24/solid";
+import { AuthContext } from "@/providers/dataProvider";
 
 export function Home() {
+  const { statisticsCardsData,revenueData,depositeData,revenueDataLastMonth } = useContext(AuthContext);
   return (
     <div className="mt-12">
       <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
-        {statisticsCardsData.map(({ icon, title, footer, ...rest }) => (
-          <StatisticsCard
+        {statisticsCardsData(revenueData,depositeData,revenueDataLastMonth)?.map(({ icon, title, footer, ...rest }) => (
+          revenueData ? (<StatisticsCard
             key={title}
             {...rest}
             title={title}
@@ -45,7 +47,8 @@ export function Home() {
                 &nbsp;{footer.label}
               </Typography>
             }
-          />
+          />):(<Spinner></Spinner>)
+          
         ))}
       </div>
       <div className="mb-6 grid grid-cols-1 gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
