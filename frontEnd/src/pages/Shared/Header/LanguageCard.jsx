@@ -18,12 +18,11 @@ import { AuthContext } from "../../../providers/AuthProvider";
 
 export default function LanguageCard({onChange}) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [value, setValue] = React.useState("1");
-  const {  setIsEnglish } = useContext(AuthContext);
+  const {  handleLanguageChange,selectedLanguage } = useContext(AuthContext);
   return (
     <>
       <div onClick={onOpen} className=" flex gap-2 items-center cursor-pointer">
-        <GrLanguage color="#0082D6" size={28} /> {value==="1"?"ENG":"বাংলা"}
+        <GrLanguage color="#0082D6" size={28} /> {selectedLanguage==="en"?"ENG":"বাংলা"}
       </div>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
@@ -31,12 +30,12 @@ export default function LanguageCard({onChange}) {
           <ModalHeader>Select Language</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <RadioGroup onChange={setValue} value={value}>
+            <RadioGroup value={selectedLanguage}>
               <Stack spacing={5} direction="row">
-                <Radio size={"lg"} colorScheme="blue" value="1" onClick={()=>{setIsEnglish(true)}}>
+                <Radio size={"lg"} colorScheme="blue" value="en" onClick={()=>{handleLanguageChange('en')}}>
                   ENGLISH
                 </Radio>
-                <Radio size={"lg"} colorScheme="blue" value="2" onClick={()=>{setIsEnglish(false)}}>
+                <Radio size={"lg"} colorScheme="blue" value="bn" onClick={()=>{handleLanguageChange('bn')}}>
                   বাংলা
                 </Radio>
               </Stack>

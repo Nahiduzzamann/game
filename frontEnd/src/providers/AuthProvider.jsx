@@ -5,7 +5,17 @@ import url from "./../module/index";
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [isEnglish, setIsEnglish] = useState(true);
+
+  const [selectedLanguage, setSelectedLanguage] = useState(
+    localStorage.getItem('selectedLanguage') || 'en'
+  );
+  useEffect(() => {
+    localStorage.setItem('selectedLanguage', selectedLanguage);
+  }, [selectedLanguage]);
+
+  const handleLanguageChange = (language) => {
+    setSelectedLanguage(language);
+  };
   const [user, setUser] = useState(null);
   const [updateUserState, setUpdateUserState] = useState(null);
 
@@ -70,8 +80,8 @@ const AuthProvider = ({ children }) => {
     updateUser,
     setUpdateUserState,
     updatePassword,
-    isEnglish,
-    setIsEnglish,
+    handleLanguageChange,
+    selectedLanguage
   };
 
   return (
