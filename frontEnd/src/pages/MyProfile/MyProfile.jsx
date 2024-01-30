@@ -59,13 +59,20 @@ const MyProfile = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">My Profile</h1>
+      <h1 className="text-3xl font-bold mb-4">
+      {
+          selectedLanguage ==='en' ? "My Profile":"আমার প্রোফাইল"
+        }
+        </h1>
 
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="mb-4">
             <label className="block text-gray-600 text-sm font-bold mb-2">
-              Full Name
+              
+              {
+          selectedLanguage ==='en' ? "Full Name":"পুরো নাম"
+        }
             </label>
             <input
               type="name"
@@ -81,7 +88,10 @@ const MyProfile = () => {
 
           <div className="mb-4">
             <label className="block text-gray-600 text-sm font-bold mb-2">
-              Username
+              
+              {
+          selectedLanguage ==='en' ? "Username":"ব্যবহারকারীর নাম"
+        }
             </label>
             <input
               type="text"
@@ -95,7 +105,10 @@ const MyProfile = () => {
 
           <div className="mb-4">
             <label className="block text-gray-600 text-sm font-bold mb-2">
-              Phone Number
+              
+              {
+          selectedLanguage ==='en' ? "Phone Number":"ফোন নম্বর"
+        }
             </label>
             <input
               type="tel"

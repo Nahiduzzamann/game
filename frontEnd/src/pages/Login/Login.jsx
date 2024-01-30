@@ -8,6 +8,7 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
 
 const Login = () => {
+  const { selectedLanguage } = useContext(AuthContext);
   const { signIn, user, setUpdateUserState } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -69,10 +70,17 @@ const Login = () => {
       </div>
       <div className=" flex justify-center h-full items-center">
         <div className="py-[10%] px-[10%] min-h-screen items-center md:min-h-min shadow bg-[#D9D9D9] md:rounded-3xl">
-          <p className="text-center text-3xl p-3 font-semibold">Login Form</p>
+          <p className="text-center text-3xl p-3 font-semibold">
+          {
+          selectedLanguage ==='en' ? "Login Form":"লগইন ফরম"
+        }
+        </p>
           <div className="mt-3">
             <p className="text-center">
-              Login here to get extra gaming features and more never ended
+              
+              {
+          selectedLanguage ==='en' ? "Login here to get extra gaming features and more never ended":"অতিরিক্ত গেমিং বৈশিষ্ট্য পেতে এখানে লগইন করুন এবং আরও কখনও শেষ হয় না"
+        }
             </p>
           </div>
 
@@ -118,7 +126,11 @@ const Login = () => {
               </div>
 
               <div className="text-end font-bold text-blue-500 pt-3 underline-offset-4">
-                <Link to="/forgot-password">Forget Password?</Link>
+                <Link to="/forgot-password">
+                {
+          selectedLanguage ==='en' ? "Forget Password?":"পাসওয়ার্ড ভুলে গেছেন?"
+        }
+        </Link>
               </div>
             </div>
 
@@ -136,13 +148,18 @@ const Login = () => {
               htmlFor="password"
               className="block text-base mt-5 pb-1 font-semibold"
             >
-              Don not have an account?
+              {
+          selectedLanguage ==='en' ? "Don not have an account?":"একটি অ্যাকাউন্ট নেই?"
+        }
             </label>
             <Link
               to="/signup"
               className=" flex py-2 items-center justify-center border-2 p-1 bg-black rounded-3xl text-white hover:bg-red-400"
             >
-              Sign Up
+             
+              {
+          selectedLanguage ==='en' ? "Sign Up":"আমাদের সম্পর্কে"
+        }
             </Link>
           </form>
         </div>
