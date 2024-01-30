@@ -157,7 +157,7 @@ export const makeDeposit = async (req: AuthenticatedRequest, res: Response) => {
         return res.status(StatusCodes.BAD_GATEWAY).json({ error: "Parameter are required" })
     }
     try {
-        if (promotionId) {
+        if (promotionId!="undefined"&&promotionId) {
             await PromotionHistory.create({
                 promotionId,
                 userId: username
