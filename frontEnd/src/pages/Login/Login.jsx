@@ -63,15 +63,9 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
   return (
-<<<<<<< Updated upstream
-    <div className="grid lg:grid-cols-2 grid-cols-1 md:gap-20 items-center min-h-screen bg-[#fff] md:py-[5%] md:px-[10%] ">
-      <div className=" hidden lg:flex justify-center h-full items-center">
-        <img className="object-fill " src={img}></img>
-=======
     <div className="flex justify-around items-center h-screen bg-[#FFF] p-25">
       <div className=" hidden sm:block w-100">
         <img className="object-fill" src={img}></img>
->>>>>>> Stashed changes
       </div>
       <div className=" flex justify-center h-full items-center">
         <div className="py-[10%] px-[10%] min-h-screen items-center md:min-h-min shadow bg-[#D9D9D9] md:rounded-3xl">
