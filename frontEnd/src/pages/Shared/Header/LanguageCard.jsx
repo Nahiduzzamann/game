@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { GrLanguage } from "react-icons/gr";
 import {
   Modal,
@@ -14,10 +14,12 @@ import {
   Stack,
   Radio,
 } from "@chakra-ui/react";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 export default function LanguageCard({onChange}) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [value, setValue] = React.useState("1");
+  const {  setIsEnglish } = useContext(AuthContext);
   return (
     <>
       <div onClick={onOpen} className=" flex gap-2 items-center cursor-pointer">
@@ -31,10 +33,10 @@ export default function LanguageCard({onChange}) {
           <ModalBody>
             <RadioGroup onChange={setValue} value={value}>
               <Stack spacing={5} direction="row">
-                <Radio size={"lg"} colorScheme="blue" value="1">
+                <Radio size={"lg"} colorScheme="blue" value="1" onClick={()=>{setIsEnglish(true)}}>
                   ENGLISH
                 </Radio>
-                <Radio size={"lg"} colorScheme="blue" value="2">
+                <Radio size={"lg"} colorScheme="blue" value="2" onClick={()=>{setIsEnglish(false)}}>
                   বাংলা
                 </Radio>
               </Stack>

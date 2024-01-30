@@ -1,12 +1,11 @@
 import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
-import url from './../module/index';
+import url from "./../module/index";
 
 export const AuthContext = createContext();
 
-
 const AuthProvider = ({ children }) => {
-//   const [language, setLanguage] = useState(true);
+  const [isEnglish, setIsEnglish] = useState(true);
   const [user, setUser] = useState(null);
   const [updateUserState, setUpdateUserState] = useState(null);
 
@@ -18,7 +17,6 @@ const AuthProvider = ({ children }) => {
       headers: { Authorization: `Bearer ${token}` },
     });
 
-
   const currentUser = async (route, token) =>
     axios.get(`${url}${route}`, {
       headers: { Authorization: `Bearer ${token}` },
@@ -28,7 +26,6 @@ const AuthProvider = ({ children }) => {
     axios.post(`${url}${route}`, data, {
       headers: { Authorization: `Bearer ${token}` },
     });
-
 
   const logOut = () => {
     setLoading(true);
@@ -43,7 +40,6 @@ const AuthProvider = ({ children }) => {
     axios.put(`${url}${route}`, data, {
       headers: { Authorization: `Bearer ${token}` },
     });
-
 
   useEffect(() => {
     setLoading(true);
@@ -65,8 +61,6 @@ const AuthProvider = ({ children }) => {
     }
   }, [updateUserState]);
 
-
-
   const authInfo = {
     user,
     loading,
@@ -75,7 +69,9 @@ const AuthProvider = ({ children }) => {
     logOut,
     updateUser,
     setUpdateUserState,
-    updatePassword
+    updatePassword,
+    isEnglish,
+    setIsEnglish,
   };
 
   return (
