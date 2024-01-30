@@ -66,6 +66,7 @@ const Login = () => {
     <div className="grid lg:grid-cols-2 grid-cols-1 md:gap-20 items-center min-h-screen bg-[#fff] md:py-[5%] md:px-[10%] ">
       <div className=" hidden lg:flex justify-center h-full items-center">
         <img className="object-fill " src={img}></img>
+        <img className="object-fill" src={img}></img>
       </div>
       <div className=" flex justify-center h-full items-center">
         <div className="py-[10%] px-[10%] min-h-screen items-center md:min-h-min shadow bg-[#D9D9D9] md:rounded-3xl">
