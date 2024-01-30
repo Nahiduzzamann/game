@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Box,
   Input,
@@ -15,7 +15,9 @@ import { useNavigate } from "react-router-dom";
 import getUserWallet from "../../module/getUserWallet";
 import { RiDeleteBin3Line } from "react-icons/ri";
 import deleteUserWallet from "../../module/deleteUserWallet";
+import { AuthContext } from "../../providers/AuthProvider";
 const BankDetails = () => {
+  const { selectedLanguage } = useContext(AuthContext);
   const [wallets, setWallets] = useState(null);
   const [walletNumber, setWalletNumber] = useState("");
   const [update, setUpdate] = useState("");
@@ -109,11 +111,16 @@ const BankDetails = () => {
         <Box p={4}>
           <div>
             <Text fontSize="2xl" fontWeight="bold" mb={4}>
-              Your Account
+             
+              {
+               selectedLanguage ==='en' ? "Your Account":"আপনার অ্যাকাউন্ট"
+              }
             </Text>
             {paymentMethods.length <= 0 && (
               <div className="text-center text-red-500 my-2">
-                Empty Your Wallet!{" "}
+                 {
+          selectedLanguage ==='en' ? "Empty Your Wallet!":"আপনার ওয়ালেট খালি করুন!"
+        }{" "}
               </div>
             )}
 
@@ -145,12 +152,17 @@ const BankDetails = () => {
             </div>
           </div>
           <Text fontSize="2xl" fontWeight="bold" mb={4}>
-            Add Bank Details
+           
+            {
+               selectedLanguage ==='en' ? "Add Bank Details":"ব্যাঙ্কের বিবরণ যোগ করুন"
+              }
           </Text>
 
           <Stack spacing={4} mb={4}>
 
-          <span className="text-red-500"> Select a wallet to add-</span>
+          <span className="text-red-500"> {
+               selectedLanguage ==='en' ? "Select a wallet to add- ":"যোগ করার জন্য একটি মানিব্যাগ নির্বাচন করুন-"
+              }</span>
             {wallets ? (
               <div className="flex  items-center flex-wrap gap-4">
              
@@ -198,7 +210,9 @@ const BankDetails = () => {
               colorScheme="blue"
               size="md"
             >
-              Add Wallet
+              {
+               selectedLanguage ==='en' ? "Add Wallet ":"ওয়ালেট যোগ করুন"
+              }
             </Button>
           </Stack>
         </Box>

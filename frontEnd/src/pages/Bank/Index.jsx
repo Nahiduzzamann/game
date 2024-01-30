@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import url from "../../module";
 import makeDeposit from "../../module/makeDeposit";
 import { useToast, Spinner } from "@chakra-ui/react";
+import { AuthContext } from "../../providers/AuthProvider";
 
 export default function BankPay() {
+  const { selectedLanguage } = useContext(AuthContext);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const amount = queryParams.get("amount");
@@ -72,10 +74,15 @@ export default function BankPay() {
   return (
     <div className="w-screen h-screen bg-blue-500 p-3">
       <div className="text-white text-2xl font-medium w-full text-center py-2">
-        Direct Pay
+        {
+          selectedLanguage ==='en' ? "  Direct Pay":"সরাসরি বেতন"
+        }
       </div>
       <div className="text-white text-center ">
-        Welcome to Direct Pay service. Transfer your money in time.
+      {
+          selectedLanguage ==='en' ? " Welcome to Direct Pay service. Transfer your money in time.":"ডাইরেক্ট পে সার্ভিসে স্বাগতম। সময়মতো আপনার টাকা স্থানান্তর করুন।"
+        }
+        
       </div>
       <div className="w-full flex flex-wrap justify-center my-4">
         <img
@@ -89,12 +96,28 @@ export default function BankPay() {
           {walletInfo?.slogan}{" "}
         </div>
         <div className="text-red-200 text-center">
-          Cash Out <span className="font-bold">{amount}BDT</span> using the
-          number <span className="font-bold">{walletInfo.walletNumber}</span>
+          
+          {
+            selectedLanguage ==='en' ? "Cash Out":"উত্তোলন"
+          }
+           <span className="font-bold">{amount}
+          
+          
+          {
+            selectedLanguage ==='en' ? "BDT":"টাকা"
+          }
+          </span> 
+          {
+            selectedLanguage ==='en' ? " using the number ":"নম্বর ব্যবহার করে"
+          }
+        
+          <span className="font-bold">{walletInfo.walletNumber}</span>
         </div>
       </div>
       <div className="text-white text-center">
-        Waiting Time: {formatDuration(time)}
+         {
+            selectedLanguage ==='en' ? "Waiting Time:":"অপেক্ষার সময়:"
+          } {formatDuration(time)}
       </div>
       <form onSubmit={handleSubmit}>
         <input

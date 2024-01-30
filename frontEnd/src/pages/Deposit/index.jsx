@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   AlertDialog,
   AlertDialogBody,
@@ -17,8 +17,10 @@ import { BsQuestionOctagonFill } from "react-icons/bs";
 import getWallet from "../../module/getWallet";
 import url from "../../module";
 import getPromotions from "../../module/getPromotions";
+import { AuthContext } from "../../providers/AuthProvider";
 
 export default function Deposit() {
+  const { selectedLanguage } = useContext(AuthContext);
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedAmount, setSelectedAmount] = useState(200);
   const [inputAmount, setInputAmount] = useState(200);
@@ -100,11 +102,18 @@ export default function Deposit() {
     <div className="bg-gray-500 rounded-lg md:mt-0 mt-5 p-4">
       <div className="p-5 bg-white rounded-md">
         <h1 className="text-center p-5 font-bold border-b-4 border-indigo-300 text-3xl">
-          Deposit
+          
+          {
+          selectedLanguage ==='en' ? "Deposit":"আমানত"
+        }
         </h1>
 
         <p className="font-bold pt-5 pb-2">
-          Payment Methods <span className="text-red-500 ">*</span>
+         
+          {
+          selectedLanguage ==='en' ? " Payment Methods":"মুল্য পরিশোধ পদ্ধতি"
+        }
+         <span className="text-red-500 ">*</span>
         </p>
         <div className="flex">
           {apiData?.map((data, index) => (
@@ -158,7 +167,11 @@ export default function Deposit() {
           </div>
 
           <p className="font-bold pt-5 pb-2 flex justify-between">
-            Deposit Amount * <BsQuestionOctagonFill />
+            
+            {
+          selectedLanguage ==='en' ? "Deposit Amount *":"আমানত পরিমাণ *"
+        }
+         <BsQuestionOctagonFill />
           </p>
           <input
             type="number"
@@ -168,7 +181,11 @@ export default function Deposit() {
           />
         </div>
 
-        <p className="font-bold pt-5 pb-2">Deposit Bonus</p>
+        <p className="font-bold pt-5 pb-2">
+        {
+          selectedLanguage ==='en' ? "Deposit Bonus":"ডিপোজিট বোনাস"
+        }
+        </p>
 
         <Select
         
@@ -222,16 +239,28 @@ export default function Deposit() {
                 <AlertDialogOverlay />
 
                 <AlertDialogContent>
-                  <AlertDialogHeader>Deposit Details</AlertDialogHeader>
+                  <AlertDialogHeader>
+                  {
+          selectedLanguage ==='en' ? "Deposit Details":"জমার বিবরণ"
+        }
+                  </AlertDialogHeader>
                   <AlertDialogCloseButton />
                   <AlertDialogBody>
                     <div className="border-t-4 border-indigo-300 p-5">
                       <div className="p-2 font-semibold flex justify-between">
-                        Deposit amount{" "}
+                        
+                        {
+          selectedLanguage ==='en' ? "Deposit amount":"আমানত পরিমাণ"
+        }
+        {" "}
                         <span className="ps-40">৳ {inputAmount}</span>
                       </div>
                       <div className="p-2 font-semibold flex justify-between">
-                        Bonus Amount{" "}
+                       
+                        {
+          selectedLanguage ==='en' ? " Bonus Amount":"বোনাস পরিমাণ"
+        }
+        {" "}
                         <span className="ps-40">
                           ৳{" "}
                           {(inputAmount *
@@ -242,7 +271,11 @@ export default function Deposit() {
                         </span>
                       </div>
                       <div className="p-2 font-semibold flex justify-between">
-                        Target Turnover{" "}
+                        
+                        {
+          selectedLanguage ==='en' ? "Target Turnover":"টার্গেট টার্নওভার"
+        }
+        {" "}
                         <span className="ps-40">
                           ৳{" "}
                           {
@@ -256,7 +289,10 @@ export default function Deposit() {
                   </AlertDialogBody>
                   <AlertDialogFooter>
                     <Button ref={cancelRef} onClick={onClose}>
-                      No
+                     
+                      {
+          selectedLanguage ==='en' ? " No":"না"
+        }
                     </Button>
                     <Button
                       disabled={loader}

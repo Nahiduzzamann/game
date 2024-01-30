@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import getGameHistory from "../../module/getGameHistory";
 import GameHistoryCard from "./GameHistoryCard";
 import { Spinner } from "@chakra-ui/react";
 import ResponsivePagination from "react-responsive-pagination";
+import { AuthContext } from "../../providers/AuthProvider";
 
 export default function GameHistory({ index }) {
+  const { selectedLanguage } = useContext(AuthContext);
   const [data, setData] = useState(null);
   const [search, setSearch] = useState();
   const itemsPerPage = 4;
@@ -48,7 +50,9 @@ export default function GameHistory({ index }) {
           <GameHistoryCard key={i} data={d} />
         ))}
       {data?.length === 0 && (
-        <div className="my-5 mx-2 font-semibold text-xl">No History!</div>
+        <div className="my-5 mx-2 font-semibold text-xl">{
+          selectedLanguage ==='en' ? "No History!":"ইতিহাস নেই!"
+        }</div>
       )}
       <ResponsivePagination
         current={currentPage}
