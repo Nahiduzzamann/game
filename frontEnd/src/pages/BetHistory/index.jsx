@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import GameHistory from "./GameHistory";
+import { AuthContext } from "../../providers/AuthProvider";
 
 export default function BetHistory() {
+  const { selectedLanguage } = useContext(AuthContext);
   const [selectedImage, setSelectedImage] = useState("");
   const [category, setCategory] = useState([]);
   useEffect(() => {
@@ -16,7 +18,10 @@ export default function BetHistory() {
     <div className="bg-gray-500 max-w-full  rounded-lg p-4 ">
       <div className="p-5 bg-white rounded-md">
         <h1 className="text-center p-5 font-bold border-b-4 border-indigo-300 text-3xl">
-          History
+          
+          {
+          selectedLanguage ==='en' ? "History":"ইতিহাস"
+        }
         </h1>
         <Tabs className="w-full  ">
           <div className="w-full overflow-x-auto">

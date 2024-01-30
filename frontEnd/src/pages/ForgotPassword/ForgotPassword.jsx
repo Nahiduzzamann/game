@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   FaCode,
   FaCodepen,
@@ -9,8 +9,10 @@ import {
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import img from "./4957136_Mobile login 1.svg";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const ForgotPassword = () => {
+  const { selectedLanguage } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [otp, setOtp] = useState("");
@@ -71,11 +73,17 @@ const ForgotPassword = () => {
       <div className=" flex justify-center h-full items-center">
         <div className="py-[10%] px-[10%] min-h-screen md:min-h-min  shadow bg-[#D9D9D9] md:rounded-3xl">
           <p className="text-center text-3xl p-3 font-semibold">
-            Reset Password
+           
+            {
+          selectedLanguage ==='en' ? " Reset Password":"পাসওয়ার্ড রিসেট করুন"
+        }
           </p>
           <div className="mt-3">
             <p className="text-center">
-              Give your username and phone number we will send you a OTP
+              
+              {
+          selectedLanguage ==='en' ? "Give your username and phone number we will send you a OTP":"আপনার ব্যবহারকারীর নাম এবং ফোন নম্বর দিন আমরা আপনাকে একটি OTP পাঠাব"
+        }
             </p>
           </div>
 
@@ -133,7 +141,13 @@ const ForgotPassword = () => {
                   />
                 </div>
                 <div className="text-red-500 mt-2">
-                  Time left: {timeLeft} seconds
+                  {
+          selectedLanguage ==='en' ? " Time left:":"বাকি সময়:"
+        }
+        {timeLeft} 
+        {
+          selectedLanguage ==='en' ? "seconds":"সেকেন্ড"
+        }
                 </div>
               </div>
             )}
@@ -158,7 +172,10 @@ const ForgotPassword = () => {
               to="/login"
               className="mt-[8%] flex py-2 items-center justify-center border-2 p-1 bg-black rounded-3xl text-white hover:bg-red-400"
             >
-              Back
+              
+              {
+          selectedLanguage ==='en' ? "Back":"পেছনে"
+        }
             </Link>
           </form>
         </div>
