@@ -1,14 +1,14 @@
-import { authorsTableData } from "@/data";
+
 import { Avatar, Card, CardBody, CardHeader, Chip, Typography } from "@material-tailwind/react";
 import { useState } from "react";
 import ResponsivePagination from "react-responsive-pagination";
 const Withdraws =()=>{
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5;
-    const totalPages = Math.ceil(authorsTableData?.length / itemsPerPage);
+    // const totalPages = Math.ceil(authorsTableData?.length / itemsPerPage);
     return (
         <div className="mt-12 mb-8 flex flex-col gap-12">
-           <Card>
+           {/* <Card>
         <CardHeader variant="gradient" color="gray" className="mb-8 p-6">
           <Typography variant="h6" color="white">
             Authors Table
@@ -108,7 +108,7 @@ const Withdraws =()=>{
       />
        </div>
         </CardBody>
-      </Card>
+      </Card> */}
         </div>
     )
 }
