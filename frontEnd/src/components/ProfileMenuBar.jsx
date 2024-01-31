@@ -1,19 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaDollarSign, FaHistory, FaUser } from "react-icons/fa";
 import { useLocation,useNavigate } from "react-router-dom";
 import { BiMoneyWithdraw } from "react-icons/bi";
 import { FiGift, FiMessageSquare } from "react-icons/fi";
 import { AiTwotoneBank } from "react-icons/ai";
 import { MdOutlinePassword } from "react-icons/md";
+import { AuthContext } from "../providers/AuthProvider";
 
 export default function ProfileMenuBar() {
+  const { selectedLanguage } = useContext(AuthContext);
   const { pathname } = useLocation();
   const navigate=useNavigate()
 
   return (
     <div className="bg-white px-2 py-2 rounded-md h-min">
       <div className="font-semibold text-gray-500 ml-2 mb-2">
-        Banking Profile
+        
+        {
+          selectedLanguage ==='en' ? "Banking Profile":"ব্যাংকিং প্রোফাইল"
+        }
       </div>
       <div className="grid gap-2">
         <div onClick={()=>navigate("/user/deposit")}

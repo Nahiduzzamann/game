@@ -10,9 +10,11 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider";
 
 const PromotionsCard = ({ banner, title, description }) => {
+  const { selectedLanguage } = useContext(AuthContext);
   return (
     <div className=" flex justify-center">
       <Card width="full" className="shadow-lg">
@@ -32,7 +34,10 @@ const PromotionsCard = ({ banner, title, description }) => {
         <CardFooter>
           <ButtonGroup spacing="2">
             <Button variant="solid" colorScheme="blue">
-              Details
+             
+              {
+          selectedLanguage ==='en' ? " Details":"বিস্তারিত"
+        }
             </Button>
             <Button
               border="2px"
@@ -40,7 +45,10 @@ const PromotionsCard = ({ banner, title, description }) => {
               variant="outline"
               colorScheme="blue"
             >
-              Apply Now
+              
+              {
+          selectedLanguage ==='en' ? "Apply Now":"এখন আবেদন কর"
+        }
             </Button>
           </ButtonGroup>
         </CardFooter>
