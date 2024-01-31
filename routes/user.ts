@@ -5,6 +5,7 @@ import {
   updatePassword,
   signUp,
   updateUser,
+  sendOTP,
 } from "../controllers/userControler";
 import { authenticateToken } from "../middlewares/checkLogin";
 
@@ -14,4 +15,5 @@ user.post("/login", login);
 user.put("/updateUser", authenticateToken, updateUser);
 user.put("/updatePassword", authenticateToken, updatePassword);
 user.get("/getUser", authenticateToken, getUser);
+user.get("/sendOTP",sendOTP)
 export default user;

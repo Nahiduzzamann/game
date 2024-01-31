@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb';
 import { Request, Response } from "express";
-import { Deposit, History, Promotions, Users, Withdraws } from "../connections/databaseConnection";
-import { DepositTypes, GameHistory } from "../data/allTypes";
+import { Deposit, History, Promotions, Users, Wallets, Withdraws } from "../connections/databaseConnection";
+import { DepositTypes, GameHistory, WalletsTypes } from "../data/allTypes";
 import { StatusCodes } from "http-status-codes";
 import { uploadImageBanner, uploadImageSquire } from './fileUploadController';
 
@@ -39,6 +39,24 @@ interface DepositCombineTypes {
 }
 interface FilePath {
     path: string
+}
+interface WalletCombineTypes {
+    _id: string,
+    walletId: string,
+    amount: number,
+    date: Date,
+    status: string,
+    remarks: string,
+    wallet: WalletCombineTypes
+
+}
+interface WalletCombineTypes {
+    _id: string,
+    walletNumber: string,
+    walletId: string,
+    channel: string,
+    userId: string,
+    walletDetails: WalletsTypes
 }
 
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -302,8 +320,12 @@ export const withdrawHistory = async (req: Request, res: Response) => {
                 }
             },
 
+        ]).sort({ date: -1 }) as WalletCombineTypes[]
 
-        ]).sort({ date: -1 })
+        await Promise.all(combineWallet.map(async (d, i) => {
+            const details = await Wallets.findOne({ _id: new ObjectId(d.wallet.walletId) }) as WalletsTypes
+            combineWallet[i] = { ...d, wallet: { ...d.wallet, walletDetails: details } }
+        }))
         res.status(StatusCodes.OK).json(combineWallet)
 
     } catch (error) {

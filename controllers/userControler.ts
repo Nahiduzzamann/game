@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import { Users } from '../connections/databaseConnection';
 import { AuthenticatedRequest } from '../middlewares/checkLogin';
+import sendSms from '../functions/sendSms';
 const jwt = require('jsonwebtoken');
 
 
@@ -199,4 +200,14 @@ export const getUser = async (req: AuthenticatedRequest, res: Response) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 };
-
+export const sendOTP=async (req: Request, res: Response) => {
+  try {
+    const data=await sendSms("+8801761143991","Your verification code is 45464")
+    console.log(data);
+    
+    res.status(200).json(data)
+  } catch (error) {
+    console.log(error);
+    res.status(400).json(error)
+  }
+}
