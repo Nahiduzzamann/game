@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { FaFileCode, FaFlag, FaPhone } from "react-icons/fa";
+import { FaFileCode, FaPhone } from "react-icons/fa";
 import { Spinner } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import img from "./4957136_Mobile login 1.svg";
