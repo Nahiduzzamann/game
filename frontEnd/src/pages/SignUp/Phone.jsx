@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaFileCode, FaFlag, FaPhone } from "react-icons/fa";
 import { Spinner } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import img from "./4957136_Mobile login 1.svg";
+import { AuthContext } from "../../providers/AuthProvider";
 const Phone = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [referralCode, setReferralCode] = useState("");
@@ -12,6 +13,7 @@ const Phone = () => {
   const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
+    const { selectedLanguage } = useContext(AuthContext);
     e.preventDefault();
 
     // Validate form data
@@ -44,11 +46,17 @@ const Phone = () => {
       </div>
       <div className=" flex justify-center h-full items-center">
         <div className="py-[10%] px-[10%] min-h-screen md:min-h-min  shadow bg-[#D9D9D9] md:rounded-3xl">
-          <p className="text-center text-3xl p-3 font-semibold">Register Now</p>
+          <p className="text-center text-3xl p-3 font-semibold">
+          {
+          selectedLanguage ==='en' ? "Register Now":"এখন নিবন্ধন করুন"
+        }
+        </p>
           <div className="mt-3">
             <p className="text-center">
-              Give your phone number also can give a “referral” code to get
-              Bonus
+              
+              {
+          selectedLanguage ==='en' ? "Give your phone number also can give a “referral” code to get Bonus":"আপনার ফোন নম্বর দিন এবং পেতে একটি রেফারেল কোড দিতে পারেনবোনাস"
+        }
             </p>
           </div>
 
@@ -99,8 +107,15 @@ const Phone = () => {
                 onChange={() => setIsChecked(!isChecked)}
               />
               <p className="ps-3 ">
-                I am of legal age and I agree with the{" "}
-                <a href="facebook.com">Terms and Conditions</a>
+                {
+          selectedLanguage ==='en' ? "I am of legal age and I agree with the":"আমি আইনি বয়সী এবং আমি এর সাথে একমত"
+        }
+        {" "}
+                <a href="facebook.com">
+                {
+          selectedLanguage ==='en' ? "Terms and Conditions":"শর্তাবলী"
+        }
+        </a>
               </p>
             </div>
 
@@ -119,6 +134,9 @@ const Phone = () => {
               className="mt-[8%] flex py-2 items-center justify-center border-2 p-1 bg-black rounded-3xl text-white hover:bg-red-400"
             >
               Back
+              {
+          selectedLanguage ==='en' ? " Back":"পেছনে"
+        }
             </Link>
           </form>
         </div>

@@ -13,6 +13,7 @@ import {
 } from "react-icons/fa";
 
 const SignUp = () => {
+  const { selectedLanguage } = useContext(AuthContext);
   const { createUser, setUpdateUserState } = useContext(AuthContext);
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
@@ -91,11 +92,17 @@ const SignUp = () => {
       </div>
       <div className=" flex justify-center h-full items-center">
         <div className="py-[10%] px-[10%] min-h-screen md:min-h-min  shadow bg-[#D9D9D9] md:rounded-3xl">
-          <p className="text-center text-3xl p-3 font-semibold">Register Now</p>
+          <p className="text-center text-3xl p-3 font-semibold">
+          {
+          selectedLanguage ==='en' ? "Register Now":"এখন নিবন্ধন করুন"
+        }
+        </p>
           <div className="mt-3">
             <p className="text-center">
-              Give your personal information to get identified of you. We will
-              happy to get you.
+              
+              {
+          selectedLanguage ==='en' ? "Give your personal information to get identified of you. We will happy to get you.":"আপনার পরিচয় পেতে আপনার ব্যক্তিগত তথ্য দিন। আমরা আপনাকে পেয়ে খুশি হবে."
+        }
             </p>
           </div>
 
@@ -189,7 +196,10 @@ const SignUp = () => {
 
             <div className="border-b-2 pt-5 border-gray-800 my-2"></div>
             <label className="block text-base mt-3 font-semibold">
-              Already have an account?
+             
+              {
+          selectedLanguage ==='en' ? " Already have an account?":"ইতিমধ্যে একটি সদস্যপদ আছে?"
+        }
             </label>
             <Link
               to="/login"

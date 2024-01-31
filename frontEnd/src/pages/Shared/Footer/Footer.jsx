@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { IoGameControllerOutline } from "react-icons/io5";
 import { FaFacebookF } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
@@ -7,15 +7,33 @@ import { FaYoutube } from "react-icons/fa";
 import { TiSocialLinkedin } from "react-icons/ti";
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.png";
+import { AuthContext } from '../../../providers/AuthProvider';
 const Footer = () => {
+    const { selectedLanguage } = useContext(AuthContext);
     return (
         <div className='bg-[#EBEBEB] border-t-4 border-indigo-200'>
             <div className='px-6 mx-auto mt-5  p-5'>
             <div className='flex gap-10 underline underline-offset-8  flex-wrap'>
-                <Link to="/info/Terms&Conditions" className="font-bold py-2 rounded hover:text-red-400">Terms And Conditions</Link>
-                <Link to="/info/aboutUs" className="font-bold py-2 rounded hover:text-red-400">About Us</Link>
-                <Link to="/info/faq" className="font-bold py-2 rounded hover:text-red-400">FAQ</Link>
-                <Link to="/info/contactUs" className="font-bold py-2 rounded hover:text-red-400">Contact Us</Link>
+                <Link to="/info/Terms&Conditions" className="font-bold py-2 rounded hover:text-red-400">
+                {
+          selectedLanguage ==='en' ? "Terms And Conditions":"শর্তাবলী"
+        }
+        </Link>
+                <Link to="/info/aboutUs" className="font-bold py-2 rounded hover:text-red-400">
+                    {
+          selectedLanguage ==='en' ? "ABOUT US":"আমাদের সম্পর্কে"
+        }
+        </Link>
+                <Link to="/info/faq" className="font-bold py-2 rounded hover:text-red-400"> 
+                {
+          selectedLanguage ==='en' ? "FAQ":"এফএকিউ"
+        }
+        </Link>
+                <Link to="/info/contactUs" className="font-bold py-2 rounded hover:text-red-400">
+                {
+          selectedLanguage ==='en' ? "Contact Us":"যোগাযোগ করুন"
+        }
+                </Link>
             </div>
 
             <div className='grid lg:grid-cols-3 gap-24 font-sans'>
@@ -88,7 +106,11 @@ const Footer = () => {
                 </div>
                 </div>
                 <div>
-                <p className='font-bold h2 pb-4'>Find Us</p>
+                <p className='font-bold h2 pb-4'>Find Us
+                {
+          selectedLanguage ==='en' ? "ABOUT US":"আমাদের সম্পর্কে"
+        }
+        </p>
                 <div className="flex flex-wrap ">
                 <FaFacebookF className='text-white text-[45px] bg-blue-500 rounded-lg p-1 m-2'/>
                 <FaInstagram className='text-white text-[45px] bg-blue-500 rounded-lg p-1 m-2'/>
@@ -102,7 +124,11 @@ const Footer = () => {
 
             <div className='grid grid-cols-1 pt-5'>
                 <div className=''>
-                    <p className='h2 pt-5'>Copyright © 2024 40XBET.All rights are reserved.</p>
+                    <p className='h2 pt-5'>Copyright © 2024 40XBET.All rights are reserved.
+                    {
+          selectedLanguage ==='en' ? "ABOUT US":"আমাদের সম্পর্কে"
+        }
+        </p>
                 </div>
                 
             </div>
