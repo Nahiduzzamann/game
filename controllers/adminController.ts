@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb';
 import { Request, Response } from "express";
-import { Deposit, History, Promotions, Withdraws } from "../connections/databaseConnection";
+import { Deposit, History, Promotions, Users, Withdraws } from "../connections/databaseConnection";
 import { DepositTypes, GameHistory } from "../data/allTypes";
 import { StatusCodes } from "http-status-codes";
 import { uploadImageBanner, uploadImageSquire } from './fileUploadController';
@@ -151,10 +151,23 @@ export const depositHistory = async (req: Request, res: Response) => {
 }
 export const toggleStatusDeposit = async (req: Request, res: Response) => {
     //const { id, status } = req.params;
-    const { message, id, status } = req.body
+    const { message, id, status, username } = req.body
+    if (!id || !username) {
+        return res.status(StatusCodes.BAD_GATEWAY).json({ error: "All field are required" })
+    }
     try {
-        const deposit = await Deposit.updateOne({ _id: new ObjectId(id) }, { $set: { status: status ? "ACCEPTED" : "CANCELLED", remarks: message } })
-        return res.status(StatusCodes.OK).json(deposit)
+        const deposit = await Deposit.findOne({ _id: new ObjectId(id) })
+        //const deposit = await Deposit.updateOne({ _id: new ObjectId(id) }, { $set: { status: status ? "ACCEPTED" : "CANCELLED", remarks: message } })
+        const user = await Users.findOne({ username: username })
+        if (!user || !user.balance || !deposit || !deposit.amount) {
+            return res.status(StatusCodes.BAD_GATEWAY).json({ error: "Deposit id and Username is invalid " })
+        }
+        deposit.status = status ? "ACCEPTED" : "CANCELLED"
+        deposit.remarks = message
+        deposit.save()
+        user.balance = user.balance + deposit.amount;
+        user.save()
+        res.status(StatusCodes.OK).json(deposit)
     } catch (error) {
         res.status(StatusCodes.EXPECTATION_FAILED).json({ error: "Invalid ID" })
     }
