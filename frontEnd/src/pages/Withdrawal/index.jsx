@@ -116,9 +116,9 @@ export default function Withdrawal() {
           {apiData?.map((data, index) => (
             <div
               key={index}
-              onClick={() => handleImageClick(data.wallet)}
+              onClick={() => handleImageClick(data)}
               className={` flex  items-center rounded-md overflow-hidden m-2  hover:bg-gray-300 cursor-pointer ${
-                selectedImage._id === data.wallet._id
+                selectedImage._id === data._id
                   ? "bg-blue-300 border-[#0082D6]"
                   : "bg-gray-200"
               }`}
