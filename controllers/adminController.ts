@@ -1,8 +1,9 @@
 import { ObjectId } from 'mongodb';
 import { Request, Response } from "express";
-import { Deposit, History, Promotions } from "../connections/databaseConnection";
+import { Deposit, History, Promotions, Withdraws } from "../connections/databaseConnection";
 import { DepositTypes, GameHistory } from "../data/allTypes";
 import { StatusCodes } from "http-status-codes";
+import { uploadImageBanner, uploadImageSquire } from './fileUploadController';
 
 interface MonthlyDepositTypes {
     month: string,
@@ -13,6 +14,31 @@ interface MonthlyRevenueTypes {
     month: string,
     revenue: number,
     year: number
+}
+interface CombinePromotionTypes {
+    _id: string,
+    title: string,
+    description: string,
+    image: string,
+    details: string,
+    bonusPercentage: number,
+    turnOverAmount: number,
+    applicable: boolean,
+    deposit: DepositCombineTypes[]
+}
+interface DepositCombineTypes {
+    walletId: string,
+    amount: number,
+    promotionId: string,
+    date: Date,
+    status: string,
+    remarks: string,
+    tranXId: string,
+    userId: string,
+    totalTurnover: number
+}
+interface FilePath {
+    path: string
 }
 
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -133,65 +159,139 @@ export const toggleStatusDeposit = async (req: Request, res: Response) => {
         res.status(StatusCodes.EXPECTATION_FAILED).json({ error: "Invalid ID" })
     }
 }
+
 export const turnOverHistory = async (req: Request, res: Response) => {
     try {
 
         const combinePromotions = await Promotions.aggregate([
-            {
-                $match:{applicable:true}
-            },
+
             {
                 $lookup: {
                     from: 'deposits',
-                    let: { userIdObj:  '$_id'  },
+                    let: { userIdObj: '$_id' },
                     pipeline: [
                         {
                             $match: {
-                                $expr: { $eq: ['$promotionId', '$$userIdObj'] }
+                                $expr: { $eq: ['$promotionId', { $toString: '$$userIdObj' }] },
+                                status: "ACCEPTED"
                             }
+                        },
+                        {
+                            $sort: {
+                                date: -1
+                            }
+                        },
+                        {
+                            $group: {
+                                _id: '$userId',
+                                deposit: { $first: '$$ROOT' }
+                            }
+                        },
+                        {
+                            $replaceRoot: { newRoot: '$deposit' }
                         }
                     ],
                     as: 'deposit'
-                },
-
-
-            },
-            {
-                $addFields: {
-                    deposit: { $arrayElemAt: ['$deposit', 0] }
                 }
-            }
-
-        ])
-        const combine=Promise.resolve
-        const combineDeposit = await Promotions.aggregate([
-            {
-                $match:{applicable:true}
             },
+        ]) as CombinePromotionTypes[]
+
+        const processPromotions = async (combinePromotions: CombinePromotionTypes[]) => {
+            for (const d of combinePromotions) {
+                await Promise.all(d.deposit.map(async (s, i) => {
+                    let totalTurnover = 0;
+                    const history = await History.find({ date: { $gte: s.date } }) as GameHistory[];
+
+                    history.forEach((h) => {
+                        totalTurnover += h.bet;
+                    });
+                    d.deposit[i] = { ...s, totalTurnover: totalTurnover };
+                }));
+            }
+        };
+
+        await processPromotions(combinePromotions);
+
+        res.status(StatusCodes.OK).json(combinePromotions)
+
+    } catch (error) {
+        res.status(StatusCodes.EXPECTATION_FAILED).json({ error })
+    }
+}
+
+export const createPromotion = async (req: Request, res: Response) => {
+    const { title, description, details, bonusPercentage, turnOverAmount } = req.body;
+    if (!title || !description || !details || !bonusPercentage || !turnOverAmount) {
+        return res.status(StatusCodes.BAD_GATEWAY).json({ error: "Field are required" })
+    }
+    try {
+
+        const { path } = (await uploadImageBanner(req, res)) as FilePath
+        //console.log(path);
+
+        const promotion = await Promotions.create({
+            title: title,
+            description: description,
+            details: details,
+            bonusPercentage: parseInt(bonusPercentage),
+            turnOverAmount: parseInt(turnOverAmount),
+            applicable: true,
+            image: path
+        })
+        //console.log(promotion);
+
+
+        res.status(StatusCodes.OK).json(promotion)
+
+    } catch (error) {
+        res.status(StatusCodes.EXPECTATION_FAILED).json({ error })
+    }
+}
+export const deletePromotion = async (req: Request, res: Response) => {
+    const { promotionID } = req.params;
+
+    try {
+
+
+        const promotion = await Promotions.deleteOne({
+            _id: new ObjectId(promotionID)
+        })
+        //console.log(promotion);
+
+
+        res.status(StatusCodes.OK).json(promotion)
+
+    } catch (error) {
+        res.status(StatusCodes.EXPECTATION_FAILED).json({ error })
+    }
+}
+export const withdrawHistory = async (req: Request, res: Response) => {
+    try {
+
+        const combineWallet = await Withdraws.aggregate([
             {
                 $lookup: {
-                    from: 'users',
-                    let: { userIdObj:  '$_id'  },
+                    from: 'userwallets',
+                    let: { userIdObj: { $toObjectId: '$walletId' } },
                     pipeline: [
                         {
                             $match: {
-                                $expr: { $eq: ['$promotionId', '$$userIdObj'] }
+                                $expr: { $eq: ['$_id', '$$userIdObj'] }
                             }
                         }
                     ],
-                    as: 'deposit'
+                    as: 'wallet'
                 },
-
-
             },
             {
                 $addFields: {
-                    deposit: { $arrayElemAt: ['$deposit', 0] }
+                    wallet: { $arrayElemAt: ['$wallet', 0] }
                 }
-            }
+            },
 
-        ])
-        res.status(StatusCodes.OK).json(combinePromotions)
+
+        ]).sort({ date: -1 })
+        res.status(StatusCodes.OK).json(combineWallet)
 
     } catch (error) {
         res.status(StatusCodes.EXPECTATION_FAILED).json({ error })

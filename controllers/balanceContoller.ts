@@ -2,7 +2,7 @@ import { DepositTypes, GameHistory, UserTypes, PromotionTypes } from './../data/
 import { Request, Response } from "express"
 import { StatusCodes } from "http-status-codes";
 import { uploadImageBanner, uploadImageSquire } from "./fileUploadController";
-import { Deposit, History, PromotionHistory, Promotions, UserWallets, Users, Wallets } from "../connections/databaseConnection";
+import { Deposit, History, PromotionHistory, Promotions, UserWallets, Users, Wallets, Withdraws } from "../connections/databaseConnection";
 import { AuthenticatedRequest } from "../middlewares/checkLogin";
 import { UserWalletsTypes, WalletsTypes } from "../data/allTypes";
 import { ObjectId } from "mongodb";
@@ -225,13 +225,10 @@ export const createWithdraw = async (req: AuthenticatedRequest, res: Response) =
             return res.status(StatusCodes.BAD_REQUEST).json({ error: "Low balance to cash out" })
 
         }
-        
 
-
-        const d = await Deposit.create({
-            walletId,
-            amount,
-            userId: username
+        const d = await Withdraws.create({
+           walletId,
+           amount
         })
         const decreaseAmountBy = parseInt(amount);
 
