@@ -3,7 +3,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { Spinner, useToast } from "@chakra-ui/react";
 
 const MyProfile = () => {
-  const { user, updateUser, setUpdateUserState } = useContext(AuthContext);
+  const { user, updateUser, setUpdateUserState,selectedLanguage } = useContext(AuthContext);
   const [name, setName] = useState("");
   const [userName, setUserName] = useState("");
   const [phone, setPhone] = useState("");

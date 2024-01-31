@@ -18,6 +18,7 @@ import makeWithdraw from "../../module/makeWithdraw";
 import { AuthContext } from "../../providers/AuthProvider";
 
 export default function Withdrawal() {
+  const { selectedLanguage } = useContext(AuthContext);
   const [selectedImage, setSelectedImage] = useState("");
   // console.log(selectedImage);
   const [selectedAmount, setSelectedAmount] = useState(200);
@@ -106,11 +107,18 @@ export default function Withdrawal() {
     <div className="bg-gray-500 rounded-lg md:mt-0 mt-5 p-4">
       <div className="p-5 bg-white rounded-md">
         <h1 className="text-center p-5 font-bold border-b-4 border-indigo-300 text-3xl">
-          Withdraw
+         
+          {
+          selectedLanguage ==='en' ? " Withdraw":"প্রত্যাহার করুন"
+        }
         </h1>
 
         <p className="font-bold pt-5 pb-2">
-          Withdraw Methods <span className="text-red-500 ">*</span>
+          
+          {
+          selectedLanguage ==='en' ? "Withdraw Methods":"প্রত্যাহার পদ্ধতি"
+        }
+         <span className="text-red-500 ">*</span>
         </p>
         <div className="flex">
           {apiData?.map((data, index) => (
@@ -165,7 +173,11 @@ export default function Withdrawal() {
           </div>
 
           <p className="font-bold pt-5 pb-2">
-            Withdraw Amount{" "}
+           
+            {
+          selectedLanguage ==='en' ? " Withdraw Amount":"পরিমাণ প্রত্যাহার"
+        }
+            {" "}
             <span className="text-red-400">(500৳-30,000৳)*</span>
           </p>
           <input
@@ -216,12 +228,20 @@ export default function Withdrawal() {
                 <AlertDialogOverlay />
 
                 <AlertDialogContent>
-                  <AlertDialogHeader>Withdraw Details</AlertDialogHeader>
+                  <AlertDialogHeader>
+                  {
+          selectedLanguage ==='en' ? "Withdraw Details":"বিবরণ প্রত্যাহার করুন"
+        }
+                  </AlertDialogHeader>
                   <AlertDialogCloseButton />
                   <AlertDialogBody>
                     <div className="border-t-4 border-indigo-300 p-5">
                       <div className="p-2 font-semibold items-center flex justify-between border-b-2">
-                        <p>Withdraw method</p>
+                        <p>
+                        {
+          selectedLanguage ==='en' ? "Withdraw method":"প্রত্যাহার পদ্ধতি"
+        }
+                        </p>
                         <div
                           className={` flex  items-center rounded-md overflow-hidden m-2`}
                         >
@@ -237,7 +257,11 @@ export default function Withdrawal() {
                         </div>
                       </div>
                       <div className="p-2 font-semibold flex justify-between">
-                        Withdraw amount{" "}
+                       
+                        {
+          selectedLanguage ==='en' ? " Withdraw amount":"পরিমাণ প্রত্যাহার"
+        }
+        {" "}
                         <span className="ps-40">৳ {inputAmount}</span>
                       </div>
                     </div>
@@ -245,6 +269,9 @@ export default function Withdrawal() {
                   <AlertDialogFooter>
                     <Button ref={cancelRef} onClick={onClose}>
                       No
+                      {
+          selectedLanguage ==='en' ? "No":"না"
+        }
                     </Button>
                     <Button
                       disabled={loader}
