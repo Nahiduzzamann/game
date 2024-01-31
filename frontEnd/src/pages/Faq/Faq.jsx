@@ -7,13 +7,13 @@ const Faq = () => {
         <div className='p-5'>
             <h1 className='text-center p-5 font-bold border-b-4 border-indigo-500 text-3xl'>
             {
-          selectedLanguage ==='en' ? "FAQ":"FAQ"
+          selectedLanguage ==='en' ? "FAQ":"এফএকিউ"
         }
         </h1>
 
             <p className='font-bold pt-5 pb-2'>
             {
-          selectedLanguage ==='en' ? "FAQ":"FAQ"
+          selectedLanguage ==='en' ? "FAQ":"এফএকিউ"
         }
         </p>
 

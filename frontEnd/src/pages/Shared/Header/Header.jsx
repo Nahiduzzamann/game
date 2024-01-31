@@ -32,6 +32,7 @@ import { GrMoney } from "react-icons/gr";
 import { FaSignOutAlt } from "react-icons/fa";
 
 const Header = () => {
+  const { selectedLanguage } = useContext(AuthContext);
   const { loading, user, setUpdateUserState } = useContext(AuthContext);
   const [data, setData] = useState();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -76,11 +77,18 @@ const Header = () => {
           ) : user ? (
             <div className="bg-blue-100 rounded border flex justify-center items-center border-blue-500 p-2 font-semibold">
               <Link to={`/user/myprofile`} className="">
-                Hi, <span className="hover:underline">{user?.username}</span> |{" "}
+               
+                {
+          selectedLanguage ==='en' ? " Hi,":"ওহে,"
+        } <span className="hover:underline">{user?.username}</span> |{" "}
               </Link>
               <Link to={`/user/deposit`} className="ml-2 hover:underline font-bold text-blue-500 flex justify-center items-center">
               <FaBangladeshiTakaSign />
-                {user.balance?.toString()} BDT
+                {user.balance?.toString()} 
+                {
+          selectedLanguage ==='en' ? "BDT":"টাকা"
+        }
+        
                 <FaPlus className="text-blue-500 hover:border-blue-500 ml-2 border-2 border-blue-300 " />
               </Link>
             </div>
@@ -90,14 +98,19 @@ const Header = () => {
                 onClick={() => navigate("/login")}
                 className="bg-black hover:bg-gray-800 text-white rounded-md w-[150px] py-2"
               >
-                Login
+               {
+          selectedLanguage ==='en' ? "Login":"প্রবেশ করুন"
+        }
+        
               </button>
 
               <button
                 onClick={() => navigate("/signup")}
                 className="bg-blue-500 hover:bg-blue-400 text-white rounded-md w-[150px] py-2"
               >
-                Sign Up
+                {
+          selectedLanguage ==='en' ? " SignUp":"নিবন্ধন করুন"
+        }
               </button>
             </div>
           )}
@@ -107,7 +120,10 @@ const Header = () => {
               onClick={handleLogOut}
               className="bg-blue-500 hover:bg-blue-400 text-white rounded-md w-[150px] py-2"
             >
-              Log Out
+              
+              {
+          selectedLanguage ==='en' ? "Log Out":"প্রস্থান"
+        }
             </button>
           )}
         </div>
@@ -119,7 +135,10 @@ const Header = () => {
               pathname === "/" && "text-green-300"
             } cursor-pointer px-4 py-4 hover:text-gray-300 font-semibold text-md `}
           >
-            Home
+            
+            {
+          selectedLanguage ==='en' ? "Home":"হোম"
+        }
           </div>
         </div>
         {data ? (
@@ -135,7 +154,10 @@ const Header = () => {
               pathname === "/promotions" && "text-green-300"
             } cursor-pointer px-4 py-4 hover:text-gray-300 font-semibold text-md `}
           >
-            Promotions
+            
+            {
+          selectedLanguage ==='en' ? "Promotions":"প্রচার"
+        }
           </div>
         </div>
         <div onClick={() => navigate("/referral")}>
@@ -144,7 +166,10 @@ const Header = () => {
               pathname === "/referral" && "text-green-300"
             } cursor-pointer px-4 py-4 hover:text-gray-300 font-semibold text-md `}
           >
-            Rewards
+            
+            {
+          selectedLanguage ==='en' ? "Rewards":"পুরস্কার"
+        }
           </div>
         </div>
       </div>
@@ -156,7 +181,10 @@ const Header = () => {
         {user ? (
           <Link to={`/user/deposit`} className="flex gap-2 items-center text-blue-500 font-bold text-xl">
             <GrMoney />
-            {user.balance} BDT
+            {user.balance} 
+            {
+          selectedLanguage ==='en' ? "BDT":"টাকা"
+        }
           </Link>
         ) : (
           <LanguageCard />
@@ -177,7 +205,11 @@ const Header = () => {
           </DrawerHeader>
           <hr />
           <DrawerBody>
-            <p className="font-medium text-md">Games</p>
+            <p className="font-medium text-md">
+            {
+          selectedLanguage ==='en' ? "Games":"গেমস"
+        }
+        </p>
             {data?.map((data, i) => (
               <Accordion key={i} allowToggle>
                 <AccordionItem>
@@ -219,18 +251,31 @@ const Header = () => {
               </Accordion>
             ))}
             <hr className="my-2" />
-            <p className="font-medium text-md">Others</p>
+            <p className="font-medium text-md"> 
+            {
+          selectedLanguage ==='en' ? "Others":"অন্যান্য"
+        }
+        </p>
             <div className=" hover:bg-gray-50 flex gap-2 items-center py-2 px-2 cursor-pointer text-gray-400  text-md">
               <GoCrossReference />
-              Rewards
+             
+              {
+          selectedLanguage ==='en' ? " Rewards":"পুরস্কার"
+        }
             </div>
             <div className=" hover:bg-gray-50 flex gap-2 items-center py-2 px-2 cursor-pointer text-gray-400  text-md">
               <AiFillNotification />
-              Promotions
+              
+              {
+          selectedLanguage ==='en' ? "Promotions":"প্রচার"
+        }
             </div>
             <div className=" hover:bg-gray-50 flex gap-2 items-center py-2 px-2 cursor-pointer text-gray-400  text-md">
               <GrLanguage />
-              Languages
+              
+              {
+          selectedLanguage ==='en' ? "Languages":"ভাষা"
+        }
             </div>
             <div
               onClick={() => {
@@ -240,19 +285,29 @@ const Header = () => {
               className=" hover:bg-gray-50 flex gap-2 items-center py-2 px-2 cursor-pointer text-gray-400  text-md"
             >
               <FaQuora />
-              FAQ
+             
+              {
+          selectedLanguage ==='en' ? " FAQ":"প্রশ্ন"
+        }
             </div>
             <div
               onClick={handleLogOut}
               className=" hover:bg-gray-50 flex gap-2 items-center py-2 px-2 cursor-pointer text-gray-400  text-md"
             >
               <FaSignOutAlt />
-              Log Out
+              
+              {
+          selectedLanguage ==='en' ? "Log Out":"প্রস্থান"
+        }
             </div>
           </DrawerBody>
 
           <DrawerFooter placeContent={"start"}>
-            <p> @All Right Reserved by 40Xbet</p>
+            <p> 
+            {
+          selectedLanguage ==='en' ? "@All Right Reserved by 40Xbet":"@সব অধিকার 40Xbet দ্বারা সংরক্ষিত"
+        }
+            </p>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

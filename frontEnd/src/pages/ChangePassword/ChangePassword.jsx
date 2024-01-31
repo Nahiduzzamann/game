@@ -82,7 +82,10 @@ const ChangePasswordPage = () => {
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-600 text-sm font-bold mb-2">
-          Current Password
+         
+          {
+          selectedLanguage ==='en' ? " Current Password":"বর্তমান গোপননম্বর"
+        }
           </label>
           <div className="relative">
             <input
