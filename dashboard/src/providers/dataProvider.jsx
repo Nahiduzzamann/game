@@ -14,7 +14,7 @@ const DataProvider = ({ children }) => {
     const [depositeDataLastMonth, setDepositeDataLastMonth] = useState(null);
     const [revenueData, setRevenueData] = useState(null);
     const [revenueDataLastMonth, setRevenueDataLastMonth] = useState(null);
-    console.log(depositeData);
+    // console.log(depositeData);
     useEffect(() => {
         localStorage.setItem('currentTime',new Date())
         getDeposite()

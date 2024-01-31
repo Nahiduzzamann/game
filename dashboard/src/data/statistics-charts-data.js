@@ -30,7 +30,7 @@ const dailySalesChart=(revenueData,depositeData,revenueDataLastMonth,depositeDat
   height: 220,
   series: [
     {
-      name: "Sales",
+      name: "Deposit",
       data:depositeData?.monthlyDeposit.reverse().slice(0,8).map((data)=>data.deposit) || [0,0,0,0,0,0,0,0,0],
     },
   ],
@@ -66,7 +66,7 @@ const completedTaskChart=(revenueData,depositeData,revenueDataLastMonth,deposite
   series: [
     {
       name: "Sales",
-      data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
+      data: revenueData?.monthlyHistory.reverse().slice(0,8).map((data)=>data.revenue.toFixed()) || [0,0,0,0,0,0,0,0,0],
     },
   ],
   options: {
@@ -80,7 +80,7 @@ const completedTaskChart=(revenueData,depositeData,revenueDataLastMonth,deposite
     },
     xaxis: {
       ...chartsConfig.xaxis,
-      categories: [
+      categories: revenueData?.monthlyHistory.reverse().slice(0,8).map((data)=>data.month) || [
         "Apr",
         "May",
         "Jun",
@@ -98,13 +98,13 @@ const completedTasksChart=(revenueData,depositeData,revenueDataLastMonth,deposit
   ...completedTaskChart(revenueData,depositeData,revenueDataLastMonth,depositeDataLastMonth),
   series: [
     {
-      name: "Tasks",
-      data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+      name: "Revenue",
+      data: revenueData?.monthlyHistory.reverse().slice(0,8).map((data)=>data.revenue.toFixed()) || [0,0,0,0,0,0,0,0,0],
     },
   ],
 });
 
-export const statisticsChartsData=(revenueData,depositeData,revenueDataLastMonth,depositeDataLastMonth) => ([
+export const statisticsChartsData=(revenueData,depositeData,revenueDataLastMonth,depositeDataLastMonth,refreshTime) => ([
   {
     color: "white",
     title: "Website View",
@@ -115,15 +115,15 @@ export const statisticsChartsData=(revenueData,depositeData,revenueDataLastMonth
   {
     color: "white",
     title: "Deposit Report",
-    description: "15% increase in today sales",
-    footer: "updated 4 min ago",
+    description: `${revenueDataLastMonth}% ${revenueDataLastMonth <=0 ? 'decrease':'increase'} than last month`,
+    footer: `${refreshTime <= 0 ? 'Just Updated':(`Updated ${refreshTime}  min ago`) } `,
     chart: dailySalesChart(revenueData,depositeData,revenueDataLastMonth,depositeDataLastMonth),
   },
   {
     color: "white",
     title: "Revenue Report",
-    description: "Last Campaign Performance",
-    footer: "just updated",
+    description: `${depositeDataLastMonth}% ${depositeDataLastMonth <=0 ? 'decrease':'increase'} than last month`,
+    footer: `${refreshTime <= 0 ? 'Just Updated':(`Updated ${refreshTime}  min ago`) } `,
     chart: completedTasksChart(revenueData,depositeData,revenueDataLastMonth,depositeDataLastMonth),
   },
 ]);

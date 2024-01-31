@@ -30,6 +30,11 @@ import { AuthContext } from "@/providers/dataProvider";
 
 export function Home() {
   const { statisticsCardsData,revenueData,depositeData,revenueDataLastMonth,depositeDataLastMonth } = useContext(AuthContext);
+  const previousDate = new Date(localStorage.getItem('currentTime'));
+  const presentDate = new Date();
+  const timeDifference = presentDate - previousDate;
+  const refreshTime = Math.floor(timeDifference / (1000 * 60));
+  // console.log(refreshTime);
   return (
     <div className="mt-12">
       <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
@@ -52,7 +57,7 @@ export function Home() {
         ))}
       </div>
       <div className="mb-6 grid grid-cols-1 gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
-        {statisticsChartsData(revenueData,depositeData,revenueDataLastMonth,depositeDataLastMonth)?.map((props) => (
+        {statisticsChartsData(revenueData,depositeData,revenueDataLastMonth,depositeDataLastMonth,refreshTime)?.map((props) => (
           <StatisticsChart
             key={props.title}
             {...props}
