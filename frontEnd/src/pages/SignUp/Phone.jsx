@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import img from "./4957136_Mobile login 1.svg";
 import { AuthContext } from "../../providers/AuthProvider";
 const Phone = () => {
+  const { selectedLanguage } = useContext(AuthContext);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [referralCode, setReferralCode] = useState("");
   const [isChecked, setIsChecked] = useState(false);
@@ -13,7 +14,7 @@ const Phone = () => {
   const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
-    const { selectedLanguage } = useContext(AuthContext);
+   
     e.preventDefault();
 
     // Validate form data
