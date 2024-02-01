@@ -109,7 +109,7 @@ const Header = () => {
                 className="bg-blue-500 hover:bg-blue-400 text-white rounded-md w-[150px] py-2"
               >
                 {
-          selectedLanguage ==='en' ? " SignUp":"নিবন্ধন করুন"
+          selectedLanguage ==='en' ? " SignUp":"সাইন আপ"
         }
               </button>
             </div>
