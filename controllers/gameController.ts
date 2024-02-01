@@ -25,7 +25,8 @@ interface Async {
 }
 interface Category {
     title: string,
-    subCategory: Providers[]
+    subCategory: Providers[],
+    bn:string
 }
 
 export const getGameCategories = async (req: Request, res: Response) => {
@@ -64,12 +65,14 @@ export const getGameCategories = async (req: Request, res: Response) => {
             if (i === 0) {
                 arr.push({
                     title: cat.title,
-                    subCategory: providers.filter(s => s.slag.match(cat.slag))
+                    subCategory: providers.filter(s => s.slag.match(cat.slag)),
+                    bn:cat.bn
                 })
             } else {
                 arr.push({
                     title: cat.title,
-                    subCategory: sub
+                    subCategory: sub,
+                    bn:cat.bn
                 })
             }
 

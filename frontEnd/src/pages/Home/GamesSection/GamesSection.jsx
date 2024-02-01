@@ -1,14 +1,16 @@
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import url from "../../../module";
 // import getCategory from "../../../module/getCategory";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const GamesSection = () => {
   const [dataCategory, setDataCategory] = useState(null);
   const [dataSubCategory, setDataSubCategory] = useState(null);
   const [activeTab, setActiveTab] = useState(0);
   const navigate = useNavigate();
+  const { selectedLanguage } = useContext(AuthContext);
 
   useEffect(() => {
     const cats = () => {
@@ -66,7 +68,7 @@ const GamesSection = () => {
                   >
                     <img
                       style={{ padding: "0px", borderRadius: "10%" }}
-                      src={`./casino${i + 1}.png`}
+                      src={`./casino${i}.png`}
                       alt="Your Image"
                       className="object-cover object-center w-full h-full "
                     />
@@ -75,7 +77,7 @@ const GamesSection = () => {
                       className={`flex items-end justify-center absolute w-full h-full  bg-gradient-to-b  from-[#fffcfc00] via-transparent  ${activeTab == i ? 'to-blue-500':'to-[#000000]'} hover:to-blue-500`}
                     >
                       <h2 className="md:text-2xl text-sm font-semibold text-white pb-2">
-                        {data?.title}
+                        {selectedLanguage==="en"?data?.title:data?.bn}
                       </h2>
                     </div>
                   </Tab>

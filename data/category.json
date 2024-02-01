@@ -1,34 +1,42 @@
 [
   {
     "title": "Live Sports",
-    "slag": "di"
+    "slag": "di",
+    "bn":"লাইভ স্পোর্টস"
   },
   {
     "title": "Live Casino",
-    "slag": "live_dealers"
+    "slag": "live_dealers",
+    "bn":"লাইভ কাসিনো"
   },
   {
     "title": "Arcade",
-    "slag": "arcade"
+    "slag": "arcade",
+    "bn":"আর্কেড"
   },
   {
     "title": "Slots",
-    "slag": "slots"
+    "slag": "slots",
+    "bn":"স্লট"
   },
   {
     "title": "Card Games",
-    "slag": "card"
+    "slag": "card",
+    "bn":"কার্ড গেম"
   },
   {
     "title": "Roulette",
-    "slag": "roulette"
+    "slag": "roulette",
+    "bn":"রাউটেল"
   },
   {
     "title": "Video Poker",
-    "slag": "video_poker"
+    "slag": "video_poker",
+    "bn":"ভিডিও পোকার"
   },
   {
     "title": "Lottery",
-    "slag": "lottery"
+    "slag": "lottery",
+    "bn":"লটারি"
   }
 ]

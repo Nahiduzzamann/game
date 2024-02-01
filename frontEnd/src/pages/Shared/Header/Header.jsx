@@ -223,7 +223,7 @@ const Header = () => {
                           className="w-5 h-5 bg-slate-500 rounded"
                           src={`${url}${data.subCategory[0]?.icon}`}
                         />
-                        {data?.title}
+                        {selectedLanguage==="en"? data?.title:data.bn}
                       </div>
                       <AccordionIcon />
                     </AccordionButton>
@@ -318,7 +318,8 @@ export default Header;
 const Options = ({ data, i, active }) => {
   const [hover, setHover] = useState(false);
   const navigate = useNavigate();
-
+  const { selectedLanguage } = useContext(AuthContext);
+  //console.log(data.bn);
   return (
     <div
       className="h-full  px-4 py-4  "
@@ -333,7 +334,7 @@ const Options = ({ data, i, active }) => {
         } cursor-pointer hover:text-gray-300 font-semibold text-md `}
         key={i}
       >
-        {data?.title}
+        {selectedLanguage==="en"?data?.title:data.bn}
       </div>
       {hover && (
         <div className=" flex gap-6 absolute z-30 bg-blue-500 flex-wrap w-full px-6 py-4 overflow-hidden rounded-md left-0 top-[120px]">
