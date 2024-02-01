@@ -140,7 +140,7 @@ const Login = () => {
               type="submit"
               className="w-full mt-4 py-2 text-center border-2 rounded-3xl p-1 bg-[#3B82F6] text-white hover:bg-red-400"
             >
-              {loading ? <Spinner color="yellow.100" size="md" /> : "Login"}
+              {loading ? <Spinner color="yellow.100" size='sm'/> : "Login"}
             </button>
 
             <div className="border-b-2 pt-8 border-black"></div>

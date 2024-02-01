@@ -35,7 +35,7 @@ const [loading, setLoading]=useState(false)
     };
 
     const handleConfirm = (status)=>{
-      postWithdrawStatus(actionData._id,status,message,actionData.wallet.user)
+      postWithdrawStatus(actionData._id,status,message,actionData.wallet.userId)
       .then((res)=>{
         setOpen(false)
         setactionData(null)
@@ -174,10 +174,10 @@ console.log(err);
             onClick={()=>handleConfirm("")}
             className="mr-1"
           >
-            <span>Deposite Cancel</span>
+            <span>Withdraw Cancel</span>
           </Button>
           <Button variant="gradient" color="green" onClick={()=>handleConfirm("tyjy")}>
-            <span>Deposite Confirm</span>
+            <span>Withdraw Confirm</span>
           </Button>
         </DialogFooter>
       </Dialog>
