@@ -109,14 +109,14 @@ export default function Withdrawal() {
         <h1 className="text-center p-5 font-bold border-b-4 border-indigo-300 text-3xl">
          
           {
-          selectedLanguage ==='en' ? " Withdraw":"প্রত্যাহার করুন"
+          selectedLanguage ==='en' ? " Withdraw":"উত্তোলন করুন"
         }
         </h1>
 
         <p className="font-bold pt-5 pb-2">
           
           {
-          selectedLanguage ==='en' ? "Withdraw Methods":"প্রত্যাহার পদ্ধতি"
+          selectedLanguage ==='en' ? "Withdraw Methods":"উত্তোলন পদ্ধতি"
         }
          <span className="text-red-500 ">*</span>
         </p>
@@ -175,7 +175,7 @@ export default function Withdrawal() {
           <p className="font-bold pt-5 pb-2">
            
             {
-          selectedLanguage ==='en' ? " Withdraw Amount":"পরিমাণ প্রত্যাহার"
+          selectedLanguage ==='en' ? " Withdraw Amount":"উত্তোলন পরিমাণ"
         }
             {" "}
             <span className="text-red-400">(500৳-30,000৳)*</span>
@@ -230,7 +230,7 @@ export default function Withdrawal() {
                 <AlertDialogContent>
                   <AlertDialogHeader>
                   {
-          selectedLanguage ==='en' ? "Withdraw Details":"বিবরণ প্রত্যাহার করুন"
+          selectedLanguage ==='en' ? "Withdraw Details":"উত্তোলন বিবরণ"
         }
                   </AlertDialogHeader>
                   <AlertDialogCloseButton />
@@ -239,7 +239,7 @@ export default function Withdrawal() {
                       <div className="p-2 font-semibold items-center flex justify-between border-b-2">
                         <p>
                         {
-          selectedLanguage ==='en' ? "Withdraw method":"প্রত্যাহার পদ্ধতি"
+          selectedLanguage ==='en' ? "Withdraw method":"উত্তোলন পদ্ধতি"
         }
                         </p>
                         <div
@@ -259,7 +259,7 @@ export default function Withdrawal() {
                       <div className="p-2 font-semibold flex justify-between">
                        
                         {
-          selectedLanguage ==='en' ? " Withdraw amount":"পরিমাণ প্রত্যাহার"
+          selectedLanguage ==='en' ? " Withdraw amount":"উত্তোলন পরিমাণ"
         }
         {" "}
                         <span className="ps-40">৳ {inputAmount}</span>
