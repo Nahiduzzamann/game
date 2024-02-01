@@ -333,11 +333,11 @@ const Options = ({ data, i, active }) => {
         } cursor-pointer hover:text-gray-300 font-semibold text-md `}
         key={i}
       >
-        {data.title}
+        {data?.title}
       </div>
       {hover && (
         <div className=" flex gap-6 absolute z-30 bg-blue-500 flex-wrap w-full px-6 py-4 overflow-hidden rounded-md left-0 top-[120px]">
-          {data.subCategory?.map((doc, j) => (
+          {data?.subCategory?.map((doc, j) => (
             <div
               key={j}
               onClick={() => {
@@ -348,10 +348,10 @@ const Options = ({ data, i, active }) => {
               className=" cursor-pointer bg-gray-700 flex justify-center items-center  hover:bg-gray-600 text-black text-center p-2 rounded-full w-[120px] h-[120px] overflow-hidden "
             >
               <div className="flex  text-white flex-wrap justify-center items-center  ">
-                <img className="" src={`${url}${doc.icon}`} />
-                <div className="w-full line-clamp-1 ">{doc.title}</div>
+                <img className="" src={`${url}${doc?.icon}`} />
+                <div className="w-full line-clamp-1 ">{doc?.title}</div>
               </div>
-              {doc.name}
+              {doc?.name}
             </div>
           ))}
         </div>
