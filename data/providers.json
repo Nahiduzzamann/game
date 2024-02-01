@@ -166,5 +166,11 @@
         "icon":"/icons/table_games.png",
         "image":"/images/table_games.png",
         "slag":"table_games"
+    },
+    {
+        "title":"Digitain Sportsbook",
+        "icon":"/icons/di.png",
+        "image":"/icons/di.png",
+        "slag":"di"
     }
 ]

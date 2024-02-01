@@ -6,7 +6,7 @@ import {
     getReasonPhrase,
     getStatusCode,
 } from 'http-status-codes';
-import RootObject from '../data/gamesTypes';
+import RootObject, { Welcome10 } from '../data/gamesTypes';
 import uniqueArray from '../functions/uniqueArray';
 import CategoryTypes from '../data/categoryTypes';
 import axios, { AxiosResponse } from "axios"
@@ -18,6 +18,7 @@ import randomNumber from '../functions/randomNumber';
 import { ObjectId } from 'mongodb';
 const providers: Providers[] = require("../data/providers.json")
 const categories: CategoryTypes = require("../data/category.json")
+const sports: Welcome10[] = require("../data/gg.json")
 
 interface Async {
     (source: string): Promise<string>;
@@ -45,7 +46,7 @@ export const getGameCategories = async (req: Request, res: Response) => {
         }
         const gameList = games[0].content.gameList;
         let arr: Category[] = [];
-        categories.map(cat => {
+        categories.map((cat, i) => {
             let sub: Providers[] = []
             let gameTitle: string[] = []
             gameList.map(d => {
@@ -60,10 +61,18 @@ export const getGameCategories = async (req: Request, res: Response) => {
                 //console.log(title);
                 sub.push(doc)
             })
-            arr.push({
-                title: cat.title,
-                subCategory: sub
-            })
+            if (i === 0) {
+                arr.push({
+                    title: cat.title,
+                    subCategory: providers.filter(s => s.slag.match(cat.slag))
+                })
+            } else {
+                arr.push({
+                    title: cat.title,
+                    subCategory: sub
+                })
+            }
+
         })
 
         res.status(StatusCodes.OK).json(arr)
@@ -78,6 +87,9 @@ export const getGameByCategory = async (req: Request, res: Response) => {
 
     const system: string = String(req.params.system)
     try {
+        if(gameIndex===0){
+            return res.status(StatusCodes.OK).json(sports.filter(d => d.system ==system ))
+        }
 
         const games = (await Games.find()) as GameTypes
         const gameList = games[0].content.gameList;
@@ -238,11 +250,11 @@ export const getGameHistory = async (req: AuthenticatedRequest, res: Response) =
         const allGames = gameList.filter(d => (d.categories == categories[id].slag))
         const history = await History.find({ username: userId }) as GameHistory[]
         let arr: GameHistory[] = []
-        
+
         history.map(d => {
             const game = allGames.find(s => s.id == d.gameId)
             if (game) {
-               return arr.push({ ...d, game: game })
+                return arr.push({ ...d, game: game })
             }
         })
 
