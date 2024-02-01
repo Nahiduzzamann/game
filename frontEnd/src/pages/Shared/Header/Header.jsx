@@ -223,7 +223,7 @@ const Header = () => {
                           className="w-5 h-5 bg-slate-500 rounded"
                           src={`${url}${data.subCategory[0]?.icon}`}
                         />
-                        {data.title}
+                        {data?.title}
                       </div>
                       <AccordionIcon />
                     </AccordionButton>
@@ -240,8 +240,8 @@ const Header = () => {
                           className="   hover:bg-gray-400 text-black flex px-2 py-1 overflow-hidden rounded-sm "
                         >
                           <div className="flex gap-2 items-center">
-                            <img className=" h-5 bg-slate-500 rounded" src={`${url}${doc.icon}`} />
-                            <div className="w-full">{doc.title}</div>
+                            <img className=" h-5 bg-slate-500 rounded" src={`${url}${doc?.icon}`} />
+                            <div className="w-full">{doc?.title}</div>
                           </div>
                         </div>
                       ))}
