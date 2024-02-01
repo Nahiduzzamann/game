@@ -20,17 +20,18 @@ const DataProvider = ({ children }) => {
         getDeposite()
         .then((res)=>{
            
-            const calculatePercentageRevenueChange = (monthlyHistory) => {
-                if (monthlyHistory.length < 2) {
+            const calculatePercentageRevenueChange = (monthlyDeposit) => {
+                if (monthlyDeposit.length < 2) {
                   // Cannot calculate percentage change with only one month
                   return 100;
                 }
               
-                const currentRevenue = monthlyHistory[monthlyHistory.length - 1].revenue;
-                const previousRevenue = monthlyHistory[monthlyHistory.length - 2].revenue;
-              
+                const currentRevenue = monthlyDeposit[monthlyDeposit.length - 1].deposit;
+                const previousRevenue = monthlyDeposit[monthlyDeposit.length - 2].deposit;
+          
                 if (previousRevenue === 0) {
                   // Handle division by zero
+                 
                   return 'N/A';
                 }
               
