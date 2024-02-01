@@ -71,7 +71,7 @@ export const getGameCategories = async (req: Request, res: Response) => {
             } else {
                 arr.push({
                     title: cat.title,
-                    subCategory: sub,
+                    subCategory: sub.filter(v => v != null),
                     bn:cat.bn
                 })
             }

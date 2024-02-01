@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import gateGame from "../../module/getGames";
 import url from "../../module";
 import ResponsivePagination from "react-responsive-pagination";
-import { Box, SkeletonText,useDisclosure } from "@chakra-ui/react";
+import { Box, SkeletonText, useDisclosure } from "@chakra-ui/react";
 import PlayGame from "../PlayGame/PlayGame";
 import { IoMdClose } from "react-icons/io";
 import {
@@ -11,9 +11,10 @@ import {
   ModalOverlay,
   ModalBody,
   ModalCloseButton,
-  ModalContent
-} from '@chakra-ui/react'
+  ModalContent,
+} from "@chakra-ui/react";
 import { AuthContext } from "../../providers/AuthProvider";
+import PlaySports from "../PlayGame/PlaySports";
 
 export default function Games() {
   const itemsPerPage = 30;
@@ -49,6 +50,7 @@ export default function Games() {
 
       {data?.length > 0 ? (
         <Items
+          index={index}
           data={data.slice(
             (currentPage - 1) * itemsPerPage,
             currentPage * itemsPerPage
@@ -85,15 +87,15 @@ export default function Games() {
   );
 }
 
-function Items({ data }) {
+function Items({ data, index }) {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [id, setId] = useState();
 
   const handlePlayGame = (id) => {
-    if(!user){
-      return navigate('/login')
+    if (!user) {
+      return navigate("/login");
     }
     setId(id);
     onOpen();
@@ -115,11 +117,7 @@ function Items({ data }) {
 
       <Modal size={"full"} onClose={onClose} isOpen={isOpen}>
         <ModalOverlay />
-        <ModalContent
-          bg={"black"}
-          overflow={"hidden"}
-          maxHeight={"100vh"}
-        >
+        <ModalContent bg={"black"} overflow={"hidden"} maxHeight={"100vh"}>
           <ModalCloseButton
             children={
               <div className="flex bg-white rounded-md shadow-sm justify-center items-center">
@@ -127,17 +125,14 @@ function Items({ data }) {
               </div>
             }
           />
-          <ModalBody 
+          <ModalBody
             height="100%" // Set height to 100% of parent container (ModalContent)
             overflowY="hidden" // Allow vertical scrolling if the content is taller than the viewport
           >
-            <PlayGame id={id} />
+            {index === "0" ? <PlaySports id={id} /> : <PlayGame id={id} />}
           </ModalBody>
         </ModalContent>
       </Modal>
-
-      
     </div>
   );
 }
-

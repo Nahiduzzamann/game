@@ -105,10 +105,10 @@ const GamesSection = () => {
                       <img
                         className=""
                         src={`${url}${data?.icon}`}
-                        alt={data.title}
+                        alt={data?.title}
                       />
                       <div className="text-sm md:text-lg font-semibold">
-                        {data.title}
+                        {data?.title}
                       </div>
                     </div>
                   ))}
