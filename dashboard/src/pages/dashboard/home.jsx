@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Typography,
   Card,
@@ -23,10 +23,13 @@ import { StatisticsChart } from "@/widgets/charts";
 import {
   statisticsChartsData,
   projectsTableData,
-  ordersOverviewData,
 } from "@/data";
-import { CheckCircleIcon, ClockIcon } from "@heroicons/react/24/solid";
+import { ArrowDownIcon, CheckCircleIcon, ClockIcon } from "@heroicons/react/24/solid";
 import { AuthContext } from "@/providers/dataProvider";
+import getDepositeDetails from "@/modules/getDepositDetails";
+import {
+  CreditCardIcon,
+} from "@heroicons/react/24/solid";
 
 export function Home() {
   const { statisticsCardsData,revenueData,depositeData,revenueDataLastMonth,depositeDataLastMonth } = useContext(AuthContext);
@@ -35,6 +38,22 @@ export function Home() {
   const timeDifference = presentDate - previousDate;
   const refreshTime = Math.floor(timeDifference / (1000 * 60));
   // console.log(refreshTime);
+
+  const [depositeDetailsData, setDepositeDetailsData] = useState(null);
+  const [loading, setLoading]=useState(false)
+      // console.log(depositeData);
+      useEffect(() => {
+        setLoading(true)
+        getDepositeDetails()
+          .then((res)=>{
+            setLoading(false)
+            setDepositeDetailsData(res.data);
+          })
+         .catch((err)=>{
+          setLoading(false)
+          console.log(err);
+         })
+      }, [])
   return (
     <div className="mt-12">
       <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
@@ -215,47 +234,56 @@ export function Home() {
               variant="small"
               className="flex items-center gap-1 font-normal text-blue-gray-600"
             >
-              <ArrowUpIcon
-                strokeWidth={3}
-                className="h-3.5 w-3.5 text-green-500"
-              />
-              <strong>24%</strong> this month
+              {
+                depositeDataLastMonth <0 ? (<ArrowDownIcon
+                  strokeWidth={3}
+                  className="h-3.5 w-3.5 text-green-500"
+                />):(<ArrowUpIcon
+                  strokeWidth={3}
+                  className="h-3.5 w-3.5 text-green-500"
+                />)
+              }
+              
+              <strong>{depositeDataLastMonth}%</strong> than last month
             </Typography>
           </CardHeader>
           <CardBody className="pt-0">
-            {ordersOverviewData.map(
-              ({ icon, color, title, description }, key) => (
-                <div key={title} className="flex items-start gap-4 py-3">
-                  <div
-                    className={`relative p-1 after:absolute after:-bottom-6 after:left-2/4 after:w-0.5 after:-translate-x-2/4 after:bg-blue-gray-50 after:content-[''] ${
-                      key === ordersOverviewData.length - 1
-                        ? "after:h-0"
-                        : "after:h-4/6"
-                    }`}
-                  >
-                    {React.createElement(icon, {
-                      className: `!w-5 !h-5 ${color}`,
-                    })}
-                  </div>
-                  <div>
-                    <Typography
-                      variant="small"
-                      color="blue-gray"
-                      className="block font-medium"
+            {
+              loading ? (<div className="flex justify-between items-center"><Spinner></Spinner></div>):( depositeDetailsData?.slice(0,6)?.map(
+                (data, key) => (
+                  <div key={key} className="flex items-start gap-4 py-3">
+                    <div
+                      className={`relative p-1 after:absolute after:-bottom-6 after:left-2/4 after:w-0.5 after:-translate-x-2/4 after:bg-blue-gray-50 after:content-[''] ${
+                        key === depositeDetailsData.length - 1
+                          ? "after:h-0"
+                          : "after:h-4/6"
+                      }`}
                     >
-                      {title}
-                    </Typography>
-                    <Typography
-                      as="span"
-                      variant="small"
-                      className="text-xs font-medium text-blue-gray-500"
-                    >
-                      {description}
-                    </Typography>
+                      {React.createElement(CreditCardIcon, {
+                        className: `!w-5 !h-5 `,
+                      })}
+                    </div>
+                    <div>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="block font-medium"
+                      >
+                        {data.amount} TK by {data.user.username}
+                      </Typography>
+                      <Typography
+                        as="span"
+                        variant="small"
+                        className="text-xs font-medium text-blue-gray-500"
+                      >
+                        {new Date(data.date).toLocaleDateString()}
+                      </Typography>
+                    </div>
                   </div>
-                </div>
-              )
-            )}
+                )
+              ))
+            }
+           
           </CardBody>
         </Card>
       </div>
