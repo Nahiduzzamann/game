@@ -332,3 +332,23 @@ export const withdrawHistory = async (req: Request, res: Response) => {
         res.status(StatusCodes.EXPECTATION_FAILED).json({ error })
     }
 }
+export const toggleStatusWithdraw = async (req: Request, res: Response) => {
+    const { message, id, status } = req.body
+    if (!id ) {
+        return res.status(StatusCodes.BAD_GATEWAY).json({ error: "All field are required" })
+    }
+    try {
+        const withdraw = await Withdraws.findOne({ _id: new ObjectId(id) })
+    
+        if ( !withdraw || !withdraw.amount) {
+            return res.status(StatusCodes.BAD_GATEWAY).json({ error: "Withdraw id and is invalid " })
+        }
+        withdraw.status = status ? "ACCEPTED" : "CANCELLED"
+        withdraw.remarks = message
+        withdraw.save()
+        
+        res.status(StatusCodes.OK).json(withdraw)
+    } catch (error) {
+        res.status(StatusCodes.EXPECTATION_FAILED).json({ error: "Invalid ID" })
+    }
+}
