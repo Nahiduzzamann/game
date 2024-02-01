@@ -99,7 +99,7 @@ const Header = () => {
                 className="bg-black hover:bg-gray-800 text-white rounded-md w-[150px] py-2"
               >
                {
-          selectedLanguage ==='en' ? "Login":"প্রবেশ করুন"
+          selectedLanguage ==='en' ? "Login":"লগইন"
         }
         
               </button>
@@ -122,7 +122,7 @@ const Header = () => {
             >
               
               {
-          selectedLanguage ==='en' ? "Log Out":"প্রস্থান"
+          selectedLanguage ==='en' ? "Log Out":"লগ আউট"
         }
             </button>
           )}
@@ -287,7 +287,7 @@ const Header = () => {
               <FaQuora />
              
               {
-          selectedLanguage ==='en' ? " FAQ":"প্রশ্ন"
+          selectedLanguage ==='en' ? " FAQ":"এফএকিউ"
         }
             </div>
             <div
@@ -297,7 +297,7 @@ const Header = () => {
               <FaSignOutAlt />
               
               {
-          selectedLanguage ==='en' ? "Log Out":"প্রস্থান"
+          selectedLanguage ==='en' ? "Log Out":"লগ আউট"
         }
             </div>
           </DrawerBody>

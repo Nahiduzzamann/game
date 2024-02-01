@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import mobile from "./mobile.png";
 import leftImage from "./left-image.png";
 import rightImage from "./right-image.png";
 import downloadIcon1 from "./download-icon1.png";
 import downloadIcon2 from "./download-icon2.png";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const DownloadSection = () => {
+  const { selectedLanguage } = useContext(AuthContext);
   return (
     <div className="">
       <div className=" flex md:hidden  flex-col justify-center items-center">
@@ -20,12 +22,21 @@ const DownloadSection = () => {
         {/* Center Content */}
         <div className=" mt-4 md:mt-0 flex flex-col gap-2 items-center justify-center ">
           <h2 className=" text-xl md:text-3xl lg:text-4xl text-center font-semibold mb-2 text-black">
-            DOWNLOAD OUR APPS
+            
+            {
+          selectedLanguage ==='en' ? "DOWNLOAD OUR APPS":"আমাদের অ্যাপস ডাউনলোড করুন"
+        }
           </h2>
           <p className="text-black text-center mb-4">
-            To Get Better Experience
+           
+            {
+          selectedLanguage ==='en' ? " To Get Better Experience":"ভাল অভিজ্ঞতা পেতে"
+        }
             <br />
-            In Your Mobile Device
+            
+            {
+          selectedLanguage ==='en' ? "In Your Mobile Device":"আপনার মোবাইল ডিভাইসে"
+        }
           </p>
 
           {/* Download Icons */}

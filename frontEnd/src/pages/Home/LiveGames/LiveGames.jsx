@@ -19,6 +19,7 @@ import { IoMdClose } from "react-icons/io";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
 export default function LiveGames() {
+  const { selectedLanguage } = useContext(AuthContext);
   const { user } = useContext(AuthContext);
   const [data, setData] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();

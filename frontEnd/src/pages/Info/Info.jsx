@@ -24,7 +24,7 @@ const Info = () => {
           <div className=" mt-4 flex flex-col">
             <NavLink activeClassName="active" className="ps-5 py-3 font-bold uppercase hover:bg-gray-300" to="/info/faq">
             {
-          selectedLanguage ==='en' ? "FAQ":"FAQ"
+          selectedLanguage ==='en' ? "FAQ":"এফএকিউ"
         }
             </NavLink>
             <div className="h-[1px] bg-[#EBEBEB]"></div>
