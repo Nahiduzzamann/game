@@ -13,9 +13,9 @@ import { IoGiftOutline } from "react-icons/io5";
 import { AuthContext } from "../../providers/AuthProvider";
 export default function TurnOverHistory() {
   const [selectedImage, setSelectedImage] = useState("");
-
+  const { selectedLanguage } = useContext(AuthContext);
   const handleImageClick = (name) => {
-    const { selectedLanguage } = useContext(AuthContext);
+    
     setSelectedImage(name);
   };
   return (

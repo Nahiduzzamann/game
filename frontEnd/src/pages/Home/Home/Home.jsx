@@ -6,6 +6,7 @@ import FavoriteGameSection from "../FavoriteGameSection/FavoriteGameSection";
 import FeaturesGameSection from "../FeaturesGameSection/FeaturesGameSection";
 import DownloadSection from "../Download/Download";
 import LiveGames from "../LiveGames/LiveGames";
+import Cricket from "../Cricket/Cricket";
 
 
 
@@ -16,6 +17,7 @@ const Home = () => {
     <div>
       <Slider/>
       <GamesSection></GamesSection>
+      <Cricket/>
       <LiveGames></LiveGames>
       <FavoriteGameSection></FavoriteGameSection>
       <FeaturesGameSection></FeaturesGameSection>
