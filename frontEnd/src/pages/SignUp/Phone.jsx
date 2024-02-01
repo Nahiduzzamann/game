@@ -134,7 +134,7 @@ const Phone = () => {
               to="/login"
               className="mt-[8%] flex py-2 items-center justify-center border-2 p-1 bg-black rounded-3xl text-white hover:bg-red-400"
             >
-              Back
+            
               {
           selectedLanguage ==='en' ? " Back":"পেছনে"
         }

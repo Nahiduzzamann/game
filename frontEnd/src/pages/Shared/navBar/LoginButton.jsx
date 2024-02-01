@@ -10,7 +10,7 @@ export default function LoginButton() {
     <div className={`${user && 'hidden'} w-full grid z-10 grid-cols-2 md:hidden fixed bottom-0`}>
       <div onClick={()=>navigate("/login")} className="flex justify-center items-center py-4 hover:bg-gray-700 bg-black text-white">
       {
-          selectedLanguage ==='en' ? "Login":"প্রবেশ করুন"
+          selectedLanguage ==='en' ? "Login":"লগইন"
         }
         
       </div>

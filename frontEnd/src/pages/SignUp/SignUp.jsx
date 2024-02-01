@@ -205,7 +205,10 @@ const SignUp = () => {
               to="/login"
               className="text-center flex items-center justify-center border-2 rounded-3xl mt-1 p-2 bg-black text-white hover:bg-red-400"
             >
-              Login
+             
+              {
+          selectedLanguage ==='en' ? " Login":"লগইন"
+        }
             </Link>
           </form>
         </div>
