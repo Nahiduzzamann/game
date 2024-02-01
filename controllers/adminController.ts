@@ -177,13 +177,16 @@ export const toggleStatusDeposit = async (req: Request, res: Response) => {
         const deposit = await Deposit.findOne({ _id: new ObjectId(id) })
         //const deposit = await Deposit.updateOne({ _id: new ObjectId(id) }, { $set: { status: status ? "ACCEPTED" : "CANCELLED", remarks: message } })
         const user = await Users.findOne({ username: username })
-        if (!user || !user.balance || !deposit || !deposit.amount) {
+        if (!user || !deposit || !deposit.amount) {
             return res.status(StatusCodes.BAD_GATEWAY).json({ error: "Deposit id and Username is invalid " })
         }
+        
         deposit.status = status ? "ACCEPTED" : "CANCELLED"
         deposit.remarks = message
         deposit.save()
-        user.balance = user.balance + deposit.amount;
+        if (status) {
+            user.balance = user.balance + deposit.amount;
+        }
         user.save()
         res.status(StatusCodes.OK).json(deposit)
     } catch (error) {
@@ -333,20 +336,23 @@ export const withdrawHistory = async (req: Request, res: Response) => {
     }
 }
 export const toggleStatusWithdraw = async (req: Request, res: Response) => {
-    const { message, id, status } = req.body
-    if (!id ) {
+    const { message, id, status,username } = req.body
+    if (!id ||!username) {
         return res.status(StatusCodes.BAD_GATEWAY).json({ error: "All field are required" })
     }
     try {
         const withdraw = await Withdraws.findOne({ _id: new ObjectId(id) })
-    
-        if ( !withdraw || !withdraw.amount) {
-            return res.status(StatusCodes.BAD_GATEWAY).json({ error: "Withdraw id and is invalid " })
+        const user = await Users.findOne({ username: username })
+        if (!withdraw || !withdraw.amount ||!user) {
+            return res.status(StatusCodes.BAD_GATEWAY).json({ error: "Withdraw id and username is invalid " })
         }
         withdraw.status = status ? "ACCEPTED" : "CANCELLED"
         withdraw.remarks = message
         withdraw.save()
-        
+        if(!status){
+            user.balance=user.balance+withdraw.amount;
+            user.save()
+        }
         res.status(StatusCodes.OK).json(withdraw)
     } catch (error) {
         res.status(StatusCodes.EXPECTATION_FAILED).json({ error: "Invalid ID" })
