@@ -1,7 +1,7 @@
 import axios from "axios";
 import url from "./url";
 
-const postWithdrawStatus = async (id,status,message) => {
+const postWithdrawStatus = async (id,status,message,username) => {
    
   return axios.post(
     `${url}/admin/withdraw/toggle`,
@@ -9,6 +9,7 @@ const postWithdrawStatus = async (id,status,message) => {
       id: id,
       status: status,
       message: message,
+      username:username
     },
   );
 };

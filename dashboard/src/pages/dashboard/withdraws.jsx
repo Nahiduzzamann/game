@@ -35,7 +35,7 @@ const [loading, setLoading]=useState(false)
     };
 
     const handleConfirm = (status)=>{
-      postWithdrawStatus(actionData._id,status,message)
+      postWithdrawStatus(actionData._id,status,message,actionData.wallet.user)
       .then((res)=>{
         setOpen(false)
         setactionData(null)

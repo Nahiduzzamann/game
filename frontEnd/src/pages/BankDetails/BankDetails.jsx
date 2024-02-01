@@ -119,7 +119,7 @@ const BankDetails = () => {
             {paymentMethods.length <= 0 && (
               <div className="text-center text-red-500 my-2">
                  {
-          selectedLanguage ==='en' ? "Empty Your Wallet!":"আপনার ওয়ালেট খালি করুন!"
+          selectedLanguage ==='en' ? "Add Wallet then Withdraw!":"আপনার ওয়ালেট খালি!"
         }{" "}
               </div>
             )}
