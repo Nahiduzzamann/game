@@ -29,7 +29,7 @@ export default function FeaturesGameSection() {
     const games = async () => {
       setData(null);
       try {
-        const res = await gateGame(url, 1, "fish");
+        const res = await gateGame(url, 2, "fish");
         // console.log(res.data);
         setData(res.data);
       } catch (error) {

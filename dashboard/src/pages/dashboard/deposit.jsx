@@ -109,7 +109,7 @@ console.log(err);
                         </td>
                         <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600">
-                            {data.amount}
+                            {data.amount} | ( <span className='font-bold text-red-400'>{data.tranXId || 'Empty tranXId'}</span> )
                           </Typography>
                           <Typography className="text-xs font-normal text-blue-gray-500">
                             {data.remarks || '-'}

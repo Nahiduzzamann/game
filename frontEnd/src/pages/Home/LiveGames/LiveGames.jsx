@@ -30,7 +30,7 @@ export default function LiveGames() {
     const games = async () => {
       setData(null);
       try {
-        const res = await gateGame(url, 0, "live_dealers");
+        const res = await gateGame(url, 1, "live_dealers");
         // console.log(res.data);
         setData(res.data);
       } catch (error) {

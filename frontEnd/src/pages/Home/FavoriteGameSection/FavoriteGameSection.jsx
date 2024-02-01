@@ -28,7 +28,7 @@ export default function FavoriteGameSection() {
     const games = async () => {
       setData(null);
       try {
-        const res = await gateGame(url, 2, "rubyplay");
+        const res = await gateGame(url, 3, "rubyplay");
         // console.log(res.data);
         setData(res.data);
       } catch (error) {
