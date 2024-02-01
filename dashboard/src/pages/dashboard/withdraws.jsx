@@ -1,6 +1,8 @@
 
 import getWithdrawDetails from "@/modules/getWithdrawDetails";
-import { Avatar, Button, Card, CardBody, CardHeader, Chip, Dialog, DialogBody, DialogFooter, Typography } from "@material-tailwind/react";
+import postWithdrawStatus from "@/modules/postWithdrawStatus";
+import url from "@/modules/url";
+import { Avatar, Button, Card, CardBody, CardHeader, Chip, Dialog, DialogBody, DialogFooter, Spinner, Typography } from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";
 import ResponsivePagination from "react-responsive-pagination";
 const Withdraws =()=>{
@@ -33,19 +35,19 @@ const [loading, setLoading]=useState(false)
     };
 
     const handleConfirm = (status)=>{
-//       postDepositeStatus(actionData._id,status,message,actionData.user.username)
-//       .then((res)=>{
-//         setOpen(false)
-//         setactionData(null)
-//         setHandleFatch(Math.random())
-// // console.log(res);
-//       })
-//       .catch((err)=>{
-//         setOpen(false)
-//         setactionData(null)
-//         setHandleFatch(Math.random())
-// console.log(err);
-//       })
+      postWithdrawStatus(actionData._id,status,message)
+      .then((res)=>{
+        setOpen(false)
+        setactionData(null)
+        setHandleFatch(Math.random())
+// console.log(res);
+      })
+      .catch((err)=>{
+        setOpen(false)
+        setactionData(null)
+        setHandleFatch(Math.random())
+console.log(err);
+      })
     }
     return (
       <div className="mt-12 mb-8 flex flex-col gap-12">
@@ -91,7 +93,7 @@ const [loading, setLoading]=useState(false)
                       <tr key={key}>
                         <td className={className}>
                           <div className="flex items-center gap-4">
-                          <Avatar src={data.wallet.walletDetails.icon} alt="avatar" variant="rounded" />
+                          <Avatar src={`${url}${data.wallet.walletDetails.icon}`} alt="avatar" variant="rounded" />
                             <div>
                               <Typography
                                 variant="small"
