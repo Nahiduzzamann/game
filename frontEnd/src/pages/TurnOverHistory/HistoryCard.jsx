@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { TbBrandCashapp } from "react-icons/tb";
 import { BiSolidOffer } from "react-icons/bi";
+import { AuthContext } from "../../providers/AuthProvider";
 
 export default function HistoryCard({ data }) {
+  const { selectedLanguage } = useContext(AuthContext);
   return (
     <div className="text-md gap-1 border-b-2 py-2 grid">
       <div>

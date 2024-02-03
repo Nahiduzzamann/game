@@ -7,7 +7,7 @@ import ResponsivePagination from "react-responsive-pagination";
 export default function WithdrawalHistory() {
   const itemsPerPage = 4;
   const [data, setData] = useState(null);
-  console.log(data);
+  // console.log(data);
   const [search, setSearch] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(data?.filter((s) => s.amount?.toString()?.match(search)).length / itemsPerPage);
