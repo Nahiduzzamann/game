@@ -18,10 +18,13 @@ import getWallet from "../../module/getWallet";
 import url from "../../module";
 import getPromotions from "../../module/getPromotions";
 import { AuthContext } from "../../providers/AuthProvider";
-
+import { useLocation } from "react-router-dom";
 
 export default function Deposit() {
-
+  const { search } = useLocation();
+  const queryParams = new URLSearchParams(search);
+  const param = queryParams.get("id");
+  // console.log(param);
   const { selectedLanguage } = useContext(AuthContext);
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedAmount, setSelectedAmount] = useState(200);
@@ -30,8 +33,8 @@ export default function Deposit() {
   const [promotions, setPromotions] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
-  const [depositBonus, setDepositBonus] = useState(null);
-  console.log(depositBonus);
+  const [depositBonus, setDepositBonus] = useState(param);
+  // console.log(depositBonus);
   const [loader, setLoader] = useState(false);
   const toast = useToast();
 
@@ -176,23 +179,26 @@ export default function Deposit() {
             className="h-10 w-36 bg-gray-200 text-black border border-[#0082D6] font-bold text-center rounded-lg p-1 m-2"
           />
         </div>
-
-        <p className="font-bold pt-5 pb-2">
-          {selectedLanguage === "en" ? "Deposit Bonus" : "ডিপোজিট বোনাস"}
-        </p>
-
-        <Select
-          onChange={(e) => {
-            setDepositBonus(e.target.value);
-          }}
-          placeholder="No Bounce"
-        >
-          {promotions?.map((doc, i) => (
-            <option key={i} value={doc._id}>
-              {doc.title}
-            </option>
-          ))}
-        </Select>
+        {!param && (
+          <div>
+            {" "}
+            <p className="font-bold pt-5 pb-2">
+              {selectedLanguage === "en" ? "Deposit Bonus" : "ডিপোজিট বোনাস"}
+            </p>
+            <Select
+              onChange={(e) => {
+                setDepositBonus(e.target.value);
+              }}
+              placeholder="No Bounce"
+            >
+              {promotions?.map((doc, i) => (
+                <option key={i} value={doc._id}>
+                  {doc.title}
+                </option>
+              ))}
+            </Select>
+          </div>
+        )}
 
         <div className="pt-5 text-center">
           <div

@@ -43,7 +43,7 @@ export default function History() {
         }
               </div>
             </Tab>
-            <Tab>
+            {/* <Tab>
               <div className="flex gap-2 items-center font-medium text-md">
                 <BiTransferAlt size={24} />
                 
@@ -69,7 +69,7 @@ export default function History() {
           selectedLanguage ==='en' ? " Bonus":"বোনাস"
         }
               </div>
-            </Tab>
+            </Tab> */}
           </TabList>
 
           <TabPanels className="w-full">
@@ -79,7 +79,7 @@ export default function History() {
             <TabPanel>
               <WithdrawalHistory />
             </TabPanel>
-            <TabPanel>
+            {/* <TabPanel>
               <Transfer />
             </TabPanel>
             <TabPanel>
@@ -87,7 +87,7 @@ export default function History() {
             </TabPanel>
             <TabPanel>
               <Bonus />
-            </TabPanel>
+            </TabPanel> */}
           </TabPanels>
         </Tabs>
       </div>
