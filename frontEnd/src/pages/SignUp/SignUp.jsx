@@ -115,7 +115,7 @@ const SignUp = () => {
                 <input
                   required
                   type="text"
-                  className="bg-[#D9D9D9] outline-0  "
+                  className="bg-[#D9D9D9] outline-0  w-full rounded-r-3xl pl-2"
                   id="username"
                   name="username"
                   placeholder="Username "
@@ -133,7 +133,7 @@ const SignUp = () => {
                 <input
                   required
                   type="text"
-                  className="bg-[#D9D9D9] outline-0 "
+                  className="bg-[#D9D9D9] outline-0 w-full rounded-r-3xl pl-2"
                   id="name"
                   name="name"
                   placeholder="Full Name"

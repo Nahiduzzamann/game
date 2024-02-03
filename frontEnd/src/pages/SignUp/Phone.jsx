@@ -70,7 +70,7 @@ const Phone = () => {
                 <input
                   required
                   type="text"
-                  className="bg-[#D9D9D9] outline-0 "
+                  className="bg-[#D9D9D9] outline-0 w-full rounded-r-3xl pl-2"
                   id="phoneNumber"
                   name="phoneNumber"
                   placeholder="Phone Number"
@@ -88,7 +88,7 @@ const Phone = () => {
 
                 <input
                   
-                  className="bg-[#D9D9D9] outline-0 flex-1 "
+                  className="bg-[#D9D9D9] outline-0 flex-1 w-full rounded-r-3xl pl-2"
                   id="referralCode"
                   name="referralCode"
                   placeholder="Referral Code"
