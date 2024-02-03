@@ -58,7 +58,7 @@ export default function WithdrawalHistory() {
             remarks={d.remarks}
             status={d.status}
             promotionId={d.promotionId || 'promotion id'}
-            walletId={d.walletId}
+            walletId={d.wallet.walletDetails}
           />
         ))}
       <ResponsivePagination

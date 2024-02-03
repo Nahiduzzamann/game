@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { TbBrandCashapp } from "react-icons/tb";
 import { BiSolidOffer } from "react-icons/bi";
 import url from "../../module";
@@ -14,12 +14,24 @@ export default function HistoryCard({
   date,
 }) {
   const { selectedLanguage } = useContext(AuthContext);
+  const [wallet,setWallet]=useState(null)
   const promotion = JSON.parse(localStorage.getItem("promotions"))?.filter(
     (d) => d._id === promotionId
   )[0];
-  const wallet = JSON.parse(localStorage.getItem("wallets"))?.filter(
-    (d) => d._id === walletId
-  )[0];
+
+  useEffect(()=>{
+
+    if(typeof walletId === 'string'){
+      const wallet = JSON.parse(localStorage.getItem("wallets"))?.filter(
+        (d) => d._id === walletId 
+      )[0];
+      setWallet(wallet)
+    }else{
+      setWallet(walletId)
+    }
+  },[walletId])
+ 
+  
   //console.log(promotion);
   return (
     <div className="text-md gap-1 border-b-2 py-2 grid">
