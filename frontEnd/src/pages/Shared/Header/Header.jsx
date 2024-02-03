@@ -200,8 +200,9 @@ const Header = () => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>
+          <DrawerHeader className="flex justify-between items-baseline">
             <img className="w-[130px] " src={logo} />
+            <LanguageCard />
           </DrawerHeader>
           <hr />
           <DrawerBody>
@@ -270,13 +271,7 @@ const Header = () => {
           selectedLanguage ==='en' ? "Promotions":"প্রচার"
         }
             </div>
-            <div className=" hover:bg-gray-50 flex gap-2 items-center py-2 px-2 cursor-pointer text-gray-400  text-md">
-              <GrLanguage />
-              
-              {
-          selectedLanguage ==='en' ? "Languages":"ভাষা"
-        }
-            </div>
+           
             <div
               onClick={() => {
                 onClose();
