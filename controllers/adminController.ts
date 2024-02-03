@@ -5,17 +5,17 @@ import { DepositTypes, GameHistory, WalletsTypes } from "../data/allTypes";
 import { StatusCodes } from "http-status-codes";
 import { uploadImageBanner, uploadImageSquire } from './fileUploadController';
 
-interface MonthlyDepositTypes {
+export interface MonthlyDepositTypes {
     month: string,
     deposit: number,
     year: number
 }
-interface MonthlyRevenueTypes {
+export interface MonthlyRevenueTypes {
     month: string,
     revenue: number,
     year: number
 }
-interface CombinePromotionTypes {
+export interface CombinePromotionTypes {
     _id: string,
     title: string,
     description: string,
@@ -26,7 +26,7 @@ interface CombinePromotionTypes {
     applicable: boolean,
     deposit: DepositCombineTypes[]
 }
-interface DepositCombineTypes {
+export interface DepositCombineTypes {
     walletId: string,
     amount: number,
     promotionId: string,
@@ -37,10 +37,10 @@ interface DepositCombineTypes {
     userId: string,
     totalTurnover: number
 }
-interface FilePath {
+export interface FilePath {
     path: string
 }
-interface WalletCombineTypes {
+export interface WalletCombineTypes {
     _id: string,
     walletId: string,
     amount: number,
@@ -50,7 +50,7 @@ interface WalletCombineTypes {
     wallet: WalletCombineTypes
 
 }
-interface WalletCombineTypes {
+export interface WalletCombineTypes {
     _id: string,
     walletNumber: string,
     walletId: string,

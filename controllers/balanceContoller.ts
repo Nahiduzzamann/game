@@ -20,6 +20,7 @@ import {
 import { AuthenticatedRequest } from "../middlewares/checkLogin";
 import { UserWalletsTypes, WalletsTypes } from "../data/allTypes";
 import { ObjectId } from "mongodb";
+import { WalletCombineTypes } from "./adminController";
 
 interface FilePath {
   path: string;
@@ -310,29 +311,37 @@ export const getWithdrawHistory = async (req: AuthenticatedRequest, res: Respons
   const { username } = req;
 
   try {
-    const withdraw = await Withdraws.aggregate([
-      { $match: { userId: username } },
+    const combineWallet = await Withdraws.aggregate([
       {
-        $lookup: {
-          from: "wallets",
-          let: { userIdObj: { $toObjectId: "$walletId" } },
-          pipeline: [
-            {
-              $match: {
-                $expr: { $eq: ["$_id", "$$userIdObj"] },
-              },
-            },
-          ],
-          as: "wallet",
-        },
+        $match:{userId:username}
       },
       {
-        $addFields: {
-          wallet: { $arrayElemAt: ["$wallet", 0] },
-        },
+          $lookup: {
+              from: 'userwallets',
+              let: { userIdObj: { $toObjectId: '$walletId' } },
+              pipeline: [
+                  {
+                      $match: {
+                          $expr: { $eq: ['$_id', '$$userIdObj'] }
+                      }
+                  }
+              ],
+              as: 'wallet'
+          },
       },
-    ]).sort({ date: -1 });
-    res.status(StatusCodes.OK).json(withdraw);
+      {
+          $addFields: {
+              wallet: { $arrayElemAt: ['$wallet', 0] }
+          }
+      },
+
+  ]).sort({ date: -1 }) as WalletCombineTypes[]
+
+  await Promise.all(combineWallet.map(async (d, i) => {
+      const details = await Wallets.findOne({ _id: new ObjectId(d.wallet.walletId) }) as WalletsTypes
+      combineWallet[i] = { ...d, wallet: { ...d.wallet, walletDetails: details } }
+  }))
+    res.status(StatusCodes.OK).json(combineWallet);
   } catch (error) {
     res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error });
   }

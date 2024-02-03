@@ -10,12 +10,12 @@ export default function WithdrawalHistory() {
   console.log(data);
   const [search, setSearch] = useState();
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(data?.filter((s) => s.amount?.match(search)).length / itemsPerPage);
+  const totalPages = Math.ceil(data?.filter((s) => s.amount?.toString()?.match(search)).length / itemsPerPage);
   useEffect(() => {
     getWithdrawHistory()
     .then((res) => {
-      console.log(res.data);
-      // setData(res.data);
+      // console.log(res.data);
+      setData(res.data);
     });
   }, []);
   if (!data) {
@@ -47,12 +47,12 @@ export default function WithdrawalHistory() {
         </div>
       )}
       {data
-        ?.filter((s) => s.amount?.match(search))
+        ?.filter((s) => s.amount?.toString()?.match(search))
         ?.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
         .map((d, i) => (
           <HistoryCard
             key={i}
-            id={d.tranXId || 'trans Id'}
+            id={d.wallet.walletNumber}
             amount={d.amount}
             date={d.date}
             remarks={d.remarks}
