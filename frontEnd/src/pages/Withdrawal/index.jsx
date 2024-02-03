@@ -260,7 +260,7 @@ export default function Withdrawal() {
                   </AlertDialogBody>
                   <AlertDialogFooter>
                     <Button ref={cancelRef} onClick={onClose}>
-                      No
+                     
                       {selectedLanguage === "en" ? "No" : "না"}
                     </Button>
                     <Button

@@ -119,7 +119,7 @@ const BankDetails = () => {
             {paymentMethods.length <= 0 && (
               <div className="text-center text-red-500 my-2">
                  {
-          selectedLanguage ==='en' ? "Add Wallet then Withdraw!":"আপনার ওয়ালেট খালি!"
+          selectedLanguage ==='en' ? "Add Wallet then Withdraw!":"ওয়ালেট যোগ করুন তারপর উত্তোলন করুন!"
         }{" "}
               </div>
             )}
@@ -161,7 +161,7 @@ const BankDetails = () => {
           <Stack spacing={4} mb={4}>
 
           <span className="text-red-500"> {
-               selectedLanguage ==='en' ? "Select a wallet to add- ":"যোগ করার জন্য একটি মানিব্যাগ নির্বাচন করুন-"
+               selectedLanguage ==='en' ? "Select a wallet to add- ":"যোগ করার জন্য একটি ওয়ালেট নির্বাচন করুন-"
               }</span>
             {wallets ? (
               <div className="flex  items-center flex-wrap gap-4">

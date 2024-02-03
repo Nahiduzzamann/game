@@ -35,7 +35,7 @@ export default function TurnOverHistory() {
                
                 {
           selectedLanguage ==='en' ? " Deposit":"জমা"
-        }
+                }
               </div>
             </Tab>
             <Tab>
@@ -43,7 +43,7 @@ export default function TurnOverHistory() {
                 <GiReceiveMoney size={24} />
                 
                 {
-          selectedLanguage ==='en' ? "Withdraw":"প্রত্যাহার করুন"
+          selectedLanguage ==='en' ? "Withdraw":"উত্তোলন করুন"
         }
               </div>
             </Tab>
