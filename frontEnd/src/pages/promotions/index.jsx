@@ -36,6 +36,7 @@ if(!data){
             banner={`${url}${card.image}`}
             title={card.title}
             description={card.description}
+            id={card._id}
           ></PromotionsCard>
         ))}
       </div>

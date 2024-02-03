@@ -20,6 +20,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
+import { Link } from "react-router-dom";
 
 const PromotionsCard = ({
   banner,
@@ -27,6 +28,7 @@ const PromotionsCard = ({
   description,
   details,
   applicable,
+  id,
 }) => {
   const { selectedLanguage } = useContext(AuthContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -52,14 +54,16 @@ const PromotionsCard = ({
               {selectedLanguage === "en" ? " Details" : "বিস্তারিত"}
             </Button>
             {applicable && (
-              <Button
-                border="2px"
-                borderColor="blue.500"
-                variant="outline"
-                colorScheme="blue"
-              >
-                {selectedLanguage === "en" ? "Apply Now" : "এখন আবেদন কর"}
-              </Button>
+              <Link to={`/user/deposit?id=${id}`}>
+                <Button
+                  border="2px"
+                  borderColor="blue.500"
+                  variant="outline"
+                  colorScheme="blue"
+                >
+                  {selectedLanguage === "en" ? "Apply Now" : "এখন আবেদন কর"}
+                </Button>
+              </Link>
             )}
           </ButtonGroup>
         </CardFooter>
