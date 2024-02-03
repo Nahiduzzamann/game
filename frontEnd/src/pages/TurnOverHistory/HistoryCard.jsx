@@ -6,20 +6,28 @@ export default function HistoryCard({ data }) {
   return (
     <div className="text-md gap-1 border-b-2 py-2 grid">
       <div>
-        <span className="font-bold">ID - </span>
+        <span className="font-bold">{
+          selectedLanguage ==='en' ? "ID -":"আইডি-"
+        } </span>
         {data.id}
       </div>
       <div className="flex flex-wrap gap-4">
         <div className="flex items-center gap-1">
           <TbBrandCashapp />
-          {data.amount} BDT
+          {data.amount} {
+          selectedLanguage ==='en' ? "BDT":"টাকা"
+        }
         </div>
         <div className="flex items-center gap-1 text-green-500">
         <BiSolidOffer />
-          {data.bonus} BDT
+          {data.bonus} {
+          selectedLanguage ==='en' ? "BDT":"টাকা"
+        }
         </div>
         <div>
-          <span className="font-bold text-yellow-600">Status </span>
+          <span className="font-bold text-yellow-600"> {
+          selectedLanguage ==='en' ? "Status":"স্ট্যাটাস"
+        } </span>
           {data.status}
         </div>
         <div className="flex items-center gap-1">

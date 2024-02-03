@@ -84,7 +84,7 @@ const ChangePasswordPage = () => {
           <label className="block text-gray-600 text-sm font-bold mb-2">
          
           {
-          selectedLanguage ==='en' ? " Current Password":"বর্তমান গোপননম্বর"
+          selectedLanguage ==='en' ? " Current Password":"বর্তমান পাসওয়ার্ড"
         }
           </label>
           <div className="relative">
@@ -113,7 +113,7 @@ const ChangePasswordPage = () => {
           <label className="block text-gray-600 text-sm font-bold mb-2">
             
             {
-          selectedLanguage ==='en' ? "New Password":"নতুন গোপননম্বর"
+          selectedLanguage ==='en' ? "New Password":"নতুন পাসওয়ার্ড"
         }
           </label>
           <div className="relative">
@@ -140,7 +140,7 @@ const ChangePasswordPage = () => {
           <label className="block text-gray-600 text-sm font-bold mb-2">
            
             {
-          selectedLanguage ==='en' ? " Confirm New Password":"নিশ্চিত কর নতুন গোপননম্বর"
+          selectedLanguage ==='en' ? " Confirm New Password":"নিশ্চিত করুন নতুন পাসওয়ার্ড"
         }
           </label>
           <div className="relative">

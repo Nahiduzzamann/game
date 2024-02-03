@@ -75,7 +75,7 @@ export default function BankPay() {
     <div className="w-screen h-screen bg-blue-500 p-3">
       <div className="text-white text-2xl font-medium w-full text-center py-2">
         {
-          selectedLanguage ==='en' ? "  Direct Pay":"সরাসরি বেতন"
+          selectedLanguage ==='en' ? "  Direct Pay":"সরাসরি পে"
         }
       </div>
       <div className="text-white text-center ">
@@ -108,7 +108,7 @@ export default function BankPay() {
           }
           </span> 
           {
-            selectedLanguage ==='en' ? " using the number ":"নম্বর ব্যবহার করে"
+            selectedLanguage ==='en' ? "using the number ":"নম্বর ব্যবহার করে"
           }
         
           <span className="font-bold">{walletInfo.walletNumber}</span>

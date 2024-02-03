@@ -64,7 +64,7 @@ export default function HistoryCard({
         ) : (
           <div>
             {
-          selectedLanguage ==='en' ? "No Wallet Found":"কোন মানিব্যাগ পাওয়া যায়নি"
+          selectedLanguage ==='en' ? "No Wallet Found":"কোন ওয়ালেট পাওয়া যায়নি"
         }
           </div>
         )}

@@ -45,7 +45,7 @@ const AboutUs = () => {
       <p className="font-bold pt-5 pb-2 underline underline-offset-5">
        
         {
-          selectedLanguage ==='en' ? "Casino Games":"ক্যাসিনো গেম"
+          selectedLanguage ==='en' ? "Casino Games":"ক্যাসিনো গেমস"
         }
       </p>
       <p className="font-medium">

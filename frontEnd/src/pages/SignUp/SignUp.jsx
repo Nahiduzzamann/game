@@ -198,7 +198,7 @@ const SignUp = () => {
             <label className="block text-base mt-3 font-semibold">
              
               {
-          selectedLanguage ==='en' ? " Already have an account?":"ইতিমধ্যে একটি সদস্যপদ আছে?"
+          selectedLanguage ==='en' ? " Already have an account?":"ইতিমধ্যে একটি সদস্যপদ আছে ?"
         }
             </label>
             <Link

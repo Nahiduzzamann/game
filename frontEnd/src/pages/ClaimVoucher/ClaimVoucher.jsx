@@ -30,7 +30,7 @@ const ClaimVoucher = () => {
             <label className="block font-bold mb-2" htmlFor="voucherCode">
              
               {
-          selectedLanguage ==='en' ? " Apply Voucher ":"ভাউচার প্রয়োগ করুন"
+          selectedLanguage ==='en' ? " Apply Voucher ":"ভাউচার আবেদন করুন"
         }
         <span className="text-red-500">*</span>
             </label>
@@ -57,7 +57,7 @@ const ClaimVoucher = () => {
             <div className="mt-4 text-green-500 font-bold">
               
               {
-          selectedLanguage ==='en' ? "Voucher applied successfully!":"ভাউচার সফলভাবে প্রয়োগ করা হয়েছে!"
+          selectedLanguage ==='en' ? "Voucher applied successfully!":"ভাউচার আবেদন করা হয়েছে!"
         }
             </div>
           )}

@@ -27,7 +27,9 @@ export default function ProfileMenuBar() {
           } flex items-center gap-2 hover:bg-gray-500 px-2 w-[220px] py-[6px] rounded-md hover:text-white cursor-pointer`}
         >
           <FaDollarSign />
-          <div className="text-xs font-medium">Deposit</div>
+          <div className="text-xs font-medium">{
+          selectedLanguage ==='en' ? "Deposit":"জমা"
+        }</div>
         </div>
         <div onClick={()=>navigate("/user/withdrawal")}
           className={`${
@@ -35,7 +37,11 @@ export default function ProfileMenuBar() {
           } flex items-center gap-2 hover:bg-gray-500 px-2 py-[6px] rounded-md hover:text-white cursor-pointer`}
         >
           <BiMoneyWithdraw />
-          <div className="text-xs font-medium">Withdrawal</div>
+          <div className="text-xs font-medium"> 
+          {
+          selectedLanguage ==='en' ? "Withdrawal":"উত্তোলন"
+        }
+        </div>
         </div>
         <div onClick={()=>navigate("/user/history")}
           className={`${
@@ -43,7 +49,9 @@ export default function ProfileMenuBar() {
           } flex items-center gap-2 hover:bg-gray-500 px-2 py-[6px] rounded-md hover:text-white cursor-pointer`}
         >
           <FaHistory />
-          <div className="text-xs font-medium">History</div>
+          <div className="text-xs font-medium">{
+          selectedLanguage ==='en' ? "History":"ইতিহাস"
+        }</div>
         </div>
         <div onClick={()=>navigate("/user/turn-over")}
           className={`${
@@ -51,7 +59,11 @@ export default function ProfileMenuBar() {
           } flex items-center gap-2 hover:bg-gray-500 px-2 py-[6px] rounded-md hover:text-white cursor-pointer`}
         >
           <FaHistory />
-          <div className="text-xs font-medium">Turnover History</div>
+          <div className="text-xs font-medium">
+          {
+          selectedLanguage ==='en' ? "Turnover History":"টার্নওভার ইতিহাস"
+        }
+        </div>
         </div>
         <div onClick={()=>navigate("/user/bet-history")}
           className={`${
@@ -59,7 +71,11 @@ export default function ProfileMenuBar() {
           } flex items-center gap-2 hover:bg-gray-500 px-2 py-[6px] rounded-md hover:text-white cursor-pointer`}
         >
           <FaHistory />
-          <div className="text-xs font-medium">Bet History</div>
+          <div className="text-xs font-medium">
+          {
+          selectedLanguage ==='en' ? "Bet History":"বাজি ইতিহাস"
+        }
+        </div>
         </div>
         <div
         onClick={()=>navigate("/user/claimVoucher")}
@@ -68,10 +84,18 @@ export default function ProfileMenuBar() {
           } flex items-center gap-2 hover:bg-gray-500 px-2 py-[6px] rounded-md hover:text-white cursor-pointer`}
         >
           <FiGift />
-          <div className="text-xs font-medium">Claim Voucher</div>
+          <div className="text-xs font-medium">
+          {
+          selectedLanguage ==='en' ? "Claim Voucher":"ভাউচার দাবি করুন"
+        }
+        </div>
         </div>
       </div>
-      <div className="font-semibold text-gray-500 ml-2 my-2">User Profile</div>
+      <div className="font-semibold text-gray-500 ml-2 my-2">
+      {
+          selectedLanguage ==='en' ? "User Profile":"ব্যবহারকারী প্রোফাইল"
+        }
+        </div>
       <div className="grid gap-2">
         <div
         onClick={()=>navigate("/user/myprofile")}
@@ -80,7 +104,11 @@ export default function ProfileMenuBar() {
           } flex items-center gap-2 hover:bg-gray-500 px-2 py-[6px] rounded-md hover:text-white cursor-pointer`}
         >
           <FaUser />
-          <div className="text-xs font-medium">My Profile</div>
+          <div className="text-xs font-medium">
+          {
+          selectedLanguage ==='en' ? "My Profile":"আমার প্রোফাইল"
+        }
+          </div>
         </div>
         <div
         onClick={()=>navigate("/user/changePassword")}
@@ -89,7 +117,11 @@ export default function ProfileMenuBar() {
           } flex items-center gap-2 hover:bg-gray-500 px-2 py-[6px] rounded-md hover:text-white cursor-pointer`}
         >
           <MdOutlinePassword />
-          <div className="text-xs font-medium">Change Password</div>
+          <div className="text-xs font-medium">
+          {
+          selectedLanguage ==='en' ? "Change Password":"পাসওয়ার্ড পরিবর্তন করুন"
+        }
+        </div>
         </div>
         <div
          onClick={()=>navigate("/user/bank-details")}
@@ -98,7 +130,11 @@ export default function ProfileMenuBar() {
           } flex items-center gap-2 hover:bg-gray-500 px-2 py-[6px] rounded-md hover:text-white cursor-pointer`}
         >
           <AiTwotoneBank />
-          <div className="text-xs font-medium">Bank Details</div>
+          <div className="text-xs font-medium">
+          {
+          selectedLanguage ==='en' ? "Bank Details":"ব্যাংক বিবরণ"
+        }
+        </div>
         </div>
         <div
           className={`${
@@ -106,7 +142,11 @@ export default function ProfileMenuBar() {
           } flex items-center gap-2 hover:bg-gray-500 px-2 py-[6px] rounded-md hover:text-white cursor-pointer`}
         >
           <FiMessageSquare />
-          <div className="text-xs font-medium">Messages</div>
+          <div className="text-xs font-medium">
+          {
+          selectedLanguage ==='en' ? "Messages":"বার্তা"
+        }
+        </div>
         </div>
         <div
           className={`${
@@ -114,7 +154,11 @@ export default function ProfileMenuBar() {
           } flex items-center gap-2 hover:bg-gray-500 px-2 py-[6px] rounded-md hover:text-white cursor-pointer`}
         >
           <FiGift />
-          <div className="text-xs font-medium">Rewards</div>
+          <div className="text-xs font-medium">
+          {
+          selectedLanguage ==='en' ? "Rewards":"পুরস্কার"
+        }
+        </div>
         </div>
        
       </div>

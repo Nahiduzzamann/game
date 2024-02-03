@@ -82,7 +82,7 @@ const PromotionsCard = ({
             <ModalBody pb={6}>{details}</ModalBody>
 
             <ModalFooter>
-              <Button onClick={onClose}>Cancel</Button>
+              <Button onClick={onClose}>  {selectedLanguage === "en" ? "Cancel" : "বাতিল করুন"}</Button>
             </ModalFooter>
           </ModalContent>
         </Modal>

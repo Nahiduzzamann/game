@@ -45,7 +45,7 @@ export default function DepositHistory() {
       {data?.length === 0 && (
         <div className="my-5 mx-2 font-semibold text-xl">
         {
-          selectedLanguage ==='en' ? "No Deposit!":"আমানত নাই!"
+          selectedLanguage ==='en' ? "No Deposit!":"জমা নাই!"
         }
         </div>
       )}
