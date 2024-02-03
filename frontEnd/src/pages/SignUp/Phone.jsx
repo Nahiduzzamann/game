@@ -22,6 +22,10 @@ const Phone = () => {
       setError("Please fill in the required fields.");
       return;
     }
+    if (phoneNumber.length < 11) {
+      setError("Please insert valid phone number");
+      return;
+    }
 
     // TODO: Add your sign-up logic here
     // For example, you can make an API call to register the user
