@@ -203,9 +203,12 @@ return (
                 />
               </div>
             </td>
-            <td onClick={()=>handleDelteturnover(data._id)} className="text-red-500 cursor-pointer rounded text-center hover:bg-gray-400">
+            {
+              data.deposit.length >0 ?(<td></td>):(<td onClick={()=>handleDelteturnover(data._id)} className="text-red-500 cursor-pointer rounded text-center hover:bg-gray-400">
               Delete
-            </td>
+            </td>)
+            }
+            
           </tr>
         );
       }
