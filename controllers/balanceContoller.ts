@@ -115,6 +115,31 @@ export const createUserWallet = async (
     res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error });
   }
 };
+export const updateUserWallet = async (
+  req: AuthenticatedRequest,
+  res: Response
+) => {
+  const { walletNumber, walletId } = req.body;
+  const { username } = req;
+  if (!walletNumber || !walletId) {
+    return res
+      .status(StatusCodes.BAD_GATEWAY)
+      .json({ error: "Parameter are required" });
+  }
+
+  try {
+    const wallet = await UserWallets.updateOne({
+      _id:new ObjectId(walletId),
+      userId:username
+    },{
+      walletNumber
+    });
+   
+    res.status(StatusCodes.OK).json(wallet);
+  } catch (error) {
+    res.status(StatusCodes.EXPECTATION_FAILED).json({ error: "Invalid wallet Id" });
+  }
+};
 export const getUserWallets = async (
   req: AuthenticatedRequest,
   res: Response
@@ -270,6 +295,7 @@ export const createWithdraw = async (
     if (promotion) {
       const gameHistory = (await History.find({
         date: { $gte: deposit[0].date },
+        username:username
       })) as GameHistory[];
       let turnOverAmount = 0;
       gameHistory.map((d) => {
