@@ -131,11 +131,11 @@ export default function Withdrawal() {
             >
               <img
                 className="h-12 w-12"
-                src={`${url}${data.wallet.icon}`}
-                alt={`${data.wallet.methodName}`}
+                src={`${url}${data?.wallet?.icon}`}
+                alt={`${data.wallet?.methodName}`}
               />
               <div className="w-full mx-2  font-medium my-1">
-                {data.wallet.methodName}
+                {data.wallet?.methodName}
                 <p>{data.walletNumber}</p>
               </div>
             </div>
@@ -241,12 +241,12 @@ export default function Withdrawal() {
                         >
                           <img
                             className="h-12 w-12"
-                            src={`${url}${selectedImage?.wallet.icon}`}
-                            alt={`${selectedImage?.wallet.methodName}`}
+                            src={`${url}${selectedImage?.wallet?.icon}`}
+                            alt={`${selectedImage?.wallet?.methodName}`}
                        
                           />
                           <div className="w-full mx-2  font-medium my-1">
-                            {selectedImage?.wallet.methodName}
+                            {selectedImage?.wallet?.methodName}
                             <p>{selectedImage?.walletNumber}</p>
                            
                           </div>
@@ -256,7 +256,7 @@ export default function Withdrawal() {
                         {selectedLanguage === "en"
                           ? " Withdrawable amount"
                           : "উত্তোলন পরিমাণ"}{" "}
-                        <span className="ps-40">৳ {inputAmount}</span>
+                        <span className="ps-40">{inputAmount}৳ </span>
                       </div>
                     </div>
                   </AlertDialogBody>
