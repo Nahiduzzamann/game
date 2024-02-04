@@ -326,7 +326,7 @@ export const withdrawHistory = async (req: Request, res: Response) => {
         ]).sort({ date: -1 }) as WalletCombineTypes[]
 
         await Promise.all(combineWallet.map(async (d, i) => {
-            const details = await Wallets.findOne({ _id: new ObjectId(d.wallet.walletId) }) as WalletsTypes
+            const details = await Wallets.findOne({ _id: new ObjectId(d?.wallet?.walletId) }) as WalletsTypes
             combineWallet[i] = { ...d, wallet: { ...d.wallet, walletDetails: details } }
         }))
         res.status(StatusCodes.OK).json(combineWallet)
