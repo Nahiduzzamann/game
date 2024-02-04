@@ -1,8 +1,8 @@
 
 import getTurnOverHistory from "@/modules/getTurnOverHistory";
-import { EllipsisVerticalIcon } from "@heroicons/react/24/solid";
-import { Avatar, Card, CardBody, CardHeader, Progress, Spinner, Tooltip, Typography } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
+import { EllipsisVerticalIcon, PlusCircleIcon, PlusIcon } from "@heroicons/react/24/solid";
+import { Avatar, Button, Card, CardBody, CardHeader, Dialog, DialogBody, DialogFooter, DialogHeader, Progress, Spinner, Tooltip, Typography } from "@material-tailwind/react";
+import React,{ useEffect, useState } from "react";
 import ResponsivePagination from "react-responsive-pagination";
 const Turnovers =()=>{
   const [data,setData]=useState()
@@ -10,7 +10,9 @@ const Turnovers =()=>{
   const itemsPerPage = 5;
   const totalPages = Math.ceil(data?.length / itemsPerPage);
   const [loading, setLoading]=useState(false)
-
+  const [open, setOpen] = React.useState(false);
+ 
+  const handleOpen = () => setOpen(!open);
   useEffect(() => {
     setLoading(true)
     getTurnOverHistory()
@@ -46,17 +48,20 @@ return 0;
 return (
     <div className="mt-12 mb-8 flex flex-col gap-12">
        <Card>
-        <CardHeader variant="gradient" color="gray" className="mb-8 p-6">
+        <CardHeader variant="gradient" color="gray" className="mb-8 p-6 flex justify-between">
           <Typography variant="h6" color="white">
             Turnovers Table
           </Typography>
+          <Button onClick={handleOpen} variant="gradient">
+       +
+      </Button>
         </CardHeader>
         <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
 {
   loading ? (<div className="h-screen flex justify-center items-center"><Spinner color="blue"></Spinner></div>):(<table className="w-full min-w-[640px] table-auto">
   <thead>
     <tr>
-      {["Turnover Parcentage", "members", "amount", "completion"].map(
+      {["Turnover Parcentage", "members", "target amount", "completion"].map(
         (el) => (
           <th
             key={el}
@@ -164,6 +169,28 @@ return (
        </div>
         </CardBody>
       </Card>
+      <Dialog open={open} handler={handleOpen}>
+        <DialogHeader>Its a simple dialog.</DialogHeader>
+        <DialogBody>
+          The key to more success is to have a lot of pillows. Put it this way,
+          it took me twenty five years to get these plants, twenty five years of
+          blood sweat and tears, and I&apos;m never giving up, I&apos;m just
+          getting started. I&apos;m up to something. Fan luv.
+        </DialogBody>
+        <DialogFooter>
+          <Button
+            variant="text"
+            color="red"
+            onClick={handleOpen}
+            className="mr-1"
+          >
+            <span>Cancel</span>
+          </Button>
+          <Button variant="gradient" color="green" onClick={handleOpen}>
+            <span>Confirm</span>
+          </Button>
+        </DialogFooter>
+      </Dialog>
     </div>
 )
 }
