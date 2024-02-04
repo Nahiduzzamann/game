@@ -151,7 +151,7 @@ const Footer = () => {
                 <div>
                 <p className='font-bold h2 pb-4'>
                 {
-          selectedLanguage ==='en' ? "Find Us":"আমাদের খোজ"
+          selectedLanguage ==='en' ? "Find Us":"আমাদের খোঁজ"
         }
         </p>
                 <div className="flex flex-wrap ">
