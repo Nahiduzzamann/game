@@ -51,7 +51,7 @@ const transfer = new Schema({
   fromWalletId: String,
   toWalletId: String,
 });
-const rewards = new Schema({
+const rewardsHistory = new Schema({
   tranXId: String,
   date: { type: Date, default: Date.now() },
   balanceAt: Number,
@@ -59,10 +59,16 @@ const rewards = new Schema({
   rewardsId: String,
 });
 const rewardsList = new Schema({
-  title: String,
-  targetAmount: Number,
+  level: String,
+  targetTurnover: Number,
   bonusAmount: Number,
 });
+const voucher=new Schema({
+  userId:{type:String,default:""},
+  bonusAmount:Number,
+  applied:{type:Boolean,default:false},
+  code:String
+})
 const userWallets = new Schema({
   walletNumber: { type: String, require: true },
   walletId: { type: String, require: true },
@@ -170,7 +176,7 @@ export {
   gameHistory,
   wallets,
   userWallets,
-  rewards,
+  rewardsHistory,
   rewardsList,
   transfer,
   withdraw,
@@ -179,4 +185,5 @@ export {
   promotions,
   promotionHistory,
   notification,
+  voucher
 };

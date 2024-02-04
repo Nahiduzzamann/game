@@ -1,3 +1,4 @@
+
 import {
   DepositTypes,
   GameHistory,
@@ -8,6 +9,7 @@ import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import { uploadImageBanner, uploadImageSquire } from "./fileUploadController";
 import {
+  BonusHistory,
   Deposit,
   History,
   PromotionHistory,
@@ -24,6 +26,14 @@ import { WalletCombineTypes } from "./adminController";
 
 interface FilePath {
   path: string;
+}
+export interface PromotionHistoryTypes {
+  _id: string,
+  promotionId: string,
+  userId: string,
+  date: Date,
+  completed: boolean,
+  promotion: PromotionTypes
 }
 
 export const createPromotions = async (req: Request, res: Response) => {
@@ -129,12 +139,12 @@ export const updateUserWallet = async (
 
   try {
     const wallet = await UserWallets.updateOne({
-      _id:new ObjectId(walletId),
-      userId:username
-    },{
+      _id: new ObjectId(walletId),
+      userId: username
+    }, {
       walletNumber
     });
-   
+
     res.status(StatusCodes.OK).json(wallet);
   } catch (error) {
     res.status(StatusCodes.EXPECTATION_FAILED).json({ error: "Invalid wallet Id" });
@@ -287,15 +297,15 @@ export const createWithdraw = async (
     const promotion =
       deposit[0].promotionId != "undefined" && deposit[0].promotionId
         ? ((await Promotions.findOne({
-            _id: new ObjectId(deposit[0].promotionId),
-          })) as PromotionTypes)
+          _id: new ObjectId(deposit[0].promotionId),
+        })) as PromotionTypes)
         : null;
 
     const user = (await Users.findOne({ username: username })) as UserTypes;
     if (promotion) {
       const gameHistory = (await History.find({
         date: { $gte: deposit[0].date },
-        username:username
+        username: username
       })) as GameHistory[];
       let turnOverAmount = 0;
       gameHistory.map((d) => {
@@ -339,36 +349,105 @@ export const getWithdrawHistory = async (req: AuthenticatedRequest, res: Respons
   try {
     const combineWallet = await Withdraws.aggregate([
       {
-        $match:{userId:username}
+        $match: { userId: username }
       },
       {
-          $lookup: {
-              from: 'userwallets',
-              let: { userIdObj: { $toObjectId: '$walletId' } },
-              pipeline: [
-                  {
-                      $match: {
-                          $expr: { $eq: ['$_id', '$$userIdObj'] }
-                      }
-                  }
-              ],
-              as: 'wallet'
-          },
+        $lookup: {
+          from: 'userwallets',
+          let: { userIdObj: { $toObjectId: '$walletId' } },
+          pipeline: [
+            {
+              $match: {
+                $expr: { $eq: ['$_id', '$$userIdObj'] }
+              }
+            }
+          ],
+          as: 'wallet'
+        },
       },
       {
-          $addFields: {
-              wallet: { $arrayElemAt: ['$wallet', 0] }
-          }
+        $addFields: {
+          wallet: { $arrayElemAt: ['$wallet', 0] }
+        }
       },
 
-  ]).sort({ date: -1 }) as WalletCombineTypes[]
+    ]).sort({ date: -1 }) as WalletCombineTypes[]
 
-  await Promise.all(combineWallet.map(async (d, i) => {
+    await Promise.all(combineWallet.map(async (d, i) => {
       const details = await Wallets.findOne({ _id: new ObjectId(d?.wallet?.walletId) }) as WalletsTypes
       combineWallet[i] = { ...d, wallet: { ...d.wallet, walletDetails: details } }
-  }))
+    }))
     res.status(StatusCodes.OK).json(combineWallet);
   } catch (error) {
     res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error });
   }
 };
+export const getTurnOvers = async (req: AuthenticatedRequest, res: Response) => {
+
+  const username = req.username;
+  try {
+    const runningTurn = await PromotionHistory.aggregate([
+      {
+        $match: { userId: username, promotionId: { $ne: "undefined" } }
+      },
+      {
+        $lookup: {
+          from: 'promotions',
+          let: { userIdObj: { $toObjectId: '$promotionId' } },
+          pipeline: [
+            {
+              $match: {
+                $expr: { $eq: ['$_id', '$$userIdObj'] }
+              }
+            }
+          ],
+          as: 'promotion'
+        },
+      },
+      {
+        $addFields: {
+          promotion: { $arrayElemAt: ['$promotion', 0] }
+        }
+      },
+
+    ]).sort({ date: -1 }) as PromotionHistoryTypes[]
+    const gameHistory = await History.find({ username: username, date: { $gte: runningTurn[0].date } }) as GameHistory[]
+    let totalTurn = 0;
+    gameHistory.map(d => {
+      totalTurn = totalTurn + d.bet;
+    })
+    if (totalTurn > runningTurn[0].promotion.turnOverAmount) {
+      runningTurn[0].completed = true;
+      await PromotionHistory.updateOne({ _id: new ObjectId(runningTurn[0]._id) }, {
+        completed: true
+      })
+      const deposit = await Deposit.find({ userId: username, promotionId: runningTurn[0].promotionId }).sort({ date: -1 }) as DepositTypes[]
+      await BonusHistory.create({
+        userId: username,
+        amount: (deposit[0].amount * runningTurn[0].promotion.bonusPercentage) / 100,
+        promotionId: runningTurn[0].promotionId
+      })
+      const user = await Users.findOne({ username: username }) as UserTypes
+      if (user && user.balance) {
+        user.balance = user.balance + (deposit[0].amount * runningTurn[0].promotion.bonusPercentage) / 100
+        user.save()
+      }
+
+    }
+    res.status(StatusCodes.OK).json(runningTurn)
+
+  } catch (error) {
+    res.status(StatusCodes.EXPECTATION_FAILED).json(error)
+  }
+}
+export const getBonus = async (req: AuthenticatedRequest, res: Response) => {
+
+  const username = req.username;
+  try {
+    const bonus = await BonusHistory.find({ userId: username }).sort({ date: -1 })
+    res.status(StatusCodes.OK).json(bonus)
+
+  } catch (error) {
+    res.status(StatusCodes.EXPECTATION_FAILED).json(error)
+  }
+}

@@ -9,7 +9,7 @@ import {
   ArrowUturnUpIcon,
   ArrowsUpDownIcon,
   DocumentTextIcon,
-  CogIcon
+  CogIcon,GiftIcon
 } from "@heroicons/react/24/solid";
 import { Home, Profile, Tables, Notifications } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
@@ -51,8 +51,8 @@ export const routes = [
       },
       {
         icon: <InformationCircleIcon {...icon} />,
-        name: "notification",
-        path: "/notification",
+        name: "messages",
+        path: "/messages",
         element: <Home />,
       },
       {
@@ -62,29 +62,41 @@ export const routes = [
         element: <Home />,
       },
       {
+        icon: <UserCircleIcon {...icon} />,
+        name: "users",
+        path: "/users",
+        element: <Home />,
+      },
+      {
         icon: <CogIcon {...icon} />,
         name: "preference",
         path: "/preference",
         element: <Home />,
       },
       {
-        icon: <UserCircleIcon {...icon} />,
-        name: "profile",
-        path: "/profile",
-        element: <Profile />,
+        icon: <GiftIcon {...icon} />,
+        name: "rewards",
+        path: "/rewards",
+        element: <Home />,
       },
-      {
-        icon: <TableCellsIcon {...icon} />,
-        name: "tables",
-        path: "/tables",
-        element: <Tables />,
-      },
-      {
-        icon: <InformationCircleIcon {...icon} />,
-        name: "notifications",
-        path: "/notifications",
-        element: <Notifications />,
-      },
+      // {
+      //   icon: <UserCircleIcon {...icon} />,
+      //   name: "profile",
+      //   path: "/profile",
+      //   element: <Profile />,
+      // },
+      // {
+      //   icon: <TableCellsIcon {...icon} />,
+      //   name: "tables",
+      //   path: "/tables",
+      //   element: <Tables />,
+      // },
+      // {
+      //   icon: <InformationCircleIcon {...icon} />,
+      //   name: "notifications",
+      //   path: "/notifications",
+      //   element: <Notifications />,
+      // },
     ],
   },
   {

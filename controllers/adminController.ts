@@ -278,7 +278,7 @@ export const createPromotion = async (req: Request, res: Response) => {
         res.status(StatusCodes.OK).json(promotion)
 
     } catch (error) {
-        res.status(StatusCodes.EXPECTATION_FAILED).json({ error })
+        res.status(StatusCodes.EXPECTATION_FAILED).json(error)
     }
 }
 export const deletePromotion = async (req: Request, res: Response) => {

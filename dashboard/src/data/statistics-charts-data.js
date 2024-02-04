@@ -45,7 +45,7 @@ const dailySalesChart=(revenueData,depositeData,revenueDataLastMonth,depositeDat
     },
     xaxis: {
       ...chartsConfig.xaxis,
-      categories: depositeData?.monthlyDeposit.reverse().slice(0,8).map((data)=>data.month) ||  [
+      categories: depositeData?.monthlyDeposit.slice(0,8).map((data)=>data.month) ||  [
         "Apr",
         "May",
         "Jun",
@@ -99,9 +99,23 @@ const completedTasksChart=(revenueData,depositeData,revenueDataLastMonth,deposit
   series: [
     {
       name: "Revenue",
-      data: revenueData?.monthlyHistory.reverse().slice(0,8).map((data)=>data.revenue.toFixed()) || [0,0,0,0,0,0,0,0,0],
+      data: revenueData?.monthlyHistory.slice(0,8).map((data)=>data.revenue.toFixed()) || [0,0,0,0,0,0,0,0,0],
     },
   ],
+  xaxis: {
+    ...chartsConfig.xaxis,
+    categories: revenueData?.monthlyHistory.reverse().slice(0,8).map((data)=>data.month) || [
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+  },
 });
 
 export const statisticsChartsData=(revenueData,depositeData,revenueDataLastMonth,depositeDataLastMonth,refreshTime) => ([
