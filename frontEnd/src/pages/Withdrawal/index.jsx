@@ -241,12 +241,14 @@ export default function Withdrawal() {
                         >
                           <img
                             className="h-12 w-12"
-                            src={`${url}${selectedImage?.icon}`}
-                            alt={`${selectedImage?.methodName}`}
+                            src={`${url}${selectedImage?.wallet.icon}`}
+                            alt={`${selectedImage?.wallet.methodName}`}
+                       
                           />
                           <div className="w-full mx-2  font-medium my-1">
-                            {selectedImage?.methodName}
+                            {selectedImage?.wallet.methodName}
                             <p>{selectedImage?.walletNumber}</p>
+                           
                           </div>
                         </div>
                       </div>
