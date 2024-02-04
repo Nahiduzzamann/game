@@ -111,11 +111,11 @@ export default function Withdrawal() {
     <div className="bg-gray-500 rounded-lg md:mt-0 mt-5 p-4">
       <div className="p-5 bg-white rounded-md">
         <h1 className="text-center p-5 font-bold border-b-4 border-indigo-300 text-3xl">
-          {selectedLanguage === "en" ? " Withdraw" : "উত্তোলন করুন"}
+          {selectedLanguage === "en" ? " Withdrawal" : "উত্তোলন করুন"}
         </h1>
 
         <p className="font-bold pt-5 pb-2">
-          {selectedLanguage === "en" ? "Withdraw Methods" : "উত্তোলন পদ্ধতি"}
+          {selectedLanguage === "en" ? "Payment Methods" : "মূল্য পরিশোধ পদ্ধতি"}
           <span className="text-red-500 ">*</span>
         </p>
         <div className="flex">
@@ -171,7 +171,7 @@ export default function Withdrawal() {
           </div>
 
           <p className="font-bold pt-5 pb-2">
-            {selectedLanguage === "en" ? " Withdraw Amount" : "উত্তোলন পরিমাণ"}{" "}
+            {selectedLanguage === "en" ? " Withdrawable Amount" : "উত্তোলনযোগ্য পরিমাণ"}{" "}
             <span className="text-red-400">(500৳-30,000৳)*</span>
           </p>
           <input
