@@ -84,7 +84,7 @@ const Header = () => {
               </Link>
               <Link to={`/user/deposit`} className="ml-2 hover:underline font-bold text-blue-500 flex justify-center items-center">
               <FaBangladeshiTakaSign />
-                {user.balance?.toString()} 
+                {user.balance?.toFixed(1).toString()} 
                 {
           selectedLanguage ==='en' ? "BDT":"টাকা"
         }
@@ -181,7 +181,7 @@ const Header = () => {
         {user ? (
           <Link to={`/user/deposit`} className="flex gap-2 items-center text-blue-500 font-bold text-xl">
             <GrMoney />
-            {user.balance} 
+            {user.balance?.toFixed(1).toString()} 
             {
           selectedLanguage ==='en' ? "BDT":"টাকা"
         }
