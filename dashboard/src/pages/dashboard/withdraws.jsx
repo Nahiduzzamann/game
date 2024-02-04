@@ -93,7 +93,7 @@ console.log(err);
                       <tr key={key}>
                         <td className={className}>
                           <div className="flex items-center gap-4">
-                          <Avatar src={`${url}${data.wallet.walletDetails.icon}`} alt="avatar" variant="rounded" />
+                          <Avatar src={`${url}${data.wallet?.walletDetails?.icon}`} alt="avatar" variant="rounded" />
                             <div>
                               <Typography
                                 variant="small"
@@ -103,7 +103,7 @@ console.log(err);
                                 {data.wallet.userId}
                               </Typography>
                               <Typography className="text-xs font-normal text-blue-gray-500">
-                                {data.wallet.walletNumber} <span>({data.wallet.walletDetails.methodName})</span>
+                                {data.wallet?.walletNumber} <span>({data.wallet?.walletDetails?.methodName})</span>
                               </Typography>
                             </div>
                           </div>
