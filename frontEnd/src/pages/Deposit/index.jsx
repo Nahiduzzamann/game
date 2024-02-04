@@ -189,7 +189,7 @@ export default function Deposit() {
               onChange={(e) => {
                 setDepositBonus(e.target.value);
               }}
-              placeholder="No Bounce"
+              placeholder="No Bonus"
             >
               {promotions?.map((doc, i) => (
                 <option key={i} value={doc._id}>
