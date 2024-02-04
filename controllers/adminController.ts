@@ -234,12 +234,12 @@ export const turnOverHistory = async (req: Request, res: Response) => {
             for (const d of combinePromotions) {
                 await Promise.all(d.deposit.map(async (s, i) => {
                     let totalTurnover = 0;
-                    const history = await History.find({ date: { $gte: s.date } }) as GameHistory[];
+                    const history = await History.find({ date: { $gte: s.date },username:s.userId }) as GameHistory[];
 
                     history.forEach((h) => {
                         totalTurnover += h.bet;
                     });
-                    d.deposit[i] = { ...s, totalTurnover: totalTurnover };
+                    d.deposit[i] = { ...s, totalTurnover: d.turnOverAmount<totalTurnover?d.turnOverAmount:totalTurnover };
                 }));
             }
         };
