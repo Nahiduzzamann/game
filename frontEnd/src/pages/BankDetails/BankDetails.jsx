@@ -7,25 +7,35 @@ import {
   Text,
   useToast,
   Spinner,
+  AlertDialog,
+  AlertDialogOverlay,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogBody,
+  AlertDialogFooter,
+  useDisclosure,
 } from "@chakra-ui/react";
 import getWallet from "../../module/getWallet";
 import url from "../../module";
 import createUserWallet from "../../module/createUserWallet";
 import { useNavigate } from "react-router-dom";
 import getUserWallet from "../../module/getUserWallet";
-import { RiDeleteBin3Line } from "react-icons/ri";
-import deleteUserWallet from "../../module/deleteUserWallet";
 import { AuthContext } from "../../providers/AuthProvider";
+import editUserWallet from "../../module/editUserWallet";
 const BankDetails = () => {
   const { selectedLanguage } = useContext(AuthContext);
   const [wallets, setWallets] = useState(null);
+  const [clickedId, setClickedId] = useState(null);
   const [walletNumber, setWalletNumber] = useState("");
   const [update, setUpdate] = useState("");
   const [loading, setLoading] = useState(false);
   const [selectedImage, setSelectedImage] = useState("");
+  const [number,setNumber]=useState("")
   const toast = useToast();
   const [paymentMethods, setPaymentMethods] = useState([]);
   const navigate = useNavigate();
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const cancelRef = React.useRef()
   useEffect(() => {
     getWallet()
       .then((response) => {
@@ -40,13 +50,16 @@ const BankDetails = () => {
   const handleImageClick = (name) => {
     setSelectedImage(name);
   };
-  const handleDeleteAccount = (walletId) => {
-    deleteUserWallet(walletId)
+  const handleEditAccount = () => {
+    // console.log(clickedId);
+    editUserWallet(number,clickedId)
       .then((response) => {
+        setClickedId(null)
         setUpdate(response);
         //  console.log(response)
       })
       .catch((error) => {
+        setClickedId(null)
         console.error("Error fetching wallets:", error);
       });
   };
@@ -141,12 +154,19 @@ const BankDetails = () => {
                 />
                 <div className="w-full  font-medium my-1">
                   {data.wallet.methodName}
-                  <p>{data.wallet.walletNumber}</p>
+                  <p>{data.walletNumber}</p>
                 </div>
-                <RiDeleteBin3Line
-                  onClick={() => handleDeleteAccount(data._id)}
-                  className="mr-2 text-4xl text-red-500 rounded-lg hover:border border-red-500"
-                />
+                <Button
+                 colorScheme='red' onClick={()=>{
+                  setClickedId(data._id)
+                  onOpen()
+                }
+                 }
+                  
+                  className="mr-2 text-4xl text-red-500 rounded-lg hover:border border-red-500">
+                    Edit
+                  </Button>
+                
               </div>
             ))}
             </div>
@@ -217,6 +237,46 @@ const BankDetails = () => {
           </Stack>
         </Box>
       </div>
+      <AlertDialog
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+              Enter Your Correct Number
+            </AlertDialogHeader>
+
+            <AlertDialogBody>
+           
+              <input
+        className=' p-1 border border-blue-300 rounded'
+        type="number"
+        value={number}
+        onChange={(e)=>setNumber(e.target.value)}
+        placeholder="Type Number"
+      />
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+              <Button ref={cancelRef} onClick={onClose}>
+                Cancel
+              </Button>
+              {
+                number.length ===11 ? (<Button colorScheme='red' onClick={()=>{
+                  handleEditAccount()
+                    onClose()}} ml={3}>
+                    Save
+                  </Button>):(<Button className="pointer-events-none" bg='gray'  ml={3}>
+                    Save
+                  </Button>)
+              }
+              
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
     </div>
   );
 };
