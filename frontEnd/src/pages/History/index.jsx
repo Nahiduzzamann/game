@@ -39,7 +39,7 @@ export default function History() {
                 <GiReceiveMoney size={24} />
                
                 {
-          selectedLanguage ==='en' ? "Withdraw":"প্রত্যাহার করুন"
+          selectedLanguage ==='en' ? "Withdraw":"উত্তোলন করুন"
         }
               </div>
             </Tab>

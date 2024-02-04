@@ -149,7 +149,7 @@ const Login = () => {
               className="block text-base mt-5 pb-1 font-semibold"
             >
               {
-          selectedLanguage ==='en' ? "Don not have an account?":"আপনার অ্যাকাউন্ট নেই ?"
+          selectedLanguage ==='en' ? "Don't have an account?":"আপনার অ্যাকাউন্ট নেই ?"
         }
             </label>
             <Link

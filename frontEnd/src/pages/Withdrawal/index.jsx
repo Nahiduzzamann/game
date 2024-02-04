@@ -252,7 +252,7 @@ export default function Withdrawal() {
                       </div>
                       <div className="p-2 font-semibold flex justify-between">
                         {selectedLanguage === "en"
-                          ? " Withdraw amount"
+                          ? " Withdrawable amount"
                           : "উত্তোলন পরিমাণ"}{" "}
                         <span className="ps-40">৳ {inputAmount}</span>
                       </div>
