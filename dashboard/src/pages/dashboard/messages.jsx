@@ -55,10 +55,10 @@ export default function Messages() {
           </thead>
           <tbody>
             {messages?.map((doc,i)=>(
-                 <tr onClick={()=>navigate(`/dashboard/${doc.type.toLowerCase()}s`)} className={`${!doc.read?"bg-gray-700 text-white":"bg-white text-black"} `} key={i}>
+                 <tr onClick={()=>navigate(`/dashboard/${doc.type.toLowerCase()}s`)} className={`${!doc.read?"bg-gray-700 text-white":"bg-white text-black"} cursor-pointer `} key={i}>
                      <td className="border-b border-blue-gray-50 py-3 px-5 text-left">{doc.userId}</td>
                      <td className="border-b border-blue-gray-50 py-3 px-5 text-left">{doc.title}</td>
-             
+                     <td className="border-b border-blue-gray-50 py-3 px-5 text-left">{doc.details}</td>
                </tr>
             ))}
             {messages?.length==0&&(<div className="border-b border-blue-gray-50 py-3 px-5 text-left">No message</div>)}

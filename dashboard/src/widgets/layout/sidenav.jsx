@@ -22,11 +22,11 @@ export function Sidenav({ brandImg, brandName, routes }) {
     white: "bg-white shadow-sm",
     transparent: "bg-transparent",
   };
-  useEffect(()=>{
-    countNotification().then(res=>{
-      setCount(res.data)
-    })
-  },[dispatch])
+  // useEffect(()=>{
+  //   countNotification().then(res=>{
+  //     setCount(res.data)
+  //   })
+  // },[dispatch])
  
   return (
     <aside
