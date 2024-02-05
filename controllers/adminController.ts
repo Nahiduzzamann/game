@@ -1,9 +1,11 @@
 import { ObjectId } from 'mongodb';
 import { Request, Response } from "express";
-import { Deposit, History, PromotionHistory, Promotions, Users, Wallets, Withdraws } from "../connections/databaseConnection";
+import { Deposit, History, Notification, PromotionHistory, Promotions, Users, Wallets, Withdraws } from "../connections/databaseConnection";
 import { DepositTypes, GameHistory, WalletsTypes } from "../data/allTypes";
 import { StatusCodes } from "http-status-codes";
 import { uploadImageBanner, uploadImageSquire } from './fileUploadController';
+import { AuthenticatedRequest } from '../middlewares/checkLogin';
+import { DATATYPES, sendNotificationToUser } from '../functions/sendNotification';
 
 export interface MonthlyDepositTypes {
     month: string,
@@ -194,6 +196,7 @@ export const toggleStatusDeposit = async (req: Request, res: Response) => {
             }
         }
         user.save()
+        await sendNotificationToUser("Deposit status!!", `Your deposit request has ${status ? "ACCEPTED" : "CANCELLED"} by game provider`, username, DATATYPES[0])
         res.status(StatusCodes.OK).json(deposit)
     } catch (error) {
         res.status(StatusCodes.EXPECTATION_FAILED).json({ error: "Invalid ID" })
@@ -358,8 +361,97 @@ export const toggleStatusWithdraw = async (req: Request, res: Response) => {
             user.balance = user.balance + withdraw.amount;
             user.save()
         }
+        await sendNotificationToUser("Withdraw status!!", `Your withdraw request has ${status ? "ACCEPTED" : "CANCELLED"} by game provider`, username, DATATYPES[1])
         res.status(StatusCodes.OK).json(withdraw)
     } catch (error) {
         res.status(StatusCodes.EXPECTATION_FAILED).json({ error: "Invalid ID" })
+    }
+}
+export const getNotificationAdmin = async (req: Request, res: Response) => {
+    try {
+
+        const notification = await Notification.aggregate([
+            { $match: { userId: { $ne: null } } },
+            {
+                $lookup: {
+                    from: "users",
+                    let: { userIdObj: "$userId" },
+                    pipeline: [
+                        {
+                            $match: {
+                                $expr: { $eq: ["$username", "$$userIdObj"] },
+                            },
+                        },
+                    ],
+                    as: "user",
+                },
+            },
+            {
+                $addFields: {
+                    user: { $arrayElemAt: ["$user", 0] },
+                },
+            },
+        ]).sort({date:-1})
+        await Notification.updateMany({ userId: { $ne: null } }, {
+            read: true
+        })
+        res.status(StatusCodes.OK).json(notification)
+    } catch (error) {
+        res.status(StatusCodes.EXPECTATION_FAILED).json(error)
+    }
+}
+export const getUnreadNotificationCount = async (req: Request, res: Response) => {
+    try {
+
+        const notification = await Notification.countDocuments({ userId: { $ne: null },read:false })
+
+        res.status(StatusCodes.OK).json(notification)
+    } catch (error) {
+        res.status(StatusCodes.EXPECTATION_FAILED).json(error)
+    }
+}
+export const getNotificationUser = async (req: AuthenticatedRequest, res: Response) => {
+    const username = req.username;
+    try {
+
+        const notification = await Notification.aggregate([
+            { $match: { receiverId: username } },
+            {
+                $lookup: {
+                    from: "users",
+                    let: { userIdObj: "$receiverId" },
+                    pipeline: [
+                        {
+                            $match: {
+                                $expr: { $eq: ["$username", "$$userIdObj"] },
+                            },
+                        },
+                    ],
+                    as: "user",
+                },
+            },
+            {
+                $addFields: {
+                    user: { $arrayElemAt: ["$user", 0] },
+                },
+            },
+        ]).sort({date:-1})
+        await Notification.updateMany({ receiverId: username }, {
+            read: true
+        })
+        res.status(StatusCodes.OK).json(notification)
+    } catch (error) {
+        res.status(StatusCodes.EXPECTATION_FAILED).json(error)
+    }
+}
+export const getUnreadNotificationCountUser = async (req: AuthenticatedRequest, res: Response) => {
+    const username = req.username
+    try {
+
+        const notification = await Notification.countDocuments({ receiverId: username ,read:false})
+
+        res.status(StatusCodes.OK).json(notification)
+    } catch (error) {
+        res.status(StatusCodes.EXPECTATION_FAILED).json(error)
     }
 }

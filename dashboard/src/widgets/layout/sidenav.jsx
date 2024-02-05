@@ -8,16 +8,26 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { useMaterialTailwindController, setOpenSidenav } from "@/context";
+import { useEffect, useState } from "react";
+import countNotification from "@/modules/countNotification";
+import getNotification from "@/modules/getNotification";
 
 export function Sidenav({ brandImg, brandName, routes }) {
   const [controller, dispatch] = useMaterialTailwindController();
+  const [count,setCount]=useState(0)
+  const [messages,setMessages]=useState()
   const { sidenavColor, sidenavType, openSidenav } = controller;
   const sidenavTypes = {
     dark: "bg-gradient-to-br from-gray-800 to-gray-900",
     white: "bg-white shadow-sm",
     transparent: "bg-transparent",
   };
-
+  // useEffect(()=>{
+  //   countNotification().then(res=>{
+  //     setCount(res.data)
+  //   })
+  // },[dispatch])
+ 
   return (
     <aside
       className={`${sidenavTypes[sidenavType]} ${
@@ -58,6 +68,7 @@ export function Sidenav({ brandImg, brandName, routes }) {
                 >
                   {title}
                 </Typography>
+                
               </li>
             )}
             {pages.map(({ icon, name, path }) => (
@@ -85,7 +96,13 @@ export function Sidenav({ brandImg, brandName, routes }) {
                       </Typography>
                     </Button>
                   )}
+                  
                 </NavLink>
+                {count>0&&(
+                  <div className="w-4 h-4 rounded-full bg-red-500 absolute left-[30px] top-[315px] text-white text-xs flex justify-center items-center">
+                  {count}
+                </div>
+                )}
               </li>
             ))}
           </ul>

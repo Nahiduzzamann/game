@@ -4,6 +4,7 @@ import { AuthenticatedRequest } from '../middlewares/checkLogin';
 import { StatusCodes } from 'http-status-codes';
 import { ObjectId } from 'mongodb';
 import { GameHistory } from '../data/allTypes';
+import { DATATYPES, sendNotificationToAdmin } from '../functions/sendNotification';
 const jwt = require('jsonwebtoken');
 
 interface RewardsTypes {
@@ -51,6 +52,11 @@ export const applyVoucher = async (req: AuthenticatedRequest, res: Response) => 
         if (voucher.applied) {
             return res.status(400).json({ error: "Code already used" })
         }
+        if (!username) {
+            return res.status(400).json({ error: "Invalid userID" })
+        }
+        await sendNotificationToAdmin("Get Voucher!!", `${username} has get a voucher ${voucher.code} and get amount ${voucher.bonusAmount}`, username, DATATYPES[2])
+
         const user = await Users.findOne({ username: username })
         if (user && voucher.bonusAmount) {
             user.balance = user.balance + voucher.bonusAmount;
@@ -68,6 +74,7 @@ export const applyVoucher = async (req: AuthenticatedRequest, res: Response) => 
             })
             return res.status(StatusCodes.OK).json(updatedVoucher)
         }
+
         res.status(StatusCodes.BAD_GATEWAY).json({ error: "Something went wrong" })
 
 
@@ -168,7 +175,13 @@ export const collectRewards = async (req: AuthenticatedRequest, res: Response) =
         if (user) {
             user.balance = user.balance + rewards.bonusAmount
             user.save()
+
         }
+        if (!username) {
+            return res.status(400).json({ error: "Invalid userID" })
+        }
+        await sendNotificationToAdmin("Get Rewards!!", `${username} has complete level ${rewards.level} and get amount ${rewards.bonusAmount}`, username, DATATYPES[3])
+
         res.status(StatusCodes.OK).json(myRewards)
     } catch (error) {
         res.status(StatusCodes.EXPECTATION_FAILED).json(error)
