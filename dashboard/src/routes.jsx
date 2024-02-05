@@ -16,6 +16,7 @@ import { SignIn, SignUp } from "@/pages/auth";
 import Deposit from "./pages/dashboard/deposit";
 import Turnovers from "./pages/dashboard/turnovers";
 import Withdraws from "./pages/dashboard/withdraws";
+import Messages from "./pages/dashboard/messages";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -53,7 +54,7 @@ export const routes = [
         icon: <InformationCircleIcon {...icon} />,
         name: "messages",
         path: "/messages",
-        element: <Home />,
+        element: <Messages />,
       },
       {
         icon: <DocumentTextIcon {...icon} />,
