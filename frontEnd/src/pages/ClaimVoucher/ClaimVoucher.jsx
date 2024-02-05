@@ -1,20 +1,39 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
-
+import applyVoucher from "../../module/applyVoucher";
+import { useToast } from "@chakra-ui/react";
 const ClaimVoucher = () => {
-  const { selectedLanguage } = useContext(AuthContext);
+  const { selectedLanguage,setUpdateUserState } = useContext(AuthContext);
   const [voucherCode, setVoucherCode] = useState("");
   const [isVoucherApplied, setIsVoucherApplied] = useState(false);
-
+const toast =useToast()
   const handleVoucherChange = (e) => {
     setVoucherCode(e.target.value);
   };
 
   const handleApplyVoucher = (e) => {
     e.preventDefault();
-    // Here you can implement voucher validation logic or make API calls
-    // For simplicity, let's just set a flag to indicate the voucher is applied
-    setIsVoucherApplied(true);
+    applyVoucher(voucherCode)
+    .then(()=>{
+      setIsVoucherApplied(true);
+      toast({
+        title: "Successfull",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+      setUpdateUserState(Math.random())
+    })
+    .catch((e)=>{
+      toast({
+        title: e.response.data.error,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    
+    })
+
   };
   return (
     <div className="bg-gray-500 rounded-lg p-4">
