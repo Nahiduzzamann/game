@@ -61,6 +61,7 @@ const rewardsList = new Schema({
   level: String,
   targetTurnover: Number,
   bonusAmount: Number,
+  date:{type:Date,default: Date.now()}
 });   
 const voucher=new Schema({
   userId:{type:String,default:""},
