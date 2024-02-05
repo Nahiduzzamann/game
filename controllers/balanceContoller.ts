@@ -410,6 +410,8 @@ export const getTurnOvers = async (req: AuthenticatedRequest, res: Response) => 
     await Promise.all(runningTurn.map(async (turn,i) => {
       if (!turn.completed && turn.promotion) {
         const gameHistory = await History.find({ username: username, date: { $gte: turn.date } }) as GameHistory[]
+        console.log(gameHistory);
+        
         let totalTurn = 0;
         gameHistory.map(d => {
           totalTurn = totalTurn + d.bet;
@@ -427,7 +429,7 @@ export const getTurnOvers = async (req: AuthenticatedRequest, res: Response) => 
             promotionId: turn.promotionId
           })
           const user = await Users.findOne({ username: username }) as UserTypes
-          if (user && user.balance) {
+          if (user) {
             user.balance = user.balance + (deposit[0].amount * turn.promotion.bonusPercentage) / 100
             user.save()
           }
