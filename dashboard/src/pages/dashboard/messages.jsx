@@ -11,6 +11,7 @@ import {
     Progress,
     Spinner
   } from "@material-tailwind/react";
+import { Link } from 'react-router-dom';
 
 export default function Messages() {
     const [messages,setMessages]=useState()
@@ -52,12 +53,14 @@ export default function Messages() {
           </thead>
           <tbody>
             {messages?.map((doc,i)=>(
-                <tr className={`${!doc.read?"bg-gray-700 text-white":"bg-white text-black"} `} key={i}>
+               <Link to={`/dashboard/${doc.type.toLowerCase()}s`}>
+                <tr  className={`${!doc.read?"bg-gray-700 text-white":"bg-white text-black"} `} key={i}>
                 <td className="border-b border-blue-gray-50 py-3 px-5 text-left">{doc.userId}</td>
                 <td className="border-b border-blue-gray-50 py-3 px-5 text-left">{doc.title}</td>
                 <td className="border-b border-blue-gray-50 py-3 px-5 text-left">{doc.details}</td>
                 
             </tr>
+               </Link>
             ))}
             {messages?.length==0&&(<div className="border-b border-blue-gray-50 py-3 px-5 text-left">No message</div>)}
           </tbody>

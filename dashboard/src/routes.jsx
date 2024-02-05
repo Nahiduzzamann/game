@@ -34,8 +34,8 @@ export const routes = [
       },
       {
         icon: <CurrencyBangladeshiIcon {...icon} />,
-        name: "deposit",
-        path: "/deposit",
+        name: "deposits",
+        path: "/deposits",
         element: <Deposit />,
       },
       {
@@ -76,8 +76,8 @@ export const routes = [
       },
       {
         icon: <GiftIcon {...icon} />,
-        name: "rewards",
-        path: "/rewards",
+        name: "rewardss",
+        path: "/rewardss",
         element: <Home />,
       },
       // {

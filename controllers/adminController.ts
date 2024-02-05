@@ -371,7 +371,7 @@ export const getNotificationAdmin = async (req: Request, res: Response) => {
     try {
 
         const notification = await Notification.aggregate([
-            { $match: { userId: { $exists: true } } },
+            { $match: { userId: { $ne: null } } },
             {
                 $lookup: {
                     from: "users",
@@ -392,7 +392,7 @@ export const getNotificationAdmin = async (req: Request, res: Response) => {
                 },
             },
         ]).sort({date:-1})
-        await Notification.updateMany({ userId: { $exists: true } }, {
+        await Notification.updateMany({ userId: { $ne: null } }, {
             read: true
         })
         res.status(StatusCodes.OK).json(notification)
@@ -403,7 +403,7 @@ export const getNotificationAdmin = async (req: Request, res: Response) => {
 export const getUnreadNotificationCount = async (req: Request, res: Response) => {
     try {
 
-        const notification = await Notification.countDocuments({ userId: { $exists: true },read:false })
+        const notification = await Notification.countDocuments({ userId: { $ne: null },read:false })
 
         res.status(StatusCodes.OK).json(notification)
     } catch (error) {
