@@ -122,13 +122,13 @@ export const getUserRewards = async (req: AuthenticatedRequest, res: Response) =
         const rewards = await Rewards.aggregate([
             {
                 $lookup: {
-                    from: 'rewardsHistory',
+                    from: 'rewardshistories',
                     let: { userIdObj: '$_id' },
                     pipeline: [
                         {
                             $match: {
                                 $expr: { $eq: ['$rewardId', { $toString: '$$userIdObj' }] },
-                                //userId: username
+                                userId: username
                                 //$expr:  { $eq: ['$userId', username] }
 
                             }
@@ -145,8 +145,8 @@ export const getUserRewards = async (req: AuthenticatedRequest, res: Response) =
             }
         ]) as RewardsTypes[]
 
-        res.status(StatusCodes.OK).json(rewards)
-        //res.status(StatusCodes.OK).json({ current: rewards.filter(r => r.targetTurnover < totalBet), upcoming: rewards.filter(r => r.targetTurnover > totalBet) })
+        //res.status(StatusCodes.OK).json(rewards)
+        res.status(StatusCodes.OK).json({ current: rewards.filter(r => r.targetTurnover < totalBet), upcoming: rewards.filter(r => r.targetTurnover > totalBet) })
     } catch (error) {
         res.status(StatusCodes.EXPECTATION_FAILED).json(error)
     }
