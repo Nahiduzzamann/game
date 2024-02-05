@@ -1,96 +1,64 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import DepositHistory from "./DepositHistory";
 import WithdrawalHistory from "./WithdrawalHistory";
-import Transfer from "./Transfer";
-import Rebate from "./Rebate";
-import Bonus from "./Bonus";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { GiReceiveMoney } from "react-icons/gi";
-import { BiTransferAlt } from "react-icons/bi";
-import { MdOutlineAutorenew } from "react-icons/md";
-import { IoGiftOutline } from "react-icons/io5";
 import { AuthContext } from "../../providers/AuthProvider";
+import getUserTurnoverHistory from "../../module/getUserTurnoverHistory";
 export default function TurnOverHistory() {
-  const [selectedImage, setSelectedImage] = useState("");
   const { selectedLanguage } = useContext(AuthContext);
-  const handleImageClick = (name) => {
-    
-    setSelectedImage(name);
-  };
+  const [completeData, setCompleteData] = useState(null);
+  const [pendingData, setPendingData] = useState(null);
+  // console.log(completeData, pendingData);
+  useEffect(() => {
+    getUserTurnoverHistory()
+      .then((res) => {
+        // console.log(res.data);
+        let t = [];
+        let f = [];
+        res.data.map((d) => {
+          if (d.completed) {
+            t.push(d);
+          } else {
+            f.push(d);
+          }
+          setCompleteData(t);
+          setPendingData(f);
+        });
+      })
+      .catch((er) => {
+        console.log(er);
+      });
+  }, []);
   return (
     <div className="bg-gray-500 max-w-full overflow-scroll rounded-lg p-4 ">
       <div className="p-5 bg-white rounded-md">
         <h1 className="text-center p-5 font-bold border-b-4 border-indigo-300 text-3xl">
-          
-          {
-          selectedLanguage ==='en' ? "History":"ইতিহাস"
-        }
+          {selectedLanguage === "en" ? "History" : "ইতিহাস"}
         </h1>
         <Tabs className="w-full overflow-x-scroll">
           <TabList className="text-gray-700">
             <Tab>
               <div className="flex gap-2 items-center font-medium text-md">
                 <RiMoneyDollarCircleFill size={24} />
-               
-                {
-          selectedLanguage ==='en' ? " Deposit":"জমা"
-                }
+                Pending
               </div>
             </Tab>
             <Tab>
               <div className="flex gap-2 items-center font-medium text-md">
                 <GiReceiveMoney size={24} />
-                
-                {
-          selectedLanguage ==='en' ? "Withdraw":"উত্তোলন করুন"
-        }
-              </div>
-            </Tab>
-            <Tab>
-              <div className="flex gap-2 items-center font-medium text-md">
-                <BiTransferAlt size={24} />
-                
-                {
-          selectedLanguage ==='en' ? "Transfer":"স্থানান্তর"
-        }
-              </div>
-            </Tab>
-            <Tab>
-              <div className="flex gap-2 items-center font-medium text-md">
-                <MdOutlineAutorenew size={24} />
-                
-                {
-          selectedLanguage ==='en' ? "Rebate":"রিবেট"
-        }
-              </div>
-            </Tab>
-            <Tab>
-              <div className="flex gap-2 items-center font-medium text-md">
-                <IoGiftOutline size={24} />
-                
-                {
-          selectedLanguage ==='en' ? "Bonus":"বোনাস"
-        }
+                Complete
               </div>
             </Tab>
           </TabList>
 
           <TabPanels className="w-full">
             <TabPanel className="w-full">
-              <DepositHistory />
+              <DepositHistory data={pendingData}/>
             </TabPanel>
             <TabPanel>
-              <WithdrawalHistory />
-            </TabPanel>
-            <TabPanel>
-              <Transfer />
-            </TabPanel>
-            <TabPanel>
-              <Rebate />
-            </TabPanel>
-            <TabPanel>
-              <Bonus />
+              <WithdrawalHistory data={completeData} />
             </TabPanel>
           </TabPanels>
         </Tabs>

@@ -96,7 +96,7 @@ const ForgotPassword = () => {
                 <input
                   required
                   type="text"
-                  className="bg-[#D9D9D9] outline-0 "
+                  className="bg-[#D9D9D9] outline-0 rounded-r-3xl w-full pl-2"
                   id="username"
                   name="username"
                   placeholder="Username "
@@ -107,14 +107,14 @@ const ForgotPassword = () => {
             </div>
 
             <div className="mt-[8%]">
-              <div className="flex border items-center border-[#3B82F6] rounded-3xl">
+              <div className="flex border border-[#3B82F6] rounded-3xl">
                 <div className="p-3">
                   <FaPhone className="text-blue-500" />
                 </div>
 
                 <input
                   required
-                  className="bg-[#D9D9D9] outline-0  "
+                  className="bg-[#D9D9D9] outline-0  rounded-r-3xl w-full pl-2"
                   id="phoneNumber"
                   name="phoneNumber"
                   placeholder="Phone Number"
@@ -132,7 +132,7 @@ const ForgotPassword = () => {
                   </div>
                   <input
                     type="text"
-                    className=" flex-1 bg-transparent "
+                    className="bg-[#D9D9D9] outline-0  rounded-r-3xl w-full pl-2"
                     id="otp"
                     name="otp"
                     placeholder="Submit OTP"
@@ -142,11 +142,11 @@ const ForgotPassword = () => {
                 </div>
                 <div className="text-red-500 mt-2">
                   {
-          selectedLanguage ==='en' ? " Time left:":"বাকি সময়:"
+          selectedLanguage ==='en' ? "Time left: ":"বাকি সময়:"
         }
         {timeLeft} 
         {
-          selectedLanguage ==='en' ? "seconds":"সেকেন্ড"
+          selectedLanguage ==='en' ? " seconds":"সেকেন্ড"
         }
                 </div>
               </div>
