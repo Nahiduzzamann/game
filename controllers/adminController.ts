@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb';
 import { Request, Response } from "express";
-import { Deposit, History, Promotions, Users, Wallets, Withdraws } from "../connections/databaseConnection";
+import { Deposit, History, PromotionHistory, Promotions, Users, Wallets, Withdraws } from "../connections/databaseConnection";
 import { DepositTypes, GameHistory, WalletsTypes } from "../data/allTypes";
 import { StatusCodes } from "http-status-codes";
 import { uploadImageBanner, uploadImageSquire } from './fileUploadController';
@@ -180,12 +180,18 @@ export const toggleStatusDeposit = async (req: Request, res: Response) => {
         if (!user || !deposit || !deposit.amount) {
             return res.status(StatusCodes.BAD_GATEWAY).json({ error: "Deposit id and Username is invalid " })
         }
-        
+
         deposit.status = status ? "ACCEPTED" : "CANCELLED"
         deposit.remarks = message
         deposit.save()
         if (status) {
             user.balance = user.balance + deposit.amount;
+            if (deposit.promotionId != "undefined" && deposit.promotionId) {
+                await PromotionHistory.create({
+                    promotionId: deposit.promotionId,
+                    userId: username,
+                });
+            }
         }
         user.save()
         res.status(StatusCodes.OK).json(deposit)
@@ -234,12 +240,12 @@ export const turnOverHistory = async (req: Request, res: Response) => {
             for (const d of combinePromotions) {
                 await Promise.all(d.deposit.map(async (s, i) => {
                     let totalTurnover = 0;
-                    const history = await History.find({ date: { $gte: s.date },username:s.userId }) as GameHistory[];
+                    const history = await History.find({ date: { $gte: s.date }, username: s.userId }) as GameHistory[];
 
                     history.forEach((h) => {
                         totalTurnover += h.bet;
                     });
-                    d.deposit[i] = { ...s, totalTurnover: d.turnOverAmount<totalTurnover?d.turnOverAmount:totalTurnover };
+                    d.deposit[i] = { ...s, totalTurnover: d.turnOverAmount < totalTurnover ? d.turnOverAmount : totalTurnover };
                 }));
             }
         };
@@ -285,7 +291,6 @@ export const deletePromotion = async (req: Request, res: Response) => {
     const { promotionID } = req.params;
 
     try {
-
 
         const promotion = await Promotions.deleteOne({
             _id: new ObjectId(promotionID)
@@ -336,21 +341,21 @@ export const withdrawHistory = async (req: Request, res: Response) => {
     }
 }
 export const toggleStatusWithdraw = async (req: Request, res: Response) => {
-    const { message, id, status,username } = req.body
-    if (!id ||!username) {
+    const { message, id, status, username } = req.body
+    if (!id || !username) {
         return res.status(StatusCodes.BAD_GATEWAY).json({ error: "All field are required" })
     }
     try {
         const withdraw = await Withdraws.findOne({ _id: new ObjectId(id) })
         const user = await Users.findOne({ username: username })
-        if (!withdraw || !withdraw.amount ||!user) {
+        if (!withdraw || !withdraw.amount || !user) {
             return res.status(StatusCodes.BAD_GATEWAY).json({ error: "Withdraw id and username is invalid " })
         }
         withdraw.status = status ? "ACCEPTED" : "CANCELLED"
         withdraw.remarks = message
         withdraw.save()
-        if(!status){
-            user.balance=user.balance+withdraw.amount;
+        if (!status) {
+            user.balance = user.balance + withdraw.amount;
             user.save()
         }
         res.status(StatusCodes.OK).json(withdraw)
