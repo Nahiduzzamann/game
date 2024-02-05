@@ -391,7 +391,7 @@ export const getNotificationAdmin = async (req: Request, res: Response) => {
                     user: { $arrayElemAt: ["$user", 0] },
                 },
             },
-        ])
+        ]).sort({date:-1})
         await Notification.updateMany({ userId: { $exists: true } }, {
             read: true
         })
@@ -435,7 +435,7 @@ export const getNotificationUser = async (req: AuthenticatedRequest, res: Respon
                     user: { $arrayElemAt: ["$user", 0] },
                 },
             },
-        ])
+        ]).sort({date:-1})
         await Notification.updateMany({ receiverId: username }, {
             read: true
         })
