@@ -1,7 +1,8 @@
 import express, { Express } from "express";
 
-import { createPromotion, deletePromotion, depositHistory, depositReport, revenueReport, toggleStatusDeposit, toggleStatusWithdraw, turnOverHistory, withdrawHistory } from "../controllers/adminController";
+import { createPromotion, deletePromotion, depositHistory, depositReport, getNotificationAdmin, getNotificationUser, getUnreadNotificationCount, getUnreadNotificationCountUser, revenueReport, toggleStatusDeposit, toggleStatusWithdraw, turnOverHistory, withdrawHistory } from "../controllers/adminController";
 import upload from "../lib/upload";
+import { authenticateToken } from "../middlewares/checkLogin";
 
 const admin = express.Router();
 admin.get("/deposit/report", depositReport);
@@ -13,4 +14,9 @@ admin.post("/create/promotion", upload.single("image"), createPromotion);
 admin.delete("/delete/promotion/:promotionID", deletePromotion);
 admin.get("/withdraw/get", withdrawHistory);
 admin.post("/withdraw/toggle", toggleStatusWithdraw);
+
+admin.get("/message/user/get",authenticateToken, getNotificationUser);
+admin.get("/message/user/count",authenticateToken, getUnreadNotificationCountUser);
+admin.get("/message/get", getNotificationAdmin);
+admin.get("/message/count", getUnreadNotificationCount);
 export default admin;

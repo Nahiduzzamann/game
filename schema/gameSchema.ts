@@ -69,6 +69,7 @@ const voucher=new Schema({
   applied:{type:Boolean,default:false},
   code:{type:String, unique:true}
 })
+
 const userWallets = new Schema({
   walletNumber: { type: String, require: true },
   walletId: { type: String, require: true },
@@ -101,6 +102,10 @@ const notification = new Schema({
   date: { type: Date, default: Date.now() },
   title: String,
   details: String,
+  read:{type:Boolean,default:false},
+  receiverId:{type:String,default:null},//null when send from user
+  userId:{type:String,default:null},//null when send from admin
+  type:{type:String,require:true}//"DEPOSIT", "WITHDRAW", "VOUCHER","REWARDS","TURNOVER"
 });
 const gameList = new Schema({
   id: {

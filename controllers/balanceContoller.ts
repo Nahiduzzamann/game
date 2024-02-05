@@ -23,6 +23,7 @@ import { AuthenticatedRequest } from "../middlewares/checkLogin";
 import { UserWalletsTypes, WalletsTypes } from "../data/allTypes";
 import { ObjectId } from "mongodb";
 import { WalletCombineTypes } from "./adminController";
+import { DATATYPES, sendNotificationToAdmin, sendNotificationToUser } from "../functions/sendNotification";
 
 interface FilePath {
   path: string;
@@ -34,7 +35,7 @@ export interface PromotionHistoryTypes {
   date: Date,
   completed: boolean,
   promotion: PromotionTypes,
-  totalTurnover:number
+  totalTurnover: number
 }
 
 export const createPromotions = async (req: Request, res: Response) => {
@@ -234,13 +235,13 @@ export const getPromotions = async (req: Request, res: Response) => {
 export const makeDeposit = async (req: AuthenticatedRequest, res: Response) => {
   const { walletId, amount, promotionId, tranXId } = req.body;
   const { username } = req;
-  if (!walletId || !amount || !tranXId) {
+  if (!walletId || !amount || !tranXId || !username) {
     return res
       .status(StatusCodes.BAD_GATEWAY)
       .json({ error: "Parameter are required" });
   }
   try {
-    
+
     const deposit = await Deposit.create({
       walletId,
       amount: parseInt(amount),
@@ -248,6 +249,7 @@ export const makeDeposit = async (req: AuthenticatedRequest, res: Response) => {
       tranXId,
       userId: username,
     });
+    await sendNotificationToAdmin("New deposit request!!", `You have new deposit request amount ${amount} by ${username}`, username, DATATYPES[0])
     res.status(StatusCodes.OK).json(deposit);
   } catch (error) {
     res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error });
@@ -324,7 +326,11 @@ export const createWithdraw = async (
         .status(StatusCodes.BAD_REQUEST)
         .json({ error: "Low balance to cash out" });
     }
-
+    if (!username) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ error: "Invalid" });
+    }
     const d = await Withdraws.create({
       walletId,
       amount,
@@ -334,6 +340,7 @@ export const createWithdraw = async (
 
     user.balance = user.balance - decreaseAmountBy;
     user.save();
+    await sendNotificationToAdmin("New Withdraw request!!", `You have new withdraw request amount ${decreaseAmountBy} by ${username}`, username, DATATYPES[1])
     res.status(StatusCodes.OK).json(d);
   } catch (error) {
     res.status(StatusCodes.EXPECTATION_FAILED).json(error);
@@ -407,11 +414,11 @@ export const getTurnOvers = async (req: AuthenticatedRequest, res: Response) => 
       },
 
     ]).sort({ date: -1 }) as PromotionHistoryTypes[]
-    await Promise.all(runningTurn.map(async (turn,i) => {
+    await Promise.all(runningTurn.map(async (turn, i) => {
       if (!turn.completed && turn.promotion) {
         const gameHistory = await History.find({ username: username, date: { $gte: turn.date } }) as GameHistory[]
         console.log(gameHistory);
-        
+
         let totalTurn = 0;
         gameHistory.map(d => {
           totalTurn = totalTurn + d.bet;
@@ -429,13 +436,16 @@ export const getTurnOvers = async (req: AuthenticatedRequest, res: Response) => 
             promotionId: turn.promotionId
           })
           const user = await Users.findOne({ username: username }) as UserTypes
-          if (user) {
+          if (user && username) {
             user.balance = user.balance + (deposit[0].amount * turn.promotion.bonusPercentage) / 100
             user.save()
+            await sendNotificationToUser("Complete Turnover!!", `You have complete turnover target amount ${turn.totalTurnover} and get ${((deposit[0].amount * turn.promotion.bonusPercentage) / 100).toFixed(2)} Credit`, username, DATATYPES[4])
           }
 
         }
-        runningTurn[i]={...turn,totalTurnover:totalTurn }
+        runningTurn[i] = { ...turn, totalTurnover: totalTurn }
+
+
       }
     }))
     res.status(StatusCodes.OK).json(runningTurn)
