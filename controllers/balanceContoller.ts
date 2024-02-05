@@ -33,7 +33,8 @@ export interface PromotionHistoryTypes {
   userId: string,
   date: Date,
   completed: boolean,
-  promotion: PromotionTypes
+  promotion: PromotionTypes,
+  totalTurnover:number
 }
 
 export const createPromotions = async (req: Request, res: Response) => {
@@ -239,12 +240,7 @@ export const makeDeposit = async (req: AuthenticatedRequest, res: Response) => {
       .json({ error: "Parameter are required" });
   }
   try {
-    if (promotionId != "undefined" && promotionId) {
-      await PromotionHistory.create({
-        promotionId,
-        userId: username,
-      });
-    }
+    
     const deposit = await Deposit.create({
       walletId,
       amount: parseInt(amount),
@@ -411,29 +407,35 @@ export const getTurnOvers = async (req: AuthenticatedRequest, res: Response) => 
       },
 
     ]).sort({ date: -1 }) as PromotionHistoryTypes[]
-    const gameHistory = await History.find({ username: username, date: { $gte: runningTurn[0].date } }) as GameHistory[]
-    let totalTurn = 0;
-    gameHistory.map(d => {
-      totalTurn = totalTurn + d.bet;
-    })
-    if (totalTurn > runningTurn[0].promotion.turnOverAmount) {
-      runningTurn[0].completed = true;
-      await PromotionHistory.updateOne({ _id: new ObjectId(runningTurn[0]._id) }, {
-        completed: true
-      })
-      const deposit = await Deposit.find({ userId: username, promotionId: runningTurn[0].promotionId }).sort({ date: -1 }) as DepositTypes[]
-      await BonusHistory.create({
-        userId: username,
-        amount: (deposit[0].amount * runningTurn[0].promotion.bonusPercentage) / 100,
-        promotionId: runningTurn[0].promotionId
-      })
-      const user = await Users.findOne({ username: username }) as UserTypes
-      if (user && user.balance) {
-        user.balance = user.balance + (deposit[0].amount * runningTurn[0].promotion.bonusPercentage) / 100
-        user.save()
-      }
+    await Promise.all(runningTurn.map(async (turn,i) => {
+      if (!turn.completed && turn.promotion) {
+        const gameHistory = await History.find({ username: username, date: { $gte: turn.date } }) as GameHistory[]
+        let totalTurn = 0;
+        gameHistory.map(d => {
+          totalTurn = totalTurn + d.bet;
 
-    }
+        })
+        if (totalTurn > turn.promotion.turnOverAmount) {
+          turn.completed = true;
+          await PromotionHistory.updateOne({ _id: new ObjectId(turn._id) }, {
+            completed: true
+          })
+          const deposit = await Deposit.find({ userId: username, promotionId: turn.promotionId }).sort({ date: -1 }) as DepositTypes[]
+          await BonusHistory.create({
+            userId: username,
+            amount: (deposit[0].amount * turn.promotion.bonusPercentage) / 100,
+            promotionId: turn.promotionId
+          })
+          const user = await Users.findOne({ username: username }) as UserTypes
+          if (user && user.balance) {
+            user.balance = user.balance + (deposit[0].amount * turn.promotion.bonusPercentage) / 100
+            user.save()
+          }
+
+        }
+        runningTurn[i]={...turn,totalTurnover:totalTurn }
+      }
+    }))
     res.status(StatusCodes.OK).json(runningTurn)
 
   } catch (error) {

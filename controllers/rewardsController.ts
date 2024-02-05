@@ -1,34 +1,52 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
-import { Users } from '../connections/databaseConnection';
+import { Users, Voucher } from '../connections/databaseConnection';
 import { AuthenticatedRequest } from '../middlewares/checkLogin';
 import sendSms from '../functions/sendSms';
+import { StatusCodes } from 'http-status-codes';
 const jwt = require('jsonwebtoken');
 
 export const getVoucher = async (req: AuthenticatedRequest, res: Response) => {
-  try {
-    const username = req.username;
-
-    // Validate request parameters
-    if (!username) {
-      return res.status(400).json({ message: 'Invalid request' });
+    try {
+        const voucher = await Voucher.find()
+        res.status(StatusCodes.OK).json(voucher.reverse());
+    } catch (error) {
+        res.status(StatusCodes.EXPECTATION_FAILED).json(error)
     }
+};
 
-    // Check if the user exists
-    const user = await Users.findOne({ username });
-
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+export const addVoucher = async (req: AuthenticatedRequest, res: Response) => {
+    const { bonusAmount, code } = req.body;
+    if (!bonusAmount || !code) {
+        return res.status(StatusCodes.BAD_GATEWAY).json({ error: "Parameter are missing" })
     }
-    if(user.balance<0){
-      user.balance=0;
-      user.save()
+    try {
+        const voucher = await Voucher.create({
+            bonusAmount:parseInt(bonusAmount),
+            code,
+        })
+        res.status(StatusCodes.OK).json(voucher)
+    } catch (error) {
+        res.status(StatusCodes.EXPECTATION_FAILED).json(error)
     }
+};
 
-    // Return the user details
-    res.status(200).json(user);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
+export const applyVoucher = async (req: AuthenticatedRequest, res: Response) => {
+
+};
+
+export const getRewards = async (req: AuthenticatedRequest, res: Response) => {
+
+};
+export const addRewards = async (req: AuthenticatedRequest, res: Response) => {
+
+};
+export const deleteRewards = async (req: AuthenticatedRequest, res: Response) => {
+
+};
+export const getUserRewards = async (req: AuthenticatedRequest, res: Response) => {
+
+};
+export const collectRewards = async (req: AuthenticatedRequest, res: Response) => {
+
 };

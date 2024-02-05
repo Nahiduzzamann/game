@@ -8,6 +8,7 @@ import user from "./routes/user";
 import bodyParser from 'body-parser';
 import balance from "./routes/balance";
 import admin from "./routes/admin";
+import rewards from "./routes/rewards";
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, "dashboard/dist")));
 app.use("/api", games)
 app.use("/api/balance",balance)
 app.use("/api/admin", admin)
+app.use("/api/rewards",rewards)
 app.use("/api/icons",express.static(path.join(__dirname, "data/icons")))
 app.use("/api/images",express.static(path.join(__dirname, "data/images")))
 app.use("/api/data/images",express.static(path.join(__dirname, "data/images")))

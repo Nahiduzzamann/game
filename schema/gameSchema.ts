@@ -52,22 +52,21 @@ const transfer = new Schema({
   toWalletId: String,
 });
 const rewardsHistory = new Schema({
-  tranXId: String,
+  userId: String,
   date: { type: Date, default: Date.now() },
-  balanceAt: Number,
+  rewardId: String,
   amount: Number,
-  rewardsId: String,
 });
 const rewardsList = new Schema({
   level: String,
   targetTurnover: Number,
   bonusAmount: Number,
-});
+});   
 const voucher=new Schema({
   userId:{type:String,default:""},
   bonusAmount:Number,
   applied:{type:Boolean,default:false},
-  code:String
+  code:{type:String, unique:true}
 })
 const userWallets = new Schema({
   walletNumber: { type: String, require: true },
