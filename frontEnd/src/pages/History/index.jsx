@@ -1,14 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import DepositHistory from "./DepositHistory";
 import WithdrawalHistory from "./WithdrawalHistory";
-import Transfer from "./Transfer";
-import Rebate from "./Rebate";
 import Bonus from "./Bonus";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { GiReceiveMoney } from "react-icons/gi";
-import { BiTransferAlt } from "react-icons/bi";
-import { MdOutlineAutorenew } from "react-icons/md";
 import { IoGiftOutline } from "react-icons/io5";
 import { AuthContext } from "../../providers/AuthProvider";
 export default function History() {

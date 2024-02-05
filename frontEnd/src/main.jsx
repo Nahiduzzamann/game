@@ -36,6 +36,8 @@ import PrivateRoute from "./layout/PrivateRoute.jsx";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword.jsx";
 import BankPay from "./pages/Bank/Index.jsx";
 import BankDetails from "./pages/BankDetails/BankDetails.jsx";
+import RewardsHistory from "./pages/RewardsHistory/RewardsHistory.jsx";
+import Notification from "./pages/Notification/Notification.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -130,6 +132,14 @@ const router = createBrowserRouter([
       {
         path: "withdrawal",
         element: <Withdrawal />,
+      },
+      {
+        path: "rewards-history",
+        element: <RewardsHistory></RewardsHistory>
+      },
+      {
+        path: "notification",
+        element: <Notification></Notification>
       },
       {
         path: "bank-details",
