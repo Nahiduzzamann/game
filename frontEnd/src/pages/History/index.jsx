@@ -60,7 +60,7 @@ export default function History() {
           selectedLanguage ==='en' ? "Rebate":"রিবেট"
         }
               </div>
-            </Tab>
+            </Tab> */}
             <Tab>
               <div className="flex gap-2 items-center font-medium text-md">
                 <IoGiftOutline size={24} />
@@ -69,7 +69,7 @@ export default function History() {
           selectedLanguage ==='en' ? " Bonus":"বোনাস"
         }
               </div>
-            </Tab> */}
+            </Tab>
           </TabList>
 
           <TabPanels className="w-full">
@@ -84,10 +84,10 @@ export default function History() {
             </TabPanel>
             <TabPanel>
               <Rebate />
-            </TabPanel>
+            </TabPanel> */}
             <TabPanel>
               <Bonus />
-            </TabPanel> */}
+            </TabPanel>
           </TabPanels>
         </Tabs>
       </div>

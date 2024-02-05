@@ -7,9 +7,11 @@ import {
     ChartBarIcon,
     PuzzlePieceIcon
   } from "@heroicons/react/24/solid";
+import getTurnOverHistory from "@/modules/getTurnOverHistory";
 export const AuthContext = createContext();
 
 const DataProvider = ({ children }) => {
+  const [turnoverData,setTurnoverData]=useState(null)
     const [depositeData, setDepositeData] = useState(null);
     const [depositeDataLastMonth, setDepositeDataLastMonth] = useState(null);
     const [revenueData, setRevenueData] = useState(null);
@@ -81,7 +83,15 @@ const DataProvider = ({ children }) => {
         console.log(err);
        })
     }, [])
-
+    useEffect(() => {
+      getTurnOverHistory()
+        .then((res)=>{
+          setTurnoverData(res.data);
+        })
+       .catch((err)=>{
+        console.log(err);
+       })
+    }, [])
     const statisticsCardsData=(revenueData,depositeData,revenueDataLastMonth,depositeDataLastMonth) => [
         {
           color: "gray",
@@ -135,7 +145,8 @@ const DataProvider = ({ children }) => {
         statisticsCardsData,
         revenueData,
         revenueDataLastMonth,
-        depositeDataLastMonth
+        depositeDataLastMonth,
+        turnoverData
     }
 
     return (

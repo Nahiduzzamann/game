@@ -24,7 +24,7 @@ import {
   statisticsChartsData,
   projectsTableData,
 } from "@/data";
-import { ArrowDownIcon, CheckCircleIcon, ClockIcon } from "@heroicons/react/24/solid";
+import { ArrowDownIcon, CheckCircleIcon, ClockIcon, PlusSmallIcon } from "@heroicons/react/24/solid";
 import { AuthContext } from "@/providers/dataProvider";
 import getDepositeDetails from "@/modules/getDepositDetails";
 import {
@@ -32,7 +32,7 @@ import {
 } from "@heroicons/react/24/solid";
 
 export function Home() {
-  const { statisticsCardsData,revenueData,depositeData,revenueDataLastMonth,depositeDataLastMonth } = useContext(AuthContext);
+  const { statisticsCardsData,revenueData,depositeData,revenueDataLastMonth,depositeDataLastMonth,turnoverData } = useContext(AuthContext);
   const previousDate = new Date(localStorage.getItem('currentTime'));
   const presentDate = new Date();
   const timeDifference = presentDate - previousDate;
@@ -54,6 +54,23 @@ export function Home() {
           console.log(err);
          })
       }, [])
+      const calculateAverageCompletionPercentage = (deposit, turnOverAmount) => {
+
+        if(deposit.length >0){
+     // Step 1: Calculate total turnOverAmount achieved
+     const totalTurnoverAchieved = deposit.reduce((total, user) => total + user.totalTurnover, 0);
+    
+     // Step 2: Calculate total turnOverAmount expected
+     const totalTurnoverExpected = deposit.length * turnOverAmount;
+    
+     // Step 3: Calculate average completion percentage
+     const averageCompletionPercentage = (totalTurnoverAchieved / totalTurnoverExpected) * 100;
+    
+     return averageCompletionPercentage.toFixed(2);
+        }
+    return 0;
+       
+      };
   return (
     <div className="mt-12">
       <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
@@ -104,121 +121,116 @@ export function Home() {
               <Typography variant="h6" color="blue-gray" className="mb-1">
                 Turnover
               </Typography>
-              <Typography
-                variant="small"
-                className="flex items-center gap-1 font-normal text-blue-gray-600"
-              >
-                <CheckCircleIcon strokeWidth={3} className="h-4 w-4 text-blue-gray-200" />
-                <strong>30 done</strong> this month
-              </Typography>
+             
             </div>
-            <Menu placement="left-start">
-              <MenuHandler>
-                <IconButton size="sm" variant="text" color="blue-gray">
-                  <EllipsisVerticalIcon
-                    strokeWidth={3}
-                    fill="currenColor"
-                    className="h-6 w-6"
-                  />
-                </IconButton>
-              </MenuHandler>
-              <MenuList>
-                <MenuItem>Action</MenuItem>
-                <MenuItem>Another Action</MenuItem>
-                <MenuItem>Something else here</MenuItem>
-              </MenuList>
-            </Menu>
+           
           </CardHeader>
           <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
-            <table className="w-full min-w-[640px] table-auto">
-              <thead>
-                <tr>
-                  {["companies", "members", "budget", "completion"].map(
-                    (el) => (
-                      <th
-                        key={el}
-                        className="border-b border-blue-gray-50 py-3 px-6 text-left"
-                      >
-                        <Typography
-                          variant="small"
-                          className="text-[11px] font-medium uppercase text-blue-gray-400"
-                        >
-                          {el}
-                        </Typography>
-                      </th>
-                    )
-                  )}
-                </tr>
-              </thead>
-              <tbody>
-                {projectsTableData.map(
-                  ({ img, name, members, budget, completion }, key) => {
-                    const className = `py-3 px-5 ${
-                      key === projectsTableData.length - 1
-                        ? ""
-                        : "border-b border-blue-gray-50"
-                    }`;
+{
+  loading ? (<div className="h-screen flex justify-center items-center"><Spinner color="blue"></Spinner></div>):(<table className="w-full min-w-[640px] table-auto">
+  <thead>
+    <tr>
+      {["Turnover Parcentage", "members", "target amount", "completion",''].map(
+        (el) => (
+          <th
+            key={el}
+            className="border-b border-blue-gray-50 py-3 px-5 text-left"
+          >
+            <Typography
+              variant="small"
+              className="text-[11px] font-bold uppercase text-blue-gray-400"
+            >
+              {el}
+            </Typography>
+          </th>
+        )
+      )}
+    </tr>
+  </thead>
+  <tbody>
+    {turnoverData?.slice(0,6).map(
+      (data, key) => {
+        const className = `py-3 px-5 ${
+          key === data.length - 1
+            ? ""
+            : "border-b border-blue-gray-50"
+        }`;
 
-                    return (
-                      <tr key={name}>
-                        <td className={className}>
-                          <div className="flex items-center gap-4">
-                            <Avatar src={img} alt={name} size="sm" />
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-bold"
-                            >
-                              {name}
-                            </Typography>
-                          </div>
-                        </td>
-                        <td className={className}>
-                          {members.map(({ img, name }, key) => (
-                            <Tooltip key={name} content={name}>
-                              <Avatar
-                                src={img}
-                                alt={name}
-                                size="xs"
-                                variant="circular"
-                                className={`cursor-pointer border-2 border-white ${
-                                  key === 0 ? "" : "-ml-2.5"
-                                }`}
-                              />
-                            </Tooltip>
-                          ))}
-                        </td>
-                        <td className={className}>
-                          <Typography
-                            variant="small"
-                            className="text-xs font-medium text-blue-gray-600"
-                          >
-                            {budget}
-                          </Typography>
-                        </td>
-                        <td className={className}>
-                          <div className="w-10/12">
-                            <Typography
-                              variant="small"
-                              className="mb-1 block text-xs font-medium text-blue-gray-600"
-                            >
-                              {completion}%
-                            </Typography>
-                            <Progress
-                              value={completion}
-                              variant="gradient"
-                              color={completion === 100 ? "green" : "blue"}
-                              className="h-1"
-                            />
-                          </div>
-                        </td>
-                      </tr>
-                    );
-                  }
-                )}
-              </tbody>
-            </table>
-          </CardBody>
+        return (
+          <tr key={key}>
+            <td className={className}>
+              <div className="flex items-center gap-4">
+             
+                <Typography
+                  variant="small"
+                  color="blue-gray"
+                  className="font-bold"
+                >
+                  {data.title}
+                </Typography>
+              </div>
+            </td>
+            <td className={className}>
+
+              {
+                data.deposit.length >0 ? (data.deposit.map((data, key) => (
+                  <Tooltip key={key} content={data.userId}>
+                    <Avatar
+                      src="https://docs.material-tailwind.com/img/face-2.jpg"
+    
+                      size="xs"
+                      variant="circular"
+                      className={`cursor-pointer border-2 border-white ${
+                        key === 0 ? "" : "-ml-2.5"
+                      }`}
+                    />
+                  </Tooltip>
+                ))):(<p>Empty</p>)
+              }
+
+            </td>
+            <td className={className}>
+              <Typography
+                variant="small"
+                className="text-xs font-medium text-blue-gray-600"
+              >
+                {data.turnOverAmount}
+              </Typography>
+            </td>
+            <td className={className}>
+              <div className="w-10/12">
+                <Typography
+                  variant="small"
+                  className="mb-1 block text-xs font-medium text-blue-gray-600"
+                >
+                  {
+                    calculateAverageCompletionPercentage(data.deposit,data.turnOverAmount)
+
+                  }%
+                </Typography>
+                <Progress
+                  value={calculateAverageCompletionPercentage(data.deposit,data.turnOverAmount)}
+                  variant="gradient"
+                  color={calculateAverageCompletionPercentage(data.deposit,data.turnOverAmount) === 100 ? "green" : "gray"}
+                  className="h-1"
+                />
+              </div>
+            </td>
+            {
+              data.deposit.length >0 ?(<td></td>):(<td onClick={()=>handleDelteturnover(data._id)} className="text-red-500 cursor-pointer rounded text-center hover:bg-gray-400">
+              Delete
+            </td>)
+            }
+            
+          </tr>
+        );
+      }
+    )}
+  </tbody>
+</table>)
+}
+          
+        </CardBody>
         </Card>
         <Card className="border border-blue-gray-100 shadow-sm">
           <CardHeader
