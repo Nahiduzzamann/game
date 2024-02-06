@@ -81,7 +81,7 @@ export default function Users() {
                     </td>
                     <td className={className}>
                       <Typography className="text-xs font-semibold text-blue-gray-600">
-                        {balance}
+                        {balance?.toFixed(2)}
                       </Typography>
                     
                     </td>
