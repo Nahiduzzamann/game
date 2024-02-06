@@ -17,6 +17,10 @@ import Deposit from "./pages/dashboard/deposit";
 import Turnovers from "./pages/dashboard/turnovers";
 import Withdraws from "./pages/dashboard/withdraws";
 import Messages from "./pages/dashboard/messages";
+import Preference from "./pages/dashboard/preference";
+import Users from "./pages/dashboard/users";
+import Voucher from "./pages/dashboard/voucher";
+import Rewards from "./pages/dashboard/rewards";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -60,25 +64,25 @@ export const routes = [
         icon: <DocumentTextIcon {...icon} />,
         name: "vouchers",
         path: "/vouchers",
-        element: <Home />,
+        element: <Voucher />,
       },
       {
         icon: <UserCircleIcon {...icon} />,
         name: "users",
         path: "/users",
-        element: <Home />,
+        element: <Users />,
       },
       {
         icon: <CogIcon {...icon} />,
         name: "preference",
         path: "/preference",
-        element: <Home />,
+        element: <Preference />,
       },
       {
         icon: <GiftIcon {...icon} />,
         name: "rewardss",
         path: "/rewardss",
-        element: <Home />,
+        element: <Rewards />,
       },
       // {
       //   icon: <UserCircleIcon {...icon} />,
