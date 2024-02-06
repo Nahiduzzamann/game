@@ -1,31 +1,35 @@
+import { Badge, Box, HStack, Text, VStack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import getUserTurnoverBonus from "../../module/getUserTurnoverBonus";
-import { Box, Badge, Text, VStack, HStack } from "@chakra-ui/react";
-export default function Bonus() {
-  const [data, setData] = useState(null);
+import getRewardsHistory from "../../module/getRewardsHistory";
+const RewardsHistory = () => {
+  const [data, setData] = useState([1, 1, 1, 1, 1]);
+
   useEffect(() => {
-    getUserTurnoverBonus().then((res) => {
-      //console.log(res.data);
-      setData(res.data);
-    });
+    getRewardsHistory()
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((er) => {
+        console.log(er);
+      });
   }, []);
 
-  return(
-    <div>
-      <div>
-        <input className="border px-5 py-2 rounded-md w-full" placeholder="Search"/>
-      </div>
-      <div className="flex justify-center flex-wrap gap-2">
-      {data?.map((d,i)=>(
-       <TransactionCard data={d} key={i}/>
-      ))}
+  return (
+    <div className="bg-gray-500 rounded-lg md:mt-0 mt-5 p-4">
+      <div className="p-5 bg-white rounded-md">
+        <div className="flex justify-center flex-wrap gap-2">
+          {data?.map((d, i) => (
+            <RewardCard data={d} key={i}></RewardCard>
+          ))}
+        </div>
       </div>
     </div>
-  )
- 
-}
-const TransactionCard = ({ data }) => {
-  const { _id, date, userId, amount } = data;
+  );
+};
+export default RewardsHistory;
+
+const RewardCard = ({ data }) => {
+  const { _id,userId, date, amount } = data;
 
   return (
     <Box
@@ -39,14 +43,14 @@ const TransactionCard = ({ data }) => {
       <VStack spacing={2} align="start">
         <HStack justify="space-between" w="100%">
           <Badge borderRadius="full" px="2" colorScheme="purple">
-            Transaction Details
+            Reward Details
           </Badge>
           <Text fontSize="sm" color="gray.500">
             {new Date(date).toLocaleString()}
           </Text>
         </HStack>
         <Text fontSize="lg" fontWeight="semibold">
-          Transaction ID: {_id}
+          TnxID: {_id}
         </Text>
         <VStack spacing={1} align="start" w="100%">
           <Text fontSize="sm" color="gray.500">
@@ -64,7 +68,6 @@ const TransactionCard = ({ data }) => {
             {amount}
           </Text>
         </VStack>
-        
       </VStack>
     </Box>
   );

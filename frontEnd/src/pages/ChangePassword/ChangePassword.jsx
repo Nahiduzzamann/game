@@ -72,7 +72,9 @@ const ChangePasswordPage = () => {
 
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="bg-gray-500 rounded-lg md:mt-0 mt-5 p-4">
+      <div className="p-5 bg-white rounded-md">
+    <div className="container mx-auto">
       <h1 className="text-3xl font-bold mb-4">
       {
           selectedLanguage ==='en' ? "Change Password":"পাসওয়ার্ড পরিবর্তন করুন"
@@ -188,6 +190,8 @@ const ChangePasswordPage = () => {
           
         </button>
       </form>
+    </div>
+    </div>
     </div>
   );
 };

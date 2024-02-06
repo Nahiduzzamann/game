@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import getCategory from "../../../module/getCategory";
 import url from "../../../module";
 import logo from "../../../assets/logo.png";
-import { GrLanguage } from "react-icons/gr";
 import {
   Drawer,
   DrawerBody,
@@ -13,6 +12,9 @@ import {
   DrawerCloseButton,
   useDisclosure,
   Spinner,
+  Menu,
+  MenuButton,
+  Button,
 } from "@chakra-ui/react";
 import { CiMenuFries } from "react-icons/ci";
 import { useNavigate, useLocation, Link } from "react-router-dom";
@@ -25,11 +27,11 @@ import {
   AccordionIcon,
 } from "@chakra-ui/react";
 import { GoCrossReference } from "react-icons/go";
-import { AiFillNotification } from "react-icons/ai";
+import { AiFillBell, AiFillNotification } from "react-icons/ai";
 import LanguageCard from "./LanguageCard";
 import { AuthContext } from "./../../../providers/AuthProvider";
-import { GrMoney } from "react-icons/gr";
 import { FaSignOutAlt } from "react-icons/fa";
+import getNotificationCount from "../../../module/getNotificationCount";
 
 const Header = () => {
   const { selectedLanguage } = useContext(AuthContext);
@@ -39,7 +41,8 @@ const Header = () => {
   const btnRef = React.useRef();
   const navigate = useNavigate();
   const { pathname } = useLocation();
-
+  const [count, setCount] = useState(null);
+  const [updateCount, setUpdateCount] = useState();
   useEffect(() => {
     const cats = async () => {
       try {
@@ -60,6 +63,16 @@ const Header = () => {
     //console.log(cat);
   }, []);
 
+  useEffect(() => {
+    getNotificationCount()
+      .then((res) => {
+        setCount(res.data);
+      })
+      .then((e) => {
+        console.log(e);
+      });
+  }, [updateCount]);
+
   const handleLogOut = () => {
     localStorage.removeItem("token");
     setUpdateUserState(Math.random());
@@ -76,19 +89,40 @@ const Header = () => {
             <Spinner className="text-blue-500"></Spinner>
           ) : user ? (
             <div className="bg-blue-100 rounded border flex justify-center items-center border-blue-500 p-2 font-semibold">
+              <Menu>
+                {({ isOpen }) => (
+                  <div className="relative">
+                    {!count || (
+                      <p className="absolute -top-1 right-2 z-10 text-red-500">
+                        {count}
+                      </p>
+                    )}
+
+                    <MenuButton
+                      onClick={() => {
+                        setUpdateCount(Math.random());
+                        navigate("/user/notification");
+                      }}
+                      className="  mr-1 shadow-md"
+                      isActive={isOpen}
+                      as={Button}
+                    >
+                      <AiFillBell className="text-blue-600 shadow shadow-blue-500 hover:shadow-red-900 cursor-pointer"></AiFillBell>
+                    </MenuButton>
+                  </div>
+                )}
+              </Menu>
+              {selectedLanguage === "en" ? "Hi," : "ওহে, "}{" "}
               <Link to={`/user/myprofile`} className="">
-               
-                {
-          selectedLanguage ==='en' ? " Hi,":"ওহে,"
-        } <span className="hover:underline">{user?.username}</span> |{" "}
+                <span className="hover:underline ml-1">{user?.username}</span> |{" "}
               </Link>
-              <Link to={`/user/deposit`} className="ml-2 hover:underline font-bold text-blue-500 flex justify-center items-center">
-              <FaBangladeshiTakaSign />
-                {user.balance?.toFixed(1).toString()} 
-                {
-          selectedLanguage ==='en' ? "BDT":"টাকা"
-        }
-        
+              <Link
+                to={`/user/deposit`}
+                className="ml-2 hover:underline font-bold text-blue-500 flex justify-center items-center"
+              >
+                <FaBangladeshiTakaSign />
+                {user.balance?.toFixed(1).toString()}
+
                 <FaPlus className="text-blue-500 hover:border-blue-500 ml-2 border-2 border-blue-300 " />
               </Link>
             </div>
@@ -98,19 +132,14 @@ const Header = () => {
                 onClick={() => navigate("/login")}
                 className="bg-black hover:bg-gray-800 text-white rounded-md w-[150px] py-2"
               >
-               {
-          selectedLanguage ==='en' ? "Login":"লগইন"
-        }
-        
+                {selectedLanguage === "en" ? "Login" : "লগইন"}
               </button>
 
               <button
                 onClick={() => navigate("/signup")}
                 className="bg-blue-500 hover:bg-blue-400 text-white rounded-md w-[150px] py-2"
               >
-                {
-          selectedLanguage ==='en' ? " SignUp":"সাইন আপ"
-        }
+                {selectedLanguage === "en" ? " SignUp" : "সাইন আপ"}
               </button>
             </div>
           )}
@@ -120,10 +149,7 @@ const Header = () => {
               onClick={handleLogOut}
               className="bg-blue-500 hover:bg-blue-400 text-white rounded-md w-[150px] py-2"
             >
-              
-              {
-          selectedLanguage ==='en' ? "Log Out":"লগ আউট"
-        }
+              {selectedLanguage === "en" ? "Log Out" : "লগ আউট"}
             </button>
           )}
         </div>
@@ -135,10 +161,7 @@ const Header = () => {
               pathname === "/" && "text-green-300"
             } cursor-pointer px-4 py-4 hover:text-gray-300 font-semibold text-md `}
           >
-            
-            {
-          selectedLanguage ==='en' ? "Home":"হোম"
-        }
+            {selectedLanguage === "en" ? "Home" : "হোম"}
           </div>
         </div>
         {data ? (
@@ -154,10 +177,7 @@ const Header = () => {
               pathname === "/promotions" && "text-green-300"
             } cursor-pointer px-4 py-4 hover:text-gray-300 font-semibold text-md `}
           >
-            
-            {
-          selectedLanguage ==='en' ? "Promotions":"প্রচার"
-        }
+            {selectedLanguage === "en" ? "Promotions" : "প্রচার"}
           </div>
         </div>
         <div onClick={() => navigate("/referral")}>
@@ -166,10 +186,7 @@ const Header = () => {
               pathname === "/referral" && "text-green-300"
             } cursor-pointer px-4 py-4 hover:text-gray-300 font-semibold text-md `}
           >
-            
-            {
-          selectedLanguage ==='en' ? "Rewards":"পুরস্কার"
-        }
+            {selectedLanguage === "en" ? "Rewards" : "পুরস্কার"}
           </div>
         </div>
       </div>
@@ -179,13 +196,29 @@ const Header = () => {
           <img className="w-[130px]" src={logo} />
         </div>
         {user ? (
-          <Link to={`/user/deposit`} className="flex gap-2 items-center text-blue-500 font-bold text-xl">
-            <GrMoney />
-            {user.balance?.toFixed(1).toString()} 
-            {
-          selectedLanguage ==='en' ? "BDT":"টাকা"
-        }
-          </Link>
+          <div className="flex items-center justify-center gap-2">
+            <div
+              onClick={() => {
+                setUpdateCount(Math.random());
+                navigate("/user/notification");
+              }}
+              className="relative"
+            >
+              {!count || (
+                <p className="absolute -top-1 right-2 z-10 text-red-500">
+                  {count}
+                </p>
+              )}
+               <AiFillBell className="text-blue-600 shadow shadow-blue-500 hover:shadow-red-900 cursor-pointer"></AiFillBell>
+            </div>
+            <Link
+              to={`/user/deposit`}
+              className="flex items-center text-blue-500 font-bold text-xl"
+            >
+              {user.balance?.toFixed(1).toString()}
+              <FaBangladeshiTakaSign />
+            </Link>
+          </div>
         ) : (
           <LanguageCard />
         )}
@@ -195,7 +228,6 @@ const Header = () => {
         placement="left"
         onClose={onClose}
         finalFocusRef={btnRef}
-        
       >
         <DrawerOverlay />
         <DrawerContent>
@@ -207,10 +239,8 @@ const Header = () => {
           <hr />
           <DrawerBody>
             <p className="font-medium text-md">
-            {
-          selectedLanguage ==='en' ? "Games":"গেমস"
-        }
-        </p>
+              {selectedLanguage === "en" ? "Games" : "গেমস"}
+            </p>
             {data?.map((data, i) => (
               <Accordion key={i} allowToggle>
                 <AccordionItem>
@@ -224,7 +254,7 @@ const Header = () => {
                           className="w-5 h-5 bg-slate-500 rounded"
                           src={`${url}${data.subCategory[0]?.icon}`}
                         />
-                        {selectedLanguage==="en"? data?.title:data.bn}
+                        {selectedLanguage === "en" ? data?.title : data.bn}
                       </div>
                       <AccordionIcon />
                     </AccordionButton>
@@ -241,7 +271,10 @@ const Header = () => {
                           className="   hover:bg-gray-400 text-black flex px-2 py-1 overflow-hidden rounded-sm "
                         >
                           <div className="flex gap-2 items-center">
-                            <img className=" h-5 bg-slate-500 rounded" src={`${url}${doc?.icon}`} />
+                            <img
+                              className=" h-5 bg-slate-500 rounded"
+                              src={`${url}${doc?.icon}`}
+                            />
                             <div className="w-full">{doc?.title}</div>
                           </div>
                         </div>
@@ -252,26 +285,20 @@ const Header = () => {
               </Accordion>
             ))}
             <hr className="my-2" />
-            <p className="font-medium text-md"> 
-            {
-          selectedLanguage ==='en' ? "Others":"অন্যান্য"
-        }
-        </p>
+            <p className="font-medium text-md">
+              {selectedLanguage === "en" ? "Others" : "অন্যান্য"}
+            </p>
             <div className=" hover:bg-gray-50 flex gap-2 items-center py-2 px-2 cursor-pointer text-gray-400  text-md">
               <GoCrossReference />
-             
-              {
-          selectedLanguage ==='en' ? " Rewards":"পুরস্কার"
-        }
+
+              {selectedLanguage === "en" ? " Rewards" : "পুরস্কার"}
             </div>
             <div className=" hover:bg-gray-50 flex gap-2 items-center py-2 px-2 cursor-pointer text-gray-400  text-md">
               <AiFillNotification />
-              
-              {
-          selectedLanguage ==='en' ? "Promotions":"প্রচার"
-        }
+
+              {selectedLanguage === "en" ? "Promotions" : "প্রচার"}
             </div>
-           
+
             <div
               onClick={() => {
                 onClose();
@@ -280,28 +307,24 @@ const Header = () => {
               className=" hover:bg-gray-50 flex gap-2 items-center py-2 px-2 cursor-pointer text-gray-400  text-md"
             >
               <FaQuora />
-             
-              {
-          selectedLanguage ==='en' ? " FAQ":"এফএকিউ"
-        }
+
+              {selectedLanguage === "en" ? " FAQ" : "এফএকিউ"}
             </div>
             <div
               onClick={handleLogOut}
               className=" hover:bg-gray-50 flex gap-2 items-center py-2 px-2 cursor-pointer text-gray-400  text-md"
             >
               <FaSignOutAlt />
-              
-              {
-          selectedLanguage ==='en' ? "Log Out":"লগ আউট"
-        }
+
+              {selectedLanguage === "en" ? "Log Out" : "লগ আউট"}
             </div>
           </DrawerBody>
 
           <DrawerFooter placeContent={"start"}>
-            <p> 
-            {
-          selectedLanguage ==='en' ? "@All Right Reserved by 40Xbet":"@সব অধিকার 40Xbet দ্বারা সংরক্ষিত"
-        }
+            <p>
+              {selectedLanguage === "en"
+                ? "@All Right Reserved by 40Xbet"
+                : "@সব অধিকার 40Xbet দ্বারা সংরক্ষিত"}
             </p>
           </DrawerFooter>
         </DrawerContent>
@@ -329,7 +352,7 @@ const Options = ({ data, i, active }) => {
         } cursor-pointer hover:text-gray-300 font-semibold text-md `}
         key={i}
       >
-        {selectedLanguage==="en"?data?.title:data.bn}
+        {selectedLanguage === "en" ? data?.title : data.bn}
       </div>
       {hover && (
         <div className=" flex gap-6 absolute z-30 bg-blue-500 flex-wrap w-full px-6 py-4 overflow-hidden rounded-md left-0 top-[120px]">

@@ -137,20 +137,23 @@ export default function ProfileMenuBar() {
         </div>
         </div>
         <div
+       
+        onClick={()=>navigate("/user/notification")}
           className={`${
-            pathname === "/user/withdrhawal" && "bg-gray-600 text-white"
+            pathname === "/user/ notification" && "bg-gray-600 text-white"
           } flex items-center gap-2 hover:bg-gray-500 px-2 py-[6px] rounded-md hover:text-white cursor-pointer`}
         >
           <FiMessageSquare />
           <div className="text-xs font-medium">
           {
-          selectedLanguage ==='en' ? "Messages":"বার্তা"
+          selectedLanguage ==='en' ? "Notification":"বার্তা"
         }
         </div>
         </div>
         <div
+         onClick={()=>navigate("/user/rewards-history")}
           className={`${
-            pathname === "/user/withdryawal" && "bg-gray-600 text-white"
+            pathname === "/user/rewards-history" && "bg-gray-600 text-white"
           } flex items-center gap-2 hover:bg-gray-500 px-2 py-[6px] rounded-md hover:text-white cursor-pointer`}
         >
           <FiGift />
