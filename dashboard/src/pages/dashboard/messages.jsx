@@ -13,10 +13,14 @@ import {
   } from "@material-tailwind/react";
 import { Link } from 'react-router-dom';
 import {useNavigate} from "react-router-dom"
+import ResponsivePagination from "react-responsive-pagination";
 
 export default function Messages() {
     const [messages,setMessages]=useState()
     const navigate=useNavigate()
+    const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 7;
+  const totalPages = Math.ceil(messages?.length / itemsPerPage);
     useEffect(()=>{
         getNotification().then(res=>{
           setMessages(res.data)
@@ -54,7 +58,10 @@ export default function Messages() {
             </tr>
           </thead>
           <tbody>
-            {messages?.map((doc,i)=>(
+            {messages?.slice(
+              (currentPage - 1) * itemsPerPage,
+              currentPage * itemsPerPage
+                ).map((doc,i)=>(
                  <tr onClick={()=>navigate(`/dashboard/${doc.type.toLowerCase()}s`)} className={`${!doc.read?"bg-gray-700 text-white":"bg-white text-black"} cursor-pointer `} key={i}>
                      <td className="border-b border-blue-gray-50 py-3 px-5 text-left">{doc.userId}</td>
                      <td className="border-b border-blue-gray-50 py-3 px-5 text-left">{doc.title}</td>
@@ -63,70 +70,15 @@ export default function Messages() {
             ))}
             {messages?.length==0&&(<div className="border-b border-blue-gray-50 py-3 px-5 text-left">No message</div>)}
           </tbody>
-          {/* <tbody>
-            {authorsTableData.map(
-              ({ img, name, email, job, online, date }, key) => {
-                const className = `py-3 px-5 ${
-                  key === authorsTableData.length - 1
-                    ? ""
-                    : "border-b border-blue-gray-50"
-                }`;
-
-                return (
-                  <tr key={name}>
-                    <td className={className}>
-                      <div className="flex items-center gap-4">
-                        <Avatar src={img} alt={name} size="sm" variant="rounded" />
-                        <div>
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-semibold"
-                          >
-                            {name}
-                          </Typography>
-                          <Typography className="text-xs font-normal text-blue-gray-500">
-                            {email}
-                          </Typography>
-                        </div>
-                      </div>
-                    </td>
-                    <td className={className}>
-                      <Typography className="text-xs font-semibold text-blue-gray-600">
-                        {job[0]}
-                      </Typography>
-                      <Typography className="text-xs font-normal text-blue-gray-500">
-                        {job[1]}
-                      </Typography>
-                    </td>
-                    <td className={className}>
-                      <Chip
-                        variant="gradient"
-                        color={online ? "green" : "blue-gray"}
-                        value={online ? "online" : "offline"}
-                        className="py-0.5 px-2 text-[11px] font-medium w-fit"
-                      />
-                    </td>
-                    <td className={className}>
-                      <Typography className="text-xs font-semibold text-blue-gray-600">
-                        {date}
-                      </Typography>
-                    </td>
-                    <td className={className}>
-                      <Typography
-                        as="a"
-                        href="#"
-                        className="text-xs font-semibold text-blue-gray-600"
-                      >
-                        Edit
-                      </Typography>
-                    </td>
-                  </tr>
-                );
-              }
-            )}
-          </tbody> */}
+         
         </table>
+        <div className="mt-3" style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
+       <ResponsivePagination
+        current={currentPage}
+        total={totalPages}
+        onPageChange={setCurrentPage}
+      />
+       </div>
       </CardBody>
     </Card></div>
   )

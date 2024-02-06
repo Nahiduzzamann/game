@@ -218,7 +218,7 @@ return (
 }
           
 
-          <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
+          <div className="mt-3" style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
        <ResponsivePagination
         current={currentPage}
         total={totalPages}
