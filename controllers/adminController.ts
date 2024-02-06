@@ -2,7 +2,7 @@ import { ObjectId } from 'mongodb';
 import { Request, Response } from "express";
 import { Deposit, History, Notification, PromotionHistory, Promotions, Users, Wallets, Withdraws } from "../connections/databaseConnection";
 import { DepositTypes, GameHistory, WalletsTypes } from "../data/allTypes";
-import { StatusCodes } from "http-status-codes";
+import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { uploadImageBanner, uploadImageSquire } from './fileUploadController';
 import { AuthenticatedRequest } from '../middlewares/checkLogin';
 import { DATATYPES, sendNotificationToUser } from '../functions/sendNotification';
@@ -391,7 +391,7 @@ export const getNotificationAdmin = async (req: Request, res: Response) => {
                     user: { $arrayElemAt: ["$user", 0] },
                 },
             },
-        ]).sort({date:-1})
+        ]).sort({ date: -1 })
         await Notification.updateMany({ userId: { $ne: null } }, {
             read: true
         })
@@ -403,7 +403,7 @@ export const getNotificationAdmin = async (req: Request, res: Response) => {
 export const getUnreadNotificationCount = async (req: Request, res: Response) => {
     try {
 
-        const notification = await Notification.countDocuments({ userId: { $ne: null },read:false })
+        const notification = await Notification.countDocuments({ userId: { $ne: null }, read: false })
 
         res.status(StatusCodes.OK).json(notification)
     } catch (error) {
@@ -435,7 +435,7 @@ export const getNotificationUser = async (req: AuthenticatedRequest, res: Respon
                     user: { $arrayElemAt: ["$user", 0] },
                 },
             },
-        ]).sort({date:-1})
+        ]).sort({ date: -1 })
         await Notification.updateMany({ receiverId: username }, {
             read: true
         })
@@ -448,9 +448,17 @@ export const getUnreadNotificationCountUser = async (req: AuthenticatedRequest, 
     const username = req.username
     try {
 
-        const notification = await Notification.countDocuments({ receiverId: username ,read:false})
+        const notification = await Notification.countDocuments({ receiverId: username, read: false })
 
         res.status(StatusCodes.OK).json(notification)
+    } catch (error) {
+        res.status(StatusCodes.EXPECTATION_FAILED).json(error)
+    }
+}
+export const getAllUser = async (req: Request, res: Response) => {
+    try {
+        const users = await Users.find().sort({ date: -1 })
+        res.status(StatusCodes.OK).json(users)
     } catch (error) {
         res.status(StatusCodes.EXPECTATION_FAILED).json(error)
     }

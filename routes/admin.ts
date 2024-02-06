@@ -1,6 +1,6 @@
 import express, { Express } from "express";
 
-import { createPromotion, deletePromotion, depositHistory, depositReport, getNotificationAdmin, getNotificationUser, getUnreadNotificationCount, getUnreadNotificationCountUser, revenueReport, toggleStatusDeposit, toggleStatusWithdraw, turnOverHistory, withdrawHistory } from "../controllers/adminController";
+import { createPromotion, deletePromotion, depositHistory, depositReport, getAllUser, getNotificationAdmin, getNotificationUser, getUnreadNotificationCount, getUnreadNotificationCountUser, revenueReport, toggleStatusDeposit, toggleStatusWithdraw, turnOverHistory, withdrawHistory } from "../controllers/adminController";
 import upload from "../lib/upload";
 import { authenticateToken } from "../middlewares/checkLogin";
 
@@ -19,4 +19,5 @@ admin.get("/message/user/get",authenticateToken, getNotificationUser);
 admin.get("/message/user/count",authenticateToken, getUnreadNotificationCountUser);
 admin.get("/message/get", getNotificationAdmin);
 admin.get("/message/count", getUnreadNotificationCount);
+admin.get("/users", getAllUser);
 export default admin;
