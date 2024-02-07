@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import getUserTurnoverBonus from "../../module/getUserTurnoverBonus";
 import { Box, Badge, Text, VStack, HStack } from "@chakra-ui/react";
+import { AuthContext } from "../../providers/AuthProvider";
 export default function Bonus() {
   const [data, setData] = useState(null);
   useEffect(() => {
@@ -25,6 +26,7 @@ export default function Bonus() {
  
 }
 const TransactionCard = ({ data }) => {
+  const { selectedLanguage } = useContext(AuthContext);
   const { _id, date, userId, amount } = data;
 
   return (
@@ -39,18 +41,30 @@ const TransactionCard = ({ data }) => {
       <VStack spacing={2} align="start">
         <HStack justify="space-between" w="100%">
           <Badge borderRadius="full" px="2" colorScheme="purple">
-            Transaction Details
+            
+            {
+            selectedLanguage === "en" ? "Transaction Details"
+            : "লেনদেন বিবরণী"
+            }
           </Badge>
           <Text fontSize="sm" color="gray.500">
             {new Date(date).toLocaleString()}
           </Text>
         </HStack>
         <Text fontSize="lg" fontWeight="semibold">
-          Transaction ID: {_id}
+           {
+            selectedLanguage === "en" ? "Transaction ID:"
+            : "লেনদেন নাম্বার:"
+            }
+            {_id}
         </Text>
         <VStack spacing={1} align="start" w="100%">
           <Text fontSize="sm" color="gray.500">
-            User ID:
+            
+            {
+            selectedLanguage === "en" ? "User ID:"
+            : "ব্যবহারকারী আইডি:"
+            }
           </Text>
           <Text fontSize="md" fontWeight="bold">
             {userId}
@@ -58,7 +72,11 @@ const TransactionCard = ({ data }) => {
         </VStack>
         <VStack spacing={1} align="start" w="100%">
           <Text fontSize="sm" color="gray.500">
-            Amount:
+           
+            {
+            selectedLanguage === "en" ? " Amount:"
+            : "পরিমাণ:"
+            }
           </Text>
           <Text fontSize="md" fontWeight="bold">
             {amount}
