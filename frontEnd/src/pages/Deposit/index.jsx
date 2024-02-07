@@ -39,8 +39,8 @@ export default function Deposit() {
   const toast = useToast();
 
   const handleAmountClick = (amount) => {
-    setSelectedAmount(amount);
-    setInputAmount(amount);
+    setSelectedAmount(parseFloat(amount));
+    setInputAmount(parseFloat(amount));
   };
 
   const handleInputChange = (e) => {
@@ -70,6 +70,21 @@ export default function Deposit() {
     if (!inputAmount || !selectedImage) {
       return toast({
         title: "Enter amount and select payment method",
+        status: "info",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+    if( parseFloat(inputAmount) < 200){
+      return toast({
+        title: "Enter amount (200-30,000)",
+        status: "info",
+        duration: 5000,
+        isClosable: true,
+      });
+    }else if( parseFloat(inputAmount) > 30000){
+      return toast({
+        title: "Enter amount (200-30,000)",
         status: "info",
         duration: 5000,
         isClosable: true,

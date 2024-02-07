@@ -48,7 +48,7 @@ else if (d==='TURNOVER') {
       ) : (
         <div className="">
           {notifications?.map((notification) => (
-            <div onClick={()=>handleNavigate(notification.type)} key={notification._id} className="bg-gray-500 rounded-lg cursor-pointer p-1 mb-1 shadow-lg hover:shadow-blue-500">
+            <div onClick={()=>handleNavigate(notification.type)} key={notification._id} className={`${notification.read ? 'bg-yellow-300':'bg-gray-500' }  rounded-lg cursor-pointer p-1 mb-1 shadow-lg hover:shadow-blue-500`}>
               <div className="bg-white flex justify-between items-center rounded-md p-5">
                 <div><h2 className="text-xl font-semibold mb-3">{notification.title}</h2>
                 <p className="text-gray-600">{notification.details}</p></div>

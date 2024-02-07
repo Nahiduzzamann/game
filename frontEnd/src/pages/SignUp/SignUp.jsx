@@ -33,18 +33,43 @@ const SignUp = () => {
 
   const handleSignUp = async (event) => {
     event.preventDefault();
-
     // const passwordRegex = /^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^&*]).{6,}$/;
-
+    setError("");
     if (!username || !password || !confirmPassword) {
       setError("Please fill in all the required fields.");
       return;
     }
-
+    if (username.length <4 ) {
+      setError("Username must (4-10) character");
+      return;
+    }
+    if (username.length >10 ) {
+      setError("Username must (4-10) character");
+      return;
+    }
+    if (name.length <4 ) {
+      setError("Name must (4-16) character");
+      return;
+    }
+    if (name.length >18 ) {
+      setError("Name must (4-16) character");
+      return;
+    }
     if (password !== confirmPassword) {
       setError("Passwords do not match.");
       return;
-    } else {
+    } 
+    if (password.length <6) {
+      setError("Password must (6-12) character/letter");
+      return;
+    }
+    if (password.length >12) {
+      setError("Password must (6-12) character/letter");
+      return;
+    }
+
+   
+    else {
       setLoading(true);
       createUser(
         "/user/signup",
