@@ -129,7 +129,7 @@ export default function Deposit() {
         <p className="font-bold pt-5 pb-2">
           {selectedLanguage === "en"
             ? " Payment Methods"
-            : "মুল্য পরিশোধ পদ্ধতি"}
+            : "মূল্য পরিশোধ পদ্ধতি"}
           <span className="text-red-500 ">*</span>
         </p>
         <div className="flex">
