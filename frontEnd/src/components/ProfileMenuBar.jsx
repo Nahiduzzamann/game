@@ -140,7 +140,7 @@ export default function ProfileMenuBar() {
        
         onClick={()=>navigate("/user/notification")}
           className={`${
-            pathname === "/user/ notification" && "bg-gray-600 text-white"
+            pathname === "/user/notification" && "bg-gray-600 text-white"
           } flex items-center gap-2 hover:bg-gray-500 px-2 py-[6px] rounded-md hover:text-white cursor-pointer`}
         >
           <FiMessageSquare />

@@ -2,10 +2,16 @@ import React, { useEffect, useState } from "react";
 import getUserNotification from "../../module/getUserNotification";
 import { Spinner } from "@chakra-ui/react";
 import {useNavigate} from 'react-router-dom'
+import ResponsivePagination from "react-responsive-pagination";
 const Notification = () => {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate()
+  const [currentPage, setCurrentPage] = useState(1);
+  // console.log(actionData);
+  const itemsPerPage =6;
+  const totalPages = Math.ceil(notifications?.length / itemsPerPage);
+
   useEffect(() => {
     getUserNotification()
       .then((res) => {
@@ -47,7 +53,8 @@ else if (d==='TURNOVER') {
         </div>
       ) : (
         <div className="">
-          {notifications?.map((notification) => (
+          {notifications?.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+        .map((notification) => (
             <div onClick={()=>handleNavigate(notification.type)} key={notification._id} className={`${notification.read ? 'bg-yellow-300':'bg-gray-500' }  rounded-lg cursor-pointer p-1 mb-1 shadow-lg hover:shadow-blue-500`}>
               <div className="bg-white flex justify-between items-center rounded-md p-5">
                 <div><h2 className="text-xl font-semibold mb-3">{notification.title}</h2>
@@ -61,6 +68,13 @@ else if (d==='TURNOVER') {
           ))}
         </div>
       )}
+      <div className="mt-3 flex justify-center items-center">
+      <ResponsivePagination
+        current={currentPage}
+        total={totalPages}
+        onPageChange={setCurrentPage}
+      />
+      </div>
     </div>
     </div>
    
