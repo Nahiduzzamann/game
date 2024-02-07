@@ -245,7 +245,10 @@ const BankDetails = () => {
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize='lg' fontWeight='bold'>
-              Enter Your Correct Number
+              
+              {
+               selectedLanguage ==='en' ? "Enter Your Correct Number":"আপনার সঠিক নম্বর লিখুন"
+              }
             </AlertDialogHeader>
 
             <AlertDialogBody>
