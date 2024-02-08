@@ -9,12 +9,41 @@ import bodyParser from 'body-parser';
 import balance from "./routes/balance";
 import admin from "./routes/admin";
 import rewards from "./routes/rewards";
+import { Server as SocketIOServer, Socket } from 'socket.io';
+import http from 'http';
+import { getNotificationSocketAdmin, getNotificationUserSocket, getUnreadNotificationCountSocket, getUnreadNotificationCountUserSocket } from "./functions/sendNotification";
 
 dotenv.config();
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
-
+const server = http.createServer(app);
+export const io = new SocketIOServer(server, {
+  cors: {
+    origin: "http://localhost:3100",
+    methods: ["GET", "POST","PUT"],
+  },
+});
+io.on("connection", (socket) => {
+  const userId = socket.handshake.query.userId;
+  console.log(userId)
+})
+io.on("userCount",async(username)=>{
+  const data=await getUnreadNotificationCountUserSocket(username)
+  io.emit("userCount",data)
+})
+io.on("adminCount",async(username)=>{
+  const data=await getUnreadNotificationCountSocket()
+  io.emit("adminCount",data)
+})
+io.on("userAll",async(username)=>{
+  const data=await getNotificationUserSocket(username)
+  io.emit("userAll",data)
+})
+io.on("adminAll",async(username)=>{
+  const data=await getNotificationSocketAdmin()
+  io.emit("adminAll",data)
+})
 
 //app.use(express.urlencoded());
 //app.use(express.json());
@@ -50,14 +79,13 @@ app.get("*", (req: Request, res: Response) => {
 });
 
 
+
 mongoConnection().then(() => {
-  app.listen(port, () => {
+  server.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);
   });
 }).catch(err => {
   console.error(err.message);
 
 })
-
-
 
