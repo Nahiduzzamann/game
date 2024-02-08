@@ -4,7 +4,7 @@ import { Spinner } from "@chakra-ui/react";
 import {useNavigate} from 'react-router-dom'
 import ResponsivePagination from "react-responsive-pagination";
 const Notification = () => {
-  const [notifications, setNotifications] = useState([]);
+  const [notifications, setNotifications] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate()
   const [currentPage, setCurrentPage] = useState(1);
@@ -13,17 +13,24 @@ const Notification = () => {
   const totalPages = Math.ceil(notifications?.length / itemsPerPage);
 
   useEffect(() => {
-    getUserNotification()
-      .then((res) => {
-        setNotifications(res.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching notifications:", error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+
+  getUserNotification()
+  .then((res) => {
+    setNotifications(res.data);
+    // console.log(res.data);
+  })
+  .catch((error) => {
+    console.error("Error fetching notifications:", error);
+  })
+  .finally(() => {
+    setLoading(false);
+  });
+
+    
+  },[]);
+
+
+  
 
 const handleNavigate =(d)=>{
 if (d==='DEPOSIT') {

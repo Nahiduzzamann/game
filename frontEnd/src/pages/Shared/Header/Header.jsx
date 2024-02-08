@@ -68,7 +68,7 @@ const Header = () => {
       .then((res) => {
         setCount(res.data);
       })
-      .then((e) => {
+      .catch((e) => {
         console.log(e);
       });
   }, [updateCount]);
