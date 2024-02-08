@@ -137,7 +137,7 @@ export default function Deposit() {
             <div
               key={index}
               onClick={() => handleImageClick(data._id)}
-              className={` flex  items-center rounded-md overflow-hidden m-2  hover:bg-gray-300 cursor-pointer ${
+              className={` flex  items-center rounded-md overflow-hidden m-2  hover:bg-blue-300 cursor-pointer ${
                 selectedImage === data._id
                   ? "bg-blue-300 border-[#0082D6]"
                   : "bg-gray-200"
@@ -162,7 +162,7 @@ export default function Deposit() {
                 key={amount}
                 onClick={() => handleAmountClick(amount)}
                 className={`h-10 w-36 flex justify-center bg-black text-white items-center font-bold text-center rounded-lg p-1 m-2 cursor-pointer ${
-                  selectedAmount == amount ? "bg-blue-500" : ""
+                  inputAmount == amount ? "bg-blue-500" : ""
                 }`}
               >
                 {amount}৳
@@ -175,7 +175,7 @@ export default function Deposit() {
                 key={amount}
                 onClick={() => handleAmountClick(amount)}
                 className={`h-10 w-36 bg-black flex justify-center items-center text-white font-bold text-center rounded-lg p-1 m-2 cursor-pointer ${
-                  selectedAmount == amount ? "bg-blue-500" : ""
+                  inputAmount == amount ? "bg-blue-500" : ""
                 }`}
               >
                 {amount}৳

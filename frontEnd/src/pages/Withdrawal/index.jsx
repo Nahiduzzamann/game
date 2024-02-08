@@ -118,7 +118,7 @@ export default function Withdrawal() {
           {selectedLanguage === "en" ? "Payment Methods" : "মূল্য পরিশোধ পদ্ধতি"}
           <span className="text-red-500 ">*</span>
         </p>
-        <div className="flex">
+        <div className="flex flex-wrap">
           {apiData?.map((data, index) => (
             <div
               key={index}

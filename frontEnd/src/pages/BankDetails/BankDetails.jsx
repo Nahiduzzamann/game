@@ -51,6 +51,7 @@ const BankDetails = () => {
     setSelectedImage(name);
   };
   const handleEditAccount = () => {
+
     // console.log(clickedId);
     editUserWallet(number,clickedId)
       .then((response) => {
@@ -74,6 +75,7 @@ const BankDetails = () => {
       });
   }, [update]);
   const handleAddWallet = async () => {
+    console.log(typeof walletNumber,walletNumber.length );
     if(!selectedImage){
       return toast({
         title: "Select Wallet",
@@ -87,6 +89,15 @@ const BankDetails = () => {
       setLoading(false);
       return toast({
         title: "Add Wallet Number",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+    if (walletNumber.length != 11) {
+      setLoading(false);
+      return toast({
+        title: "Add 11 digit correct number",
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -141,11 +152,7 @@ const BankDetails = () => {
             {paymentMethods?.map((data, index) => (
               <div
                 key={index}
-                className={` flex gap-2 items-center rounded-md overflow-hidden m-2  hover:bg-gray-300 cursor-pointer ${
-                  selectedImage === data.wallet._id
-                    ? "bg-blue-300 border-[#0082D6]"
-                    : "bg-gray-200"
-                }`}
+                className={` flex gap-2 items-center rounded-md overflow-hidden m-2 bg-gray-300`}
               >
                 <img
                   className="h-12 w-12"
@@ -163,7 +170,7 @@ const BankDetails = () => {
                 }
                  }
                   
-                  className="mr-2 text-4xl text-red-500 rounded-lg hover:border border-red-500">
+                  className="mr-2 text-4xl text-red-500 rounded-lg">
                     Edit
                   </Button>
                 
@@ -190,7 +197,7 @@ const BankDetails = () => {
                   <div
                     key={index}
                     onClick={() => handleImageClick(data._id)}
-                    className={` flex  items-center rounded-md overflow-hidden m-2  hover:bg-gray-300 cursor-pointer ${
+                    className={` flex  items-center rounded-md overflow-hidden m-2  hover:bg-blue-300 cursor-pointer ${
                       selectedImage === data._id
                         ? "bg-blue-300 border-[#0082D6]"
                         : "bg-gray-200"
@@ -257,7 +264,7 @@ const BankDetails = () => {
         className=' p-1 border border-blue-300 rounded'
         type="number"
         value={number}
-        onChange={(e)=>setNumber(e.target.value)}
+        onChange={ (e)=>setNumber(e.target.value)}
         placeholder="Type Number"
       />
             </AlertDialogBody>
