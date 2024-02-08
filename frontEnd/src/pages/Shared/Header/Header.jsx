@@ -32,6 +32,7 @@ import LanguageCard from "./LanguageCard";
 import { AuthContext } from "./../../../providers/AuthProvider";
 import { FaSignOutAlt } from "react-icons/fa";
 import getNotificationCount from "../../../module/getNotificationCount";
+import socket from "../../../module/socket";
 
 const Header = () => {
   const { selectedLanguage } = useContext(AuthContext);
@@ -43,6 +44,8 @@ const Header = () => {
   const { pathname } = useLocation();
   const [count, setCount] = useState(null);
   const [updateCount, setUpdateCount] = useState();
+
+ 
   useEffect(() => {
     const cats = async () => {
       try {
@@ -64,14 +67,17 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    getNotificationCount()
+    socket.on("notification",()=>{
+      getNotificationCount()
       .then((res) => {
         setCount(res.data);
       })
       .then((e) => {
         console.log(e);
       });
-  }, [updateCount]);
+    })
+   
+  }, []);
 
   const handleLogOut = () => {
     localStorage.removeItem("token");
