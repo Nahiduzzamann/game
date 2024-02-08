@@ -26,7 +26,7 @@ export const io = new SocketIOServer(server, {
 });
 io.on("connection", (socket) => {
   const userId = socket.handshake.query.userId;
-  //console.log(userId)
+  console.log(userId)
 })
 io.on("userCount",async(username)=>{
   const data=await getUnreadNotificationCountUserSocket(username)
