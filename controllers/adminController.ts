@@ -160,9 +160,10 @@ export const depositHistory = async (req: Request, res: Response) => {
                 $addFields: {
                     user: { $arrayElemAt: ['$user', 0] }
                 }
-            }
+            },
+            { $sort: { date: -1 } }
 
-        ]).sort({ date: -1 })
+        ])
         res.status(StatusCodes.OK).json(combineDeposit)
 
     } catch (error) {
@@ -330,8 +331,9 @@ export const withdrawHistory = async (req: Request, res: Response) => {
                     wallet: { $arrayElemAt: ['$wallet', 0] }
                 }
             },
+            { $sort: { date: -1 } }
 
-        ]).sort({ date: -1 }) as WalletCombineTypes[]
+        ]) as WalletCombineTypes[]
 
         await Promise.all(combineWallet.map(async (d, i) => {
             const details = await Wallets.findOne({ _id: new ObjectId(d?.wallet?.walletId) }) as WalletsTypes
@@ -391,7 +393,8 @@ export const getNotificationAdmin = async (req: Request, res: Response) => {
                     user: { $arrayElemAt: ["$user", 0] },
                 },
             },
-        ]).sort({ date: -1 })
+            { $sort: { date: -1 } }
+        ])
         await Notification.updateMany({ userId: { $ne: null } }, {
             read: true
         })
@@ -435,7 +438,8 @@ export const getNotificationUser = async (req: AuthenticatedRequest, res: Respon
                     user: { $arrayElemAt: ["$user", 0] },
                 },
             },
-        ]).sort({ date: -1 })
+            { $sort: { date: -1 } }
+        ])
         await Notification.updateMany({ receiverId: username }, {
             read: true
         })
