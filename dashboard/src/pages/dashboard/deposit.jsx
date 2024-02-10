@@ -156,7 +156,7 @@ console.log(err);
         </Card>)
       }
       <Dialog open={open}>
-        <div className='flex justify-between items-center m-4 text-2xl'><span>Deposite Amount: <span className='text-red-500 font-semibold'></span>tk</span> <p onClick={handleOpen} className='border border-red-500 p-1 rounded-md'>X</p></div>
+        <div className='flex justify-between items-center m-4 text-2xl'><span>Deposite Amount: <span className='text-red-500 font-semibold'>{actionData?.amount}</span>tk</span> <p onClick={handleOpen} className='border border-red-500 p-1 rounded-md'>X</p></div>
         <DialogBody>
         <input
         className=' p-1 border border-blue-300 rounded'

@@ -183,9 +183,9 @@ export default function Deposit() {
             ))}
           </div>
 
-          <p className="font-bold pt-5 pb-2 flex justify-between">
-            {selectedLanguage === "en" ? "Deposit Amount *" : "জমা পরিমাণ *"}
-            <BsQuestionOctagonFill />
+          <p className="font-bold pt-5 pb-2 flex">
+            {selectedLanguage === "en" ? "Deposit Amount " : "জমা পরিমাণ "}
+            <span className="text-red-400">(500৳-30,000৳)*</span>
           </p>
 
           <input
@@ -194,7 +194,7 @@ export default function Deposit() {
             onChange={handleInputChange}
             className="h-10 w-36 bg-gray-200 text-black border border-[#0082D6] font-bold text-center rounded-lg p-1 m-2"
           />
-                    <p className="text-red-500 text-xs">Deposite Amount (200-30,000)*</p>
+                    
         </div>
         {!param && (
           <div>
