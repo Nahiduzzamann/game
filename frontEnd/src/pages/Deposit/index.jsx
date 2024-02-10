@@ -34,6 +34,7 @@ export default function Deposit() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
   const [depositBonus, setDepositBonus] = useState(param);
+  const [depositChannel, setDepositChannel] = useState("Cash Out");
   // console.log(depositBonus);
   const [loader, setLoader] = useState(false);
   const toast = useToast();
@@ -53,10 +54,10 @@ export default function Deposit() {
 
   useEffect(() => {
     apiCall();
-  }, []);
+  }, [depositChannel]);
   const apiCall = async () => {
     try {
-      const walletRes = await getWallet();
+      const walletRes = await getWallet(depositChannel);
       setApiData(walletRes.data);
       localStorage.setItem("wallets", JSON.stringify(walletRes.data));
       const promotionRes = await getPromotions(true);
@@ -97,7 +98,7 @@ export default function Deposit() {
   const openPopup = () => {
     const hostname = window.location.hostname;
     //console.log(hostname);
-    const url = `https://${hostname}/pay?walletId=${selectedImage}&amount=${inputAmount}&promotionId=${
+    const url = `${hostname==="localhost"?"http://localhost:5173":`https://${hostname}`}/pay?walletId=${selectedImage}&amount=${inputAmount}&promotionId=${
       promotions?.filter((d) => d._id.match(depositBonus))[0]?._id
     }`;
     const width = 300;
@@ -125,7 +126,32 @@ export default function Deposit() {
         <h1 className="text-center p-5 font-bold border-b-4 border-indigo-300 text-3xl">
           {selectedLanguage === "en" ? "Deposit" : "জমা"}
         </h1>
-
+        <p className="font-bold pt-5 pb-2">
+          {selectedLanguage === "en"
+            ? " Payment Channel"
+            : "পরিশোধ পদ্ধতি"}
+          <span className="text-red-500 ">*</span>
+        </p>
+        <div className="flex">
+          {["Cash Out",'Send Money']?.map((data, index) => (
+            <div
+              key={index}
+              onClick={() => setDepositChannel(data)}
+              className={` flex  items-center rounded-md py-2 w-[150px] overflow-hidden m-2  hover:bg-blue-300 cursor-pointer ${
+                depositChannel === data
+                  ? "bg-blue-300 border-[#0082D6]"
+                  : "bg-gray-200"
+              }`}
+            >
+            
+              <div className="w-full mx-2 text-center  font-medium my-1">
+                {data}
+              </div>
+            </div>
+          ))}
+          
+        </div>
+        <div>Send Money charge 1.5% applicable</div>
         <p className="font-bold pt-5 pb-2">
           {selectedLanguage === "en"
             ? " Payment Methods"
@@ -137,7 +163,7 @@ export default function Deposit() {
             <div
               key={index}
               onClick={() => handleImageClick(data._id)}
-              className={` flex  items-center rounded-md overflow-hidden m-2  hover:bg-blue-300 cursor-pointer ${
+              className={` flex  items-center w-[150px] rounded-md overflow-hidden m-2  hover:bg-blue-300 cursor-pointer ${
                 selectedImage === data._id
                   ? "bg-blue-300 border-[#0082D6]"
                   : "bg-gray-200"

@@ -81,8 +81,8 @@ export const createPromotions = async (req: Request, res: Response) => {
   }
 };
 export const createWallet = async (req: Request, res: Response) => {
-  const { methodName, slogan, walletNumber } = req.body;
-  if (!methodName || !slogan || !walletNumber) {
+  const { methodName, slogan, walletNumber,depositChannel } = req.body;
+  if (!methodName || !slogan || !walletNumber||!depositChannel) {
     return res
       .status(StatusCodes.BAD_GATEWAY)
       .json({ error: "Parameter are required" });
@@ -98,6 +98,31 @@ export const createWallet = async (req: Request, res: Response) => {
       slogan,
       walletNumber,
       icon: path,
+      depositChannel
+    });
+    res.status(StatusCodes.OK).json(wallet);
+  } catch (error) {
+    res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error });
+  }
+};
+export const updateWallet = async (req: Request, res: Response) => {
+  const { methodName, slogan, walletNumber,id,depositChannel } = req.body;
+  
+  if(!id){
+    return res.status(StatusCodes.BAD_GATEWAY).json({error:"Invalid Id"})
+  }
+
+
+  try {
+    const { path } =req.file? (await uploadImageSquire(req, res)) as FilePath:{path:undefined};
+    const wallet = await Wallets.updateOne({
+      _id:new ObjectId(id)
+    },{
+      methodName,
+      slogan,
+      walletNumber,
+      icon: path,
+      depositChannel
     });
     res.status(StatusCodes.OK).json(wallet);
   } catch (error) {
@@ -206,9 +231,22 @@ export const deleteUserWallets = async (
   }
 };
 export const getWallets = async (req: Request, res: Response) => {
+  const {depositChannel}=req.query;
   try {
-    const wallet = await Wallets.find();
-    res.status(StatusCodes.OK).json(wallet);
+    let wallet;
+
+  if (depositChannel) {
+    //console.log(depositChannel);
+    wallet = await Wallets.find({ depositChannel });
+  } else {
+    wallet = await Wallets.find();
+  }
+
+  if (!wallet) {
+    return res.status(StatusCodes.NOT_FOUND).json({ error: 'Wallet not found' });
+  }
+
+  res.status(StatusCodes.OK).json(wallet);
   } catch (error) {
     res.status(StatusCodes.EXPECTATION_FAILED).json({ error: error });
   }

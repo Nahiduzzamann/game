@@ -43,7 +43,7 @@ export default function BankPay() {
     e.preventDefault();
     try {
       setLoader(true);
-      await makeDeposit(walletId, amount, promotionId, tranXId);
+      await makeDeposit(walletId,walletInfo.depositChannel==="Cash Out" ?amount:parseInt(amount)+(parseInt(amount)*1.5)/100, promotionId, tranXId);
       toast({
         title: "Successful deposit",
         status: "success",
@@ -75,12 +75,12 @@ export default function BankPay() {
     <div className="w-screen h-screen bg-blue-500 p-3">
       <div className="text-white text-2xl font-medium w-full text-center py-2">
         {
-          selectedLanguage ==='en' ? "  Direct Pay":"সরাসরি পে"
+          selectedLanguage ==='en' ? "  Transaction Pay":"সরাসরি পে"
         }
       </div>
       <div className="text-white text-center ">
       {
-          selectedLanguage ==='en' ? " Welcome to Direct Pay service. Transfer your money in time.":"ডাইরেক্ট পে সার্ভিসে স্বাগতম। সময়মতো আপনার টাকা স্থানান্তর করুন।"
+          selectedLanguage ==='en' ? " Welcome to Pay service. Transfer your money in time.":"পে সার্ভিসে স্বাগতম। সময়মতো আপনার টাকা স্থানান্তর করুন।"
         }
         
       </div>
@@ -95,10 +95,11 @@ export default function BankPay() {
         <div className="w-full text-center text-sm text-white">
           {walletInfo?.slogan}{" "}
         </div>
-        <div className="text-red-200 text-center">
+        {walletInfo?.depositChannel==="Cash Out"?(
+          <div className="text-red-200 text-center">
           
           {
-            selectedLanguage ==='en' ? "Cash Out":"উত্তোলন"
+            selectedLanguage ==='en' ? "Cash Out ":"উত্তোলন "
           }
            <span className="font-bold">{amount}
           
@@ -108,11 +109,29 @@ export default function BankPay() {
           }
           </span> 
           {
-            selectedLanguage ==='en' ? "using the number ":"নম্বর ব্যবহার করে"
+            selectedLanguage ==='en' ? " using the number ":" নম্বর ব্যবহার করে"
           }
         
           <span className="font-bold">{walletInfo.walletNumber}</span>
         </div>
+        ):(<div className="text-red-200 text-center">
+          
+        {
+          selectedLanguage ==='en' ? "Send Money ":"পাঠান "
+        }
+         <span className="font-bold">{parseInt(amount)+(parseInt(amount)*1.5)/100}
+        
+        
+        {
+          selectedLanguage ==='en' ? "BDT":"টাকা"
+        }
+        </span> 
+        {
+          selectedLanguage ==='en' ? " using the number ":" নম্বর ব্যবহার করে"
+        }
+      
+        <span className="font-bold">{walletInfo.walletNumber}</span>
+      </div>)}
       </div>
       <div className="text-white text-center">
          {
