@@ -373,8 +373,9 @@ export const getWithdrawHistory = async (req: AuthenticatedRequest, res: Respons
           wallet: { $arrayElemAt: ['$wallet', 0] }
         }
       },
+      { $sort: { date: -1 } }
 
-    ]).sort({ date: -1 }) as WalletCombineTypes[]
+    ]) as WalletCombineTypes[]
 
     await Promise.all(combineWallet.map(async (d, i) => {
       const details = await Wallets.findOne({ _id: new ObjectId(d?.wallet?.walletId) }) as WalletsTypes
@@ -412,8 +413,8 @@ export const getTurnOvers = async (req: AuthenticatedRequest, res: Response) => 
           promotion: { $arrayElemAt: ['$promotion', 0] }
         }
       },
-
-    ]).sort({ date: -1 }) as PromotionHistoryTypes[]
+      { $sort: { date: -1 } }
+    ]) as PromotionHistoryTypes[]
     await Promise.all(runningTurn.map(async (turn, i) => {
       if (!turn.completed && turn.promotion) {
         const gameHistory = await History.find({ username: username, date: { $gte: turn.date } }) as GameHistory[]
