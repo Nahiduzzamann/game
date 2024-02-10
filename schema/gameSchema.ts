@@ -81,7 +81,7 @@ const wallets = new Schema({
   icon: String,
   slogan: String,
   walletNumber: { type: String, require: true },
-  depositChannel: { type: String, default: "Dpay" },
+  depositChannel: { type: String, default: "Cash Out" },
 });
 const users = new Schema({
   name: String, // String is shorthand for {type: String}

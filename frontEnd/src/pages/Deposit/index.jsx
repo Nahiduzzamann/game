@@ -133,7 +133,7 @@ export default function Deposit() {
           <span className="text-red-500 ">*</span>
         </p>
         <div className="flex">
-          {["Dpay",'Send Money']?.map((data, index) => (
+          {["Cash Out",'Send Money']?.map((data, index) => (
             <div
               key={index}
               onClick={() => setDepositChannel(data)}
