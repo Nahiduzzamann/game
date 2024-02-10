@@ -34,7 +34,7 @@ export default function Deposit() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
   const [depositBonus, setDepositBonus] = useState(param);
-  const [depositChannel, setDepositChannel] = useState("Dapay");
+  const [depositChannel, setDepositChannel] = useState("Cash Out");
   // console.log(depositBonus);
   const [loader, setLoader] = useState(false);
   const toast = useToast();
