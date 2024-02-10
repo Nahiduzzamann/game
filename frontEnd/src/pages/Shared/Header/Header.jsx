@@ -67,6 +67,9 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
+    socket.on("connect",()=>{
+      console.log("Connected")
+    })
     socket.on("notification",()=>{
       getNotificationCount()
       .then((res) => {

@@ -22,10 +22,12 @@ export default function Messages() {
   const itemsPerPage = 7;
   const totalPages = Math.ceil(messages?.length / itemsPerPage);
     useEffect(()=>{
-        getNotification().then(res=>{
-          setMessages(res.data)
-          //console.log(res.data);
-        })
+      const load=async()=>{
+        const d=await getNotification()
+        console.log(d.data);
+        setMessages(d.data)
+      }
+       load()
       },[])
       if(!messages){
         return <div className='flex justify-center items-center py-20'><Spinner className='text-blue-500'></Spinner></div>
