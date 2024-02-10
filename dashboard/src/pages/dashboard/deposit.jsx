@@ -145,7 +145,7 @@ console.log(err);
          
               </tbody>
             </table>
-            <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
+            <div style={{display:'flex', justifyContent:'center', alignItems:'center',marginTop:10}}>
          <ResponsivePagination
           current={currentPage}
           total={totalPages}

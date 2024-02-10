@@ -185,7 +185,7 @@ export default function Deposit() {
 
           <p className="font-bold pt-5 pb-2 flex">
             {selectedLanguage === "en" ? "Deposit Amount " : "জমা পরিমাণ "}
-            <span className="text-red-400">(500৳-30,000৳)*</span>
+            <span className="text-red-400">(200৳-30,000৳)*</span>
           </p>
 
           <input
