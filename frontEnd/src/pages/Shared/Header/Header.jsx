@@ -67,20 +67,17 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    socket.on("connect",()=>{
-      console.log("Connected")
+    // socket.on("connect",()=>{
+    //   console.log("Connected")
+    // })
+    getNotificationCount()
+    .then((res) => {
+      setCount(res.data);
     })
-    socket.on("notification",()=>{
-      getNotificationCount()
-      .then((res) => {
-        setCount(res.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-    })
-   
-  }, []);
+    .catch((e) => {
+      console.log(e);
+    });
+  }, [pathname]);
 
   const handleLogOut = () => {
     localStorage.removeItem("token");
