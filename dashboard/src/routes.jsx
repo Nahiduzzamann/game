@@ -22,6 +22,7 @@ import Preference from "./pages/dashboard/preference";
 import Users from "./pages/dashboard/users";
 import Voucher from "./pages/dashboard/voucher";
 import Rewards from "./pages/dashboard/rewards";
+import Banks from "./pages/dashboard/banks";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -89,7 +90,7 @@ export const routes = [
         icon: <BanknotesIcon {...icon} />,
         name: "banks",
         path: "/banks",
-        element: <Rewards />,
+        element: <Banks></Banks>,
       },
       // {
       //   icon: <UserCircleIcon {...icon} />,
