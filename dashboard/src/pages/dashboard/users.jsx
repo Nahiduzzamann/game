@@ -12,9 +12,14 @@ import {
   } from "@material-tailwind/react";
 import getUsers from '@/modules/getUsers';
 import { SearchContext } from '@/providers/searchProvider';
+import ResponsivePagination from "react-responsive-pagination";
 export default function Users() {
  const [data,setData]=useState(null)
  const { searchData, setSearchData } = useContext(SearchContext);
+ const [currentPage, setCurrentPage] = useState(1);
+ // console.log(actionData);
+ const itemsPerPage = 10;
+ const totalPages = Math.ceil(data?.filter(d=>d.username?.toLowerCase().match(searchData?.toLowerCase())).length / itemsPerPage);
   useEffect(()=>{
  getUsers()
     .then((res)=>{
@@ -57,7 +62,10 @@ export default function Users() {
             </tr>
           </thead>
           <tbody>
-            {data?.map(
+            {data?.filter(d=>d.username?.toLowerCase().match(searchData?.toLowerCase())).slice(
+              (currentPage - 1) * itemsPerPage,
+              currentPage * itemsPerPage
+            ).map(
               ({ username, balance, phone, date}, key) => {
                 const className = `py-3 px-5 ${
                   key === data.length - 1
@@ -104,6 +112,13 @@ export default function Users() {
             )}
           </tbody>
         </table>
+        <div style={{display:'flex', justifyContent:'center', alignItems:'center',marginTop:10}}>
+         <ResponsivePagination
+          current={currentPage}
+          total={totalPages}
+          onPageChange={setCurrentPage}
+        />
+         </div>
       </CardBody>
     </Card>
     </div>
