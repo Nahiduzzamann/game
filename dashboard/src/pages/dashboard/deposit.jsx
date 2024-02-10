@@ -17,6 +17,7 @@ const { searchData, setSearchData } = useContext(SearchContext);
       getDepositeDetails()
         .then((res)=>{
           setLoading(false)
+          console.log(res.data);
             setDepositeData(res.data);
         })
        .catch((err)=>{
@@ -64,7 +65,7 @@ console.log(err);
             <table className="w-full min-w-[640px] table-auto">
               <thead>
                 <tr>
-                  {["users", "Deposite Request", "status", "Deposite Date", "Action"].map((el) => (
+                  {["users", "Deposite Request","TranXId", "status", "Deposite Date", "Action"].map((el) => (
                     <th
                       key={el}
                       className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -112,11 +113,17 @@ console.log(err);
                         </td>
                         <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600">
-                            {data.amount} | ( <span className='font-bold text-red-400'>{data.tranXId || 'Empty tranXId'}</span> )
+                            {data.amount} | ( <span className='font-bold text-red-400'>{data.wallet.depositChannel || 'Empty Channel'}</span> )
                           </Typography>
                           <Typography className="text-xs font-normal text-blue-gray-500">
                             {data.remarks || '-'}
                           </Typography>
+                        </td>
+                        <td className={className}>
+                          <Typography className="text-xs font-semibold text-blue-gray-600">
+                            {data.tranXId} 
+                          </Typography>
+                          
                         </td>
                         <td className={className}>
                         <div
