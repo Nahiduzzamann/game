@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {
     Card,
     CardHeader,
@@ -15,6 +15,7 @@ import { PlusIcon } from "@heroicons/react/24/outline";
 import getVoucher from '@/modules/getVoucher';
 import createVoucher from '@/modules/createVoucher';
 import ResponsivePagination from "react-responsive-pagination";
+import { SearchContext } from '@/providers/searchProvider';
 export default function Voucher() {
     const [voucher,setVoucher]=useState()
     const [open, setOpen] = React.useState(false);
@@ -22,11 +23,13 @@ export default function Voucher() {
     const [amount,setAmount]=useState()
     const [alert,setAlert]=useState(false)
     const [loader,setLoader]=useState(false)
+    const { searchData, setSearchData } = useContext(SearchContext);
 
     const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 7;
-  const totalPages = Math.ceil(voucher?.length / itemsPerPage);
+  const totalPages = Math.ceil(voucher?.filter(d=>d.code?.toLowerCase().match(searchData?.toLowerCase())).length / itemsPerPage);
     useEffect(()=>{
+      setSearchData("")
         getVoucher().then(res=>{
             setVoucher(res.data)
             //console.log(res.data);
@@ -97,7 +100,7 @@ export default function Voucher() {
               </tr>
             </thead>
             <tbody>
-                {voucher?.slice(
+                {voucher?.filter(d=>d.code?.toLowerCase().match(searchData?.toLowerCase())).slice(
               (currentPage - 1) * itemsPerPage,
               currentPage * itemsPerPage
                 ).map((d,i)=>(

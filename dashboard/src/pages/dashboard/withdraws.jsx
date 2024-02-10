@@ -2,16 +2,19 @@
 import getWithdrawDetails from "@/modules/getWithdrawDetails";
 import postWithdrawStatus from "@/modules/postWithdrawStatus";
 import url from "@/modules/url";
+import { SearchContext } from "@/providers/searchProvider";
 import { Avatar, Button, Card, CardBody, CardHeader, Chip, Dialog, DialogBody, DialogFooter, Spinner, Typography } from "@material-tailwind/react";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ResponsivePagination from "react-responsive-pagination";
 const Withdraws =()=>{
   const [handleFetch,setHandleFatch]=useState()
   const [withdrawData, setWithdrawData] = useState(null);
 const [loading, setLoading]=useState(false)
+const { searchData, setSearchData } = useContext(SearchContext);
     // console.log(depositeData);
     useEffect(() => {
       setLoading(true)
+      setSearchData("")
       getWithdrawDetails()
         .then((res)=>{
           setLoading(false)
@@ -26,7 +29,7 @@ const [loading, setLoading]=useState(false)
     const [actionData, setactionData] = useState(null);
     // console.log(actionData);
     const itemsPerPage = 10;
-    const totalPages = Math.ceil(withdrawData?.length / itemsPerPage);
+    const totalPages = Math.ceil(withdrawData?.filter(d=>d.wallet.userId?.toLowerCase().match(searchData?.toLowerCase())).length / itemsPerPage);
     const [open, setOpen] = React.useState(false);
  const [message,setMessage]=useState("")
     const handleOpen = (data) =>{
@@ -78,7 +81,7 @@ console.log(err);
                 </tr>
               </thead>
               <tbody>
-                {withdrawData?.slice(
+                {withdrawData?.filter(d=>d.wallet.userId?.toLowerCase().match(searchData?.toLowerCase())).slice(
               (currentPage - 1) * itemsPerPage,
               currentPage * itemsPerPage
             ).map(

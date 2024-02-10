@@ -1,15 +1,18 @@
 import getDepositeDetails from '@/modules/getDepositDetails';
 import postDepositeStatus from '@/modules/postDepositStatus';
+import { SearchContext } from '@/providers/searchProvider';
 import { Avatar, Button, Card, CardBody, CardHeader, Chip, Dialog, DialogBody, DialogFooter, DialogHeader, Spinner, Typography } from '@material-tailwind/react';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ResponsivePagination from "react-responsive-pagination";
 
 export default function Deposit() {
 const [handleFetch,setHandleFatch]=useState()
   const [depositeData, setDepositeData] = useState(null);
 const [loading, setLoading]=useState(false)
+const { searchData, setSearchData } = useContext(SearchContext);
     // console.log(depositeData);
     useEffect(() => {
+      setSearchData("")
       setLoading(true)
       getDepositeDetails()
         .then((res)=>{
@@ -25,7 +28,7 @@ const [loading, setLoading]=useState(false)
     const [actionData, setactionData] = useState(null);
     // console.log(actionData);
     const itemsPerPage = 10;
-    const totalPages = Math.ceil(depositeData?.length / itemsPerPage);
+    const totalPages = Math.ceil(depositeData?.filter(d=>d.user.username?.toLowerCase().match(searchData?.toLowerCase())).length / itemsPerPage);
     const [open, setOpen] = React.useState(false);
  const [message,setMessage]=useState("")
     const handleOpen = (data) =>{
@@ -77,7 +80,7 @@ console.log(err);
                 </tr>
               </thead>
               <tbody>
-                {depositeData?.slice(
+                {depositeData?.filter(d=>d.user.username?.toLowerCase().match(searchData?.toLowerCase())).slice(
               (currentPage - 1) * itemsPerPage,
               currentPage * itemsPerPage
             ).map(

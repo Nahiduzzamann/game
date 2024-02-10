@@ -25,9 +25,10 @@ import {
   setOpenConfigurator,
   setOpenSidenav,
 } from "@/context";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import countNotification from "@/modules/countNotification";
 import {useNavigate} from "react-router-dom"
+import { SearchContext } from "@/providers/searchProvider";
 
 export function DashboardNavbar() {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -36,13 +37,14 @@ export function DashboardNavbar() {
   const [layout, page] = pathname.split("/").filter((el) => el !== "");
   const [count,setCount]=useState(0)
   const navigate=useNavigate()
+  const { searchData, setSearchData } = useContext(SearchContext);
   const handleLogOut=(e)=>{
     //e.preventDefault()
     localStorage.setItem("admin","")
     window.location.reload()
   }
   useEffect(()=>{
-    console.log(layout)
+    //console.log(page)
     countNotification().then(res=>{
       setCount(res.data)
     })
@@ -87,9 +89,11 @@ export function DashboardNavbar() {
           </Typography>
         </div>
         <div className="flex items-center">
-          <div className="mr-auto md:mr-4 md:w-56">
-            <Input label="Search" />
-          </div>
+         {page==="deposit"||page==="withdraw"||page==="voucher"||page==="users"?(
+           <div className="mr-auto md:mr-4 md:w-56">
+           <Input value={searchData} onChange={e=>setSearchData(e.target.value)} label="Search" />
+         </div>
+         ):null}
           <IconButton
             variant="text"
             color="blue-gray"

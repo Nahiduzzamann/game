@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {
     Card,
     CardHeader,
@@ -11,13 +11,10 @@ import {
     Spinner,
   } from "@material-tailwind/react";
 import getUsers from '@/modules/getUsers';
-import ResponsivePagination from "react-responsive-pagination";
+import { SearchContext } from '@/providers/searchProvider';
 export default function Users() {
-  const [data,setData]=useState(null)
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
-  const totalPages = Math.ceil(data?.length / itemsPerPage);
-
+ const [data,setData]=useState(null)
+ const { searchData, setSearchData } = useContext(SearchContext);
   useEffect(()=>{
  getUsers()
     .then((res)=>{
@@ -60,10 +57,7 @@ export default function Users() {
             </tr>
           </thead>
           <tbody>
-            {data?.slice(
-              (currentPage - 1) * itemsPerPage,
-              currentPage * itemsPerPage
-            ).map(
+            {data?.map(
               ({ username, balance, phone, date}, key) => {
                 const className = `py-3 px-5 ${
                   key === data.length - 1
@@ -110,17 +104,8 @@ export default function Users() {
             )}
           </tbody>
         </table>
-        <div style={{display:'flex', justifyContent:'center', alignItems:'center',marginTop:10}}>
-         <ResponsivePagination
-          current={currentPage}
-          total={totalPages}
-          onPageChange={setCurrentPage}
-        />
-         </div>
       </CardBody>
-      
     </Card>
-    
     </div>
   )
 }

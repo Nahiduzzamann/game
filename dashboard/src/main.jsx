@@ -8,16 +8,19 @@ import { MaterialTailwindControllerProvider } from "@/context";
 import "../public/css/tailwind.css";
 import 'react-responsive-pagination/themes/classic.css';
 import DataProvider from "./providers/dataProvider";
+import { SearchProvider } from "./providers/searchProvider";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <DataProvider>
-    <BrowserRouter>
+   <SearchProvider>
+   <BrowserRouter>
       <ThemeProvider>
         <MaterialTailwindControllerProvider>
           <App />
         </MaterialTailwindControllerProvider>
       </ThemeProvider>
     </BrowserRouter>
+   </SearchProvider>
     </DataProvider>
     
   </React.StrictMode>
