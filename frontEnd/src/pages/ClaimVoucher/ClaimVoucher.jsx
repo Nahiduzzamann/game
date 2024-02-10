@@ -12,7 +12,16 @@ const toast =useToast()
   };
 
   const handleApplyVoucher = (e) => {
+   
     e.preventDefault();
+    if(voucherCode.length == 0){
+      return toast({
+        title: "Type Voucher Code",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
     applyVoucher(voucherCode)
     .then(()=>{
       setIsVoucherApplied(true);
