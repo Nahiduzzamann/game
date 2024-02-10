@@ -31,7 +31,7 @@ export default function BetHistory() {
                   <div className=" h-full  font-medium text-md">
                     <img
                       className="h-5"
-                      src={doc?.subCategory[0].image_colored}
+                      src={doc?.subCategory[0]?.image_colored}
                     />
                     {doc.title}
                   </div>
