@@ -149,7 +149,7 @@ export default function Withdrawal() {
                 key={amount}
                 onClick={() => handleAmountClick(amount)}
                 className={`h-10 w-36 flex justify-center bg-black text-white items-center font-bold text-center rounded-lg p-1 m-2 cursor-pointer ${
-                  selectedAmount == amount ? "bg-blue-500" : ""
+                  inputAmount == amount ? "bg-blue-500" : ""
                 }`}
               >
                 {amount}৳
@@ -162,7 +162,7 @@ export default function Withdrawal() {
                 key={amount}
                 onClick={() => handleAmountClick(amount)}
                 className={`h-10 w-36 bg-black flex justify-center items-center text-white font-bold text-center rounded-lg p-1 m-2 cursor-pointer ${
-                  selectedAmount == amount ? "bg-blue-500" : ""
+                  inputAmount == amount ? "bg-blue-500" : ""
                 }`}
               >
                 {amount}৳

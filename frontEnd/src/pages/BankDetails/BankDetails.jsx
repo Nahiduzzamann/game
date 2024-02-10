@@ -226,7 +226,12 @@ const BankDetails = () => {
                 type="text"
                 placeholder="Enter Wallet Number"
                 value={walletNumber}
-                onChange={(e) => setWalletNumber(e.target.value)}
+                onChange={(e) => {
+                  if(e.target.value?.length>11){
+                    return
+                  }
+                  setWalletNumber(e.target.value)
+                }}
               />
             )}
 
