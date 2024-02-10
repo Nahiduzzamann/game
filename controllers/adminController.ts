@@ -197,7 +197,7 @@ export const toggleStatusDeposit = async (req: Request, res: Response) => {
             }
         }
         user.save()
-        await sendNotificationToUser("Deposit status!!", `Your deposit request has ${status ? "ACCEPTED" : "CANCELLED"} by game provider`, username, DATATYPES[0])
+        await sendNotificationToUser("Deposit status!!", `Your deposit request amount ${deposit.amount}BDT has ${status ? "ACCEPTED" : "CANCELLED"} by game provider`, username, DATATYPES[0])
         res.status(StatusCodes.OK).json(deposit)
     } catch (error) {
         res.status(StatusCodes.EXPECTATION_FAILED).json({ error: "Invalid ID" })
@@ -363,7 +363,7 @@ export const toggleStatusWithdraw = async (req: Request, res: Response) => {
             user.balance = user.balance + withdraw.amount;
             user.save()
         }
-        await sendNotificationToUser("Withdraw status!!", `Your withdraw request has ${status ? "ACCEPTED" : "CANCELLED"} by game provider`, username, DATATYPES[1])
+        await sendNotificationToUser("Withdraw status!!", `Your withdraw request amount ${withdraw.amount}BDT has ${status ? "ACCEPTED" : "CANCELLED"} by game provider`, username, DATATYPES[1])
         res.status(StatusCodes.OK).json(withdraw)
     } catch (error) {
         res.status(StatusCodes.EXPECTATION_FAILED).json({ error: "Invalid ID" })

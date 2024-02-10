@@ -9,7 +9,8 @@ import {
   ArrowUturnUpIcon,
   ArrowsUpDownIcon,
   DocumentTextIcon,
-  CogIcon,GiftIcon
+  CogIcon,GiftIcon,
+  BanknotesIcon
 } from "@heroicons/react/24/solid";
 import { Home, Profile, Tables, Notifications } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
@@ -39,31 +40,31 @@ export const routes = [
       {
         icon: <CurrencyBangladeshiIcon {...icon} />,
         name: "deposits",
-        path: "/deposits",
+        path: "/deposit",
         element: <Deposit />,
       },
       {
         icon: <ArrowUturnUpIcon {...icon} />,
         name: "turnovers",
-        path: "/turnovers",
+        path: "/turnover",
         element: <Turnovers></Turnovers>,
       },
       {
         icon: <ArrowsUpDownIcon {...icon} />,
         name: "withdraws",
-        path: "/withdraws",
+        path: "/withdraw",
         element: <Withdraws></Withdraws>,
       },
       {
         icon: <InformationCircleIcon {...icon} />,
-        name: "messages",
+        name: "notification",
         path: "/messages",
         element: <Messages />,
       },
       {
         icon: <DocumentTextIcon {...icon} />,
         name: "vouchers",
-        path: "/vouchers",
+        path: "/voucher",
         element: <Voucher />,
       },
       {
@@ -80,8 +81,14 @@ export const routes = [
       },
       {
         icon: <GiftIcon {...icon} />,
-        name: "rewardss",
-        path: "/rewardss",
+        name: "rewards",
+        path: "/rewards",
+        element: <Rewards />,
+      },
+      {
+        icon: <BanknotesIcon {...icon} />,
+        name: "banks",
+        path: "/banks",
         element: <Rewards />,
       },
       // {

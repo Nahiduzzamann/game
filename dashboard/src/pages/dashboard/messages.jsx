@@ -64,7 +64,7 @@ export default function Messages() {
               (currentPage - 1) * itemsPerPage,
               currentPage * itemsPerPage
                 ).map((doc,i)=>(
-                 <tr onClick={()=>navigate(`/dashboard/${doc.type.toLowerCase()}s`)} className={`${!doc.read?"bg-gray-700 text-white":"bg-white text-black"} cursor-pointer `} key={i}>
+                 <tr onClick={()=>navigate(`/dashboard/${doc.type.toLowerCase()}`)} className={`${!doc.read?"bg-gray-700 text-white":"bg-white text-black"} cursor-pointer `} key={i}>
                      <td className="border-b border-blue-gray-50 py-3 px-5 text-left">{doc.userId}</td>
                      <td className="border-b border-blue-gray-50 py-3 px-5 text-left">{doc.title}</td>
                      <td className="border-b border-blue-gray-50 py-3 px-5 text-left">{doc.details}</td>
