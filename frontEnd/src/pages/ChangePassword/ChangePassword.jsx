@@ -123,6 +123,8 @@ const ChangePasswordPage = () => {
               type={showNewPassword ? 'text' : 'password'}
               name="newPassword"
               value={newPassword}
+              maxLength={16}
+            minLength={6}
               onChange={(e) => {
                 setNewPassword(e.target.value)
               }}
@@ -147,6 +149,8 @@ const ChangePasswordPage = () => {
           </label>
           <div className="relative">
             <input
+            maxLength={16}
+            minLength={6}
               type={showConfirmPassword ? 'text' : 'password'}
               name="confirmNewPassword"
               value={confirmNewPassword}
