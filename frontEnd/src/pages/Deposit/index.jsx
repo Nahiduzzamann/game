@@ -54,6 +54,7 @@ export default function Deposit() {
 
   useEffect(() => {
     apiCall();
+    setSelectedImage('')
   }, [depositChannel]);
   const apiCall = async () => {
     try {
