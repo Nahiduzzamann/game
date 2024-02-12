@@ -51,14 +51,14 @@ export const getGameCategories = async (req: Request, res: Response) => {
             let sub: Providers[] = []
             let gameTitle: string[] = []
             gameList.map(d => {
-                if (d.categories.match(cat.slag)) {
+                if (d.categories===cat.slag) {
                     gameTitle.push(d.title)
                 }
             })
 
 
             gameTitle.filter(uniqueArray).map(title => {
-                const doc = providers.filter(d => d.slag.match(title))[0]
+                const doc = providers.filter(d => d.slag===title)[0]
                 //console.log(title);
                 sub.push(doc)
             })
