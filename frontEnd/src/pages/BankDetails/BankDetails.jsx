@@ -37,10 +37,10 @@ const BankDetails = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const cancelRef = React.useRef()
   useEffect(() => {
-    getWallet()
+    getWallet('')
       .then((response) => {
         setWallets(response.data);
-        // console.log(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error("Error fetching wallets:", error);
