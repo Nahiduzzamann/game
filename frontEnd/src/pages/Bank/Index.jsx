@@ -43,7 +43,7 @@ export default function BankPay() {
     e.preventDefault();
     try {
       setLoader(true);
-      await makeDeposit(walletId,walletInfo.depositChannel==="Cash Out" ?amount:parseInt(amount)+(parseInt(amount)*1.5)/100, promotionId, tranXId);
+      await makeDeposit(walletId,amount, promotionId, tranXId);
       toast({
         title: "Successful deposit",
         status: "success",
