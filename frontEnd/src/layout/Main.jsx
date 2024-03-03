@@ -26,7 +26,7 @@ const Main = () => {
       <LoginButton />
       <ScrollToTop />
       <MessengerCustomerChat
-        pageId="61556726231022"
+        pageId="262257293631805"
         appId="280237441636512"
         htmlRef="<REF_STRING>"
       />
