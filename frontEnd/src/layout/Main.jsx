@@ -5,27 +5,32 @@ import Footer from "../pages/Shared/Footer/Footer";
 import ScrollToTop from "../components/ScrollToTop";
 import LoginButton from "../pages/Shared/navBar/LoginButton";
 import { AuthContext } from "../providers/AuthProvider";
-
+import MessengerCustomerChat from "react-messenger-customer-chat";
 const Main = () => {
   const location = useLocation();
-  const {setUpdateUserState } = useContext(AuthContext);
- 
+  const { setUpdateUserState } = useContext(AuthContext);
 
   useEffect(() => {
-    setUpdateUserState(Math.random())
-
-  },[location])
+    setUpdateUserState(Math.random());
+  }, [location]);
   const noHeaderFooter =
-    location.pathname.includes("/login")  || location.pathname.includes('/signup') ||location.pathname.includes('/forgot-password');
+    location.pathname.includes("/login") ||
+    location.pathname.includes("/signup") ||
+    location.pathname.includes("/forgot-password");
 
   return (
     <div className="bg-White">
       {noHeaderFooter || <Header></Header>}
       <Outlet></Outlet>
       {noHeaderFooter || <Footer></Footer>}
-
       <LoginButton />
       <ScrollToTop />
+      <MessengerCustomerChat
+        pageId="61556726231022"
+        appId="280237441636512"
+        htmlRef="<REF_STRING>"
+      />
+      ,
     </div>
   );
 };
