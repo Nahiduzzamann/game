@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb';
 import { Request, Response } from "express";
-import { Deposit, History, Notification, PromotionHistory, Promotions, Users, Wallets, Withdraws } from "../connections/databaseConnection";
+import { Agents, Banner, Deposit, History, Notification, PromotionHistory, Promotions, Users, Wallets, Withdraws } from "../connections/databaseConnection";
 import { DepositTypes, GameHistory, WalletsTypes } from "../data/allTypes";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { uploadImageBanner, uploadImageSquire } from './fileUploadController';
@@ -465,5 +465,84 @@ export const getAllUser = async (req: Request, res: Response) => {
         res.status(StatusCodes.OK).json(users)
     } catch (error) {
         res.status(StatusCodes.EXPECTATION_FAILED).json(error)
+    }
+}
+export const registerAgents = async (req: Request, res: Response) => {
+    const { email, password, name } = req.body;
+    if (!email || !password || !name) return res.status(StatusCodes.EXPECTATION_FAILED).json(`email ,password or name is required`)
+    try {
+        const agent = await Agents.create({
+            password,
+            email,
+            name
+        })
+        res.status(StatusCodes.OK).json(agent)
+    } catch (error) {
+        return res.status(StatusCodes.EXPECTATION_FAILED).json("error creating agent")
+
+    }
+}
+export const loginAgents = async (req: Request, res: Response) => {
+    const { email, password } = req.body;
+    if (!email || !password) return res.status(StatusCodes.EXPECTATION_FAILED).json(`email ,password  is required`)
+    try {
+        const agent = await Agents.find({ email: email, password: password })
+        if (agent) return res.status(StatusCodes.OK).json(agent)
+
+        res.status(StatusCodes.EXPECTATION_FAILED).json("Invalid Agent")
+    } catch (error) {
+        res.status(StatusCodes.EXPECTATION_FAILED).json("error creating agent")
+
+    }
+}
+interface PasswordTypesRequest {
+    oldPassword: string,
+    newPassword: string,
+    email: string
+}
+export const changePasswordAgents = async (req: Request<{}, {}, PasswordTypesRequest>, res: Response) => {
+    const { oldPassword, newPassword, email } = req.body
+    if (!oldPassword.match(newPassword)) return res.status(StatusCodes.EXPECTATION_FAILED).json("Password ")
+    try {
+        const agent = await Agents.findOne({ email: email })
+        if (!agent?.password?.match(oldPassword)) return res.status(StatusCodes.EXPECTATION_FAILED).json("Invalid Agent password")
+        await Agents.updateOne({ email: email }, { password: newPassword })
+    } catch (error) {
+        res.status(StatusCodes.EXPECTATION_FAILED).json("error updating agents")
+    }
+}
+export const addSlider = async (req: Request, res: Response) => {
+    if(!req.file){
+        return  res.status(StatusCodes.EXPECTATION_FAILED).json("Invalid file")
+    }
+    try {
+        const { path } = await uploadImageBanner(req, res)
+        if (!path) return res.status(StatusCodes.EXPECTATION_FAILED).json("Invalid file")
+        const banner = await Banner.create({
+            path: path
+        })
+        res.status(StatusCodes.OK).json(banner)
+    } catch (error) {
+        res.status(StatusCodes.EXPECTATION_FAILED).json(error)
+    }
+}
+export const deleteSlider = async (req: Request, res: Response) => {
+    const { id } = req.params
+    try {
+        const banner = await Banner.deleteOne({
+            _id: new ObjectId(id)
+        })
+        res.status(StatusCodes.OK).json(banner)
+    } catch (error) {
+        res.status(StatusCodes.EXPECTATION_FAILED).json("Failed to delete file")
+    }
+}
+export const getSlider = async (req: Request, res: Response) => {
+    try {
+        const banner = await Banner.find()
+
+        res.status(StatusCodes.OK).json(banner)
+    } catch (error) {
+        res.status(StatusCodes.EXPECTATION_FAILED).json("Failed to upload file")
     }
 }

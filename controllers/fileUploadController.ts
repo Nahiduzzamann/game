@@ -19,7 +19,9 @@ export const uploadImageSquire = async (req: Request, res: Response) => {
 export const uploadImageBanner = async (req: Request, res: Response) => {
     const name = v1()
     await sharp(req.file?.buffer)
-        .png()
+        .png().resize(1800, 660, {
+            fit: 'cover' // Crop the image to cover the specified dimensions
+        })
         .toFile(path.join(__dirname ,`../data/images/${name}-${req.file?.originalname}`));
     return { path: `/data/images/${name}-${req.file?.originalname}` };
 };
