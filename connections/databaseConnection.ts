@@ -1,6 +1,6 @@
 
 import mongoose from "mongoose";
-import { bonusHistory, deposit, gameHistory, games, notification, promotionHistory, promotions, rewardsHistory, rewardsList, userWallets, users, voucher, wallets, withdraw } from "../schema/gameSchema";
+import { agents, banner, bonusHistory, deposit, gameHistory, games, notification, promotionHistory, promotions, rewardsHistory, rewardsList, userWallets, users, voucher, wallets, withdraw } from "../schema/gameSchema";
 
 export const mongoConnection = async () => {
   try {
@@ -25,3 +25,5 @@ export const Voucher=mongoose.model("voucher",voucher)
 export const Rewards=mongoose.model("rewards",rewardsList)
 export const RewardsHistory=mongoose.model("rewardsHistory",rewardsHistory)
 export const Notification=mongoose.model("notifications",notification)
+export const Agents=mongoose.model("agents",agents)
+export const Banner=mongoose.model("banner",banner)

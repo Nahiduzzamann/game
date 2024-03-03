@@ -1,6 +1,14 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
-
+const agents=new Schema({
+  name:String,
+  password:String,
+  email:{type:String,unique:true},
+  motherAdmin:{type:Boolean,default:false}
+})
+const banner=new Schema({
+  path:{type:String,require:true}
+})
 const promotionHistory = new Schema({
   promotionId: String,
   userId: String,
@@ -191,5 +199,7 @@ export {
   promotions,
   promotionHistory,
   notification,
-  voucher
+  voucher,
+  agents,
+  banner
 };
