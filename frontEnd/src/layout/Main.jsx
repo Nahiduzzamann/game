@@ -28,7 +28,6 @@ const Main = () => {
       <MessengerCustomerChat
         pageId="262257293631805"
         appId="280237441636512"
-        htmlRef="<REF_STRING>"
       />
       ,
     </div>
