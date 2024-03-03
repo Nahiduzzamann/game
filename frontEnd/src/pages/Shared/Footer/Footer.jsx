@@ -1,9 +1,7 @@
 import React, { useContext } from "react";
 import { IoGameControllerOutline } from "react-icons/io5";
-import { FaFacebookF, FaWhatsapp } from "react-icons/fa";
-import { FaTwitter } from "react-icons/fa";
+import { FaFacebookF, FaTelegram, FaWhatsapp } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
-import { TiSocialLinkedin } from "react-icons/ti";
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import { AuthContext } from "../../../providers/AuthProvider";
@@ -153,16 +151,28 @@ const Footer = () => {
             </p>
             <div className="flex flex-wrap ">
               <a
-                href="https://www.facebook.com/share/Yp3kUxsTwTXddWen/?mibextid= qi20mg"
+                href="https://www.facebook.com/share/Yp3kUxsTwTXddWen/?mibextid=qi20mg"
                 target="blank"
               >
-                {" "}
                 <FaFacebookF className="text-white text-[45px] bg-blue-500 rounded-lg p-1 m-2" />
               </a>
+              <a
+              href="https://chat.whatsapp.com/IROvfDyJAPOINd3t3KHQtY"
+              target="blank"
+              >
               <FaWhatsapp className="text-white text-[45px] bg-blue-500 rounded-lg p-1 m-2" />
-              <FaTwitter className="text-white text-[45px] bg-blue-500 rounded-lg p-1 m-2" />
+              </a>
+              <a  href="https://t.me/+reNTS3EuulxmOTVI"
+              target="blank">
+              <FaTelegram className="text-white text-[45px] bg-blue-500 rounded-lg p-1 m-2" />
+              </a>
+              <a
+              href="https://youtube.com/@40xbet"
+              target="blank"
+              >
               <FaYoutube className="text-white text-[45px] bg-blue-500 rounded-lg p-1 m-2" />
-              <TiSocialLinkedin className="text-white text-[45px] bg-blue-500 rounded-lg p-1 m-2" />
+              </a>
+              
             </div>
           </div>
         </div>
