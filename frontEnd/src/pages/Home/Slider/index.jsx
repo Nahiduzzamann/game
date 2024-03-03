@@ -2,23 +2,11 @@ import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./style.css";
-import img1 from './1.png'
-import img2 from './2.png'
-import img3 from './3.png'
-import img4 from './4.png'
-import img5 from './5.png'
-import img6 from './6.png'
+
 import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
-export default function Slider() {
- 
-  const images = [
-    img1,
-    img2,
-    img3,
-    img4,
-    img5,
-    img6,
-  ];
+import url from "../../../module";
+export default function Slider({data}) {
+
   // const rotateAnimationHandler = (props, state) => {
   //   const transitionTime = props.transitionTime + "ms";
   //   const transitionTimingFunction = "ease-in-out";
@@ -106,9 +94,9 @@ export default function Slider() {
         // animationHandler={rotateAnimationHandler}
         swipeable={false}        
       >
-        {images.map((URL, index) => (
+        {data?.map((d, index) => (
           <div key={index} className="slide">
-            <img alt="sample_file" src={URL} key={index} />
+            <img alt="sample_file" src={`${url}${d.path}`} key={index} />
           </div>
         ))}
       </Carousel>
