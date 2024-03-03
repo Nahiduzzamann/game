@@ -28,9 +28,9 @@ jobs:
           git status
           npm i
           cd frontEnd
-          npm i
+          npm i --force
           npm run build
           cd ..
           cd dashboard
-          npm i
+          npm i --force
           npm run build
