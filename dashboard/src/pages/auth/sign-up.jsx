@@ -77,7 +77,9 @@ export function SignUp() {
             <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
               Your Password
             </Typography>
-            <Input  value={fromData.password} onChange={handleChange} required 
+            <Input  value={fromData.password} onChange={handleChange} name="password" required 
+            minLength={6}
+            maxLength={12}
               size="lg"
               placeholder="******"
               type="password"
