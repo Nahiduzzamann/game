@@ -3,7 +3,7 @@ import url from "./url";
 
 const loginAgent = async (email,password) => {
   return axios.post(
-    `${url}/agents/login`,{
+    `${url}/admin/agents/login`,{
         email:email,
         password:password
     });

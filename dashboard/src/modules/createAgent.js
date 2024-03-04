@@ -3,7 +3,7 @@ import url from "./url";
 
 const createAgent = async (email,password,name) => {
   return axios.post(
-    `${url}/agents/register`,{
+    `${url}/admin/agents/register`,{
         email:email,
         password:password,
         name:name
