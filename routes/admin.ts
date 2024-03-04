@@ -24,6 +24,6 @@ admin.post("/agents/register",registerAgents)
 admin.post("/agents/login",loginAgents) 
 admin.post("/agents/change-password",changePasswordAgents)
 admin.post("/add-slider",upload.single("image"),addSlider)
-admin.delete("/delete-slider",deleteSlider)
+admin.delete("/delete-slider/:id",deleteSlider)
 admin.get("/get-slider", getSlider)
 export default admin;
