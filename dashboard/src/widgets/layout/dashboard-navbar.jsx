@@ -29,6 +29,7 @@ import { useContext, useEffect, useState } from "react";
 import countNotification from "@/modules/countNotification";
 import {useNavigate} from "react-router-dom"
 import { SearchContext } from "@/providers/searchProvider";
+import Cookies from 'js-cookie';
 
 export function DashboardNavbar() {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -40,7 +41,7 @@ export function DashboardNavbar() {
   const { searchData, setSearchData } = useContext(SearchContext);
   const handleLogOut=(e)=>{
     //e.preventDefault()
-    localStorage.setItem("admin","")
+    Cookies.remove('user');
     window.location.reload()
   }
   useEffect(()=>{

@@ -1,19 +1,22 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Dashboard, Auth } from "@/layouts";
 import { useEffect, useState } from "react";
+import Cookies from 'js-cookie';
+import { useUser } from "./providers/userProvider";
 
 function App() {
-  const [admin,setAdmin]=useState(false)
+  const { user, updateUser } = useUser();
+ 
   useEffect(()=>{
-   const ad= localStorage.getItem("admin")
-    if(ad){
-      setAdmin(true)
+    const user = Cookies.get('user');
+    if(user){
+      updateUser(JSON.parse(user))
     }
-  },[])
+  },[user])
 
   return (
     <Routes>
-      {admin?(
+      {user?(
 <>
 <Route path="/dashboard/*" element={<Dashboard />} />
       
@@ -21,7 +24,7 @@ function App() {
 </>
       ):(
         <>
-        <Route path="/auth/*" element={<Auth setAdmin={setAdmin} />} />
+        <Route path="/auth/*" element={<Auth  />} />
         <Route path="*" element={<Navigate to="/auth/sign-in" replace />} />
        
         </>

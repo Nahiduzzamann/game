@@ -23,9 +23,10 @@ export function SignIn() {
     const user=await loginAgent(email,password)
     Cookies.set('user', JSON.stringify(user.data), { expires: 1 });
     updateUser(user.data)
-    console.log(user.data);
-    //window.location.reload()
+    //console.log(user.data);
+    window.location.reload()
    } catch (error) {
+    alert("Invalid login credentials")
     console.error(error)
    }
   }
