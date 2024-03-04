@@ -7,7 +7,9 @@ import {
 } from "@material-tailwind/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
+import Cookies from 'js-cookie';
+import createAgent from "@/modules/createAgent";
+import { EyeIcon,EyeSlashIcon } from "@heroicons/react/24/solid";
 
 export function SignUp() {
   const [fromData,setFormData]=useState({
@@ -15,18 +17,24 @@ export function SignUp() {
     email:"",
     password:""
   })
+  const [eye,setEye]=useState(false)
   const handleChange=(e)=>{
     setFormData(prevState => ({
       ...prevState,
       [e.target.name]: e.target.value
     }));
   }
-  const handleSubmit=async()=>{
+  const handleSubmit=async(e)=>{
     try {
-      
-    } catch (error) {
-      
-    }
+      e.preventDefault()
+      const user=await createAgent(fromData.email,fromData.password,fromData.name)
+      Cookies.set('user', JSON.stringify(user.data), { expires: 1 });
+      //console.log(user.data);
+      window.location.reload()
+     } catch (error) {
+      //alert("Something went wrong")
+      console.error(error)
+     }
   }
   return (
     <section className="m-8 flex">
@@ -46,7 +54,7 @@ export function SignUp() {
           <Typography variant="h2" className="font-bold mb-4">Join Us Today</Typography>
           <Typography variant="paragraph" color="blue-gray" className="text-lg font-normal">Enter your email and password to register.</Typography>
         </div>
-        <form className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2">
+        <form onSubmit={handleSubmit} className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2">
         <div className="mb-1 flex flex-col gap-6">
             <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
               Your Name
@@ -82,11 +90,12 @@ export function SignUp() {
             maxLength={12}
               size="lg"
               placeholder="******"
-              type="password"
+              type={eye?"text":"password"}
               className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
               labelProps={{
                 className: "before:content-none after:content-none",
               }}
+              icon={eye?(<EyeIcon onClick={()=>setEye(v=>!v)}/>):(<EyeSlashIcon onClick={()=>setEye(v=>!v)}/>)}
             />
           </div>
           <Checkbox required

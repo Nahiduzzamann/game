@@ -11,11 +11,14 @@ import { useMaterialTailwindController, setOpenSidenav } from "@/context";
 import { useEffect, useState } from "react";
 import countNotification from "@/modules/countNotification";
 import getNotification from "@/modules/getNotification";
+import { useUser } from "@/providers/userProvider";
 
 export function Sidenav({ brandImg, brandName, routes }) {
   const [controller, dispatch] = useMaterialTailwindController();
   const [count,setCount]=useState(0)
   const [messages,setMessages]=useState()
+  const {user}=useUser()
+  //console.log(user);
   const { sidenavColor, sidenavType, openSidenav } = controller;
   const sidenavTypes = {
     dark: "bg-gradient-to-br from-gray-800 to-gray-900",
@@ -71,7 +74,7 @@ export function Sidenav({ brandImg, brandName, routes }) {
                 
               </li>
             )}
-            {pages.map(({ icon, name, path }) => (
+            {pages?.filter(d=>user?.motherAdmin?d:!d.onlyMother).map(({ icon, name, path }) => (
               <li key={name}>
                 <NavLink to={`/${layout}${path}`}>
                   {({ isActive }) => (

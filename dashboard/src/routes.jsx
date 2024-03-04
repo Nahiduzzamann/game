@@ -37,60 +37,70 @@ export const routes = [
         name: "dashboard",
         path: "/home",
         element: <Home />,
+        onlyMother:false
       },
       {
         icon: <CurrencyBangladeshiIcon {...icon} />,
         name: "deposits",
         path: "/deposit",
         element: <Deposit />,
+        onlyMother:true
       },
       {
         icon: <ArrowUturnUpIcon {...icon} />,
         name: "turnovers",
         path: "/turnover",
         element: <Turnovers></Turnovers>,
+        onlyMother:false
       },
       {
         icon: <ArrowsUpDownIcon {...icon} />,
         name: "withdraws",
         path: "/withdraw",
         element: <Withdraws></Withdraws>,
+        onlyMother:true
       },
       {
         icon: <InformationCircleIcon {...icon} />,
         name: "notification",
         path: "/messages",
         element: <Messages />,
+        onlyMother:false
       },
       {
         icon: <DocumentTextIcon {...icon} />,
         name: "vouchers",
         path: "/voucher",
         element: <Voucher />,
+        onlyMother:false
       },
       {
         icon: <UserCircleIcon {...icon} />,
         name: "users",
         path: "/users",
         element: <Users />,
+        onlyMother:false
       },
       {
         icon: <CogIcon {...icon} />,
         name: "preference",
         path: "/preference",
         element: <Preference />,
+        onlyMother:true
       },
       {
         icon: <GiftIcon {...icon} />,
         name: "rewards",
         path: "/rewards",
         element: <Rewards />,
+        onlyMother:false
       },
       {
         icon: <BanknotesIcon {...icon} />,
         name: "banks",
         path: "/banks",
         element: <Banks></Banks>,
+        onlyMother:true
       },
       // {
       //   icon: <UserCircleIcon {...icon} />,
@@ -111,6 +121,7 @@ export const routes = [
       //   element: <Notifications />,
       // },
     ],
+    title:"Admin Pages"
   },
   {
     title: "auth pages",

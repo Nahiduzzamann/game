@@ -10,12 +10,14 @@ import { Link } from "react-router-dom";
 import Cookies from 'js-cookie';
 import { useUser } from "@/providers/userProvider";
 import loginAgent from "@/modules/loginAgent";
+import { EyeIcon,EyeSlashIcon } from "@heroicons/react/24/solid";
 
 
 export function SignIn() {
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
   const { user, updateUser } = useUser();
+  const [eye,setEye]=useState(false)
 
   const handleLogin=async(e)=>{
    try {
@@ -54,13 +56,14 @@ export function SignIn() {
               Password
             </Typography>
             <Input value={password} onChange={e=>setPassword(e.target.value)}
-              type="password"
+              type={eye?"text":"password"}
               size="lg"
               placeholder="********"
               className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
               labelProps={{
                 className: "before:content-none after:content-none",
               }}
+              icon={eye?(<EyeIcon onClick={()=>setEye(v=>!v)}/>):(<EyeSlashIcon onClick={()=>setEye(v=>!v)}/>)}
             />
           </div>
           <Checkbox required
