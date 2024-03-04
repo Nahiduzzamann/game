@@ -7,16 +7,27 @@ import {
 } from "@material-tailwind/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Cookies from 'js-cookie';
+import { useUser } from "@/providers/userProvider";
+import loginAgent from "@/modules/loginAgent";
 
 
 export function SignIn() {
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
+  const { user, updateUser } = useUser();
 
-  const handleLogin=(e)=>{
+  const handleLogin=async(e)=>{
+   try {
     e.preventDefault()
-    localStorage.setItem("admin","ok")
-    window.location.reload()
+    const user=await loginAgent(email,password)
+    Cookies.set('user', JSON.stringify(user.data), { expires: 1 });
+    updateUser(user.data)
+    console.log(user.data);
+    //window.location.reload()
+   } catch (error) {
+    console.error(error)
+   }
   }
   return (
     <section className="m-8 flex gap-4">

@@ -9,10 +9,12 @@ import "../public/css/tailwind.css";
 import 'react-responsive-pagination/themes/classic.css';
 import DataProvider from "./providers/dataProvider";
 import { SearchProvider } from "./providers/searchProvider";
+import { UserProvider } from "./providers/userProvider";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <DataProvider>
    <SearchProvider>
+   <UserProvider>
    <BrowserRouter>
       <ThemeProvider>
         <MaterialTailwindControllerProvider>
@@ -20,6 +22,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </MaterialTailwindControllerProvider>
       </ThemeProvider>
     </BrowserRouter>
+   </UserProvider>
    </SearchProvider>
     </DataProvider>
     

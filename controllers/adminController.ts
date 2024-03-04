@@ -486,7 +486,7 @@ export const loginAgents = async (req: Request, res: Response) => {
     const { email, password } = req.body;
     if (!email || !password) return res.status(StatusCodes.EXPECTATION_FAILED).json(`email ,password  is required`)
     try {
-        const agent = await Agents.find({ email: email, password: password })
+        const agent = await Agents.findOne({ email: email, password: password })
         if (agent) return res.status(StatusCodes.OK).json(agent)
 
         res.status(StatusCodes.EXPECTATION_FAILED).json("Invalid Agent")
