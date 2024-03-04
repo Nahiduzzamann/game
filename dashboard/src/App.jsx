@@ -12,7 +12,7 @@ function App() {
     if(user){
       updateUser(JSON.parse(user))
     }
-  },[user])
+  },[])
 
   return (
     <Routes>
