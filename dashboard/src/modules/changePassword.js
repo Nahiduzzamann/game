@@ -3,7 +3,7 @@ import url from "./url";
 
 const changePassword = async (email,oldPassword,newPassword) => {
   return axios.post(
-    `${url}/agents/change-password`,{
+    `${url}/admin/agents/change-password`,{
         oldPassword:oldPassword,newPassword:newPassword,
         email:email
     });

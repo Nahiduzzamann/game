@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Card,
     CardHeader,
@@ -12,46 +12,45 @@ import {
     Spinner,Input,Alert
   } from "@material-tailwind/react";
 import { PlusIcon } from "@heroicons/react/24/outline";
-import getVoucher from '@/modules/getVoucher';
-import createVoucher from '@/modules/createVoucher';
-import ResponsivePagination from "react-responsive-pagination";
-import { SearchContext } from '@/providers/searchProvider';
 import getSliders from '@/modules/getSliders';
 import url from '@/modules/url';
 import deleteSlider from '@/modules/deleteSlider';
+import addSlider from '@/modules/addSlider';
+import ChangePasswordForm from '@/widgets/cards/ChangePasswordForm';
 export default function Preference() {
   const [slider,setSlider]=useState(null)
   const [update,setUpdate]=useState(null)
     const [open, setOpen] = React.useState(false);
-    const [code,setCode]=useState()
     const [alert,setAlert]=useState(false)
     const [loader,setLoader]=useState(false)
-
+    const [selectedImage, setSelectedImage] = useState(null);
     useEffect(()=>{
      
       getSliders().then(res=>{
         setSlider(res.data)
-            console.log(res.data);
+            // console.log(res.data);
         })
     },[update])
    
+    const handleChange = (event) => {
+      setSelectedImage(event.target.files[0]);
+    };
 
     const handleSubmit=async()=>{
-      // setLoader(true)
-      // try {
-      //   await createVoucher(code,amount)
-      //   setCode("")
-      //   setAmount("")
-      //   handleOpen()
-      //   setLoader(false)
-      //   setAlert("Voucher is added successful")
+      setLoader(true)
+      try {
+        await addSlider(selectedImage)
+        handleOpen()
+        setLoader(false)
+        setAlert("Image is added successful")
+        setUpdate(Math.random())
 
-      // } catch (error) {
-      //   handleOpen()
-      //   setLoader(false)
-      //   //console.log()
-      //   setAlert(error.response.data.code?"Code has already used":error.response.data?.error)
-      // }
+      } catch (error) {
+        handleOpen()
+        setLoader(false)
+        //console.log()
+        setAlert(error.response.data.code?"Somthing went wrong":error.response.data?.error)
+      }
     }
     const handleDelete=(id)=>{
       deleteSlider(id)
@@ -69,7 +68,7 @@ export default function Preference() {
     }
   return (
     <div>
-<div className='flex flex-col md:flex-row justify-between'>
+<div className='flex flex-col md:flex-row justify-between gap-4'>
       <div className="mt-12 mb-8 flex flex-col gap-12">
       <Card>
         <CardHeader variant="gradient" color="gray" className="mb-8 p-6">
@@ -87,7 +86,7 @@ export default function Preference() {
           </div>
         </CardHeader>
         <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
-          <table className="w-full min-w-[640px] table-auto">
+          <table className="w-full min-w-[440px] table-auto">
             <thead>
               <tr>
                 {["Image", "Action"].map((el) => (
@@ -131,10 +130,17 @@ export default function Preference() {
       </Card>
       
       </div>
-<div>Change Password</div>
+<div className='w-full min-w-[300px]'>
+
+      <div className="mt-12 mb-8 flex flex-col gap-12">
+      <ChangePasswordForm></ChangePasswordForm>
+        </div>
+       
+  
+</div>
 
     </div>
-    {/* <Dialog size={"xs"}
+    <Dialog size={"xs"}
         open={open}
         handler={handleOpen}
         animate={{
@@ -145,8 +151,16 @@ export default function Preference() {
         <DialogHeader>Add Slider Image</DialogHeader>
         <DialogBody>
         <div className='grid gap-3'>
-        <Input value={code} onChange={e=>setCode(e.target.value)} label="Give a unique code (eg. AAA)" />
-        <Input value={amount} onChange={e=>setAmount(e.target.value)} type={"number"} label="Give bonus amount" />
+       {/* Input field for selecting image */}
+          <Input
+            type="file"
+            onChange={handleChange}
+            label=""
+          />
+          {/* Display the selected image */}
+          {selectedImage && (
+            <img src={URL.createObjectURL(selectedImage)} alt="Selected Image" />
+          )}
         </div>
         </DialogBody>
         <DialogFooter>
@@ -172,7 +186,7 @@ export default function Preference() {
         }}
       >
         {alert}
-      </Alert> */}
+      </Alert>
     </div>
     
     

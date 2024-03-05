@@ -5,6 +5,6 @@ const addSlider = async (file) => {
     const formData=new FormData()
     formData.append("image",file)
   return axios.post(
-    `${url}/add-slider`,formData);
+    `${url}/admin/add-slider`,formData);
 };
 export default addSlider;
