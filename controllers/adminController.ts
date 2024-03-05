@@ -502,10 +502,10 @@ interface PasswordTypesRequest {
 }
 export const changePasswordAgents = async (req: Request<{}, {}, PasswordTypesRequest>, res: Response) => {
     const { oldPassword, newPassword, email } = req.body
-    if (!oldPassword.match(newPassword)) return res.status(StatusCodes.EXPECTATION_FAILED).json("Password ")
+    if (oldPassword.match(newPassword)) return res.status(StatusCodes.EXPECTATION_FAILED).json("Password is same")
     try {
-        const agent = await Agents.findOne({ email: email })
-        if (!agent?.password?.match(oldPassword)) return res.status(StatusCodes.EXPECTATION_FAILED).json("Invalid Agent password")
+        const agent = await Agents.findOne({ email: email,password:oldPassword })
+        if (!agent) return res.status(StatusCodes.EXPECTATION_FAILED).json("Invalid Agent password")
         await Agents.updateOne({ email: email }, { password: newPassword })
     } catch (error) {
         res.status(StatusCodes.EXPECTATION_FAILED).json("error updating agents")
