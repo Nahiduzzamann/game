@@ -8,6 +8,7 @@ import {
     PuzzlePieceIcon
   } from "@heroicons/react/24/solid";
 import getTurnOverHistory from "@/modules/getTurnOverHistory";
+import getUsers from "@/modules/getUsers";
 export const AuthContext = createContext();
 
 const DataProvider = ({ children }) => {
@@ -16,6 +17,7 @@ const DataProvider = ({ children }) => {
     const [depositeDataLastMonth, setDepositeDataLastMonth] = useState(null);
     const [revenueData, setRevenueData] = useState(null);
     const [revenueDataLastMonth, setRevenueDataLastMonth] = useState(null);
+    const [users,setUsers]=useState([])
     // console.log(depositeData);
     useEffect(() => {
         localStorage.setItem('currentTime',new Date())
@@ -82,6 +84,10 @@ const DataProvider = ({ children }) => {
        .catch((err)=>{
         console.log(err);
        })
+       getUsers().then(res=>{
+        //console.log(res.data)
+        setUsers(res.data)
+       })
     }, [])
     useEffect(() => {
       getTurnOverHistory()
@@ -108,7 +114,7 @@ const DataProvider = ({ children }) => {
           color: "gray",
           icon: UsersIcon,
           title: "Total Users",
-          value: "2,300",
+          value: users?.length,
           footer: {
             color: "text-green-500",
             value: "+3%",

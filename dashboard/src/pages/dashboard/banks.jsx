@@ -77,7 +77,7 @@ const Banks =()=>{
     formDataObject.append("slogan",formData.slogan)
     formDataObject.append("depositChannel",formData.depositChannel)
     formDataObject.append("walletNumber",formData.walletNumber)
-    formDataObject.append("id",editData._id)
+    formDataObject.append("id",editData?._id)
     {
         formData.image && formDataObject.append("icon",formData.image)
     }
