@@ -25,7 +25,6 @@ jobs:
         script: |
           cd game
           git pull origin main
-          git status
           npm i
           cd frontEnd
           npm i --force
