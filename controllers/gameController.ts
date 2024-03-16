@@ -35,7 +35,7 @@ export const getGameCategories = async (req: Request, res: Response) => {
         const date = new Date()
         var yesterday = new Date(date.getTime());
         yesterday.setDate(date.getDate() - 1);
-        if (new Date(games[0].dateTime) < yesterday) {
+        if (new Date(games[0].dateTime) < yesterday || games?.length===0) {
             console.log("Updated game list")
             const response: AxiosResponse = await axios.post(`http://tbs2api.aslot.net/API/`, {
                 "cmd": "gamesList",
