@@ -35,7 +35,7 @@ export const getGameCategories = async (req: Request, res: Response) => {
         const date = new Date()
         var yesterday = new Date(date.getTime());
         yesterday.setDate(date.getDate() - 1);
-        if (new Date(games[0].dateTime) < yesterday || games?.length===0) {
+        if (new Date(games?.[0]?.dateTime) < yesterday) {
             console.log("Updated game list")
             const response: AxiosResponse = await axios.post(`http://tbs2api.aslot.net/API/`, {
                 "cmd": "gamesList",
@@ -44,6 +44,16 @@ export const getGameCategories = async (req: Request, res: Response) => {
             }
             )
             await Games.updateOne({ _id: new ObjectId(games[0]._id) }, response.data)
+        }
+        if ( games?.length===0) {
+            console.log("Added game list")
+            const response: AxiosResponse = await axios.post(`http://tbs2api.aslot.net/API/`, {
+                "cmd": "gamesList",
+                "hall": "3202296",
+                "key": "sazzad#991",
+            }
+            )
+            await Games.create(response.data)
         }
         const gameList = games[0].content.gameList;
         let arr: Category[] = [];
