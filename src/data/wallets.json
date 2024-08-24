@@ -1,0 +1,86 @@
+[
+    {
+        "name":"Bkash Personal",
+        "id":"4b278",
+        "icon":"/wallets/bkashP.png",
+        "cashout":false,
+        "payment":false
+    },
+    {
+        "name":"Bkash Agent",
+        "id":"4b275",
+        "icon":"/wallets/bkashA.png",
+        "cashout":true,
+        "payment":false
+    },
+    {
+        "name":"Bkash Merchant",
+        "id":"4b235",
+        "icon":"/wallets/bkashM.png",
+        "cashout":false,
+        "payment":true
+    },
+    {
+        "name":"Rocket Personal",
+        "id":"4r374",
+        "icon":"/wallets/rocketP.png",
+        "cashout":false,
+        "payment":false
+    },
+    {
+        "name":"Rocket Agent",
+        "id":"4r264",
+        "icon":"/wallets/rocketA.png",
+        "cashout":true,
+        "payment":false
+    },
+    {
+        "name":"Rocket Merchant",
+        "id":"4r269",
+        "icon":"/wallets/rocketP.png",
+        "cashout":false,
+        "payment":true
+    },
+    {
+        "name":"Upay Merchant",
+        "id":"4u269",
+        "icon":"/wallets/upayP.png",
+        "cashout":false,
+        "payment":true
+    },
+    {
+        "name":"Upay Agent",
+        "id":"4u869",
+        "icon":"/wallets/upayA.png",
+        "cashout":true,
+        "payment":false
+    },
+    {
+        "name":"Upay Personal",
+        "id":"4u864",
+        "icon":"/wallets/upayP.png",
+        "cashout":false,
+        "payment":false
+    },
+    {
+        "name":"Nagad Personal",
+        "id":"4n864",
+        "icon":"/wallets/nagadP.png",
+        "cashout":false,
+        "payment":false
+    },
+    {
+        "name":"Nagad Agent",
+        "id":"4nd64",
+        "icon":"/wallets/nagadA.png",
+        "cashout":true,
+        "payment":false
+    },
+    {
+        "name":"Nagad Merchant",
+        "id":"4u8g64",
+        "icon":"/wallets/nagadP.png",
+        "cashout":false,
+        "payment":true
+    }
+]

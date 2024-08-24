@@ -1,0 +1,77 @@
+import { Notification } from "../connections/databaseConnection.js";
+import { io } from "../index.js";
+export const DATATYPES = ["DEPOSIT", "WITHDRAW", "VOUCHER", "REWARDS", "TURNOVER"];
+export const sendNotificationToUser = async (title, body, username, type) => {
+    const data = await Notification.create({
+        title,
+        details: body,
+        receiverId: username,
+        type: type
+    });
+    io.emit("notification", data);
+    return data;
+};
+export const sendNotificationToAdmin = async (title, body, senderUserName, type) => {
+    const data = await Notification.create({
+        title,
+        details: body,
+        userId: senderUserName,
+        type: type
+    });
+    io.emit("notification", data);
+    return data;
+};
+export const getNotificationSocketAdmin = async () => {
+    return await Notification.aggregate([
+        { $match: { userId: { $ne: null } } },
+        {
+            $lookup: {
+                from: "users",
+                let: { userIdObj: "$userId" },
+                pipeline: [
+                    {
+                        $match: {
+                            $expr: { $eq: ["$username", "$$userIdObj"] },
+                        },
+                    },
+                ],
+                as: "user",
+            },
+        },
+        {
+            $addFields: {
+                user: { $arrayElemAt: ["$user", 0] },
+            },
+        },
+    ]).sort({ date: -1 });
+};
+export const getUnreadNotificationCountSocket = async () => {
+    return await Notification.countDocuments({ userId: { $ne: null }, read: false });
+};
+export const getNotificationUserSocket = async (username) => {
+    return await Notification.aggregate([
+        { $match: { receiverId: username } },
+        {
+            $lookup: {
+                from: "users",
+                let: { userIdObj: "$receiverId" },
+                pipeline: [
+                    {
+                        $match: {
+                            $expr: { $eq: ["$username", "$$userIdObj"] },
+                        },
+                    },
+                ],
+                as: "user",
+            },
+        },
+        {
+            $addFields: {
+                user: { $arrayElemAt: ["$user", 0] },
+            },
+        },
+    ]).sort({ date: -1 });
+};
+export const getUnreadNotificationCountUserSocket = async (username) => {
+    return await Notification.countDocuments({ receiverId: username, read: false });
+};
