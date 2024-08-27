@@ -32,7 +32,8 @@ import LanguageCard from "./LanguageCard";
 import { AuthContext } from "./../../../providers/AuthProvider";
 import { FaSignOutAlt } from "react-icons/fa";
 import getNotificationCount from "../../../module/getNotificationCount";
-import socket from "../../../module/socket";
+
+import CurrentTime from "./TimeCounter";
 
 const Header = () => {
   const { selectedLanguage } = useContext(AuthContext);
@@ -45,7 +46,6 @@ const Header = () => {
   const [count, setCount] = useState(null);
   const [updateCount, setUpdateCount] = useState();
 
- 
   useEffect(() => {
     const cats = async () => {
       try {
@@ -71,12 +71,12 @@ const Header = () => {
     //   console.log("Connected")
     // })
     getNotificationCount()
-    .then((res) => {
-      setCount(res.data);
-    })
-    .catch((e) => {
-      console.log(e);
-    });
+      .then((res) => {
+        setCount(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }, [pathname]);
 
   const handleLogOut = () => {
@@ -86,6 +86,18 @@ const Header = () => {
 
   return (
     <div className="bg-white">
+      <div className="bg-gray-700 w-full py-1 ">
+        <div className="container text-white mx-auto flex justify-between">
+          <div className="flex">
+            <p>
+              <CurrentTime />
+            </p>
+            <div>
+              <img src=""/>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="md:flex items-center justify-between hidden px-6 py-3">
         <a onClick={() => navigate("/")}>
           <img className="w-[150px] cursor-pointer" src={logo} />
@@ -215,7 +227,7 @@ const Header = () => {
                   {count}
                 </p>
               )}
-               <AiFillBell className="text-blue-600 shadow shadow-blue-500 hover:shadow-red-900 cursor-pointer"></AiFillBell>
+              <AiFillBell className="text-blue-600 shadow shadow-blue-500 hover:shadow-red-900 cursor-pointer"></AiFillBell>
             </div>
             <Link
               to={`/user/deposit`}
@@ -240,7 +252,7 @@ const Header = () => {
           <DrawerCloseButton />
           <DrawerHeader className="flex justify-between items-baseline">
             <img className="w-[130px] " src={logo} />
-            <LanguageCard />
+           
           </DrawerHeader>
           <hr />
           <DrawerBody>
